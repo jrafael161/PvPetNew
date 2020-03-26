@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
   m_Name: LeatherBoots
   m_EditorClassIdentifier: 
-  Name: leather boots
-  ItemID: 1
+  Name: Leather Boots
   icon: {fileID: 0}
   PvP_Price: 10
   Pet_Price: 5
@@ -22,7 +21,7 @@ MonoBehaviour:
     than nothing.
   damage: 0
   bonus: 3
-  Set: leather
-  Bz: 3
+  Set: Leather
+  Bz: 4
   It: 0
   Bt: 4

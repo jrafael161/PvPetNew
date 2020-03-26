@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BodyZone {Head, Chest, Arms, Foots, Weapon, Equipable};
+public enum BodyZone {Head, Chest, Arms, Legs, Foots, Weapon, Equipable};
 public enum ItemType {Armor, Weapon, Pasive, Active};
 public enum BonusType {Health, Strength, Speed, Agility, Armor, NA};
 
@@ -11,7 +11,6 @@ public enum BonusType {Health, Strength, Speed, Agility, Armor, NA};
 public class Item: ScriptableObject
 {
     public string Name;
-    public int ItemID;
     public Sprite icon = null;
     public int PvP_Price;
     public int Pet_Price;

@@ -14,11 +14,12 @@ public class ItemsDBmanager
 
     public void Set_ItemDatabase()
     {        
-        for (int i = 0; ItemDB.Count < 5; i++)
+        for (int i = 0; ItemDB.Count < 6; i++)
         {
             ItemDB.Add(Resources.Load("Items/LeatherHelmet") as Item);
             ItemDB.Add(Resources.Load("Items/LeatherVest") as Item);
             ItemDB.Add(Resources.Load("Items/LeatherGauntlets") as Item);
+            ItemDB.Add(Resources.Load("Items/LeatherPants") as Item);
             ItemDB.Add(Resources.Load("Items/LeatherBoots") as Item);
             ItemDB.Add(Resources.Load("Items/ShortSword") as Item);
         }

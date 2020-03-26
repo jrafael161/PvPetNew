@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ChangeOrietPort : MonoBehaviour
 {
-    private void OnPreRender()
+    // Start is called before the first frame update
+    void Start()
     {
         Screen.orientation = ScreenOrientation.Portrait;
     }

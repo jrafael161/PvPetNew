@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
   m_Name: ShortSword
   m_EditorClassIdentifier: 
-  Name: short sword
-  ItemID: 5
+  Name: Short Sword
   icon: {fileID: 0}
   PvP_Price: 15
   Pet_Price: 7
@@ -22,6 +21,6 @@ MonoBehaviour:
   damage: 5
   bonus: 0
   Set: NA
-  Bz: 4
+  Bz: 5
   It: 1
   Bt: 5

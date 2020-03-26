@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class ChangeOrietLands : MonoBehaviour
 {
-    private void OnPreRender()
+    // Start is called before the first frame update
+    void Start()
     {
-        Screen.orientation = ScreenOrientation.Landscape;
+        Screen.orientation = ScreenOrientation.Landscape;        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }

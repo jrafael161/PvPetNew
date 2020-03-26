@@ -1136,12 +1136,12 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
+  m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1772,20 +1772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac37defdc740534a857e5bb9a48e533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filters: []
-  ActiveScene:
-    m_Handle: 0
-  FiltersButton: {fileID: 0}
-  hp: 0
-  xp: 0
-  Lv: 0
-  Str: 0
-  Spd: 0
-  Agl: 0
-  Arm: 0
-  PvpC: 0
-  PetC: 0
-  PremC: 0
 --- !u!4 &2100761260
 Transform:
   m_ObjectHideFlags: 0

@@ -4,27 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System;
 
 public class GlobalControl : MonoBehaviour
-{    
-    public static GlobalControl globalControl;
+{
+    public static GlobalControl Instance;
     public PlayerData playeProfile = new PlayerData();
-    public PlayerData oponentProfile = new PlayerData();
-    public ItemsDBmanager itemDataBase = new ItemsDBmanager();        
+    public ItemsDBmanager itemDataBase = new ItemsDBmanager();
     public Scene ActiveScene;
-    int NumberOfStats;
-    int NumberOfCoins;
 
     public int hp=0,xp=0,Lv=0,Str=0,Spd=0,Agl=0,Arm=0,PvpC=0,PetC=0,PremC=0;
 
     private void Start()
     {
-        NumberOfStats = 2;//3 por que se cuenta el 0
-        NumberOfCoins = 2;
         itemDataBase.Set_ItemDatabase();
         SetPlayerData();
-        LoadPlayerData();                
+        SavePlayerData();
+        GetPlayerData();//Asigna los valores del jason a la variable playerProfile
+        LoadPlayerData();        
         ActiveScene = SceneManager.GetActiveScene();
     }
 
@@ -34,14 +30,14 @@ public class GlobalControl : MonoBehaviour
             LoadPlayerData();
     }
 
-    private void Awake()//Funcion que mantiene el GlobalControl entre escenas
+    private void Awake()
     {
-        if (globalControl == null)
+        if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
-            globalControl = this;
+            Instance = this;
         }
-        else if (globalControl != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
@@ -57,26 +53,24 @@ public class GlobalControl : MonoBehaviour
         else if (ActiveScene.name == "ShopScreen")
         {
             InitializePlayerData();
+            SetShopItems();
         }
             
     }
 
     public void InitializePlayerData()//Se muestra la informacion del jugador segun lo requerido
     {
-        Slider sli;       
+        Slider sli;
         Text hp_Text;
-        GameObject hpStat,currency;
+        GameObject hpStat;
         GameObject [] stats = new GameObject[3];
-        Text[] PlayerCoins = new Text[3];
         stats[0] = GameObject.Find("StrengthStat");
         stats[1] = GameObject.Find("AgilityStat");
         stats[2] = GameObject.Find("SpeedStat");
         hpStat = GameObject.Find("HPStat");
-        currency = GameObject.Find("Currency");
-        PlayerCoins = currency.GetComponentsInChildren<Text>();
         hp_Text = hpStat.GetComponentInChildren<Text>();
         hp_Text.text = "HP:" + playeProfile.HP.ToString();
-        for (int i = 0; i <= NumberOfStats; i++)
+        for (int i = 0; i <= 2; i++)
         {
             sli = stats[i].GetComponentInChildren<Slider>();            
             switch (i)
@@ -94,26 +88,9 @@ public class GlobalControl : MonoBehaviour
                     break;
             }
         }
-        for (int i = 0; i <= NumberOfCoins; i++)
-        {
-            switch (i)
-            {
-                case 0:
-                    PlayerCoins[i].text = playeProfile.PetCoin.ToString();
-                    break;
-                case 1:
-                    PlayerCoins[i].text = playeProfile.PvPCoin.ToString();
-                    break;
-                case 2:
-                    PlayerCoins[i].text = playeProfile.PremiumCoin.ToString();
-                    break;
-                default:
-                    break;
-            }
-        }
     }
 
-    public void SetPlayerData()//Se tendran que obtener estos datos de preferencia del save en la nube de lo contrario del save local del dispositivo del jugador
+    public void SetPlayerData()
     {
         /*
         playeProfile.HP = hp;
@@ -128,8 +105,7 @@ public class GlobalControl : MonoBehaviour
         PrepareItems();
         playeProfile.PremiumCoin = PremC;
         Debug.Log("fuerza: " + playeProfile.Strength);
-        */        
-        
+        */
         playeProfile.HP = 100;
         playeProfile.XP = 1;
         playeProfile.Level = 1;
@@ -137,60 +113,45 @@ public class GlobalControl : MonoBehaviour
         playeProfile.Speed = 30;
         playeProfile.Agility = 25;
         playeProfile.Armor = 0;
-        playeProfile.PvPCoin = 50;
-        playeProfile.PetCoin = 25;
-        playeProfile.PremiumCoin = 1;
+        playeProfile.PvPCoin = PvpC;
+        playeProfile.PetCoin = PetC;
+        playeProfile.PremiumCoin = PremC;
         PrepareItems();        
-
-        //GetPlayerData();//Sustituir por la query de firebase
+        Debug.Log("fuerza: " + playeProfile.Strength);
     }
 
-    public void SetOponentData()
+    public void PrepareItems()
     {
-        oponentProfile = null;
+        //Inicializar los items que el jugador tiene equipados
     }
 
-    public void PrepareItems()//Inicializar los items que el jugador tiene equipados
-    {
-        playeProfile.Inventory = new List<Item>();//Checar el inventario
-        playeProfile.HeadGear = UnityEngine.ScriptableObject.CreateInstance<Item>(); //Checar los items equipados
-        playeProfile.ChestGear = UnityEngine.ScriptableObject.CreateInstance<Item>();
-        playeProfile.ArmsGear = UnityEngine.ScriptableObject.CreateInstance<Item>();
-        playeProfile.FootsGear = UnityEngine.ScriptableObject.CreateInstance<Item>();
-        playeProfile.Weapon = UnityEngine.ScriptableObject.CreateInstance<Item>();        
-    }
-
-    public void GetPlayerData()
+    private void GetPlayerData()
     {             
         string json = File.ReadAllText(Application.dataPath + "/playerProfile.json");//Obtiene los datos del jugador desde un JASON
         playeProfile = JsonUtility.FromJson<PlayerData>(json);//Setea los dato obtenidos
     }
 
-    public void SavePlayerData()
+    private void SavePlayerData()
     {
         string jsonstr = JsonUtility.ToJson(playeProfile);//Convierte los datos del jugador en un JASON
         File.WriteAllText(Application.dataPath + "/playerProfile.json", jsonstr);//Guarda los datos del jugador en un archivo JASON
-    }   
-
-    public PlayerData GetPlayer(bool whichPlayer)//1 -> Player, 0 -> Oponent
-    {
-        if (whichPlayer)
-        {
-            return playeProfile;
-        }
-        else if(!whichPlayer)
-        {
-            return oponentProfile;
-        }
-        else
-        {
-            Debug.Log("Cual jugador?");
-            return playeProfile;
-        }
     }
 
-    public GlobalControl get_Instance()
+    public void SetShopItems()
     {
-        return globalControl;
+        GameObject ShopItem, ShopItemAux;
+        Text[] Texto;
+        ShopItem = GameObject.Find("ShopItem");        
+        foreach  (Item item in itemDataBase.ItemDB)
+        {
+            ShopItemAux = Instantiate(ShopItem) as GameObject;
+            ShopItemAux.SetActive(true);
+            ShopItemAux.transform.SetParent(ShopItem.transform.parent, false);
+            Texto = ShopItemAux.GetComponentsInChildren<Text>();
+            Texto[0].text = item.Description.ToString();
+            Texto[1].text = item.PvP_Price.ToString();
+            Texto[2].text = item.Pet_Price.ToString();
+            Texto[3].text = item.Prem_Price.ToString();
+        }        
     }
 }

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
   m_Name: LeatherHelmet
   m_EditorClassIdentifier: 
-  Name: leather Helmet
-  ItemID: 3
+  Name: Leather Helmet
   icon: {fileID: 0}
   PvP_Price: 10
   Pet_Price: 5
@@ -21,7 +20,7 @@ MonoBehaviour:
   Description: A common leather helmet, it won't help much but it's better than nothing.
   damage: 0
   bonus: 3
-  Set: leather
+  Set: Leather
   Bz: 0
   It: 0
   Bt: 4

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
   m_Name: LeatherVest
   m_EditorClassIdentifier: 
-  Name: leather Vest
-  ItemID: 4
+  Name: Leather Vest
   icon: {fileID: 0}
   PvP_Price: 10
   Pet_Price: 5
@@ -21,7 +20,7 @@ MonoBehaviour:
   Description: A common leather Vest, it won't help much but it's better than nothing.
   damage: 0
   bonus: 5
-  Set: leather
+  Set: Leather
   Bz: 1
   It: 0
   Bt: 4
