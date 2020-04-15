@@ -54,7 +54,7 @@ public class PvPControl : MonoBehaviour
         {
             Random.InitState(i);
             Opo.BattleTag = "Pepe";
-            Opo.HP = Random.Range(0,100);
+            Opo.HP = 100;//Random.Range(0,100);
             Opo.XP = 1;
             Opo.Level = 1;
             Opo.Strength = Random.Range(0, 30);

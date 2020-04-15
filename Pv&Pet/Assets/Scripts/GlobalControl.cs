@@ -128,15 +128,16 @@ public class GlobalControl : MonoBehaviour
         PrepareItems();
         playeProfile.PremiumCoin = PremC;
         Debug.Log("fuerza: " + playeProfile.Strength);
-        */        
-        
+        */
+        playeProfile.BattleTag = "Raizen8";
+        playeProfile.Level = 1;
         playeProfile.HP = 100;
         playeProfile.XP = 1;
-        playeProfile.Level = 1;
         playeProfile.Strength = 20;
         playeProfile.Speed = 30;
         playeProfile.Agility = 25;
-        playeProfile.Armor = 0;
+        playeProfile.Armor = 5;
+        playeProfile.critic_prob = 0.1f;
         playeProfile.PvPCoin = 50;
         playeProfile.PetCoin = 25;
         playeProfile.PremiumCoin = 1;
@@ -153,11 +154,11 @@ public class GlobalControl : MonoBehaviour
     public void PrepareItems()//Inicializar los items que el jugador tiene equipados
     {
         playeProfile.Inventory = new List<Item>();//Checar el inventario
-        playeProfile.HeadGear = UnityEngine.ScriptableObject.CreateInstance<Item>(); //Checar los items equipados
-        playeProfile.ChestGear = UnityEngine.ScriptableObject.CreateInstance<Item>();
-        playeProfile.ArmsGear = UnityEngine.ScriptableObject.CreateInstance<Item>();
-        playeProfile.FootsGear = UnityEngine.ScriptableObject.CreateInstance<Item>();
-        playeProfile.Weapon = UnityEngine.ScriptableObject.CreateInstance<Item>();        
+        playeProfile.HeadGear = itemDataBase.ItemDB.Find(x => x.ItemID == 3);//Reemplazar por las ids de lo que se obtenga de la query del player
+        playeProfile.ChestGear = itemDataBase.ItemDB.Find(x => x.ItemID == 4);
+        playeProfile.ArmsGear = itemDataBase.ItemDB.Find(x => x.ItemID == 2);
+        playeProfile.FootsGear = itemDataBase.ItemDB.Find(x => x.ItemID == 1);
+        playeProfile.Weapon = itemDataBase.ItemDB.Find(x => x.ItemID == 5);
     }
 
     public void GetPlayerData()
