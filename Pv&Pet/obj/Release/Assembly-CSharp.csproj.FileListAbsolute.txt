@@ -478,3 +478,11 @@ C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\obj\Release\Assembly-CSharp.csp
 C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\obj\Release\Assembly-CSharp.csproj.CopyComplete
 C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\obj\Release\Assembly-CSharp.dll
 C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\obj\Release\Assembly-CSharp.pdb
+C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\Temp\bin\Release\Firebase.App.dll
+C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\Temp\bin\Release\Firebase.Auth.dll
+C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\Temp\bin\Release\Firebase.Database.dll
+C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\Temp\bin\Release\Firebase.Platform.dll
+C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\Temp\bin\Release\Firebase.TaskExtension.dll
+C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\Temp\bin\Release\Google.MiniJson.dll
+C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\Temp\bin\Release\Unity.Compat.dll
+C:\Users\JRafa\Documents\GitHub\PvPet_New\Pv&Pet\Temp\bin\Release\Unity.Tasks.dll
