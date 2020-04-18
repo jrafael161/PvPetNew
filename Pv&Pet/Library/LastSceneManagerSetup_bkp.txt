@@ -1,8 +1,0 @@
-sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/InitialScreen.unity
-=======
-- path: Assets/Scenes/02-INV.unity
->>>>>>> Pve_Development
-  isLoaded: 1
-  isActive: 1
