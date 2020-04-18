@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
+  m_Name: Life Potion
+  m_EditorClassIdentifier: 
+  Name: Life Potion
+  ItemID: 6
+  icon: {fileID: 0}
+  PvP_Price: 20
+  Pet_Price: 5
+  Prem_Price: 1
+  Description: A minor curation in battle, consumable.
+  LevelRequirement: 1
+  damage: 0
+  bonus: 10
+  Set: NA
+  Bz: 5
+  It: 3
+  Bt: 0
+  Eff: 0

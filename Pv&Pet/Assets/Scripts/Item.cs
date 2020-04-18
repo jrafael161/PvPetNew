@@ -17,10 +17,12 @@ public class Item: ScriptableObject
     public int Pet_Price;
     public int Prem_Price;
     public string Description;
+    public int LevelRequirement;
     public int damage;
     public int bonus;
     public string Set;
     public BodyZone Bz;
     public ItemType It;
     public BonusType Bt;
+    public Effect Eff;
 }

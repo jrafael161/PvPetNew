@@ -28,7 +28,8 @@ public class BattleController : MonoBehaviour
 
     IEnumerator Battle()
     {
-        SetBuffs();
+        AbilitiesHandler.Instance.SetPasives(Player,Oponent);
+        AbilitiesHandler.Instance.SetPasives(Oponent,Player);
         while (Player.HP > 0 && Oponent.HP > 0)
         {            
             set_turns(Player.Speed/Oponent.Speed);
@@ -140,7 +141,22 @@ public class BattleController : MonoBehaviour
     {
         if (player_onturn.PlayerID == Player.PlayerID)
         {
-            //UseActives() Cosas como pociones, habilidades, etc antes de realizar su ataque
+            for (int i = 0; i < player_onturn.EquipedItems.Count; i++)
+            {
+                if (player_onturn.EquipedItems[i].It == ItemType.Active)
+                {
+                    if(AbilitiesHandler.Instance.CheckTriggerCondition(player_onturn.EquipedItems[i]))
+                        AbilitiesHandler.Instance.UseActive(player_onturn.EquipedItems[i]);
+                }
+            }
+            for (int i = 0; i < player_onturn.OwnedAbilities.Count; i++)
+            {
+                if (player_onturn.OwnedAbilities[i].It == ItemType.Active)
+                {
+                    if(AbilitiesHandler.Instance.CheckTriggerCondition(player_onturn.OwnedAbilities[i]))
+                        AbilitiesHandler.Instance.UseActive(player_onturn.OwnedAbilities[i]);
+                }
+            }
             Attack(Player,Oponent);
 
             if (Oponent.HP <= 0)//Hacer una funcion de Check health

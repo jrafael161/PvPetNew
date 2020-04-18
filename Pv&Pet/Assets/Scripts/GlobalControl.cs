@@ -11,7 +11,8 @@ public class GlobalControl : MonoBehaviour
     public static GlobalControl globalControl;
     public PlayerData playeProfile = new PlayerData();
     public PlayerData oponentProfile = new PlayerData();
-    public ItemsDBmanager itemDataBase = new ItemsDBmanager();        
+    public ItemsDBmanager itemDataBase = new ItemsDBmanager();
+    public AbilitiesDBmanager abilitiesDataBase = new AbilitiesDBmanager();    
     public Scene ActiveScene;
     int NumberOfStats;
     int NumberOfCoins;
@@ -23,6 +24,8 @@ public class GlobalControl : MonoBehaviour
         NumberOfStats = 2;//3 por que se cuenta el 0
         NumberOfCoins = 2;
         itemDataBase.Set_ItemDatabase();
+        abilitiesDataBase.Set_AbilitiesDatabase();
+        AbilitiesHandler abilitiesHandler = new AbilitiesHandler();
         SetPlayerData();
         LoadPlayerData();                
         ActiveScene = SceneManager.GetActiveScene();

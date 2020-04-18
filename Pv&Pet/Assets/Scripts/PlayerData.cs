@@ -25,6 +25,7 @@ public class PlayerData
     public Item FootsGear;
     public Item Weapon;
     public List<Item> EquipedItems;
+    public List<Ability> OwnedAbilities;
     public List<Item> Inventory;
     public List<int> ItemInventoryID;
 }

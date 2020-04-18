@@ -298,7 +298,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActiveScene:
     m_Handle: 0
-  FiltersButton: {fileID: 0}
   hp: 0
   xp: 0
   Lv: 0
