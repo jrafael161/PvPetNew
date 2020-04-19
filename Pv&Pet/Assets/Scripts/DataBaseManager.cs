@@ -17,6 +17,11 @@ public class DataBaseManager : MonoBehaviour
     private bool registered;
     public GameObject Panel;
 
+    public GameObject img1;
+    public GameObject img2;
+    public GameObject img3;
+    public GameObject img4;
+
     [SerializeField]
     private InputField Battletag = null;
     DatabaseReference reference;
@@ -30,7 +35,6 @@ public class DataBaseManager : MonoBehaviour
         Checkforbattletag();
     }
 
-
     void DB()
     {
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pvpet-f0b05.firebaseio.com/Players/Pa5UU16uCzt6X1E1DJ6a");
@@ -42,34 +46,44 @@ public class DataBaseManager : MonoBehaviour
         auth.StateChanged += AuthStateChanged;
         AuthStateChanged(this, null);
     }
-    /*void AuthStateChanged(object sender, System.EventArgs eventArgs)
-    {
-        if (auth.CurrentUser != user)
-        {
-            signedIn = user != auth.CurrentUser && auth.CurrentUser != null;
-            user = auth.CurrentUser;
-            if (signedIn)
-            {
-                Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-                textuserid.text = user.UserId;
-                Checkforbattletag();
-                Debug.Log("usuario autentificado");
-            }
-            else
-            {
-                SceneManager.LoadScene("00-Login");
-            }
-        }
-    }*/
     void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
         Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
         Checkforbattletag();
     }
-    public void Checkforbattletag()
+
+    public void chechprofileimg1()
     {
-       
+        img1.SetActive(true);
+        img2.SetActive(false);
+        img3.SetActive(false);
+        img4.SetActive(false);
+    }
+    public void chechprofileimg2()
+    {
+        img1.SetActive(false);
+        img2.SetActive(true);
+        img3.SetActive(false);
+        img4.SetActive(false);
+    }
+    public void chechprofileimg3()
+    {
+        img1.SetActive(false);
+        img2.SetActive(false);
+        img3.SetActive(true);
+        img4.SetActive(false);
+    }
+    public void chechprofileimg4()
+    {
+        img1.SetActive(false);
+        img2.SetActive(false);
+        img3.SetActive(false);
+        img4.SetActive(true);
+    }
+
+    public void Checkforbattletag()
+    {       
         string Userid;
         Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         Userid = textuserid.text;
@@ -97,7 +111,6 @@ public class DataBaseManager : MonoBehaviour
                 }
             }
         });
-
     }
     public void Btn_go()
     {
@@ -109,14 +122,31 @@ public class DataBaseManager : MonoBehaviour
         Checkforbattletag();
         Panel.SetActive(false);
     }
+
     public void OpenPanel()
     {
-            bool isActive = Panel.activeSelf;
-            Panel.SetActive(true);
-     }
+        bool isActive = Panel.activeSelf;
+        Panel.SetActive(true);
+    }
+    
     private void writeNewUser(string userId, string name)
     {
-        User user = new User(name, "100", "1", "1", "20", "20", "20", "0", "50", "50", "1", "1", "1", "1", "1", "1", "1");
+        bool profile1 = img1.activeSelf;
+        bool profile2 = img2.activeSelf;
+        bool profile3 = img3.activeSelf;
+        bool profile4 = img4.activeSelf;
+        string profileimg = "Profile_1";
+
+        if(profile1)
+            profileimg = "Profile_1";
+        if (profile2)
+            profileimg = "Profile_2";
+        if (profile3)
+            profileimg = "Profile_3";
+        if (profile4)
+            profileimg = "Profile_4";
+
+        User user = new User(name, profileimg, "100", "1", "1", "20", "20", "20", "0", "50", "50", "1", "1", "1", "1", "1", "1", "1");
         string json = JsonUtility.ToJson(user);
         reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
         
@@ -131,15 +161,14 @@ public class DataBaseManager : MonoBehaviour
         PveU PveU = new PveU("10");
         json = JsonUtility.ToJson(PveU);
         reference.Child("users/" + userId).Child("PVE").SetRawJsonValueAsync(json);
-
-
-    }
+    }    
     public void SignOut()
     {
         SceneManager.LoadScene("00-Login");
 
     }
 }
+
 public class EquipedItems
 {
     public string item;
@@ -177,6 +206,7 @@ public class PveU
 public class User
 {
     public string username;
+    public string profilepic;
     public string HP;
     public string Level;
     public string XP;
@@ -196,9 +226,10 @@ public class User
     public User()
     {
     }
-    public User(string username, string HP, string Level, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin, string HeadGear, string ChestGear, string FootsGear,string ArmsGear, string Weapon, string Shield)
+    public User(string username,string profilepic, string HP, string Level, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin, string HeadGear, string ChestGear, string FootsGear,string ArmsGear, string Weapon, string Shield)
     {
         this.username = username;
+        this.profilepic = profilepic;
         this.HP = HP;
         this.Level = Level;
         this.XP = XP;

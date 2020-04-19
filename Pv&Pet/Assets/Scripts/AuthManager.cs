@@ -14,14 +14,10 @@ public class AuthManager : MonoBehaviour
     public GameObject Panellogin;
     public GameObject Panelinicio;
 
-
-
-
     [SerializeField]
     private InputField newinputFieldEmail = null;
     [SerializeField]
     private InputField newinputFieldPassword = null;
-
 
     [SerializeField]
     private InputField inputFieldEmail = null;
