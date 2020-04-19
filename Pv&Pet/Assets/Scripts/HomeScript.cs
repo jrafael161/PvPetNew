@@ -6,11 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class HomeScript : MonoBehaviour
 {
+    private void Start()
+    {
+        UpdateUserId();
+    }
+
     void Update()
     {
-        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-        textuserid.text = GameController.userid;
+        
     }
+
+    public void UpdateUserId()
+    {
+        if (GameObject.Find("Canvas/Txt_userid").GetComponent<Text>())
+        {
+            Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
+            textuserid.text = GameController.userid;
+        }        
+    }
+
     public void GOHOME()
     {
         SceneManager.LoadScene("01-Main");

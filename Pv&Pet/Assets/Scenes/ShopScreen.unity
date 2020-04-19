@@ -7545,8 +7545,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 191906946}
   m_HandleRect: {fileID: 191906945}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.9999999
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12665,6 +12665,7 @@ GameObject:
   - component: {fileID: 1654450326}
   - component: {fileID: 1654450325}
   - component: {fileID: 1654450324}
+  - component: {fileID: 1654450327}
   - component: {fileID: 1654450323}
   m_Layer: 5
   m_Name: back_btn
@@ -12745,8 +12746,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1654450323}
-        m_MethodName: GoToMainMenu
+      - m_Target: {fileID: 1654450327}
+        m_MethodName: GOHOME
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12791,6 +12792,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1654450321}
   m_CullTransparentMesh: 0
+--- !u!114 &1654450327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654450321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76311c231e3de6a42b1c4a722921ff28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1662101604
 GameObject:
   m_ObjectHideFlags: 0
