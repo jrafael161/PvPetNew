@@ -12,6 +12,8 @@ public class BattleController : MonoBehaviour
     List<bool> turns;
     float G_priority;
 
+    public GameObject back_button; 
+
     private void Start()
     {
         PlayerData Winner;
@@ -28,8 +30,8 @@ public class BattleController : MonoBehaviour
 
     IEnumerator Battle()
     {
-        AbilitiesHandler.Instance.SetPasives(Player,Oponent);
-        AbilitiesHandler.Instance.SetPasives(Oponent,Player);
+        //AbilitiesHandler.Instance.SetPasives(Player,Oponent);
+        //AbilitiesHandler.Instance.SetPasives(Oponent,Player);
         while (Player.HP > 0 && Oponent.HP > 0)
         {            
             set_turns(Player.Speed/Oponent.Speed);
@@ -54,6 +56,8 @@ public class BattleController : MonoBehaviour
             Debug.Log(Player.BattleTag + " ha ganado");
         else
             Debug.Log(Oponent.BattleTag + " ha ganado");
+
+        back_button.SetActive(true);
         Debug.Log("Termino el combate");
         yield return true;
     }
@@ -141,6 +145,7 @@ public class BattleController : MonoBehaviour
     {
         if (player_onturn.PlayerID == Player.PlayerID)
         {
+            /*
             for (int i = 0; i < player_onturn.EquipedItems.Count; i++)
             {
                 if (player_onturn.EquipedItems[i].It == ItemType.Active)
@@ -157,6 +162,7 @@ public class BattleController : MonoBehaviour
                         AbilitiesHandler.Instance.UseActive(player_onturn.OwnedAbilities[i]);
                 }
             }
+            */
             Attack(Player,Oponent);
 
             if (Oponent.HP <= 0)//Hacer una funcion de Check health
