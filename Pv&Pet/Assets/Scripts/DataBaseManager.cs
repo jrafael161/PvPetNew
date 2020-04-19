@@ -22,17 +22,25 @@ public class DataBaseManager : MonoBehaviour
     public GameObject img3;
     public GameObject img4;
 
+    public Sprite sprite1;
+    public Sprite sprite2;
+    public Sprite sprite3;
+    public Sprite sprite4;
+
+
+    public GameObject profilepic;
+
+
     [SerializeField]
     private InputField Battletag = null;
     DatabaseReference reference;
 
-
     void Start()
     {
         DB();
-        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
+        Text textuserid = GameObject.Find("Canvas/bg_main/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
-        Checkforbattletag();
+        Checkforbattletag(textuserid.text.ToString());
     }
 
     void DB()
@@ -50,7 +58,7 @@ public class DataBaseManager : MonoBehaviour
     {
         Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
-        Checkforbattletag();
+        Checkforbattletag(textuserid.text.ToString());
     }
 
     public void chechprofileimg1()
@@ -82,11 +90,9 @@ public class DataBaseManager : MonoBehaviour
         img4.SetActive(true);
     }
 
-    public void Checkforbattletag()
-    {       
-        string Userid;
-        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-        Userid = textuserid.text;
+    public void Checkforbattletag(string Userid)
+    {
+        Debug.Log("Checando bt");
         Firebase.Database.FirebaseDatabase dbInstance = Firebase.Database.FirebaseDatabase.DefaultInstance;
         dbInstance.GetReference("users").GetValueAsync().ContinueWith(task =>
         {
@@ -98,8 +104,37 @@ public class DataBaseManager : MonoBehaviour
                     if (user.Key == Userid)
                     {
                         IDictionary dictUser = (IDictionary)user.Value;
-                        Text textusername = GameObject.Find("Canvas/Lbl_Username").GetComponent<Text>();
+                        Text textusername = GameObject.Find("Canvas/bg_main/Lbl_Username").GetComponent<Text>();
                         textusername.text = dictUser["username"].ToString();
+
+                        Debug.Log(dictUser["profilepic"].ToString());
+                        profilepic.SetActive(true);
+
+
+                        if (dictUser["profilepic"].ToString() =="Profile_1")
+                        {
+                            Debug.Log(dictUser["profilepic"].ToString());
+
+                            profilepic.GetComponent<Image>().sprite = sprite1;
+                        }
+                        if (dictUser["profilepic"].ToString() == "Profile_2")
+                        {
+                            Debug.Log(dictUser["profilepic"].ToString());
+
+                            profilepic.GetComponent<Image>().sprite = sprite2;
+                        }
+                        if (dictUser["profilepic"].ToString() == "Profile_3")
+                        {
+                            Debug.Log(dictUser["profilepic"].ToString());
+
+                            profilepic.GetComponent<Image>().sprite = sprite3;
+                        }
+                        if (dictUser["profilepic"].ToString() == "Profile_4")
+                        {
+                            Debug.Log(dictUser["profilepic"].ToString());
+
+                            profilepic.GetComponent<Image>().sprite = sprite4;
+                        }
                         registered = true;
                     }
                 }
@@ -116,10 +151,13 @@ public class DataBaseManager : MonoBehaviour
     {
         string Userid;
         string Battletaguser = Battletag.text;
-        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
+        Text textuserid = GameObject.Find("Canvas/bg_main/Txt_userid").GetComponent<Text>();
         Userid = textuserid.text;
         writeNewUser(Userid, Battletaguser);
-        Checkforbattletag();
+        Debug.Log("uid:"+ Userid);
+
+        Debug.Log("Usuario creado");
+        Checkforbattletag(Userid);
         Panel.SetActive(false);
     }
 
@@ -161,7 +199,9 @@ public class DataBaseManager : MonoBehaviour
         PveU PveU = new PveU("10");
         json = JsonUtility.ToJson(PveU);
         reference.Child("users/" + userId).Child("PVE").SetRawJsonValueAsync(json);
-    }    
+
+
+    }
     public void SignOut()
     {
         SceneManager.LoadScene("00-Login");
@@ -246,5 +286,38 @@ public class User
         this.ArmsGear = ArmsGear;
         this.Weapon = Weapon;
         this.Shield = Shield;
+    }
+}
+
+
+public class Pets
+{
+    public string Nombre;
+    public string Tipo;
+    public string Facil;
+    public string Normal;
+    public string Dificil;
+    public string Extremo;
+    public string Tormento1;
+    public string Tormento2;
+    public string Tormento3;
+    public string PetHunter;
+
+    public Pets()
+    {
+    }
+    public Pets(string Nombre, string Tipo, string Facil, string Normal, string Dificil, string Extremo, string Tormento1, string Tormento2, string Tormento3, string PetHunter)
+    {
+        this.Nombre = Nombre;
+        this.Tipo = Tipo;
+        this.Facil = Facil;
+        this.Normal = Normal;
+        this.Dificil = Dificil;
+        this.Extremo = Extremo;
+        this.Tormento1 = Tormento1;
+        this.Tormento2 = Tormento2;
+        this.Tormento3 = Tormento3;
+        this.PetHunter = PetHunter;
+
     }
 }

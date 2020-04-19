@@ -9,10 +9,13 @@ public class AuthManager : MonoBehaviour
 {
     protected Firebase.Auth.FirebaseAuth auth;
     protected Firebase.Auth.FirebaseUser user;
+    
     private string displayName;
     private bool signedIn;
+
     public GameObject Panellogin;
     public GameObject Panelinicio;
+    public GameObject Panelreg;
 
     [SerializeField]
     private InputField newinputFieldEmail = null;
@@ -57,7 +60,6 @@ public class AuthManager : MonoBehaviour
         {
             OpenPanel();
         }
-
     }
 
     public void CreateUser()
@@ -67,48 +69,27 @@ public class AuthManager : MonoBehaviour
 
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
-            if (task.IsCanceled)
-            {
-                Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
-                return;
-            }
-            if (task.IsFaulted)
-            {
-                Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
-                return;
-            }
-
+ 
             // Firebase user has been created.
             Firebase.Auth.FirebaseUser newUser = task.Result;
             Debug.LogFormat("Firebase user created successfully: {0} ({1})",newUser.DisplayName, newUser.UserId);
             saveuserid(newUser.UserId);
-
+            Debug.Log("Cerrando");
+            Panelreg.SetActive(false);
         });
     }
 
     public void LoginUser()
     {
-
         string email = inputFieldEmail.text;
         string password = inputFieldPassword.text;
 
         auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
-            if (task.IsCanceled)
-            {
-                Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
-                return;
-            }
-            if (task.IsFaulted)
-            {
-                Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
-                return;
-            }
             Firebase.Auth.FirebaseUser newUser = task.Result;
             Debug.Log("Userid:" + newUser.UserId);
             saveuserid(newUser.UserId);
             SceneManager.LoadScene("01-Main");
-
         });
     }   
 
