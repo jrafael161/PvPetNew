@@ -8,7 +8,7 @@ public class HomeScript : MonoBehaviour
 {
     void Update()
     {
-        Text textuserid = GameObject.Find("Canvas/bg_main/Txt_userid").GetComponent<Text>();
+        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
     }
     public void GOHOME()
