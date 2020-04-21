@@ -4,23 +4,39 @@ using UnityEngine;
 
 public class BattleController : MonoBehaviour
 {
+
+    private static BattleController _instance;
+
+    public static BattleController Instance
+    {
+        get { return _instance; }
+    }
+
+    void Awake()
+    {
+        _instance = this;
+    }
+
     GlobalControl gc;
-    PlayerData Player, Oponent;    
-    float Ptemp_critic_prob;
+    public PlayerData Player, Oponent;    
     static bool action_done;
     static bool both_alive;
     List<bool> turns;
+    public int passedTurns;
     float G_priority;
 
+    List<Item> PlayerActives;
+    List<Item> OponentActives;
     public GameObject back_button; 
 
     private void Start()
     {
-        PlayerData Winner;
         gc = FindObjectOfType<GlobalControl>();
         action_done = true;
         both_alive = true;
         SetPlayersData();
+        PlayerActives = new List<Item>();
+        OponentActives = new List<Item>();
         StartCoroutine(Battle());
     }
 
@@ -30,8 +46,11 @@ public class BattleController : MonoBehaviour
 
     IEnumerator Battle()
     {
-        //AbilitiesHandler.Instance.SetPasives(Player,Oponent);
-        //AbilitiesHandler.Instance.SetPasives(Oponent,Player);
+        AbilitiesHandler.Instance.SetPasives(Player,Oponent);
+        AbilitiesHandler.Instance.SetPasives(Oponent,Player);
+        PlayerActives = AbilitiesHandler.Instance.SetActives(Player);
+        OponentActives = AbilitiesHandler.Instance.SetActives(Oponent);
+
         while (Player.HP > 0 && Oponent.HP > 0)
         {            
             set_turns(Player.Speed/Oponent.Speed);
@@ -42,12 +61,14 @@ public class BattleController : MonoBehaviour
                     if (turns[i] == true && both_alive)
                     {
                         action_done = false;
-                        yield return StartCoroutine(action(Player));                        
+                        yield return StartCoroutine(action(Player));
+                        passedTurns++;
                     }
                     else if(both_alive)
                     {
                         action_done = false;
-                        yield return StartCoroutine(action(Oponent));                        
+                        yield return StartCoroutine(action(Oponent));
+                        passedTurns++;
                     }
                 }                
             }
@@ -143,48 +164,55 @@ public class BattleController : MonoBehaviour
 
     IEnumerator action(PlayerData player_onturn)
     {
+        List<Item> UsableActives = new List<Item>();
         if (player_onturn.PlayerID == Player.PlayerID)
         {
-            /*
-            for (int i = 0; i < player_onturn.EquipedItems.Count; i++)
-            {
-                if (player_onturn.EquipedItems[i].It == ItemType.Active)
-                {
-                    if(AbilitiesHandler.Instance.CheckTriggerCondition(player_onturn.EquipedItems[i]))
-                        AbilitiesHandler.Instance.UseActive(player_onturn.EquipedItems[i]);
-                }
-            }
-            for (int i = 0; i < player_onturn.OwnedAbilities.Count; i++)
-            {
-                if (player_onturn.OwnedAbilities[i].It == ItemType.Active)
-                {
-                    if(AbilitiesHandler.Instance.CheckTriggerCondition(player_onturn.OwnedAbilities[i]))
-                        AbilitiesHandler.Instance.UseActive(player_onturn.OwnedAbilities[i]);
-                }
-            }
-            */
-            Attack(Player,Oponent);
 
+            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(PlayerActives,Player);
+            for (int i = 0; i < UsableActives.Count; i++)
+            {
+                AbilitiesHandler.Instance.UseActive(Player,UsableActives[i].Abilitys);
+            }            
+            Attack(Player,Oponent);
+            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(OponentActives, Oponent);//Se le da oportunidad al oponente de responder
+            for (int i = 0; i < UsableActives.Count; i++)
+            {
+                if (UsableActives[i].Abilitys.Et == EffectType.Healing)
+                {
+                    AbilitiesHandler.Instance.UseActive(Player, UsableActives[i].Abilitys);
+                }                    
+            }
             if (Oponent.HP <= 0)//Hacer una funcion de Check health
             {
                 both_alive = false;
                 action_done = true;
                 yield return null;
             }
-            Debug.Log(player_onturn.BattleTag + " realizo su turno");
+            Debug.Log(Player.BattleTag + " realizo su turno");
         }
         else
         {
-            //UseActives()
+            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(OponentActives,Oponent);
+            for (int i = 0; i < UsableActives.Count; i++)
+            {
+                AbilitiesHandler.Instance.UseActive(Oponent, UsableActives[i].Abilitys);
+            }
             Attack(Oponent, Player);
-
+            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(PlayerActives, Player);
+            for (int i = 0; i < UsableActives.Count; i++)
+            {
+                if (UsableActives[i].Abilitys.Et == EffectType.Healing)
+                {
+                    AbilitiesHandler.Instance.UseActive(Oponent, UsableActives[i].Abilitys);
+                }                
+            }
             if (Player.HP <= 0)
             {
                 both_alive = false;
                 action_done = true;
                 yield return null;
             }            
-            Debug.Log(player_onturn.BattleTag + " realizo su turno");
+            Debug.Log(Oponent.BattleTag + " realizo su turno");
         }
         yield return new WaitForSeconds(2f);//Reemplazar con el tiempo que tome la accion que realizara el jugador
         action_done = true;
@@ -197,11 +225,11 @@ public class BattleController : MonoBehaviour
         int  hit = 0;
         if (crit_chance >= Random.Range(0, 100))
         {
-            hit = ((Attacker.Strength * Attacker.Weapon.damage) * 2) / Attacked.Armor;
+            hit = ((Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Damage) * 2) / Attacked.Armor;
         }
         else
         {
-            hit = (Attacker.Strength * Attacker.Weapon.damage) / Attacked.Armor;
+            hit = (Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Damage) / Attacked.Armor;
         }
         hit = Mathf.FloorToInt(hit);
 
@@ -209,7 +237,7 @@ public class BattleController : MonoBehaviour
         int hit_chance = Mathf.FloorToInt(hit_prob) * 100;
         if ( hit_chance >= Random.Range(0, 100))
         {
-            Debug.Log(Attacker.BattleTag + " le hizo " + hit + "puntos de daño a " + Attacked.BattleTag + "con su ataque");
+            Debug.Log(Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + "con su ataque");
             Attacked.HP -= hit;
         }
         else

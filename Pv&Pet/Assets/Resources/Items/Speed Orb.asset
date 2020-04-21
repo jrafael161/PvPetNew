@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: Speed Orb
   m_EditorClassIdentifier: 
   Name: Speed Orb
-  ItemID: 9
+  ItemID: 8
   icon: {fileID: 0}
   PvP_Price: 9999
   Pet_Price: 9999
   Prem_Price: 9999
   Description: It gives the player a boost in the speed department. +5 SPD
   LevelRequirement: 1
-  damage: 0
-  bonus: 5
+  Damage: 0
+  Bonus_amount: 0
   Set: NA
   Bz: 5
   It: 2
-  Bt: 2
-  Eff: 0
+  has_ability: 0
+  At: 0
+  Abilitys: {fileID: 0}

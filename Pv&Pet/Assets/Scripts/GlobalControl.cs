@@ -157,11 +157,18 @@ public class GlobalControl : MonoBehaviour
     public void PrepareItems()//Inicializar los items que el jugador tiene equipados
     {
         playeProfile.Inventory = new List<Item>();//Checar el inventario
-        playeProfile.HeadGear = itemDataBase.ItemDB.Find(x => x.ItemID == 3);//Reemplazar por las ids de lo que se obtenga de la query del player
-        playeProfile.ChestGear = itemDataBase.ItemDB.Find(x => x.ItemID == 4);
-        playeProfile.ArmsGear = itemDataBase.ItemDB.Find(x => x.ItemID == 2);
-        playeProfile.FootsGear = itemDataBase.ItemDB.Find(x => x.ItemID == 1);
-        playeProfile.Weapon = itemDataBase.ItemDB.Find(x => x.ItemID == 5);
+        playeProfile.EquipedGear = new List<Item>(4);
+        playeProfile.EquipedGear[(int)BodyZone.Head] = itemDataBase.ItemDB.Find(x => x.ItemID == 0);//Reemplazar por las ids de lo que se obtenga de la query del player
+        playeProfile.EquipedGear[(int)BodyZone.Chest] = itemDataBase.ItemDB.Find(x => x.ItemID == 1);
+        playeProfile.EquipedGear[(int)BodyZone.Arms] = itemDataBase.ItemDB.Find(x => x.ItemID == 2);
+        playeProfile.EquipedGear[(int)BodyZone.Foots] = itemDataBase.ItemDB.Find(x => x.ItemID == 3);
+        playeProfile.EquipedGear[(int)BodyZone.Weapon] = itemDataBase.ItemDB.Find(x => x.ItemID == 4);
+        /*
+        for (int i = 0; i < playeProfile.EquipedGear.Count; i++)
+        {
+            playeProfile.EquipedGear[i] = itemDataBase.ItemDB.Find(x => x.ItemID == i);
+        }
+        */
     }
 
     public void GetPlayerData()

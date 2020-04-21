@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: Agility Orb
   m_EditorClassIdentifier: 
   Name: Agility Orb
-  ItemID: 7
+  ItemID: 9
   icon: {fileID: 0}
   PvP_Price: 9999
   Pet_Price: 9999
   Prem_Price: 9999
   Description: It gives the player a boost in the agility department. +5 AGI
   LevelRequirement: 1
-  damage: 5
-  bonus: 0
+  Damage: 0
+  Bonus_amount: 0
   Set: NA
   Bz: 5
   It: 2
-  Bt: 3
-  Eff: 0
+  has_ability: 0
+  At: 0
+  Abilitys: {fileID: 0}

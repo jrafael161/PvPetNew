@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/03-PVP.unity
+- path: Assets/Scenes/00-Login.unity
   isLoaded: 1
   isActive: 1
