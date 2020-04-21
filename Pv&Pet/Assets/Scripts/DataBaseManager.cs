@@ -184,7 +184,7 @@ public class DataBaseManager : MonoBehaviour
         if (profile4)
             profileimg = "Profile_4";
 
-        User user = new User(name, profileimg, "100", "1", "1", "20", "20", "20", "0", "50", "50", "1", "1", "1", "1", "1", "1", "1");
+        User user = new User(name, profileimg, "100", "1", "1", "20", "20", "20", "0", "50", "50","1");
         string json = JsonUtility.ToJson(user);
         reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
         
@@ -199,6 +199,10 @@ public class DataBaseManager : MonoBehaviour
         PveU PveU = new PveU("10");
         json = JsonUtility.ToJson(PveU);
         reference.Child("users/" + userId).Child("PVE").SetRawJsonValueAsync(json);
+
+        Equipedgear Equipedgear = new Equipedgear("1","2","3","4","5");
+        json = JsonUtility.ToJson(Equipedgear);
+        reference.Child("users/" + userId).Child("Equipedgear").SetRawJsonValueAsync(json);
 
 
     }
@@ -374,7 +378,6 @@ public class DataBaseManager : MonoBehaviour
 
 
 }
-
 public class EquipedItems
 {
     public string item;
@@ -409,6 +412,27 @@ public class PveU
         this.available = available;
     }
 }
+public class Equipedgear
+{
+    public string Head;
+    public string Chest;
+    public string Arms;
+    public string Foots;
+    public string Weapon;
+
+    public Equipedgear()
+    {
+    }
+    public Equipedgear(string Head, string Chest, string Arms, string Foots, string Weapon)
+    {
+        this.Head = Head;
+        this.Chest = Chest;
+        this.Arms = Arms;
+        this.Foots = Foots;
+        this.Weapon = Weapon;
+    }
+}
+
 public class User
 {
     public string username;
@@ -423,16 +447,11 @@ public class User
     public string PvPCoin;
     public string PetCoin;
     public string PremiumCoin;
-    public string HeadGear;
-    public string ChestGear;
-    public string ArmsGear;
-    public string Shield;
-    public string FootsGear;
-    public string Weapon;
+
     public User()
     {
     }
-    public User(string username,string profilepic, string HP, string Level, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin, string HeadGear, string ChestGear, string FootsGear,string ArmsGear, string Weapon, string Shield)
+    public User(string username,string profilepic, string HP, string Level, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin)
     {
         this.username = username;
         this.profilepic = profilepic;
@@ -446,12 +465,6 @@ public class User
         this.PvPCoin = PvPCoin;
         this.PetCoin = PetCoin;
         this.PremiumCoin = PremiumCoin;
-        this.HeadGear = HeadGear;
-        this.ChestGear = ChestGear;
-        this.FootsGear = FootsGear;
-        this.ArmsGear = ArmsGear;
-        this.Weapon = Weapon;
-        this.Shield = Shield;
     }
 }
 

@@ -23,6 +23,7 @@ public class PVE : MonoBehaviour
     public GameObject Panelpreparativos;
     public GameObject Panelmision;
     public Transform dropdownMenu;
+    public GameObject btncaptura;
 
     public int Acto;
     public int Capitulo;
@@ -200,12 +201,7 @@ public class PVE : MonoBehaviour
         DB();
         GetUserStats();
     }
-    public void Refreshlist()
-    {
-        DB();
-        GetUserStats();
-        //Getdata();
-    }
+    
     public void showact1()
     {
         Panelact1.SetActive(true);
@@ -258,7 +254,7 @@ public class PVE : MonoBehaviour
         Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
         uid = textuserid.text.ToString();
-        uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
+        //uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
         //OBTIENE LABES PARA PANTALLA
         Text textUsername = GameObject.Find("Canvas/lbl_username").GetComponent<Text>();
         Text textHP = GameObject.Find("Canvas/lbl_pv").GetComponent<Text>();
@@ -284,12 +280,14 @@ public class PVE : MonoBehaviour
                 {
                     //GUARDA TODOS LOS DATOS DE USUARIO, LLENA LAS VARIABLES DE USUARIO Y CAMBIA LOS LABELS PARA LA PANTALLA
                     Dictionary<string, System.Object> PVE = (Dictionary<string, System.Object>)attributes["PVE"];
+
                     hpuser = int.Parse(attributes["HP"].ToString());
                     struser = int.Parse(attributes["Strength"].ToString());
                     aguser = int.Parse(attributes["Agility"].ToString());
                     speuser = int.Parse(attributes["Speed"].ToString());
                     armuser = int.Parse(attributes["Armorv"].ToString());
                     expuser = int.Parse(attributes["Armorv"].ToString());
+
                     available = int.Parse(PVE["available"].ToString());
                     
                     textUsername.text = attributes["username"].ToString();
@@ -340,8 +338,11 @@ public class PVE : MonoBehaviour
         Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
         uid = textuserid.text.ToString();
-        uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
+//uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
+
         reference.Child("users").Child(uid).Child("PVE").Child("available").SetValueAsync(available);
+
+
         Debug.Log(Diff);
         switch (Diff)
         {
@@ -390,7 +391,13 @@ public class PVE : MonoBehaviour
                     foreach (KeyValuePair<string, System.Object> pair in pets)
                     {
                         Dictionary<string, System.Object> pet = (Dictionary<string, System.Object>)pets[pair.Key];
-                        items.Add(new Itemc() { name = pet["Nombre"].ToString(), chance = int.Parse(pet[Diff].ToString()) });
+                        items.Add(
+                            new Itemc() { 
+                                name = pet["Nombre"].ToString(), 
+                                chance = int.Parse(pet[Diff].ToString()), 
+                                type = pet["Tipo"].ToString() 
+                            }
+                        );
                     }
                     
                     Itemc Petichooseyou = ProportionalWheelSelection.SelectItem(items);
@@ -400,17 +407,39 @@ public class PVE : MonoBehaviour
                     int petagy = UnityEngine.Random.Range(LE, VO);
                     int petspe = UnityEngine.Random.Range(LE, VO);
                     int petarm = UnityEngine.Random.Range(LE, VO);
-
-                    Debug.Log(Petichooseyou.name);
-                    Debug.Log(Petichooseyou.chance);
-                    Debug.Log(pethp);
-                    Debug.Log(petstr);
-                    Debug.Log(petagy);
-                    Debug.Log(petspe);
-                    Debug.Log(petarm);
-
                     Panelpreparativos.SetActive(false);
                     Panelmision.SetActive(true);
+                    Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
+                    Text petpvtxt = GameObject.Find("Canvas/pnl_mision/txt_pv_v").GetComponent<Text>();
+                    Text petstrtxt = GameObject.Find("Canvas/pnl_mision/txt_str_v").GetComponent<Text>();
+                    Text petspetxt = GameObject.Find("Canvas/pnl_mision/txt_spe_v").GetComponent<Text>();
+                    Text petagytxt = GameObject.Find("Canvas/pnl_mision/txt_agy_v").GetComponent<Text>();
+                    Text petarmtxt = GameObject.Find("Canvas/pnl_mision/txt_arm_v").GetComponent<Text>();
+                    petnametxt.text = Petichooseyou.name;
+                    Debug.Log(Petichooseyou.type);
+                    if (Petichooseyou.type == "Normal")
+                        petnametxt.color = Color.white;
+                    else if (Petichooseyou.type == "Poco comun")
+                        petnametxt.color = Color.green;
+                    else if (Petichooseyou.type == "Raro")
+                        petnametxt.color = Color.blue;
+                    else if (Petichooseyou.type == "Legendario")
+                        petnametxt.color = new Color(0.8F, 0.4F, 0F);
+                    else if (Petichooseyou.type == "Epico")
+                        petnametxt.color = new Color(0.3F, 0F, 0.6F);
+                    petpvtxt.text = pethp.ToString();
+                    petstrtxt.text = petstr.ToString();
+                    petspetxt.text = petagy.ToString();
+                    petagytxt.text = petspe.ToString();
+                    petarmtxt.text = petarm.ToString();
+
+
+                    bool estatus = true;
+                    if(estatus)
+                        btncaptura.SetActive(true);
+                    else
+                        btncaptura.SetActive(false);
+
 
                     switch (Petichooseyou.name)
                     {
@@ -576,6 +605,35 @@ public class PVE : MonoBehaviour
         });
 
     }
+
+    public void capurarpet()
+    {
+        string uid = "";
+        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
+        textuserid.text = GameController.userid;
+        uid = textuserid.text.ToString();
+        //uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
+
+        Debug.Log(uid);
+        Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
+        Text petpvtxt = GameObject.Find("Canvas/pnl_mision/txt_pv_v").GetComponent<Text>();
+        Text petstrtxt = GameObject.Find("Canvas/pnl_mision/txt_str_v").GetComponent<Text>();
+        Text petspetxt = GameObject.Find("Canvas/pnl_mision/txt_spe_v").GetComponent<Text>();
+        Text petagytxt = GameObject.Find("Canvas/pnl_mision/txt_agy_v").GetComponent<Text>();
+        Text petarmtxt = GameObject.Find("Canvas/pnl_mision/txt_arm_v").GetComponent<Text>();
+        string petname = petnametxt.text.ToString();
+        string pethp = petpvtxt.text.ToString();
+        string petstr = petstrtxt.text.ToString();
+        string petagy = petagytxt.text.ToString();
+        string petspe = petspetxt.text.ToString();
+        string petarm = petarmtxt.text.ToString();
+
+
+        Capturapet Capturapet = new Capturapet( pethp, petstr, petspe, petagy, petarm);
+        string json = JsonUtility.ToJson(Capturapet);
+        reference.Child("users/" + uid).Child("PETS").Child(petname).SetRawJsonValueAsync(json);
+    }
+
     public void exitmision()
     {
         Panelmision.SetActive(false);
@@ -610,6 +668,7 @@ public class Itemc
 {
     public string name; // not only string, any type of data
     public int chance;  // chance of getting this Item
+    public string type;
 }
 
 public class ProportionalWheelSelection
@@ -637,5 +696,25 @@ public class ProportionalWheelSelection
                 return items[i];
         }
         return null;    // this code will never come while you use this programm right :)
+    }
+}
+
+public class Capturapet
+{
+    public string HP;
+    public string STR;
+    public string SPE;
+    public string AGY;
+    public string ARM;
+    public Capturapet()
+    {
+    }
+    public Capturapet(string HP, string STR, string SPE, string AGY, string ARM)
+    {
+        this.HP = HP;
+        this.STR = STR;
+        this.SPE = SPE;
+        this.AGY = AGY;
+        this.ARM = ARM;
     }
 }
