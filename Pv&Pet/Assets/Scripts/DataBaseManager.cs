@@ -30,6 +30,7 @@ public class DataBaseManager : MonoBehaviour
 
     public GameObject profilepic;
 
+    public GlobalControl gc;
 
     [SerializeField]
     private InputField Battletag = null;
@@ -40,7 +41,10 @@ public class DataBaseManager : MonoBehaviour
         DB();
         Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
+        GlobalControl gcReal = GameObject.FindObjectOfType<GlobalControl>();
+        gc = gcReal.get_Instance();
         Checkforbattletag(textuserid.text.ToString());
+
     }
 
     void DB()
@@ -136,6 +140,34 @@ public class DataBaseManager : MonoBehaviour
                             profilepic.GetComponent<Image>().sprite = sprite4;
                         }
                         registered = true;
+
+                        gc.playeProfile.BattleTag = dictUser["username"].ToString();
+                        gc.playeProfile.Level = int.Parse(dictUser["Level"].ToString());
+                        gc.playeProfile.HP = int.Parse(dictUser["HP"].ToString()); 
+                        gc.playeProfile.XP = int.Parse(dictUser["XP"].ToString());
+                        gc.playeProfile.Strength = int.Parse(dictUser["Strength"].ToString());
+                        gc.playeProfile.Speed = int.Parse(dictUser["Speed"].ToString());
+                        gc.playeProfile.Agility = int.Parse(dictUser["Agility"].ToString());
+                        gc.playeProfile.Armor = int.Parse(dictUser["Armorv"].ToString());
+                        gc.playeProfile.critic_prob = 0.1f;
+                        gc.playeProfile.PvPCoin = int.Parse(dictUser["PvPCoin"].ToString());
+                        gc.playeProfile.PetCoin = int.Parse(dictUser["PetCoin"].ToString());
+                        gc.playeProfile.PremiumCoin = int.Parse(dictUser["PremiumCoin"].ToString());
+
+                        Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];
+                        gc.playeProfile.Inventory = new List<Item>();//Checar el inventario
+                        foreach (KeyValuePair<string, System.Object> InventoryItems in Inventory)
+                        {
+                            int itemid = int.Parse(InventoryItems.Value.ToString());
+                            gc.playeProfile.Inventory.Add(gc.itemDataBase.ItemDB.Find(x => x.ItemID == itemid));
+                        }
+
+                        Dictionary<string, System.Object> Equipedgear = (Dictionary<string, System.Object>)dictUser["Equipedgear"];
+                        gc.playeProfile.HeadGear = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(dictUser["Head"].ToString()));//Reemplazar por las ids de lo que se obtenga de la query del player
+                        gc.playeProfile.ChestGear = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(dictUser["Chest"].ToString()));
+                        gc.playeProfile.ArmsGear = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(dictUser["Arms"].ToString()));
+                        gc.playeProfile.FootsGear = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(dictUser["Foots"].ToString()));
+                        gc.playeProfile.Weapon = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(dictUser["Weapon"].ToString()));
                     }
                 }
                 if (!registered)
@@ -373,10 +405,7 @@ public class DataBaseManager : MonoBehaviour
         Pets Pets154 = new Pets("King Yoggoth", "Legendario", "0", "0", "0", "0,2", "1", "2", "5", "10"); json = JsonUtility.ToJson(Pets154); reference.Child("Pets").Child("King Yoggoth").SetRawJsonValueAsync(json);
         Pets Pets155 = new Pets("Queen Yoggoth", "Legendario", "0", "0", "0", "0,3", "2,5", "5", "10", "20"); json = JsonUtility.ToJson(Pets155); reference.Child("Pets").Child("Queen Yoggoth").SetRawJsonValueAsync(json);
         Pets Pets156 = new Pets("Abomination Gazer", "Normal", "30", "25", "20", "20", "10", "10", "10", "0"); json = JsonUtility.ToJson(Pets156); reference.Child("Pets").Child("Abomination Gazer").SetRawJsonValueAsync(json);
-
     }*/
-
-
 }
 public class EquipedItems
 {

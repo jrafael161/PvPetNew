@@ -7,7 +7,8 @@ using UnityEngine.UI;
 using System;
 
 public class GlobalControl : MonoBehaviour
-{    
+{
+
     public static GlobalControl globalControl;
     public PlayerData playeProfile = new PlayerData();
     public PlayerData oponentProfile = new PlayerData();
@@ -49,7 +50,7 @@ public class GlobalControl : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+   
     public void LoadPlayerData()//Se asegura que nos econtremos en una escena valida en la que se pueda cargar la informacion del jugador
     {
         ActiveScene = SceneManager.GetActiveScene();
@@ -118,35 +119,8 @@ public class GlobalControl : MonoBehaviour
 
     public void SetPlayerData()//Se tendran que obtener estos datos de preferencia del save en la nube de lo contrario del save local del dispositivo del jugador
     {
-        /*
-        playeProfile.HP = hp;
-        playeProfile.XP = xp;
-        playeProfile.Level = Lv;
-        playeProfile.Strength = Str;
-        playeProfile.Speed = Spd;
-        playeProfile.Agility = Agl;
-        playeProfile.Armor = Arm;
-        playeProfile.PvPCoin = PvpC;
-        playeProfile.PetCoin = PetC;
-        PrepareItems();
-        playeProfile.PremiumCoin = PremC;
-        Debug.Log("fuerza: " + playeProfile.Strength);
-        */
-        playeProfile.BattleTag = "Raizen8";
-        playeProfile.Level = 1;
-        playeProfile.HP = 100;
-        playeProfile.XP = 1;
-        playeProfile.Strength = 20;
-        playeProfile.Speed = 30;
-        playeProfile.Agility = 25;
-        playeProfile.Armor = 5;
-        playeProfile.critic_prob = 0.1f;
-        playeProfile.PvPCoin = 50;
-        playeProfile.PetCoin = 25;
-        playeProfile.PremiumCoin = 1;
-        PrepareItems();        
-
-        //GetPlayerData();//Sustituir por la query de firebase
+        
+        //PrepareItems();        
     }
 
     public void SetOponentData()
@@ -156,12 +130,12 @@ public class GlobalControl : MonoBehaviour
 
     public void PrepareItems()//Inicializar los items que el jugador tiene equipados
     {
-        playeProfile.Inventory = new List<Item>();//Checar el inventario
-        playeProfile.HeadGear = itemDataBase.ItemDB.Find(x => x.ItemID == 3);//Reemplazar por las ids de lo que se obtenga de la query del player
-        playeProfile.ChestGear = itemDataBase.ItemDB.Find(x => x.ItemID == 4);
-        playeProfile.ArmsGear = itemDataBase.ItemDB.Find(x => x.ItemID == 2);
-        playeProfile.FootsGear = itemDataBase.ItemDB.Find(x => x.ItemID == 1);
-        playeProfile.Weapon = itemDataBase.ItemDB.Find(x => x.ItemID == 5);
+        //playeProfile.Inventory = new List<Item>();//Checar el inventario
+        //playeProfile.HeadGear = itemDataBase.ItemDB.Find(x => x.ItemID == 3);//Reemplazar por las ids de lo que se obtenga de la query del player
+        //playeProfile.ChestGear = itemDataBase.ItemDB.Find(x => x.ItemID == 4);
+        //playeProfile.ArmsGear = itemDataBase.ItemDB.Find(x => x.ItemID == 2);
+        //playeProfile.FootsGear = itemDataBase.ItemDB.Find(x => x.ItemID == 1);
+        //playeProfile.Weapon = itemDataBase.ItemDB.Find(x => x.ItemID == 5);
     }
 
     public void GetPlayerData()
