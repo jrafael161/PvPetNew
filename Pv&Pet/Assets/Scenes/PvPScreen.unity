@@ -3702,6 +3702,7 @@ GameObject:
   - component: {fileID: 500880699}
   - component: {fileID: 500880701}
   - component: {fileID: 500880700}
+  - component: {fileID: 500880702}
   m_Layer: 5
   m_Name: OponentList
   m_TagString: Untagged
@@ -3768,6 +3769,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &500880702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500880698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -146154839, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &521102375
 GameObject:
   m_ObjectHideFlags: 0
@@ -7638,7 +7651,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1318875746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d1dac5912b867c4584c16732c86c354, type: 3}
+  m_Script: {fileID: 11500000, guid: 76311c231e3de6a42b1c4a722921ff28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1318875749
@@ -7682,7 +7695,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1318875748}
-        m_MethodName: GoToMainMenu
+        m_MethodName: GOHOME
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

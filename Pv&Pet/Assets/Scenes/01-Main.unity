@@ -2977,7 +2977,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1208746346}
-        m_MethodName: GOPVP
+        m_MethodName: GoToPvPSc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3031,7 +3031,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1208746341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76311c231e3de6a42b1c4a722921ff28, type: 3}
+  m_Script: {fileID: 11500000, guid: b1b53924d1f23c643b6ff1255f6ea593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1208777715
@@ -4533,6 +4533,7 @@ GameObject:
   - component: {fileID: 1824466066}
   - component: {fileID: 1824466065}
   - component: {fileID: 1824466064}
+  - component: {fileID: 1824466067}
   m_Layer: 0
   m_Name: Btn_store
   m_TagString: Untagged
@@ -4599,7 +4600,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1824466065}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1824466067}
+        m_MethodName: GoToShopSc
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1824466065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4635,6 +4647,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824466062}
   m_CullTransparentMesh: 0
+--- !u!114 &1824466067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824466062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fba35db952d18a4db3b4970b00c75e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1927336365
 GameObject:
   m_ObjectHideFlags: 0
