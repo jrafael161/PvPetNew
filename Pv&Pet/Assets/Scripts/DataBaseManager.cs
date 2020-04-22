@@ -162,12 +162,13 @@ public class DataBaseManager : MonoBehaviour
                             gc.playeProfile.Inventory.Add(gc.itemDataBase.ItemDB.Find(x => x.ItemID == itemid));
                         }
 
-                        Dictionary<string, System.Object> Equipedgear = (Dictionary<string, System.Object>)dictUser["Equipedgear"];
-                        gc.playeProfile.HeadGear = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(dictUser["Head"].ToString()));//Reemplazar por las ids de lo que se obtenga de la query del player
-                        gc.playeProfile.ChestGear = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(dictUser["Chest"].ToString()));
-                        gc.playeProfile.ArmsGear = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(dictUser["Arms"].ToString()));
-                        gc.playeProfile.FootsGear = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(dictUser["Foots"].ToString()));
-                        gc.playeProfile.Weapon = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(dictUser["Weapon"].ToString()));
+                        //Dictionary<string, System.Object> Equipedgear = (Dictionary<string, System.Object>)dictUser["Equipedgear"];
+                        gc.PrepareItems();
+                        for (int i = 0; i < 5; i++)
+                        {
+                            gc.playeProfile.EquipedGear.Add(gc.itemDataBase.ItemDB.Find(x => x.ItemID == i));
+                            //gc.playeProfile.EquipedGear[i] = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(Equipedgear[i.ToString()].ToString()));
+                        }
                     }
                 }
                 if (!registered)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LeatherBoots
   m_EditorClassIdentifier: 
   Name: Leather boots
-  ItemID: 1
+  ItemID: 3
   icon: {fileID: 0}
   PvP_Price: 10
   Pet_Price: 5
@@ -21,10 +21,11 @@ MonoBehaviour:
   Description: A common pair of leather boots, it won't help much but it's better
     than nothing.
   LevelRequirement: 1
-  damage: 0
-  bonus: 3
+  Damage: 0
+  Bonus_amount: 0
   Set: leather
   Bz: 3
   It: 0
-  Bt: 4
-  Eff: 0
+  has_ability: 0
+  At: 0
+  Abilitys: {fileID: 0}

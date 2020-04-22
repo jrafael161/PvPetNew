@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: ShortSword
   m_EditorClassIdentifier: 
   Name: Short Sword
-  ItemID: 5
+  ItemID: 4
   icon: {fileID: 0}
   PvP_Price: 15
   Pet_Price: 7
   Prem_Price: 1
   Description: A common sword, useful for opening letter and not much more.
   LevelRequirement: 1
-  damage: 5
-  bonus: 0
+  Damage: 0
+  Bonus_amount: 0
   Set: NA
   Bz: 4
   It: 1
-  Bt: 5
-  Eff: 0
+  has_ability: 0
+  At: 0
+  Abilitys: {fileID: 0}

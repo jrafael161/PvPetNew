@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum BodyZone {Head, Chest, Arms, Foots, Weapon, Equipable};
-public enum ItemType {Armor, Weapon, Pasive, Active};
-public enum BonusType {Health, Strength, Speed, Agility, Armor, NA};
+public enum ItemType { Armor, Weapon };
+public enum AbiltyType {Passive, Active};
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items")]
 
@@ -18,11 +18,12 @@ public class Item: ScriptableObject
     public int Prem_Price;
     public string Description;
     public int LevelRequirement;
-    public int damage;
-    public int bonus;
+    public int Damage;
+    public int Bonus_amount;
     public string Set;
     public BodyZone Bz;
     public ItemType It;
-    public BonusType Bt;
-    public Effect Eff;
+    public bool has_ability;
+    public AbiltyType At;
+    public Ability Abilitys;
 }

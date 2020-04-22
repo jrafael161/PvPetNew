@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: Life Orb
   m_EditorClassIdentifier: 
   Name: Lofe Orb
-  ItemID: 8
+  ItemID: 6
   icon: {fileID: 0}
   PvP_Price: 9999
   Pet_Price: 9999
   Prem_Price: 9999
   Description: It gives the player a boost in the life department. 10+ LP
   LevelRequirement: 1
-  damage: 0
-  bonus: 10
+  Damage: 0
+  Bonus_amount: 0
   Set: NA
   Bz: 4
   It: 2
-  Bt: 0
-  Eff: 0
+  has_ability: 0
+  At: 0
+  Abilitys: {fileID: 0}

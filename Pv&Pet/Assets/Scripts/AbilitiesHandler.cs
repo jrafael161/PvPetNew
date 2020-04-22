@@ -5,6 +5,7 @@ using UnityEngine;
 public class AbilitiesHandler
 {
     private static AbilitiesHandler _instance;
+
     public static AbilitiesHandler Instance
     {
         get { return _instance; }
@@ -15,85 +16,205 @@ public class AbilitiesHandler
         _instance = this;
     }
 
+    public void Initialize()
+    {
+        _instance = this;
+    }
+
     public void SetPasives(PlayerData player,PlayerData oponent)
     {
-        for (int i = 0; i < player.EquipedItems.Count; i++)
+        if (player.EquipedGear != null)
+        for (int i = 0; i < player.EquipedGear.Count; i++)//Checa habilidades de armadura y arma
         {
-            if (player.EquipedItems[i].It == ItemType.Pasive)
+            if (player.EquipedGear[i].has_ability)
             {
-                UsePasive(player, player.EquipedItems[i]);
+                if (player.EquipedGear[i].At == AbiltyType.Passive)
+                {
+                    if (player.EquipedGear[i].Abilitys.Eff == Effect.Oneself)
+                    {
+                        UsePasive(player, player.EquipedGear[i].Abilitys);
+                    }
+                    else if(player.EquipedGear[i].Abilitys.Eff == Effect.Opponent)
+                    {
+                        UsePasive(oponent, player.EquipedGear[i].Abilitys);
+                    }
+                }
             }
         }
-        for (int i = 0; i < player.OwnedAbilities.Count; i++)
+        if (player.EquipedItems != null)
+            for (int i = 0; i < player.EquipedItems.Count; i++)//Checa habilidades de los items equipados
         {
-            if (player.OwnedAbilities[i].It == ItemType.Pasive)
+            if (player.EquipedItems[i].has_ability)
             {
-                if (player.OwnedAbilities[i].Eff == Effect.Oneself)
+                if (player.EquipedItems[i].At == AbiltyType.Passive)
                 {
-                    UsePasive(player, player.OwnedAbilities[i]);
+                    if (player.EquipedItems[i].Abilitys.Eff == Effect.Oneself)
+                    {
+                        UsePasive(player, player.EquipedItems[i].Abilitys);
+                    }
+                    else if (player.EquipedItems[i].Abilitys.Eff == Effect.Opponent)
+                    {
+                        UsePasive(oponent, player.EquipedItems[i].Abilitys);
+                    }
                 }
-                else if(player.OwnedAbilities[i].Eff == Effect.Opponent)
-                {
-                    UsePasive(oponent, player.OwnedAbilities[i]);
-                }
-                
             }
         }
     }
 
-    public bool CheckTriggerCondition(Item it)
+    public List<Item> SetActives(PlayerData player)
     {
-        return true;//Se cumplen las condiciones para que la abilidad sea activada
-    }
-
-    public bool CheckTriggerCondition(Ability ab)
-    {
-        return true;//Se cumplen las condiciones para que la abilidad sea activada
-    }
-
-    public void UseActive(Item it)
-    {
-        switch (it.Bt)
+        List<Item> itemsWActive = new List<Item>();
+        for (int i = 0; i < player.EquipedGear.Count; i++)//Checa habilidades de armadura y arma
         {
-            case BonusType.Health:
+            if (player.EquipedGear[i].has_ability)
+            {
+                if (player.EquipedGear[i].At == AbiltyType.Active)
+                {
+                    itemsWActive.Add(player.EquipedGear[i]);
+                }
+            }
+        }
+        for (int i = 0; i < player.EquipedItems.Count; i++)//Checa habilidades de armadura y arma
+        {
+            if (player.EquipedItems[i].has_ability)
+            {
+                if (player.EquipedItems[i].At == AbiltyType.Active)
+                {
+                    itemsWActive.Add(player.EquipedItems[i]);
+                }
+            }
+        }
+        return itemsWActive;
+    }
 
+    public List<Item> CheckTriggerCondition(List<Item> availableActives, PlayerData player)
+    {
+        List<Item> readyActives = new List<Item>();
+        for (int i = 0; i < availableActives.Count; i++)
+        {
+            if (availableActives[i].Abilitys.Tt == ThresholdType.Turns)
+            {
+                if (BattleController.Instance.passedTurns >= availableActives[i].Abilitys.minThreshold)
+                {
+                    readyActives.Add(availableActives[i]);
+                }
+            }
+            else if (availableActives[i].Abilitys.Tt == ThresholdType.Health)
+            {
+                if (player.HP <= availableActives[i].Abilitys.minThreshold)
+                {
+                    readyActives.Add(availableActives[i]);
+                }
+            }
+        }
+        return readyActives;
+    }
+
+    public void UseActive(PlayerData player ,Ability ability)
+    {
+        switch (ability.Et)
+        {
+            case EffectType.Damage:
+                if (player == BattleController.Instance.Player)
+                    player = BattleController.Instance.Oponent;
+                else
+                    player = BattleController.Instance.Player;
+                Damage(player, ability);
                 break;
-            case BonusType.Strength:
+            case EffectType.Healing:
+                Heal(player, ability);
                 break;
-            case BonusType.Speed:
+            case EffectType.Buff:
+                Buff(player, ability);
                 break;
-            case BonusType.Agility:
-                break;
-            case BonusType.Armor:
-                break;
-            case BonusType.NA:
+            case EffectType.Debuff:
+                if (player == BattleController.Instance.Player)
+                    player = BattleController.Instance.Oponent;
+                else
+                    player = BattleController.Instance.Player;
+                Debuff(player, ability);
                 break;
             default:
                 break;
         }
     }
 
-    public void UseActive(Ability ab)
+    public void Damage(PlayerData player, Ability ability)
     {
-
+        player.HP -= ability.Bonus;
+        Debug.Log("Daño hecho a " + player.BattleTag + " de " + ability.Bonus + "por" + ability.Name);
     }
 
-    public void UsePasive(PlayerData player, Item item)
+    public void Heal(PlayerData player, Ability ability)
     {
-        switch (item.It)
+        player.HP += ability.Bonus;
+        Debug.Log("Curacion hecha a " + player.BattleTag + " de " + ability.Bonus + "por" + ability.Name);
+    }
+
+    public void Buff(PlayerData player, Ability ability)
+    {
+        switch (ability.Bt)
         {
-            case ItemType.Armor:
+            case BuffType.Health:
+                player.HP += ability.Bonus;
+                Debug.Log(ability.Bonus + "en vida " + " a " + player.BattleTag + " por " + ability.name);
                 break;
-
-            case ItemType.Weapon:
+            case BuffType.Strength:
+                player.Strength += ability.Bonus;
+                Debug.Log(ability.Bonus + "en fuerza " + " a " + player.BattleTag + " por " + ability.name);
                 break;
-
-            case ItemType.Pasive:
+            case BuffType.Speed:
+                player.Speed += ability.Bonus;
+                Debug.Log(ability.Bonus + "en velicidad " + " a " + player.BattleTag + " por " + ability.name);
                 break;
-
-            case ItemType.Active:
+            case BuffType.Agility:
+                player.Agility += ability.Bonus;
+                Debug.Log(ability.Bonus + "en agilidad " + " a " + player.BattleTag + " por " + ability.name);
+                break;
+            case BuffType.Critic:
+                player.critic_prob += ability.Bonus;
+                Debug.Log(ability.Bonus + "en critico " + " a " + player.BattleTag + " por " + ability.name);
+                break;
+            case BuffType.Armor:
+                player.Armor += ability.Bonus;
+                Debug.Log(ability.Bonus + "en armadura " + " a " + player.BattleTag + " por " + ability.name);
                 break;
             default:
+                Debug.Log("No se supo que hacer con la habilidad " + ability.name);
+                break;
+        }
+    }
+
+    public void Debuff(PlayerData player, Ability ability)
+    {
+        switch (ability.Bt)
+        {
+            case BuffType.Health:
+                player.HP -= ability.Bonus;
+                Debug.Log(ability.Bonus + "en vida " + " a " + player.BattleTag + " por " + ability.name);
+                break;
+            case BuffType.Strength:
+                player.Strength -= ability.Bonus;
+                Debug.Log(ability.Bonus + "en fuerza " + " a " + player.BattleTag + " por " + ability.name);
+                break;
+            case BuffType.Speed:
+                player.Speed -= ability.Bonus;
+                Debug.Log(ability.Bonus + "en velicidad " + " a " + player.BattleTag + " por " + ability.name);
+                break;
+            case BuffType.Agility:
+                player.Agility -= ability.Bonus;
+                Debug.Log(ability.Bonus + "en agilidad " + " a " + player.BattleTag + " por " + ability.name);
+                break;
+            case BuffType.Critic:
+                player.critic_prob -= ability.Bonus;
+                Debug.Log(ability.Bonus + "en critico " + " a " + player.BattleTag + " por " + ability.name);
+                break;
+            case BuffType.Armor:
+                player.Armor -= ability.Bonus;
+                Debug.Log(ability.Bonus + "en armadura " + " a " + player.BattleTag + " por " + ability.name);
+                break;
+            default:
+                Debug.Log("No se supo que hacer con la habilidad " + ability.name);
                 break;
         }
     }
@@ -103,24 +224,31 @@ public class AbilitiesHandler
         switch (ability.Bt)
         {
             case BuffType.Health:
-                player.HP += ability.cuantity;
+                player.HP += ability.Bonus;
+                Debug.Log(ability.Bonus  + "en vida " + " a " + player.BattleTag + " por " + ability.name);
                 break;
             case BuffType.Strength:
-                player.Strength += ability.cuantity;
+                player.Strength += ability.Bonus;
+                Debug.Log(ability.Bonus + "en fuerza " + " a " + player.BattleTag + " por " + ability.name);
                 break;
             case BuffType.Speed:
-                player.Speed += ability.cuantity;
+                player.Speed += ability.Bonus;
+                Debug.Log(ability.Bonus + "en velicidad " + " a " + player.BattleTag + " por " + ability.name);
                 break;
             case BuffType.Agility:
-                player.Agility += ability.cuantity;
+                player.Agility += ability.Bonus;
+                Debug.Log(ability.Bonus + "en agilidad " + " a " + player.BattleTag + " por " + ability.name);
                 break;
             case BuffType.Critic:
-                player.critic_prob += ability.cuantity;
+                player.critic_prob += ability.Bonus;
+                Debug.Log(ability.Bonus + "en critico " + " a " + player.BattleTag + " por " + ability.name);
                 break;
             case BuffType.Armor:
-                player.Armor += ability.cuantity;
+                player.Armor += ability.Bonus;
+                Debug.Log(ability.Bonus + "en armadura " + " a " + player.BattleTag + " por " + ability.name);
                 break;
             default:
+                Debug.Log("No se supo que hacer con la habilidad " + ability.name);
                 break;
         }    
     }
