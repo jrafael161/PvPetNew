@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 5
   Mision: 25
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: be8e7e00d74554f46a3742b655eb0a39, type: 3}
   PetID: 154
-  PetName: KingYoggoth
+  PetName: King Yoggoth
   ProbFacil: 0
   ProbNormal: 0
   ProbDificil: 0

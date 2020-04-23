@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 3
   Mision: 14
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 536c97678dd6c5540b910c44848cb021, type: 3}
   PetID: 84
   PetName: Octopus
   ProbFacil: 50

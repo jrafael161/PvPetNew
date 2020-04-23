@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 5
   Mision: 23
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 9bc2557bfb90e7442a4dc2a325e64905, type: 3}
   PetID: 40
-  PetName: KnightSpearElite
+  PetName: Knight Spear Elite
   ProbFacil: 25
   ProbNormal: 20
   ProbDificil: 20

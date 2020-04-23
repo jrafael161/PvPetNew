@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 3
   Mision: 14
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 5a0a9133d2ea4734e88fb848ed04374b, type: 3}
   PetID: 86
   PetName: Shark
   ProbFacil: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 2
   Mision: 8
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: e6e2b2d58420b444fa2ea0d432b1cd1c, type: 3}
   PetID: 43
   PetName: Gemstone Fire
   ProbFacil: 0

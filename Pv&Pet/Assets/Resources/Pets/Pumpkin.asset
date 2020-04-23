@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 4
   Mision: 16
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: b4170c2ca20e7864284c6b558bd26879, type: 3}
   PetID: 95
   PetName: Pumpkin
   ProbFacil: 50

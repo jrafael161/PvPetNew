@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 5
   Mision: 23
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 715dddcc32ef0c84e8e54eaa2b50a4aa, type: 3}
   PetID: 143
-  PetName: RedGuardwarrior
+  PetName: Red Guard warrior
   ProbFacil: 25
   ProbNormal: 20
   ProbDificil: 15

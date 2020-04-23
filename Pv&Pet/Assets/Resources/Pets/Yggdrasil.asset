@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 4
   Mision: 17
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 715bd64624130ea4393d003f41fe9ded, type: 3}
   PetID: 105
   PetName: Yggdrasil
   ProbFacil: 0

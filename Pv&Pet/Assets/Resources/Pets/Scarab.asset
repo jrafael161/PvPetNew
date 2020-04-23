@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 1
   Mision: 1
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 67d8650a79f33cc438fe3e2286cb1245, type: 3}
   PetID: 5
   PetName: Mantis
   ProbFacil: 33
