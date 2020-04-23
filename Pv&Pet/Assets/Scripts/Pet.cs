@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ public class Pet : ScriptableObject
 {
     public int Clase;
     public int Mision;
-    public Image PetSprite;
+    public Sprite PetSprite;
     public int PetID;
     public string PetName;
     public float ProbFacil;
