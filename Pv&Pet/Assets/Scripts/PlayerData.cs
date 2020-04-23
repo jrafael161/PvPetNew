@@ -19,14 +19,8 @@ public class PlayerData
     public int PvPCoin;
     public int PetCoin;
     public int PremiumCoin;
-    /*
-    public Item HeadGear;
-    public Item ChestGear;
-    public Item ArmsGear;
-    public Item FootsGear;
-    public Item Weapon;
-    */
     public List<Item> EquipedGear;
     public List<Item> EquipedItems;
+    public List<Pet> OwnedPets;
     public List<Item> Inventory;
 }
