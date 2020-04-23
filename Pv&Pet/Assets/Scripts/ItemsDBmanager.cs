@@ -5,7 +5,13 @@ using UnityEngine;
 
 public class ItemsDBmanager
 {
-    public List<Item> ItemDB=new List<Item>();
+    private static ItemsDBmanager _instance;
+    public static ItemsDBmanager Instance
+    {
+        get { return _instance; }
+    }
+
+    public List<Item> ItemDB = new List<Item>();
     
     public void Set_ShopInventory()
     {

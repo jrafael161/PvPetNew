@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class AbilitiesDBmanager
 {
+    private static AbilitiesDBmanager _instance;
+    public static AbilitiesDBmanager Instance
+    {
+        get { return _instance; }
+    }
+
     public List<Ability> AbilitiesDB = new List<Ability>();
 
     public void Set_AbilitiesDatabase()
