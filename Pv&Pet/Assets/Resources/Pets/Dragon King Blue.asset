@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 2
   Mision: 10
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 71516db29d6a7dd45abcb9dd314d12f9, type: 3}
   PetID: 59
   PetName: Dragon King Blue
   ProbFacil: 50

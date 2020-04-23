@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 5
   Mision: 25
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 1472907e87a6e434b8677103e78720df, type: 3}
   PetID: 150
-  PetName: AbominationTyrant
+  PetName: Abomination Tyrant
   ProbFacil: 0
   ProbNormal: 0
   ProbDificil: 20

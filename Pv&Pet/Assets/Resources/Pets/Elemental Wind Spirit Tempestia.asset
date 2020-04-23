@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 2
   Mision: 9
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: cb12b53dad99b634fb33eea104846888, type: 3}
   PetID: 58
   PetName: Elemental Wind Spirit Tempestia
   ProbFacil: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 2
   Mision: 9
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 1d61422dad714944f957c7c81a460495, type: 3}
   PetID: 52
   PetName: Elemental Goddess Airi
   ProbFacil: 0

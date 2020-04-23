@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 1
   Mision: 3
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 55d6aaea3ba5fde40a9d8d0b58aa68ba, type: 3}
   PetID: 17
   PetName: Black Ant Protector
   ProbFacil: 20

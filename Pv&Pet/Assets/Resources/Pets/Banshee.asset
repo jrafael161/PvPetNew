@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 4
   Mision: 19
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 369fcaf84e316c0478b245beab0a19b9, type: 3}
   PetID: 113
   PetName: Banshee
   ProbFacil: 5

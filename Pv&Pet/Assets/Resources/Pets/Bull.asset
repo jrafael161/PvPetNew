@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 1
   Mision: 1
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: f4467b4053e6d774db0ef8a833dc0b15, type: 3}
   PetID: 1
   PetName: Bull
   ProbFacil: 0

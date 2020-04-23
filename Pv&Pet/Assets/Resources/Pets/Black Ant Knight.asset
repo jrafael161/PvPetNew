@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 1
   Mision: 3
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 47501294211be2f46aaff3ca4e39cf07, type: 3}
   PetID: 15
   PetName: Black Ant Knight
   ProbFacil: 30

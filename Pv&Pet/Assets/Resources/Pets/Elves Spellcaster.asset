@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 2
   Mision: 7
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 2da3e9b669ed484468eac2fd88d6c6fe, type: 3}
   PetID: 40
   PetName: Elves Spellcaster
   ProbFacil: 0
