@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 1
   Mision: 2
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 75264280f8809124f96204d7cf9dee96, type: 3}
   PetID: 8
   PetName: Giant Bug Centipede
   ProbFacil: 33

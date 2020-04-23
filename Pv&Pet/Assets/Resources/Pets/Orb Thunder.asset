@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 2
   Mision: 8
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 0b41324e6e05b594eaea4ba0bef0b665, type: 3}
   PetID: 49
   PetName: Orb Thunder
   ProbFacil: 25

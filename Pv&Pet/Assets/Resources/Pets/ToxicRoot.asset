@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 4
   Mision: 18
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: d30f2b9336e1e604c81f83f43eea5ce1, type: 3}
   PetID: 106
-  PetName: ToxicRoot
+  PetName: Toxic Root
   ProbFacil: 33
   ProbNormal: 25
   ProbDificil: 20

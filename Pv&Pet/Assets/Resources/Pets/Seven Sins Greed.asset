@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 2
   Mision: 6
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 64f9327a8e1b6fc4985dac3d331b6223, type: 3}
   PetID: 34
   PetName: Seven Sins Greed
   ProbFacil: 0

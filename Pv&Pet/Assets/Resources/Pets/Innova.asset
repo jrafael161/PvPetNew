@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 5
   Mision: 24
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: d4e98b986ae35af489acfa463abd20e0, type: 3}
   PetID: 145
   PetName: Innova
   ProbFacil: 0

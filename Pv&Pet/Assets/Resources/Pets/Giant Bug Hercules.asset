@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 1
   Mision: 4
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: e6ac692ddae339f48959a13307a58440, type: 3}
   PetID: 20
   PetName: Giant Bug Hercules
   ProbFacil: 15

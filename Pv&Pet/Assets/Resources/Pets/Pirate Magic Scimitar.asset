@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 3
   Mision: 13
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 12f8b7c6ab112074e9c86e065d9d3a08, type: 3}
   PetID: 75
   PetName: Pirate Magic Scimitar
   ProbFacil: 0

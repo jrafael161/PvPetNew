@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 1
   Mision: 5
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 5eaa7f859ef8cfe43aeb3977feee7e24, type: 3}
   PetID: 28
   PetName: Imperial Widow
   ProbFacil: 0

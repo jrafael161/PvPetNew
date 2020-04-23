@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 4
   Mision: 16
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 4521f650e882aa74ca895d008ea5777b, type: 3}
   PetID: 99
-  PetName: UltraStein
+  PetName: Ultra Stein
   ProbFacil: 0
   ProbNormal: 0
   ProbDificil: 0

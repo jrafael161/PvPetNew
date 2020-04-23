@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clase: 4
   Mision: 19
-  PetSprite: {fileID: 0}
+  PetSprite: {fileID: 21300000, guid: 85f2b00c8e64a2b41a3932b9e31fa962, type: 3}
   PetID: 118
-  PetName: ShadowKnight
+  PetName: Shadow Knight
   ProbFacil: 0
   ProbNormal: 0
   ProbDificil: 0
