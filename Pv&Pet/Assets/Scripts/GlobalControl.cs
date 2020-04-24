@@ -13,6 +13,7 @@ public class GlobalControl : MonoBehaviour
     public PlayerData oponentProfile = new PlayerData();
     public ItemsDBmanager itemDataBase = new ItemsDBmanager();
     public AbilitiesDBmanager abilitiesDataBase = new AbilitiesDBmanager();
+    public PetDBManager petDBManager = new PetDBManager();
     AbilitiesHandler abilitiesHandler = new AbilitiesHandler();
     public Scene ActiveScene;
     int NumberOfStats;
@@ -27,6 +28,7 @@ public class GlobalControl : MonoBehaviour
         itemDataBase.Set_ItemDatabase();
         abilitiesDataBase.Set_AbilitiesDatabase();
         abilitiesHandler.Initialize();
+        petDBManager.Set_PetDatabase();
         SetPlayerData();
         LoadPlayerData();                
         ActiveScene = SceneManager.GetActiveScene();
