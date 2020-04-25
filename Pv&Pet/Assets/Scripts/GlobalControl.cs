@@ -29,6 +29,7 @@ public class GlobalControl : MonoBehaviour
         abilitiesDataBase.Set_AbilitiesDatabase();
         abilitiesHandler.Initialize();
         petDBManager.Set_PetDatabase();
+        Debug.Log(petDBManager.PetDB.Find(x => x.PetID == 0));
         SetPlayerData();
         LoadPlayerData();                
         ActiveScene = SceneManager.GetActiveScene();
