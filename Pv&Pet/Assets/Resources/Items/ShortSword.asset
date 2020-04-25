@@ -20,7 +20,7 @@ MonoBehaviour:
   Prem_Price: 1
   Description: A common sword, useful for opening letter and not much more.
   LevelRequirement: 1
-  Damage: 0
+  Value: 1
   Bonus_amount: 0
   Set: NA
   Bz: 4

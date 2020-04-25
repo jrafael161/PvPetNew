@@ -14,7 +14,7 @@ public class PetDBManager
 
     public void Set_PetDatabase()
     {
-        for (int i = 0; PetDB.Count < 5; i++)
+        for (int i = 0; PetDB.Count < 155; i++)
         {
             PetDB.Add(Resources.Load("Pet/Bull") as Pet);
             PetDB.Add(Resources.Load("Pet/Lunar Butterfly") as Pet);

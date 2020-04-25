@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
-  m_Name: Life Orb
+  m_Name: Platinum Gauntlets
   m_EditorClassIdentifier: 
-  Name: Lofe Orb
-  ItemID: 6
+  Name: Platinum Gauntlets
+  ItemID: 32
   icon: {fileID: 0}
-  PvP_Price: 9999
-  Pet_Price: 9999
-  Prem_Price: 9999
-  Description: It gives the player a boost in the life department. 10+ LP
-  LevelRequirement: 1
-  Damage: 0
+  PvP_Price: 0
+  Pet_Price: 0
+  Prem_Price: 0
+  Description: 
+  LevelRequirement: 30
+  Value: 7
   Bonus_amount: 0
-  Set: NA
-  Bz: 4
-  It: 2
+  Set: Platinum
+  Bz: 2
+  It: 0
   has_ability: 0
   At: 0
   Abilitys: {fileID: 0}

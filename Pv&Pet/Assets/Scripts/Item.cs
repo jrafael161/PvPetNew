@@ -18,7 +18,7 @@ public class Item: ScriptableObject
     public int Prem_Price;
     public string Description;
     public int LevelRequirement;
-    public int Damage;
+    public int Value;//Modficador de armadura o de daño dependiendo sea el caso
     public int Bonus_amount;
     public string Set;
     public BodyZone Bz;

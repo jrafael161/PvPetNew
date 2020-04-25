@@ -21,9 +21,9 @@ MonoBehaviour:
   Description: A common pair of leather boots, it won't help much but it's better
     than nothing.
   LevelRequirement: 1
-  Damage: 0
+  Value: 1
   Bonus_amount: 0
-  Set: leather
+  Set: Leather
   Bz: 3
   It: 0
   has_ability: 0
