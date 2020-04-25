@@ -26,6 +26,10 @@ public class AbilitiesHandler
         if (player.EquipedGear != null)
         for (int i = 0; i < player.EquipedGear.Count; i++)//Checa habilidades de armadura y arma
         {
+            if (player.EquipedGear.TrueForAll(x => x.Set == player.EquipedGear[0].Set))
+            {
+                    UseAllSetBonus();
+            }
             if (player.EquipedGear[i].has_ability)
             {
                 if (player.EquipedGear[i].At == AbiltyType.Passive)
@@ -251,5 +255,10 @@ public class AbilitiesHandler
                 Debug.Log("No se supo que hacer con la habilidad " + ability.name);
                 break;
         }    
+    }
+
+    public void UseAllSetBonus()
+    {
+
     }
 }

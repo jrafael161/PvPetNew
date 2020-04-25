@@ -42,7 +42,9 @@ public class BattleController : MonoBehaviour
 
     IEnumerator Battle()
     {
-        AbilitiesHandler.Instance.SetPasives(Player,Oponent);
+        CalculateArmor(Player);
+        CalculateArmor(Oponent);
+        AbilitiesHandler.Instance.SetPasives(Player, Oponent);
         AbilitiesHandler.Instance.SetPasives(Oponent,Player);
         PlayerActives = AbilitiesHandler.Instance.SetActives(Player);
         OponentActives = AbilitiesHandler.Instance.SetActives(Oponent);
@@ -221,11 +223,11 @@ public class BattleController : MonoBehaviour
         int  hit = 0;
         if (crit_chance >= Random.Range(0, 100))
         {
-            hit = ((Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Damage) * 2) / Attacked.Armor;
+            hit = ((Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Value) * 2) / Attacked.Armor;
         }
         else
         {
-            hit = (Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Damage) / Attacked.Armor;
+            hit = (Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Value) / Attacked.Armor;
         }
         hit = Mathf.FloorToInt(hit);
 
@@ -248,9 +250,12 @@ public class BattleController : MonoBehaviour
         Oponent = gc.oponentProfile;       
     }
 
-    public void SetBuffs()
+    public void CalculateArmor(PlayerData player)
     {
-        Debug.Log("Se aplicaron buffs");
+        for (int i = 0; i < player.EquipedGear.Count - 1; i++)
+        {
+            player.Armor += player.EquipedGear[i].Value;
+        }
     }
 }
 

@@ -32,7 +32,7 @@ public class ShopControl : MonoBehaviour
             ShopItemAux = Instantiate(ShopItem) as GameObject;
             ShopItemAux.SetActive(true);
             ShopItemAux.transform.SetParent(ShopItem.transform.parent, false);
-            Texto = ShopItemAux.GetComponentsInChildren<Text>();
+            Texto = ShopItemAux.GetComponentsInChildren<Text>(); ;
             Texto[0].text = item.Description.ToString();
             Texto[1].text = item.PvP_Price.ToString();
             Texto[2].text = item.Pet_Price.ToString();
