@@ -16,7 +16,6 @@ public class DataBaseManager : MonoBehaviour
     private bool signedIn;
     private bool registered;
     public GameObject Panel;
-
     public GameObject img1;
     public GameObject img2;
     public GameObject img3;
@@ -26,10 +25,7 @@ public class DataBaseManager : MonoBehaviour
     public Sprite sprite2;
     public Sprite sprite3;
     public Sprite sprite4;
-
-
     public GameObject profilepic;
-
     public GlobalControl gc;
 
     [SerializeField]

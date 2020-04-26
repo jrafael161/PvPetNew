@@ -419,6 +419,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &2616191
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,6 +709,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!114 &9519620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,6 +1057,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &72823841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,6 +1442,84 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
+--- !u!1 &83992941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 83992942}
+  - component: {fileID: 83992944}
+  - component: {fileID: 83992943}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &83992942
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83992941}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1278842416}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &83992943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83992941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Button
+--- !u!222 &83992944
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83992941}
+  m_CullTransparentMesh: 0
 --- !u!1 &106616203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,6 +1820,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!114 &107965539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2635,6 +2717,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &233147725
 GameObject:
   m_ObjectHideFlags: 0
@@ -3201,6 +3284,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &356226890
 GameObject:
   m_ObjectHideFlags: 0
@@ -3585,6 +3669,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &383741023
 GameObject:
   m_ObjectHideFlags: 0
@@ -3892,6 +3977,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &385900582
 GameObject:
   m_ObjectHideFlags: 0
@@ -5250,6 +5336,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &579683257
 GameObject:
   m_ObjectHideFlags: 0
@@ -5932,6 +6019,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &646527291
 GameObject:
   m_ObjectHideFlags: 0
@@ -6547,6 +6635,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &707037045
 GameObject:
   m_ObjectHideFlags: 0
@@ -7008,6 +7097,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &734862307
 GameObject:
   m_ObjectHideFlags: 0
@@ -7392,6 +7482,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &747901339
 GameObject:
   m_ObjectHideFlags: 0
@@ -8537,6 +8628,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &870095138
 GameObject:
   m_ObjectHideFlags: 0
@@ -8878,6 +8970,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 21300000, guid: f866553d849878d44b27d1b46fb7c74a, type: 3}
   AbominationGazer: {fileID: 21300000, guid: 8a3502d4f204409419cb375df1de16a8, type: 3}
   petimg: {fileID: 781427841}
+  gc: {fileID: 0}
 --- !u!114 &887845603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9420,6 +9513,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &927302290
 GameObject:
   m_ObjectHideFlags: 0
@@ -9881,6 +9975,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &973103937
 GameObject:
   m_ObjectHideFlags: 0
@@ -10563,6 +10658,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1006466240
 GameObject:
   m_ObjectHideFlags: 0
@@ -10870,6 +10966,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1007205325
 GameObject:
   m_ObjectHideFlags: 0
@@ -11177,6 +11274,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1007420225
 GameObject:
   m_ObjectHideFlags: 0
@@ -12332,6 +12430,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1117652660
 GameObject:
   m_ObjectHideFlags: 0
@@ -13178,6 +13277,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1229628102
 GameObject:
   m_ObjectHideFlags: 0
@@ -13716,6 +13816,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1249930765
 GameObject:
   m_ObjectHideFlags: 0
@@ -13792,6 +13893,314 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249930765}
+  m_CullTransparentMesh: 0
+--- !u!1 &1278842415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1278842416}
+  - component: {fileID: 1278842420}
+  - component: {fileID: 1278842419}
+  - component: {fileID: 1278842418}
+  - component: {fileID: 1278842417}
+  m_Layer: 0
+  m_Name: Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1278842416
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278842415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 83992942}
+  m_Father: {fileID: 1522943155}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 234.13994, y: -790.4}
+  m_SizeDelta: {x: 261.16, y: 148.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1278842417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278842415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119b4eaafc700934ca55be1dab9f52c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Panelact1: {fileID: 0}
+  Panelact2: {fileID: 0}
+  Panelact3: {fileID: 0}
+  Panelact4: {fileID: 0}
+  Panelact5: {fileID: 0}
+  Panelpreparativos: {fileID: 0}
+  Panelmision: {fileID: 0}
+  dropdownMenu: {fileID: 0}
+  btncaptura: {fileID: 0}
+  Acto: 0
+  Capitulo: 0
+  titulo: 
+  Bull: {fileID: 0}
+  LunarButterfly: {fileID: 0}
+  Mantis: {fileID: 0}
+  Roach: {fileID: 0}
+  Scarab: {fileID: 0}
+  Tick: {fileID: 0}
+  Caterpillar: {fileID: 0}
+  GiantBugCentipede: {fileID: 0}
+  GiantBugDeathWorm: {fileID: 0}
+  InsectsDragon: {fileID: 0}
+  RedAntKnight: {fileID: 0}
+  Waterstrider: {fileID: 0}
+  BlackAntArcher: {fileID: 0}
+  BlackAntBerserker: {fileID: 0}
+  BlackAntKnight: {fileID: 0}
+  BlackAntMage: {fileID: 0}
+  BlackAntProtector: {fileID: 0}
+  Golem: {fileID: 0}
+  DeathWorm: {fileID: 0}
+  GiantBugHercules: {fileID: 0}
+  HellMantis: {fileID: 0}
+  Swarm: {fileID: 0}
+  TitanTellia: {fileID: 0}
+  Tridentpupa: {fileID: 0}
+  DryadMini: {fileID: 0}
+  EarthDragon: {fileID: 0}
+  ForestSpider: {fileID: 0}
+  ImperialWidow: {fileID: 0}
+  SixWingFairy: {fileID: 0}
+  FeralKitsune: {fileID: 0}
+  RabbitWarriorsArcher: {fileID: 0}
+  RabbitWarriorsBandit: {fileID: 0}
+  RabbitWarriorsKnight: {fileID: 0}
+  SevenSinsGreed: {fileID: 0}
+  WindSnake: {fileID: 0}
+  Deer: {fileID: 0}
+  Elf_Assasin: {fileID: 0}
+  ElvesRapier: {fileID: 0}
+  ElvesRogueElf: {fileID: 0}
+  ElvesSpellcaster: {fileID: 0}
+  FairyFilia: {fileID: 0}
+  ArcaneGolem: {fileID: 0}
+  GemstoneFire: {fileID: 0}
+  GemstoneThunder: {fileID: 0}
+  GemstoneWater: {fileID: 0}
+  GemstoneWind: {fileID: 0}
+  OrbFire: {fileID: 0}
+  OrbFrost: {fileID: 0}
+  OrbThunder: {fileID: 0}
+  OrbWind: {fileID: 0}
+  ElementalEarthSpiritTellia: {fileID: 0}
+  ElementalGoddessAiri: {fileID: 0}
+  ElementalGoddessFlora: {fileID: 0}
+  ElementalGoddessimp: {fileID: 0}
+  ElementalGoddessYukia: {fileID: 0}
+  ElementalIceSpiritHelida: {fileID: 0}
+  ElementalSpiritFireBlazia: {fileID: 0}
+  ElementalWindSpiritTempestia: {fileID: 0}
+  DragonKingBlue: {fileID: 0}
+  DragonKingBrown: {fileID: 0}
+  DragonKingGreen: {fileID: 0}
+  DragonKingRed: {fileID: 0}
+  EgyptArcher: {fileID: 0}
+  EgyptAxe: {fileID: 0}
+  EgyptChariot: {fileID: 0}
+  EgyptKnight: {fileID: 0}
+  EgyptMage: {fileID: 0}
+  Hieracosphinx: {fileID: 0}
+  Cobra: {fileID: 0}
+  Crocodile: {fileID: 0}
+  Mummy: {fileID: 0}
+  Sphinx: {fileID: 0}
+  PirateBandit: {fileID: 0}
+  PirateCaptain: {fileID: 0}
+  PirateMagicScimitar: {fileID: 0}
+  PirateMonkey: {fileID: 0}
+  PirateParrot: {fileID: 0}
+  PirateSkeleton: {fileID: 0}
+  TurtleGolem: {fileID: 0}
+  Mermaid: {fileID: 0}
+  MermaidWarriorArliette: {fileID: 0}
+  MermaidWarriorSasha: {fileID: 0}
+  MermaidWarriorSion: {fileID: 0}
+  Octopus: {fileID: 0}
+  Piranos: {fileID: 0}
+  Shark: {fileID: 0}
+  TitanAquos: {fileID: 0}
+  SkeletonArcher: {fileID: 0}
+  SkeletonDragon: {fileID: 0}
+  SkeletonKnight: {fileID: 0}
+  SkeletonKnightBaron: {fileID: 0}
+  SkeletonMage: {fileID: 0}
+  SkullKnightXoer: {fileID: 0}
+  BlackCat: {fileID: 0}
+  Pumpkin: {fileID: 0}
+  PumpkinGentleman: {fileID: 0}
+  Pumpkinmini: {fileID: 0}
+  SteinMonster: {fileID: 0}
+  UltraStein: {fileID: 0}
+  CarnivorousPlant: {fileID: 0}
+  DryadsArcher: {fileID: 0}
+  DryadsMage: {fileID: 0}
+  DryadsWarrior: {fileID: 0}
+  Hydra: {fileID: 0}
+  Yggdrasil: {fileID: 0}
+  ToxicRoot: {fileID: 0}
+  UndeadClawKnight: {fileID: 0}
+  UndeadGigaraven: {fileID: 0}
+  UndeadSkullTree: {fileID: 0}
+  UndeadWalker: {fileID: 0}
+  UndeadWarrior: {fileID: 0}
+  UndeadWolf: {fileID: 0}
+  Banshee: {fileID: 0}
+  DarkAxeWarrior: {fileID: 0}
+  DarkHealer: {fileID: 0}
+  DarknessDullahan: {fileID: 0}
+  DarknessReaper: {fileID: 0}
+  ShadowKnight: {fileID: 0}
+  DarkMonk: {fileID: 0}
+  DragonEmperorZalaras: {fileID: 0}
+  GhostKnight: {fileID: 0}
+  Greatwitch: {fileID: 0}
+  Succubus: {fileID: 0}
+  Vampire: {fileID: 0}
+  Witch: {fileID: 0}
+  EldritchEyes: {fileID: 0}
+  EldritchslimetypeA: {fileID: 0}
+  EldritchslimetypeB: {fileID: 0}
+  EldritchslimetypeC: {fileID: 0}
+  EldritchslimetypeD: {fileID: 0}
+  EldritchslimetypeF: {fileID: 0}
+  KoboldPaladin: {fileID: 0}
+  KoboldsDaggerKobold: {fileID: 0}
+  KoboltRogue: {fileID: 0}
+  koboltultraknight: {fileID: 0}
+  MageKobold: {fileID: 0}
+  SpearKobold: {fileID: 0}
+  KnightAxeElite: {fileID: 0}
+  KnightBlunderbussElite: {fileID: 0}
+  KnightSpearElite: {fileID: 0}
+  RedGuardknuckles: {fileID: 0}
+  RedGuardsniper: {fileID: 0}
+  RedGuardwarrior: {fileID: 0}
+  BookMaster: {fileID: 0}
+  Innova: {fileID: 0}
+  Novus: {fileID: 0}
+  RedGuardKnight: {fileID: 0}
+  RedguardReaper: {fileID: 0}
+  AbominationHound: {fileID: 0}
+  AbominationTyrant: {fileID: 0}
+  AbominationsScout: {fileID: 0}
+  Cultist: {fileID: 0}
+  GodYoggoth: {fileID: 0}
+  KingYoggoth: {fileID: 0}
+  QueenYoggoth: {fileID: 0}
+  AbominationGazer: {fileID: 0}
+  petimg: {fileID: 0}
+  gc: {fileID: 0}
+--- !u!114 &1278842418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278842415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1278842419}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1278842417}
+        m_MethodName: petlista
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1278842419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278842415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &1278842420
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278842415}
   m_CullTransparentMesh: 0
 --- !u!1 &1279333629
 GameObject:
@@ -14403,6 +14812,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1340605886
 GameObject:
   m_ObjectHideFlags: 0
@@ -14710,6 +15120,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1380532759
 GameObject:
   m_ObjectHideFlags: 0
@@ -15094,6 +15505,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1388523154
 GameObject:
   m_ObjectHideFlags: 0
@@ -16233,6 +16645,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1522943154
 GameObject:
   m_ObjectHideFlags: 0
@@ -16288,6 +16701,7 @@ RectTransform:
   - {fileID: 579683258}
   - {fileID: 106616204}
   - {fileID: 1992881217}
+  - {fileID: 1278842416}
   m_Father: {fileID: 1494940302}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16889,6 +17303,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1583184098
 GameObject:
   m_ObjectHideFlags: 0
@@ -17779,6 +18194,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!114 &1720800334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18126,6 +18542,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1777782927
 GameObject:
   m_ObjectHideFlags: 0
@@ -18895,6 +19312,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1889391508
 GameObject:
   m_ObjectHideFlags: 0
@@ -19274,6 +19692,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1897035688
 GameObject:
   m_ObjectHideFlags: 0
@@ -20120,6 +20539,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &1988898494
 GameObject:
   m_ObjectHideFlags: 0
@@ -20944,6 +21364,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!114 &2062976565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21337,6 +21758,7 @@ MonoBehaviour:
   QueenYoggoth: {fileID: 0}
   AbominationGazer: {fileID: 0}
   petimg: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!1 &2069629670
 GameObject:
   m_ObjectHideFlags: 0

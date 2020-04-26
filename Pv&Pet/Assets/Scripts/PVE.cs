@@ -195,13 +195,21 @@ public class PVE : MonoBehaviour
     public Sprite AbominationGazer;
 
     public GameObject petimg;
+    public GlobalControl gc;
 
     void Start()
     {
         DB();
         GetUserStats();
+        GlobalControl gcReal = GameObject.FindObjectOfType<GlobalControl>();
+        gc = gcReal.get_Instance();
     }
-    
+
+    public void petlista()
+    {
+        
+    }
+
     public void showact1()
     {
         Panelact1.SetActive(true);
