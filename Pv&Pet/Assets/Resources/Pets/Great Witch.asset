@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 497c1732bba94ed42ac5802339a3aeeb, type: 3}
-  m_Name: Greatwitch
+  m_Name: Great Witch
   m_EditorClassIdentifier: 
   Clase: 4
   Mision: 20
   PetSprite: {fileID: 21300000, guid: f487d33335fd1b445b20fecc4640e9d9, type: 3}
   PetID: 122
-  PetName: Great witch
+  PetName: Great Witch
   ProbFacil: 0
   ProbNormal: 0
   ProbDificil: 9

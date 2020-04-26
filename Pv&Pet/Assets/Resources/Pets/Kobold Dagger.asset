@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 497c1732bba94ed42ac5802339a3aeeb, type: 3}
-  m_Name: KoboldsDaggerKobold
+  m_Name: Kobold Dagger
   m_EditorClassIdentifier: 
   Clase: 5
   Mision: 22
   PetSprite: {fileID: 21300000, guid: 3d780cb13ab018e44b498906202d2082, type: 3}
   PetID: 133
-  PetName: Dagger Kobold
+  PetName: Kobold Dagger
   ProbFacil: 33
   ProbNormal: 25
   ProbDificil: 25
