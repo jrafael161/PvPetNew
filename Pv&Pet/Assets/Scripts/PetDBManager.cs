@@ -153,9 +153,9 @@ public class PetDBManager
             PetDB.Add(Resources.Load("Pets/Eldritch slime type D") as Pet);
             PetDB.Add(Resources.Load("Pets/Eldritch slime type F") as Pet);
             PetDB.Add(Resources.Load("Pets/Kobold Paladin") as Pet);
-            PetDB.Add(Resources.Load("Pets/Kobolds Dagger Kobold") as Pet);
-            PetDB.Add(Resources.Load("Pets/Kobolt Rogue") as Pet);
-            PetDB.Add(Resources.Load("Pets/kobolt ultra knight") as Pet);
+            PetDB.Add(Resources.Load("Pets/Kobold Dagger") as Pet);
+            PetDB.Add(Resources.Load("Pets/Kobold Rogue") as Pet);
+            PetDB.Add(Resources.Load("Pets/kobold ultra knight") as Pet);
             PetDB.Add(Resources.Load("Pets/Mage Kobold") as Pet);
             PetDB.Add(Resources.Load("Pets/Spear Kobold") as Pet);
             PetDB.Add(Resources.Load("Pets/Knight Axe Elite") as Pet);

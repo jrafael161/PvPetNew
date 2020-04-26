@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 497c1732bba94ed42ac5802339a3aeeb, type: 3}
-  m_Name: KnightBlunderbussElite
+  m_Name: Knight Blunderbuss Elite
   m_EditorClassIdentifier: 
   Clase: 5
   Mision: 23
