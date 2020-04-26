@@ -197,19 +197,21 @@ public class PVE : MonoBehaviour
     public GameObject petimg;
     public GlobalControl gc;
 
+
     void Start()
     {
         DB();
         GetUserStats();
-        GlobalControl gcReal = GameObject.FindObjectOfType<GlobalControl>();
-        gc = gcReal.get_Instance();
+        //GlobalControl gcReal = GameObject.FindObjectOfType<GlobalControl>();
+        //gc = gcReal.get_Instance();
     }
 
     public void petlista()
     {
+        Debug.Log(PetDBManager.Instance.PetDB.Find(x => x.PetID == 1));
         
     }
-
+ 
     public void showact1()
     {
         Panelact1.SetActive(true);
