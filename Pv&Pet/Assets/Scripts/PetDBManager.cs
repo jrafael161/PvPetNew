@@ -142,7 +142,7 @@ public class PetDBManager
             PetDB.Add(Resources.Load("Pets/Dark Monk") as Pet);
             PetDB.Add(Resources.Load("Pets/Dragon Emperor Zalaras") as Pet);
             PetDB.Add(Resources.Load("Pets/Ghost Knight") as Pet);
-            PetDB.Add(Resources.Load("Pets/Great witch") as Pet);
+            PetDB.Add(Resources.Load("Pets/Great Witch") as Pet);
             PetDB.Add(Resources.Load("Pets/Succubus") as Pet);
             PetDB.Add(Resources.Load("Pets/Vampire") as Pet);
             PetDB.Add(Resources.Load("Pets/Witch") as Pet);
