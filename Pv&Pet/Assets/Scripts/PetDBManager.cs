@@ -12,6 +12,11 @@ public class PetDBManager
 
     public List<Pet> PetDB = new List<Pet>();
 
+    public void Initialize()
+    {
+        _instance = this;
+    }
+    
     public void Set_PetDatabase()
     {
         for (int i = 0; PetDB.Count < 155; i++)

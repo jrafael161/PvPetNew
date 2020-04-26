@@ -17,7 +17,6 @@ public class BattleController : MonoBehaviour
         _instance = this;
     }
 
-    GlobalControl gc;
     public PlayerData Player, Oponent;    
     static bool action_done;
     static bool both_alive;
@@ -31,7 +30,6 @@ public class BattleController : MonoBehaviour
 
     private void Start()
     {
-        gc = FindObjectOfType<GlobalControl>();
         action_done = true;
         both_alive = true;
         SetPlayersData();
@@ -246,8 +244,8 @@ public class BattleController : MonoBehaviour
 
     public void SetPlayersData()
     {
-        Player = gc.playeProfile;
-        Oponent = gc.oponentProfile;       
+        Player = GlobalControl.Instance.playeProfile;
+        Oponent = GlobalControl.Instance.oponentProfile;       
     }
 
     public void CalculateArmor(PlayerData player)

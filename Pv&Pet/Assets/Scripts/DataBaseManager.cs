@@ -37,8 +37,8 @@ public class DataBaseManager : MonoBehaviour
         DB();
         Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
-        GlobalControl gcReal = GameObject.FindObjectOfType<GlobalControl>();
-        gc = gcReal.get_Instance();
+        //GlobalControl gcReal = GameObject.FindObjectOfType<GlobalControl>();
+        //gc = gcReal.get_Instance();
         Checkforbattletag(textuserid.text.ToString());
 
     }
@@ -137,32 +137,32 @@ public class DataBaseManager : MonoBehaviour
                         }
                         registered = true;
 
-                        gc.playeProfile.BattleTag = dictUser["username"].ToString();
-                        gc.playeProfile.Level = int.Parse(dictUser["Level"].ToString());
-                        gc.playeProfile.HP = int.Parse(dictUser["HP"].ToString()); 
-                        gc.playeProfile.XP = int.Parse(dictUser["XP"].ToString());
-                        gc.playeProfile.Strength = int.Parse(dictUser["Strength"].ToString());
-                        gc.playeProfile.Speed = int.Parse(dictUser["Speed"].ToString());
-                        gc.playeProfile.Agility = int.Parse(dictUser["Agility"].ToString());
-                        gc.playeProfile.Armor = int.Parse(dictUser["Armorv"].ToString());
-                        gc.playeProfile.critic_prob = 0.1f;
-                        gc.playeProfile.PvPCoin = int.Parse(dictUser["PvPCoin"].ToString());
-                        gc.playeProfile.PetCoin = int.Parse(dictUser["PetCoin"].ToString());
-                        gc.playeProfile.PremiumCoin = int.Parse(dictUser["PremiumCoin"].ToString());
+                        GlobalControl.Instance.playeProfile.BattleTag = dictUser["username"].ToString();
+                        GlobalControl.Instance.playeProfile.Level = int.Parse(dictUser["Level"].ToString());
+                        GlobalControl.Instance.playeProfile.HP = int.Parse(dictUser["HP"].ToString());
+                        GlobalControl.Instance.playeProfile.XP = int.Parse(dictUser["XP"].ToString());
+                        GlobalControl.Instance.playeProfile.Strength = int.Parse(dictUser["Strength"].ToString());
+                        GlobalControl.Instance.playeProfile.Speed = int.Parse(dictUser["Speed"].ToString());
+                        GlobalControl.Instance.playeProfile.Agility = int.Parse(dictUser["Agility"].ToString());
+                        GlobalControl.Instance.playeProfile.Armor = int.Parse(dictUser["Armorv"].ToString());
+                        GlobalControl.Instance.playeProfile.critic_prob = 0.1f;
+                        GlobalControl.Instance.playeProfile.PvPCoin = int.Parse(dictUser["PvPCoin"].ToString());
+                        GlobalControl.Instance.playeProfile.PetCoin = int.Parse(dictUser["PetCoin"].ToString());
+                        GlobalControl.Instance.playeProfile.PremiumCoin = int.Parse(dictUser["PremiumCoin"].ToString());
 
                         Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];
-                        gc.playeProfile.Inventory = new List<Item>();//Checar el inventario
+                        GlobalControl.Instance.playeProfile.Inventory = new List<Item>();//Checar el inventario
                         foreach (KeyValuePair<string, System.Object> InventoryItems in Inventory)
                         {
                             int itemid = int.Parse(InventoryItems.Value.ToString());
-                            gc.playeProfile.Inventory.Add(gc.itemDataBase.ItemDB.Find(x => x.ItemID == itemid));
+                            GlobalControl.Instance.playeProfile.Inventory.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == itemid));
                         }
 
                         //Dictionary<string, System.Object> Equipedgear = (Dictionary<string, System.Object>)dictUser["Equipedgear"];
-                        gc.PrepareItems();
+                        GlobalControl.Instance.PrepareItems();
                         for (int i = 0; i < 5; i++)
                         {
-                            gc.playeProfile.EquipedGear.Add(gc.itemDataBase.ItemDB.Find(x => x.ItemID == i));
+                            GlobalControl.Instance.playeProfile.EquipedGear.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == i));
                             //gc.playeProfile.EquipedGear[i] = gc.itemDataBase.ItemDB.Find(x => x.ItemID == int.Parse(Equipedgear[i.ToString()].ToString()));
                         }
                     }
