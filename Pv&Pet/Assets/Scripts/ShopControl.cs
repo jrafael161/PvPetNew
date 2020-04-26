@@ -6,7 +6,6 @@ using UnityEngine;
 public class ShopControl : MonoBehaviour
 {
     public bool active;
-    public ItemsDBmanager itemDataBase = new ItemsDBmanager();
     public List<string> filters;
     public List<ItemGObjectRelation> ShopItemRelationList;//Reemplazar por diccionario o no se necesita si se hacer por IDs
     public ItemGObjectRelation ShopItemRelation;
@@ -15,7 +14,6 @@ public class ShopControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        itemDataBase.Set_ItemDatabase();
         ShopItemRelationList = new List<ItemGObjectRelation>();
         filters = new List<string>();
         SetShopItems();
@@ -27,16 +25,17 @@ public class ShopControl : MonoBehaviour
         Text[] Texto;
 
         ShopItem = GameObject.Find("ShopItem");
-        foreach (Item item in itemDataBase.ItemDB)
+        foreach (Item item in ItemsDBmanager.Instance.ItemDB)
         {
             ShopItemAux = Instantiate(ShopItem) as GameObject;
             ShopItemAux.SetActive(true);
             ShopItemAux.transform.SetParent(ShopItem.transform.parent, false);
-            Texto = ShopItemAux.GetComponentsInChildren<Text>(); ;
+            Texto = ShopItemAux.GetComponentsInChildren<Text>();
             Texto[0].text = item.Description.ToString();
             Texto[1].text = item.PvP_Price.ToString();
             Texto[2].text = item.Pet_Price.ToString();
             Texto[3].text = item.Prem_Price.ToString();
+            Texto[4].text = item.ItemID.ToString();
             ShopItemRelation = new ItemGObjectRelation(item, ShopItemAux);
             ShopItemRelationList.Add(ShopItemRelation);
         }

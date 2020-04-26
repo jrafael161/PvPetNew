@@ -12,6 +12,11 @@ public class AbilitiesDBmanager
 
     public List<Ability> AbilitiesDB = new List<Ability>();
 
+    public void Initialize()
+    {
+        _instance = this;
+    }
+
     public void Set_AbilitiesDatabase()
     {
         for (int i = 0; AbilitiesDB.Count < 5; i++)

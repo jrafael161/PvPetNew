@@ -6,36 +6,37 @@ using UnityEngine.UI;
 public class GearManager : MonoBehaviour
 {
     BodyZone GearSelect;
-    public GlobalControl gc;
-    public ItemsDBmanager itemDataBase = new ItemsDBmanager();
     GameObject Item;
-    PlayerData Player;
 
     private void Start()
     {
-        gc = FindObjectOfType<GlobalControl>();
-    }
 
-    public void InitializeInventory(GlobalControl gcReal)
-    {        
-        Player = gc.playeProfile;
     }
 
     public void SetSelectedInventory(GameObject dp)//Hace falta programar la funcion para esconder el dropdown cuando se deseleccione y que aparezca de nuevo la lista
     {
+        int counter = 0;
         dp.SetActive(true);
         List<string> m_DropOptions = new List<string>();
         Dropdown drp;
         drp = dp.GetComponentInChildren<Dropdown>();
         drp.ClearOptions();
-        foreach (Item item in Player.Inventory)
+        foreach (Item item in GlobalControl.Instance.playeProfile.Inventory)
         {
             if (item.Bz == GearSelect)
-            {
+            {                
                 m_DropOptions.Add(item.name);
+                if (GlobalControl.Instance.playeProfile.EquipedGear[(int)GearSelect].name == item.name)
+                    drp.value = counter;
             }
+            counter++;
         }
         drp.AddOptions(m_DropOptions);    
+    }
+
+    public void changeUserEquipedGear(string GearName)
+    {
+
     }
 
     public void GearSelected(GameObject gear)
@@ -65,6 +66,7 @@ public class GearManager : MonoBehaviour
     public void HideInventory(GameObject drp)
     {
         Dropdown dp = drp.GetComponentInChildren<Dropdown>();
+        GlobalControl.Instance.playeProfile.EquipedGear[(int)GearSelect] = GlobalControl.Instance.playeProfile.Inventory.Find(x => x.name == dp.options[dp.value].text);               
         Destroy(dp.GetComponent<Transform>().GetChild(3).gameObject);
         drp.gameObject.SetActive(false);        
     }

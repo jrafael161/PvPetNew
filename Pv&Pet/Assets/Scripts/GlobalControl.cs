@@ -8,7 +8,7 @@ using System;
 
 public class GlobalControl : MonoBehaviour
 {    
-    public static GlobalControl globalControl;
+    public static GlobalControl _instance;
     public PlayerData playeProfile = new PlayerData();
     public PlayerData oponentProfile = new PlayerData();
     public ItemsDBmanager itemDataBase = new ItemsDBmanager();
@@ -21,15 +21,22 @@ public class GlobalControl : MonoBehaviour
 
     public int hp=0,xp=0,Lv=0,Str=0,Spd=0,Agl=0,Arm=0,PvpC=0,PetC=0,PremC=0;
 
+    public static GlobalControl Instance
+    {
+        get { return _instance; }
+    }
+
     private void Start()
     {
         NumberOfStats = 2;//3 por que se cuenta el 0
         NumberOfCoins = 2;
         itemDataBase.Set_ItemDatabase();
+        itemDataBase.Initialize();
         abilitiesDataBase.Set_AbilitiesDatabase();
         abilitiesHandler.Initialize();
         petDBManager.Set_PetDatabase();
-        Debug.Log(petDBManager.PetDB.Find(x => x.PetID == 0));
+        petDBManager.Initialize();
+        //Si el dispositivo tiene conexion a internet, jala datos de firebase de lo contrario del save local.
         SetPlayerData();
         LoadPlayerData();                
         ActiveScene = SceneManager.GetActiveScene();
@@ -43,12 +50,12 @@ public class GlobalControl : MonoBehaviour
 
     private void Awake()//Funcion que mantiene el GlobalControl entre escenas
     {
-        if (globalControl == null)
+        if (_instance == null)
         {
             DontDestroyOnLoad(gameObject);
-            globalControl = this;
+            _instance = this;
         }
-        else if (globalControl != this)
+        else if (_instance != this)
         {
             Destroy(gameObject);
         }
@@ -203,10 +210,5 @@ public class GlobalControl : MonoBehaviour
             Debug.Log("Cual jugador?");
             return playeProfile;
         }
-    }
-
-    public GlobalControl get_Instance()
-    {
-        return globalControl;
     }
 }

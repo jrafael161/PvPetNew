@@ -5,41 +5,35 @@ using UnityEngine;
 
 public class Purchase : MonoBehaviour
 {
-    static GlobalControl gc;
-    public ItemsDBmanager itemDataBase = new ItemsDBmanager();
     GameObject Item;
-    PlayerData Player;
     int Precio;
+    int ItemID;
     string Description;
     int UsingCoin;
 
-    public static GlobalControl Gc { get => gc; set => gc = value; }
-
     private void Start()
     {
-        Gc = FindObjectOfType<GlobalControl>();   
+
     }
 
-    public void CheckCurrency(GlobalControl gcReal)
+    public void CheckCurrency()
     {
-        itemDataBase = Gc.itemDataBase;
-        Player = Gc.playeProfile;
         switch (UsingCoin)
         {
             case 1:
-                if (Player.PvPCoin >= Precio)//Checar con cual moneda se esta realizando la compra
+                if (GlobalControl.Instance.playeProfile.PvPCoin >= Precio)//Checar con cual moneda se esta realizando la compra
                     AddItemToInventory();
                 else
                     Debug.Log("Tas pobre shabo");                       
                 break;
             case 2:
-                if (Player.PetCoin >= Precio)
+                if (GlobalControl.Instance.playeProfile.PetCoin >= Precio)
                     AddItemToInventory();                 
                 else
                     Debug.Log("Tas pobre shabo");
                 break;
             case 3:
-                if (Player.PremiumCoin >= Precio)
+                if (GlobalControl.Instance.playeProfile.PremiumCoin >= Precio)
                     AddItemToInventory();
                 else
                     Debug.Log("Tas pobre shabo");
@@ -52,30 +46,22 @@ public class Purchase : MonoBehaviour
     
     public void AddItemToInventory()
     {
-        foreach (Item item in itemDataBase.ItemDB)
+        GlobalControl.Instance.playeProfile.Inventory.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID==ItemID));
+        switch (UsingCoin)
         {
-            if (item.Description == Description)
-            {
-                Player.Inventory.Add(item);
-                switch (UsingCoin)
-                {
-                    case 1:
-                        Player.PvPCoin = Player.PvPCoin - Precio;
-                        break;
-                    case 2:
-                        Player.PetCoin = Player.PetCoin - Precio;
-                        break;
-                    case 3:
-                        Player.PremiumCoin = Player.PremiumCoin - Precio;
-                        break;
-                    default:
-                        break;
-                }
+            case 1:
+                GlobalControl.Instance.playeProfile.PvPCoin = GlobalControl.Instance.playeProfile.PvPCoin - Precio;
                 break;
-            }                
+            case 2:
+                GlobalControl.Instance.playeProfile.PetCoin = GlobalControl.Instance.playeProfile.PetCoin - Precio;
+                break;
+            case 3:
+                GlobalControl.Instance.playeProfile.PremiumCoin = GlobalControl.Instance.playeProfile.PremiumCoin - Precio;
+                break;
+            default:
+                break;
         }
-        //Gc.SavePlayerData();
-        Gc.InitializePlayerData();
+        GlobalControl.Instance.InitializePlayerData();
     }
 
     public void GetCurrentCurrency(GameObject CoinType)
@@ -100,8 +86,8 @@ public class Purchase : MonoBehaviour
         Precio = int.Parse(precio.text);
     }
 
-    public void GetItemDescription(Text description)
+    public void GetItemID(Text PurchasingItemID)
     {
-        Description = description.text;
+        ItemID = int.Parse(PurchasingItemID.text);
     }
 }

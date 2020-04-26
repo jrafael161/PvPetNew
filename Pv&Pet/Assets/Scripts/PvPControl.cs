@@ -7,15 +7,13 @@ using UnityEngine;
 
 public class PvPControl : MonoBehaviour
 {
-    GlobalControl gc;
     private bool active;
     PlayerData Opo;
     private List<PlayerData> Oponents;
     
 
     void Start()
-    {
-        gc = GameObject.FindObjectOfType<GlobalControl>();
+    {       
         Oponents = new List<PlayerData>();
         Opo = new PlayerData();        
         GetOponents();
@@ -71,7 +69,7 @@ public class PvPControl : MonoBehaviour
 
     public void TransitionToBattle()
     {
-        gc.oponentProfile = Oponents.Find(x => x.BattleTag==Opo.BattleTag);
+        GlobalControl.Instance.oponentProfile = Oponents.Find(x => x.BattleTag==Opo.BattleTag);
         SceneManager.LoadScene("CombatScreen");
     }
 

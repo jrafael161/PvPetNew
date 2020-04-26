@@ -913,7 +913,7 @@ PrefabInstance:
     - target: {fileID: 6602206430225149499, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: GetItemDescription
+      value: GetItemID
       objectReference: {fileID: 0}
     - target: {fileID: 6602206430225149499, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -938,7 +938,7 @@ PrefabInstance:
     - target: {fileID: 6602206430225149499, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6602206430225149499, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -948,7 +948,7 @@ PrefabInstance:
     - target: {fileID: 6602206430225149499, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: GlobalControl, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -973,7 +973,7 @@ PrefabInstance:
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: GetItemDescription
+      value: GetItemID
       objectReference: {fileID: 0}
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -998,7 +998,7 @@ PrefabInstance:
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -1008,7 +1008,12 @@ PrefabInstance:
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: GlobalControl, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -1033,7 +1038,7 @@ PrefabInstance:
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: GetItemDescription
+      value: GetItemID
       objectReference: {fileID: 0}
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -1058,7 +1063,7 @@ PrefabInstance:
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -1068,7 +1073,7 @@ PrefabInstance:
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: GlobalControl, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6602206429594658536, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -1302,10 +1307,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 79200913}
-        m_MethodName: GetItemDescription
+        m_MethodName: GetItemID
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 79200914}
+          m_ObjectArgument: {fileID: 1879249675}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1314,10 +1319,10 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 79200913}
         m_MethodName: CheckCurrency
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 770053259}
-          m_ObjectArgumentAssemblyTypeName: GlobalControl, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1435,10 +1440,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 79200916}
-        m_MethodName: GetItemDescription
+        m_MethodName: GetItemID
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 79200914}
+          m_ObjectArgument: {fileID: 1879249675}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1447,10 +1452,10 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 79200916}
         m_MethodName: CheckCurrency
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 770053259}
-          m_ObjectArgumentAssemblyTypeName: GlobalControl, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1568,10 +1573,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 79200919}
-        m_MethodName: GetItemDescription
+        m_MethodName: GetItemID
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 79200914}
+          m_ObjectArgument: {fileID: 1879249675}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1580,10 +1585,10 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 79200919}
         m_MethodName: CheckCurrency
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 770053259}
-          m_ObjectArgumentAssemblyTypeName: GlobalControl, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4220,7 +4225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &409435632
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7335,10 +7340,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 895037438}
-        m_MethodName: GetItemDescription
+        m_MethodName: GetItemID
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1091918786}
+          m_ObjectArgument: {fileID: 1637441401}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -7347,10 +7352,10 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 895037438}
         m_MethodName: CheckCurrency
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 770053259}
-          m_ObjectArgumentAssemblyTypeName: GlobalControl, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7545,7 +7550,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 191906946}
   m_HandleRect: {fileID: 191906945}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7935,7 +7940,7 @@ PrefabInstance:
     - target: {fileID: 6602206430225149499, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: GetItemDescription
+      value: GetItemID
       objectReference: {fileID: 0}
     - target: {fileID: 6602206430225149499, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -7960,7 +7965,7 @@ PrefabInstance:
     - target: {fileID: 6602206430225149499, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6602206430225149499, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -7970,7 +7975,7 @@ PrefabInstance:
     - target: {fileID: 6602206430225149499, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: GlobalControl, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -7995,7 +8000,7 @@ PrefabInstance:
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: GetItemDescription
+      value: GetItemID
       objectReference: {fileID: 0}
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -8020,7 +8025,7 @@ PrefabInstance:
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -8030,7 +8035,7 @@ PrefabInstance:
     - target: {fileID: 6602206430236281236, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: GlobalControl, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -8055,7 +8060,7 @@ PrefabInstance:
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: GetItemDescription
+      value: GetItemID
       objectReference: {fileID: 0}
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -8080,7 +8085,7 @@ PrefabInstance:
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
@@ -8090,7 +8095,7 @@ PrefabInstance:
     - target: {fileID: 6602206431388188812, guid: 0e7e75a3c04f282489f5b87f2b912f36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: GlobalControl, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e7e75a3c04f282489f5b87f2b912f36, type: 3}
@@ -10564,17 +10569,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1406224086}
-        m_MethodName: InitializeInventory
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 770053259}
-          m_ObjectArgumentAssemblyTypeName: GlobalControl, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1406224086}
         m_MethodName: GearSelected
         m_Mode: 2
         m_Arguments:
@@ -10627,7 +10621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0845170ab3baa9c49a9195a43ab5fd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gc: {fileID: 770053259}
 --- !u!1 &1407691823
 GameObject:
   m_ObjectHideFlags: 0
@@ -10709,17 +10702,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1407691827}
-        m_MethodName: InitializeInventory
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 770053259}
-          m_ObjectArgumentAssemblyTypeName: GlobalControl, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1407691827}
         m_MethodName: GearSelected
         m_Mode: 2
         m_Arguments:
@@ -10772,7 +10754,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0845170ab3baa9c49a9195a43ab5fd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gc: {fileID: 770053259}
 --- !u!1 &1417394651
 GameObject:
   m_ObjectHideFlags: 0
@@ -10854,17 +10835,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1417394655}
-        m_MethodName: InitializeInventory
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 770053259}
-          m_ObjectArgumentAssemblyTypeName: GlobalControl, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1417394655}
         m_MethodName: GearSelected
         m_Mode: 2
         m_Arguments:
@@ -10917,7 +10887,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0845170ab3baa9c49a9195a43ab5fd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gc: {fileID: 770053259}
 --- !u!1 &1436452702
 GameObject:
   m_ObjectHideFlags: 0
@@ -11819,7 +11788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1556619771
@@ -12269,6 +12238,7 @@ RectTransform:
   - {fileID: 1790100487}
   - {fileID: 895037439}
   - {fileID: 1763961779}
+  - {fileID: 1637441400}
   m_Father: {fileID: 1653628222}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12353,6 +12323,83 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616362485}
+  m_CullTransparentMesh: 0
+--- !u!1 &1637441399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1637441400}
+  - component: {fileID: 1637441402}
+  - component: {fileID: 1637441401}
+  m_Layer: 5
+  m_Name: ItemID
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1637441400
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637441399}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1609209915}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -263.75, y: 195.82501}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1637441401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637441399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &1637441402
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637441399}
   m_CullTransparentMesh: 0
 --- !u!1 &1650611713
 GameObject:
@@ -13057,17 +13104,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1672296950}
-        m_MethodName: InitializeInventory
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 770053259}
-          m_ObjectArgumentAssemblyTypeName: GlobalControl, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1672296950}
         m_MethodName: GearSelected
         m_Mode: 2
         m_Arguments:
@@ -13120,7 +13156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0845170ab3baa9c49a9195a43ab5fd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gc: {fileID: 770053259}
 --- !u!1 &1683858754
 GameObject:
   m_ObjectHideFlags: 0
@@ -13455,6 +13490,7 @@ RectTransform:
   - {fileID: 79200927}
   - {fileID: 79200923}
   - {fileID: 79200917}
+  - {fileID: 1879249674}
   m_Father: {fileID: 1556619770}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13849,10 +13885,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1763961778}
-        m_MethodName: GetItemDescription
+        m_MethodName: GetItemID
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1091918786}
+          m_ObjectArgument: {fileID: 1637441401}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -13861,10 +13897,10 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1763961778}
         m_MethodName: CheckCurrency
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 770053259}
-          m_ObjectArgumentAssemblyTypeName: GlobalControl, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -14088,10 +14124,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1790100488}
-        m_MethodName: GetItemDescription
+        m_MethodName: GetItemID
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1091918786}
+          m_ObjectArgument: {fileID: 1637441401}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -14100,10 +14136,10 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1790100488}
         m_MethodName: CheckCurrency
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 770053259}
-          m_ObjectArgumentAssemblyTypeName: GlobalControl, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -15016,6 +15052,83 @@ RectTransform:
   m_AnchoredPosition: {x: 86.45499, y: -36.199997}
   m_SizeDelta: {x: 369.01, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1879249673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1879249674}
+  - component: {fileID: 1879249676}
+  - component: {fileID: 1879249675}
+  m_Layer: 5
+  m_Name: ItemID
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1879249674
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879249673}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1710980007}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1879249675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879249673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &1879249676
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879249673}
+  m_CullTransparentMesh: 0
 --- !u!1 &1879711743
 GameObject:
   m_ObjectHideFlags: 0
@@ -15558,7 +15671,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.2}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15634,7 +15747,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -18, y: 0}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1970695325
 MonoBehaviour:
@@ -15799,7 +15912,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1947166617}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.2
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16525,17 +16638,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2095032134}
-        m_MethodName: InitializeInventory
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 770053259}
-          m_ObjectArgumentAssemblyTypeName: GlobalControl, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-      - m_Target: {fileID: 2095032134}
         m_MethodName: GearSelected
         m_Mode: 2
         m_Arguments:
@@ -16588,7 +16690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0845170ab3baa9c49a9195a43ab5fd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gc: {fileID: 770053259}
 --- !u!1 &2100026060
 GameObject:
   m_ObjectHideFlags: 0

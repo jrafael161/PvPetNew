@@ -9,14 +9,14 @@ public class ItemsDBmanager
     public static ItemsDBmanager Instance
     {
         get { return _instance; }
+    }    
+    
+    public void Initialize()
+    {
+        _instance = this;
     }
 
     public List<Item> ItemDB = new List<Item>();
-    
-    public void Set_ShopInventory()
-    {
-
-    }
 
     public void Set_ItemDatabase()
     {        
