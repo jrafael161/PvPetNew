@@ -163,8 +163,6 @@ public class DataBaseManager : MonoBehaviour
                         for (int i = 0; i < 5; i++)
                         {
                             GlobalControl.Instance.playeProfile.EquipedGear.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(Equipedgear["Item" + i.ToString()].ToString())));
-                            Debug.Log(Equipedgear["Item" + i.ToString()]);
-                           Debug.Log(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(Equipedgear["Item" + i.ToString()].ToString())));
                         }
 
 
@@ -227,7 +225,7 @@ public class DataBaseManager : MonoBehaviour
         Inventory inventory = new Inventory("1");
         json = JsonUtility.ToJson(inventory);
         reference.Child("users/" + userId).Child("Inventory").SetRawJsonValueAsync(json);
-
+        Debug.Log(json);
         PveU PveU = new PveU("10");
         json = JsonUtility.ToJson(PveU);
         reference.Child("users/" + userId).Child("PVE").SetRawJsonValueAsync(json);
@@ -240,8 +238,8 @@ public class DataBaseManager : MonoBehaviour
         json = JsonUtility.ToJson(nivel);
         reference.Child("Nivel").Child("1").Child(userId).SetRawJsonValueAsync(json);
 
-
-
+        //json = "{\"item5\":\"1\"}";
+        //reference.Child("users/" + userId).Child("Inventory").SetRawJsonValueAsync(json);
     }
     public void SignOut()
     {
