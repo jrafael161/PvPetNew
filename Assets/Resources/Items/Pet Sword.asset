@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
-  m_Name: ShortSword
+  m_Name: Pet Sword
   m_EditorClassIdentifier: 
-  Name: Short Sword
-  ItemID: 4
+  Name: Pet Sword
+  ItemID: 50
   icon: {fileID: 0}
-  PvP_Price: 15
-  Pet_Price: 7
-  Prem_Price: 1
-  Description: A common sword, useful for opening letter and not much more.
-  LevelRequirement: 1
-  Value: 2
+  PvP_Price: 0
+  Pet_Price: 0
+  Prem_Price: 0
+  Description: 
+  LevelRequirement: 0
+  Value: 1
   Bonus_amount: 0
   Set: NA
   Bz: 4

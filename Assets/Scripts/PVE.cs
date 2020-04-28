@@ -37,165 +37,7 @@ public class PVE : MonoBehaviour
     private int expuser;
     private int available;
 
-    public Sprite Bull;
-    public Sprite LunarButterfly;
-    public Sprite Mantis;
-    public Sprite Roach;
-    public Sprite Scarab;
-    public Sprite Tick;
-    public Sprite Caterpillar;
-    public Sprite GiantBugCentipede;
-    public Sprite GiantBugDeathWorm;
-    public Sprite InsectsDragon;
-    public Sprite RedAntKnight;
-    public Sprite Waterstrider;
-    public Sprite BlackAntArcher;
-    public Sprite BlackAntBerserker;
-    public Sprite BlackAntKnight;
-    public Sprite BlackAntMage;
-    public Sprite BlackAntProtector;
-    public Sprite Golem;
-    public Sprite DeathWorm;
-    public Sprite GiantBugHercules;
-    public Sprite HellMantis;
-    public Sprite Swarm;
-    public Sprite TitanTellia;
-    public Sprite Tridentpupa;
-    public Sprite DryadMini;
-    public Sprite EarthDragon;
-    public Sprite ForestSpider;
-    public Sprite ImperialWidow;
-    public Sprite SixWingFairy;
-    public Sprite FeralKitsune;
-    public Sprite RabbitWarriorsArcher;
-    public Sprite RabbitWarriorsBandit;
-    public Sprite RabbitWarriorsKnight;
-    public Sprite SevenSinsGreed;
-    public Sprite WindSnake;
-    public Sprite Deer;
-    public Sprite Elf_Assasin;
-    public Sprite ElvesRapier;
-    public Sprite ElvesRogueElf;
-    public Sprite ElvesSpellcaster;
-    public Sprite FairyFilia;
-    public Sprite ArcaneGolem;
-    public Sprite GemstoneFire;
-    public Sprite GemstoneThunder;
-    public Sprite GemstoneWater;
-    public Sprite GemstoneWind;
-    public Sprite OrbFire;
-    public Sprite OrbFrost;
-    public Sprite OrbThunder;
-    public Sprite OrbWind;
-    public Sprite ElementalEarthSpiritTellia;
-    public Sprite ElementalGoddessAiri;
-    public Sprite ElementalGoddessFlora;
-    public Sprite ElementalGoddessimp;
-    public Sprite ElementalGoddessYukia;
-    public Sprite ElementalIceSpiritHelida;
-    public Sprite ElementalSpiritFireBlazia;
-    public Sprite ElementalWindSpiritTempestia;
-    public Sprite DragonKingBlue;
-    public Sprite DragonKingBrown;
-    public Sprite DragonKingGreen;
-    public Sprite DragonKingRed;
-    public Sprite EgyptArcher;
-    public Sprite EgyptAxe;
-    public Sprite EgyptChariot;
-    public Sprite EgyptKnight;
-    public Sprite EgyptMage;
-    public Sprite Hieracosphinx;
-    public Sprite Cobra;
-    public Sprite Crocodile;
-    public Sprite Mummy;
-    public Sprite Sphinx;
-    public Sprite PirateBandit;
-    public Sprite PirateCaptain;
-    public Sprite PirateMagicScimitar;
-    public Sprite PirateMonkey;
-    public Sprite PirateParrot;
-    public Sprite PirateSkeleton;
-    public Sprite TurtleGolem;
-    public Sprite Mermaid;
-    public Sprite MermaidWarriorArliette;
-    public Sprite MermaidWarriorSasha;
-    public Sprite MermaidWarriorSion;
-    public Sprite Octopus;
-    public Sprite Piranos;
-    public Sprite Shark;
-    public Sprite TitanAquos;
-    public Sprite SkeletonArcher;
-    public Sprite SkeletonDragon;
-    public Sprite SkeletonKnight;
-    public Sprite SkeletonKnightBaron;
-    public Sprite SkeletonMage;
-    public Sprite SkullKnightXoer;
-    public Sprite BlackCat;
-    public Sprite Pumpkin;
-    public Sprite PumpkinGentleman;
-    public Sprite Pumpkinmini;
-    public Sprite SteinMonster;
-    public Sprite UltraStein;
-    public Sprite CarnivorousPlant;
-    public Sprite DryadsArcher;
-    public Sprite DryadsMage;
-    public Sprite DryadsWarrior;
-    public Sprite Hydra;
-    public Sprite Yggdrasil;
-    public Sprite ToxicRoot;
-    public Sprite UndeadClawKnight;
-    public Sprite UndeadGigaraven;
-    public Sprite UndeadSkullTree;
-    public Sprite UndeadWalker;
-    public Sprite UndeadWarrior;
-    public Sprite UndeadWolf;
-    public Sprite Banshee;
-    public Sprite DarkAxeWarrior;
-    public Sprite DarkHealer;
-    public Sprite DarknessDullahan;
-    public Sprite DarknessReaper;
-    public Sprite ShadowKnight;
-    public Sprite DarkMonk;
-    public Sprite DragonEmperorZalaras;
-    public Sprite GhostKnight;
-    public Sprite Greatwitch;
-    public Sprite Succubus;
-    public Sprite Vampire;
-    public Sprite Witch;
-    public Sprite EldritchEyes;
-    public Sprite EldritchslimetypeA;
-    public Sprite EldritchslimetypeB;
-    public Sprite EldritchslimetypeC;
-    public Sprite EldritchslimetypeD;
-    public Sprite EldritchslimetypeF;
-    public Sprite KoboldPaladin;
-    public Sprite KoboldsDaggerKobold;
-    public Sprite KoboltRogue;
-    public Sprite koboltultraknight;
-    public Sprite MageKobold;
-    public Sprite SpearKobold;
-    public Sprite KnightAxeElite;
-    public Sprite KnightBlunderbussElite;
-    public Sprite KnightSpearElite;
-    public Sprite RedGuardknuckles;
-    public Sprite RedGuardsniper;
-    public Sprite RedGuardwarrior;
-    public Sprite BookMaster;
-    public Sprite Innova;
-    public Sprite Novus;
-    public Sprite RedGuardKnight;
-    public Sprite RedguardReaper;
-    public Sprite AbominationHound;
-    public Sprite AbominationTyrant;
-    public Sprite AbominationsScout;
-    public Sprite Cultist;
-    public Sprite GodYoggoth;
-    public Sprite KingYoggoth;
-    public Sprite QueenYoggoth;
-    public Sprite AbominationGazer;
-
     public GameObject petimg;
-    public GlobalControl gc;
 
 
     void Start()
@@ -342,7 +184,7 @@ public class PVE : MonoBehaviour
         Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
         uid = textuserid.text.ToString();
-//uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
+        //uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
 
         reference.Child("users").Child(uid).Child("PVE").Child("available").SetValueAsync(available);
 
@@ -424,47 +266,64 @@ public class PVE : MonoBehaviour
             );
         }
         Itemc Petichooseyou = ProportionalWheelSelection.SelectItem(items);
-        petimg.GetComponent<Image>().sprite = Petichooseyou.PetSprite;
-
-
-
         int pethp = UnityEngine.Random.Range(LE, VO);
         int petstr = UnityEngine.Random.Range(LE, VO);
         int petagy = UnityEngine.Random.Range(LE, VO);
         int petspe = UnityEngine.Random.Range(LE, VO);
         int petarm = UnityEngine.Random.Range(LE, VO);
-        Panelpreparativos.SetActive(false);
-        Panelmision.SetActive(true);
-        Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
-        Text petpvtxt = GameObject.Find("Canvas/pnl_mision/txt_pv_v").GetComponent<Text>();
-        Text petstrtxt = GameObject.Find("Canvas/pnl_mision/txt_str_v").GetComponent<Text>();
-        Text petspetxt = GameObject.Find("Canvas/pnl_mision/txt_spe_v").GetComponent<Text>();
-        Text petagytxt = GameObject.Find("Canvas/pnl_mision/txt_agy_v").GetComponent<Text>();
-        Text petarmtxt = GameObject.Find("Canvas/pnl_mision/txt_arm_v").GetComponent<Text>();
-        petnametxt.text = Petichooseyou.name;
-        Debug.Log(Petichooseyou.type);
-        if (Petichooseyou.type == "Normal")
-            petnametxt.color = Color.white;
-        else if (Petichooseyou.type == "Poco comun")
-            petnametxt.color = Color.green;
-        else if (Petichooseyou.type == "Raro")
-            petnametxt.color = Color.blue;
-        else if (Petichooseyou.type == "Legendario")
-            petnametxt.color = new Color(0.8F, 0.4F, 0F);
-        else if (Petichooseyou.type == "Epico")
-            petnametxt.color = new Color(0.3F, 0F, 0.6F);
-        petpvtxt.text = pethp.ToString();
-        petstrtxt.text = petstr.ToString();
-        petspetxt.text = petagy.ToString();
-        petagytxt.text = petspe.ToString();
-        petarmtxt.text = petarm.ToString();
+
+        //petimg.GetComponent<Image>().sprite = Petichooseyou.PetSprite;
+        //Panelpreparativos.SetActive(false);
+        //Panelmision.SetActive(true);
+        //Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
+        //Text petpvtxt = GameObject.Find("Canvas/pnl_mision/txt_pv_v").GetComponent<Text>();
+        //Text petstrtxt = GameObject.Find("Canvas/pnl_mision/txt_str_v").GetComponent<Text>();
+        //Text petspetxt = GameObject.Find("Canvas/pnl_mision/txt_spe_v").GetComponent<Text>();
+        //Text petagytxt = GameObject.Find("Canvas/pnl_mision/txt_agy_v").GetComponent<Text>();
+        //Text petarmtxt = GameObject.Find("Canvas/pnl_mision/txt_arm_v").GetComponent<Text>();
+        //petnametxt.text = Petichooseyou.name;
+        //Debug.Log(Petichooseyou.type);
+        //if (Petichooseyou.type == "Normal")
+        //    petnametxt.color = Color.white;
+        //else if (Petichooseyou.type == "Poco comun")
+        //    petnametxt.color = Color.green;
+        //else if (Petichooseyou.type == "Raro")
+        //    petnametxt.color = Color.blue;
+        //else if (Petichooseyou.type == "Legendario")
+        //    petnametxt.color = new Color(0.8F, 0.4F, 0F);
+        //else if (Petichooseyou.type == "Epico")
+        //    petnametxt.color = new Color(0.3F, 0F, 0.6F);
+
+        //petpvtxt.text = pethp.ToString();
+        //petstrtxt.text = petstr.ToString();
+        //petspetxt.text = petagy.ToString();
+        //petagytxt.text = petspe.ToString();
+        //petarmtxt.text = petarm.ToString();
+
+        GlobalControl.Instance.oponentProfile.BattleTag = Petichooseyou.name;
+        GlobalControl.Instance.oponentProfile.PlayerSprite = Petichooseyou.PetSprite;
+        GlobalControl.Instance.oponentProfile.HP = pethp;
+        GlobalControl.Instance.oponentProfile.Strength = petstr;
+        GlobalControl.Instance.oponentProfile.Agility = petagy;
+        GlobalControl.Instance.oponentProfile.Speed = petspe;
+        GlobalControl.Instance.oponentProfile.Armor = petarm;
+        GlobalControl.Instance.oponentProfile.critic_prob = 0.1f;
+
+        GlobalControl.Instance.oponentProfile.Inventory = null;
+        GlobalControl.Instance.oponentProfile.EquipedItems = null;
+
+        GlobalControl.Instance.oponentProfile.EquipedGear = new List<Item>(4);
+        GlobalControl.Instance.oponentProfile.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 50);
+
+        SceneManager.LoadScene("CombatScreen");
+
+        //bool estatus = true;
 
 
-        bool estatus = true;
-        if (estatus)
-            btncaptura.SetActive(true);
-        else
-            btncaptura.SetActive(false);
+        //if (estatus)
+        //    btncaptura.SetActive(true);
+        //else
+        //    btncaptura.SetActive(false);
 
       
     }

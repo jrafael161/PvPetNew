@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerData
 {    
-    public Image PlayerSprite;
+    public Sprite PlayerSprite;
     public string PlayerID;
     public string BattleTag;
     public int Level;

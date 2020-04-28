@@ -20,7 +20,7 @@ public class ItemsDBmanager
 
     public void Set_ItemDatabase()
     {        
-        for (int i = 0; ItemDB.Count < 49; i++)
+        for (int i = 0; ItemDB.Count < 51; i++)
         {
             ItemDB.Add(Resources.Load("Items/LeatherHelmet") as Item);
             ItemDB.Add(Resources.Load("Items/LeatherVest") as Item);
@@ -72,6 +72,8 @@ public class ItemsDBmanager
             ItemDB.Add(Resources.Load("Items/Adamantite Gauntlets") as Item);
             ItemDB.Add(Resources.Load("Items/Adamantite Boots") as Item);
             ItemDB.Add(Resources.Load("Items/Adamantite Sword") as Item);
+            ItemDB.Add(Resources.Load("Items/Pet Sword") as Item);
+
 
         }
     }

@@ -24,7 +24,7 @@ public class PvPControl : MonoBehaviour
     {
         GameObject OponentProfile, OponentProfileAux;
         Text[] Texto;
-        Image profile;
+        Sprite profile;
 
         OponentProfile = GameObject.Find("OponentProfile");
         foreach (PlayerData Oponent in Oponents)
@@ -32,7 +32,7 @@ public class PvPControl : MonoBehaviour
             OponentProfileAux = Instantiate(OponentProfile) as GameObject;
             OponentProfileAux.SetActive(true);
             OponentProfileAux.transform.SetParent(OponentProfile.transform.parent, false);
-            profile = OponentProfileAux.GetComponentInChildren<Image>();
+            profile = OponentProfileAux.GetComponentInChildren<Sprite>();
             profile = Opo.PlayerSprite;
             Texto = OponentProfileAux.GetComponentsInChildren<Text>();            
             Texto[0].text = Opo.BattleTag.ToString();

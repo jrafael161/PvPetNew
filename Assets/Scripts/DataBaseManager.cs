@@ -110,34 +110,18 @@ public class DataBaseManager : MonoBehaviour
                         Debug.Log(dictUser["profilepic"].ToString());
                         profilepic.SetActive(true);
 
-
                         if (dictUser["profilepic"].ToString() =="Profile_1")
-                        {
-                            Debug.Log(dictUser["profilepic"].ToString());
-
                             profilepic.GetComponent<Image>().sprite = sprite1;
-                        }
                         if (dictUser["profilepic"].ToString() == "Profile_2")
-                        {
-                            Debug.Log(dictUser["profilepic"].ToString());
-
                             profilepic.GetComponent<Image>().sprite = sprite2;
-                        }
                         if (dictUser["profilepic"].ToString() == "Profile_3")
-                        {
-                            Debug.Log(dictUser["profilepic"].ToString());
-
                             profilepic.GetComponent<Image>().sprite = sprite3;
-                        }
                         if (dictUser["profilepic"].ToString() == "Profile_4")
-                        {
-                            Debug.Log(dictUser["profilepic"].ToString());
-
                             profilepic.GetComponent<Image>().sprite = sprite4;
-                        }
-                        registered = true;
 
+                        registered = true;
                         GlobalControl.Instance.playeProfile.BattleTag = dictUser["username"].ToString();
+                        GlobalControl.Instance.playeProfile.PlayerSprite = profilepic.GetComponent<Image>().sprite;
                         GlobalControl.Instance.playeProfile.Level = int.Parse(dictUser["Level"].ToString());
                         GlobalControl.Instance.playeProfile.HP = int.Parse(dictUser["HP"].ToString());
                         GlobalControl.Instance.playeProfile.XP = int.Parse(dictUser["XP"].ToString());
