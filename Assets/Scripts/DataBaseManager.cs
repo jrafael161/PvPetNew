@@ -221,8 +221,8 @@ public class DataBaseManager : MonoBehaviour
         EquipedItems equipedItems = new EquipedItems("1");
         json = JsonUtility.ToJson(equipedItems);
         reference.Child("users/" + userId).Child("EquipedItems").SetRawJsonValueAsync(json);
-        
-        Inventory inventory = new Inventory("1");
+
+        Inventory inventory = new Inventory("0", "1", "2", "3", "4");
         json = JsonUtility.ToJson(inventory);
         reference.Child("users/" + userId).Child("Inventory").SetRawJsonValueAsync(json);
         Debug.Log(json);
@@ -423,13 +423,22 @@ public class EquipedItems
 }
 public class Inventory
 {
-    public string item;
+    public string item_0;
+    public string item_1;
+    public string item_2;
+    public string item_3;
+    public string item_4;
+
     public Inventory()
     {
     }
-    public Inventory(string item)
+    public Inventory(string item0, string item1, string item2, string item3, string item4)
     {
-        this.item = item;
+        this.item_0 = item0;
+        this.item_1 = item1;
+        this.item_2 = item2;
+        this.item_3 = item3;
+        this.item_4 = item4;
     }
 }
 public class PveU
