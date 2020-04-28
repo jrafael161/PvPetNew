@@ -40,6 +40,7 @@ public class BattleController : MonoBehaviour
 
     IEnumerator Battle()
     {
+        SetPlayersData();
         CalculateArmor(Player);
         CalculateArmor(Oponent);
         AbilitiesHandler.Instance.SetPasives(Player, Oponent);
@@ -49,7 +50,7 @@ public class BattleController : MonoBehaviour
 
         while (Player.HP > 0 && Oponent.HP > 0)
         {            
-            set_turns(Player.Speed/Oponent.Speed);
+            set_turns((float)Player.Speed/ (float)Oponent.Speed);
             for (int i = 0; i < turns.Count; i++)
             {
                 if (action_done)
@@ -118,19 +119,19 @@ public class BattleController : MonoBehaviour
             return;
         }
         int turn_ratio;
-        if (priority<0)
+        if (priority<1)
         {
             float aux = Mathf.Pow(priority, -1);
-            turn_ratio = Mathf.FloorToInt(priority) + 1;
+            turn_ratio = Mathf.FloorToInt(aux);// + 1;
         }
         else
         {
-            turn_ratio = Mathf.FloorToInt(priority) + 1;
+            turn_ratio = Mathf.FloorToInt(priority);// + 1;
         }            
         turns = new List<bool>(turn_ratio);
         for (int i = 0, t = turn_ratio; i < t+1; i++)
         {
-            if (priority > 0)
+            if (priority > 1)
             {
                 if (turn_ratio > 0)
                 {
@@ -229,8 +230,9 @@ public class BattleController : MonoBehaviour
         }
         hit = Mathf.FloorToInt(hit);
 
-        float hit_prob = Attacker.Speed / Attacked.Agility;
-        int hit_chance = Mathf.FloorToInt(hit_prob) * 100;
+        float hit_prob = (float)Attacker.Speed / (float)Attacked.Agility;
+        hit_prob = hit_prob * 100;
+        int hit_chance = Mathf.FloorToInt(hit_prob);
         if ( hit_chance >= Random.Range(0, 100))
         {
             Debug.Log(Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + "con su ataque");
@@ -252,7 +254,14 @@ public class BattleController : MonoBehaviour
     {
         for (int i = 0; i < player.EquipedGear.Count - 1; i++)
         {
-            player.Armor += player.EquipedGear[i].Value;
+            if (player.EquipedGear[i] == null)
+            {
+                continue;
+            }
+            else
+            {
+                player.Armor += player.EquipedGear[i].Value;
+            }                
         }
     }
 }

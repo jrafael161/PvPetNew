@@ -120,6 +120,7 @@ public class DataBaseManager : MonoBehaviour
                             profilepic.GetComponent<Image>().sprite = sprite4;
 
                         registered = true;
+                        GlobalControl.Instance.playeProfile.PlayerID = Userid;
                         GlobalControl.Instance.playeProfile.BattleTag = dictUser["username"].ToString();
                         GlobalControl.Instance.playeProfile.PlayerSprite = profilepic.GetComponent<Image>().sprite;
                         GlobalControl.Instance.playeProfile.Level = int.Parse(dictUser["Level"].ToString());
