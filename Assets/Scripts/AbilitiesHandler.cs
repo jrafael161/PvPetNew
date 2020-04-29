@@ -23,68 +23,106 @@ public class AbilitiesHandler
 
     public void SetPasives(PlayerData player,PlayerData oponent)
     {
+        bool DontSetBuff = false;
         if (player.EquipedGear != null)
-        for (int i = 0; i < player.EquipedGear.Count; i++)//Checa habilidades de armadura y arma
         {
-            if (player.EquipedGear.TrueForAll(x => x.Set == player.EquipedGear[0].Set))
+            for (int i = 0; i < player.EquipedGear.Count; i++)//Checa habilidades de armadura y arma
             {
-                    UseAllSetBonus();
-            }
-            if (player.EquipedGear[i].has_ability)
-            {
-                if (player.EquipedGear[i].At == AbiltyType.Passive)
+                if (player.EquipedGear[i] == null)
                 {
-                    if (player.EquipedGear[i].Abilitys.Eff == Effect.Oneself)
+                    DontSetBuff = true;
+                    continue;
+                }
+                else
+                {
+                    if (!DontSetBuff)
                     {
-                        UsePasive(player, player.EquipedGear[i].Abilitys);
+                        if (player.EquipedGear.TrueForAll(x => x.Set == player.EquipedGear[0].Set))
+                        {
+                            UseAllSetBonus();
+                        }
+                        else
+                        {
+                            DontSetBuff = true;
+                        }
                     }
-                    else if(player.EquipedGear[i].Abilitys.Eff == Effect.Opponent)
+                    if (player.EquipedGear[i].has_ability)
                     {
-                        UsePasive(oponent, player.EquipedGear[i].Abilitys);
+                        if (player.EquipedGear[i].At == AbiltyType.Passive)
+                        {
+                            if (player.EquipedGear[i].Abilitys.Eff == Effect.Oneself)
+                            {
+                                UsePasive(player, player.EquipedGear[i].Abilitys);
+                            }
+                            else if (player.EquipedGear[i].Abilitys.Eff == Effect.Opponent)
+                            {
+                                UsePasive(oponent, player.EquipedGear[i].Abilitys);
+                            }
+                        }
                     }
                 }
             }
-        }
+        }        
         if (player.EquipedItems != null)
-            for (int i = 0; i < player.EquipedItems.Count; i++)//Checa habilidades de los items equipados
         {
-            if (player.EquipedItems[i].has_ability)
+            for (int i = 0; i < player.EquipedItems.Count; i++)//Checa habilidades de los items equipados
             {
-                if (player.EquipedItems[i].At == AbiltyType.Passive)
+                if (player.EquipedItems[i] == null)
                 {
-                    if (player.EquipedItems[i].Abilitys.Eff == Effect.Oneself)
+                    continue;
+                }
+                if (player.EquipedItems[i].has_ability)
+                {
+                    if (player.EquipedItems[i].At == AbiltyType.Passive)
                     {
-                        UsePasive(player, player.EquipedItems[i].Abilitys);
-                    }
-                    else if (player.EquipedItems[i].Abilitys.Eff == Effect.Opponent)
-                    {
-                        UsePasive(oponent, player.EquipedItems[i].Abilitys);
+                        if (player.EquipedItems[i].Abilitys.Eff == Effect.Oneself)
+                        {
+                            UsePasive(player, player.EquipedItems[i].Abilitys);
+                        }
+                        else if (player.EquipedItems[i].Abilitys.Eff == Effect.Opponent)
+                        {
+                            UsePasive(oponent, player.EquipedItems[i].Abilitys);
+                        }
                     }
                 }
             }
-        }
+        }            
     }
 
     public List<Item> SetActives(PlayerData player)
     {
         List<Item> itemsWActive = new List<Item>();
-        for (int i = 0; i < player.EquipedGear.Count; i++)//Checa habilidades de armadura y arma
+        if (player.EquipedGear != null)
         {
-            if (player.EquipedGear[i].has_ability)
+            for (int i = 0; i < player.EquipedGear.Count; i++)//Checa habilidades de armadura y arma
             {
-                if (player.EquipedGear[i].At == AbiltyType.Active)
+                if (player.EquipedGear[i] == null)
                 {
-                    itemsWActive.Add(player.EquipedGear[i]);
+                    continue;
+                }
+                if (player.EquipedGear[i].has_ability)
+                {
+                    if (player.EquipedGear[i].At == AbiltyType.Active)
+                    {
+                        itemsWActive.Add(player.EquipedGear[i]);
+                    }
                 }
             }
         }
-        for (int i = 0; i < player.EquipedItems.Count; i++)//Checa habilidades de armadura y arma
+        if (player.EquipedItems != null)
         {
-            if (player.EquipedItems[i].has_ability)
+            for (int i = 0; i < player.EquipedItems.Count; i++)//Checa habilidades de armadura y arma
             {
-                if (player.EquipedItems[i].At == AbiltyType.Active)
+                if (player.EquipedItems[i] == null)
                 {
-                    itemsWActive.Add(player.EquipedItems[i]);
+                    continue;
+                }
+                if (player.EquipedItems[i].has_ability)
+                {
+                    if (player.EquipedItems[i].At == AbiltyType.Active)
+                    {
+                        itemsWActive.Add(player.EquipedItems[i]);
+                    }
                 }
             }
         }

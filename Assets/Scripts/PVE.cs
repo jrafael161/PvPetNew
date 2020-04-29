@@ -313,6 +313,10 @@ public class PVE : MonoBehaviour
         GlobalControl.Instance.oponentProfile.EquipedItems = null;
 
         GlobalControl.Instance.oponentProfile.EquipedGear = new List<Item>(4);
+        for (int i = 0; i < 5; i++)
+        {
+            GlobalControl.Instance.oponentProfile.EquipedGear.Add(null);
+        }
         GlobalControl.Instance.oponentProfile.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 50);
 
         //SceneManager.LoadScene("CombatScreen");
