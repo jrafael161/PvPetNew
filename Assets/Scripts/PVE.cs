@@ -272,33 +272,33 @@ public class PVE : MonoBehaviour
         int petspe = UnityEngine.Random.Range(LE, VO);
         int petarm = UnityEngine.Random.Range(LE, VO);
 
-        //petimg.GetComponent<Image>().sprite = Petichooseyou.PetSprite;
-        //Panelpreparativos.SetActive(false);
-        //Panelmision.SetActive(true);
-        //Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
-        //Text petpvtxt = GameObject.Find("Canvas/pnl_mision/txt_pv_v").GetComponent<Text>();
-        //Text petstrtxt = GameObject.Find("Canvas/pnl_mision/txt_str_v").GetComponent<Text>();
-        //Text petspetxt = GameObject.Find("Canvas/pnl_mision/txt_spe_v").GetComponent<Text>();
-        //Text petagytxt = GameObject.Find("Canvas/pnl_mision/txt_agy_v").GetComponent<Text>();
-        //Text petarmtxt = GameObject.Find("Canvas/pnl_mision/txt_arm_v").GetComponent<Text>();
-        //petnametxt.text = Petichooseyou.name;
-        //Debug.Log(Petichooseyou.type);
-        //if (Petichooseyou.type == "Normal")
-        //    petnametxt.color = Color.white;
-        //else if (Petichooseyou.type == "Poco comun")
-        //    petnametxt.color = Color.green;
-        //else if (Petichooseyou.type == "Raro")
-        //    petnametxt.color = Color.blue;
-        //else if (Petichooseyou.type == "Legendario")
-        //    petnametxt.color = new Color(0.8F, 0.4F, 0F);
-        //else if (Petichooseyou.type == "Epico")
-        //    petnametxt.color = new Color(0.3F, 0F, 0.6F);
+        petimg.GetComponent<Image>().sprite = Petichooseyou.PetSprite;
+        Panelpreparativos.SetActive(false);
+        Panelmision.SetActive(true);
+        Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
+        Text petpvtxt = GameObject.Find("Canvas/pnl_mision/txt_pv_v").GetComponent<Text>();
+        Text petstrtxt = GameObject.Find("Canvas/pnl_mision/txt_str_v").GetComponent<Text>();
+        Text petspetxt = GameObject.Find("Canvas/pnl_mision/txt_spe_v").GetComponent<Text>();
+        Text petagytxt = GameObject.Find("Canvas/pnl_mision/txt_agy_v").GetComponent<Text>();
+        Text petarmtxt = GameObject.Find("Canvas/pnl_mision/txt_arm_v").GetComponent<Text>();
+        petnametxt.text = Petichooseyou.name;
+        Debug.Log(Petichooseyou.type);
+        if (Petichooseyou.type == "Normal")
+            petnametxt.color = Color.white;
+        else if (Petichooseyou.type == "Poco comun")
+            petnametxt.color = Color.green;
+        else if (Petichooseyou.type == "Raro")
+            petnametxt.color = Color.blue;
+        else if (Petichooseyou.type == "Legendario")
+            petnametxt.color = new Color(0.8F, 0.4F, 0F);
+        else if (Petichooseyou.type == "Epico")
+            petnametxt.color = new Color(0.3F, 0F, 0.6F);
 
-        //petpvtxt.text = pethp.ToString();
-        //petstrtxt.text = petstr.ToString();
-        //petspetxt.text = petagy.ToString();
-        //petagytxt.text = petspe.ToString();
-        //petarmtxt.text = petarm.ToString();
+        petpvtxt.text = pethp.ToString();
+        petstrtxt.text = petstr.ToString();
+        petspetxt.text = petagy.ToString();
+        petagytxt.text = petspe.ToString();
+        petarmtxt.text = petarm.ToString();
 
         GlobalControl.Instance.oponentProfile.BattleTag = Petichooseyou.name;
         GlobalControl.Instance.oponentProfile.PlayerSprite = Petichooseyou.PetSprite;
@@ -315,17 +315,17 @@ public class PVE : MonoBehaviour
         GlobalControl.Instance.oponentProfile.EquipedGear = new List<Item>(4);
         GlobalControl.Instance.oponentProfile.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 50);
 
-        SceneManager.LoadScene("CombatScreen");
+        //SceneManager.LoadScene("CombatScreen");
 
-        //bool estatus = true;
+        bool estatus = true;
 
 
-        //if (estatus)
-        //    btncaptura.SetActive(true);
-        //else
-        //    btncaptura.SetActive(false);
+        if (estatus)
+            btncaptura.SetActive(true);
+        else
+            btncaptura.SetActive(false);
 
-      
+
     }
 
     public void capurarpet()

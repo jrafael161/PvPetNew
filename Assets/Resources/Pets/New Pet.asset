@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 497c1732bba94ed42ac5802339a3aeeb, type: 3}
+  m_Name: New Pet
+  m_EditorClassIdentifier: 
+  Clase: 0
+  Mision: 0
+  PetSprite: {fileID: 21300000, guid: eea116ad0e705534d984416e05cf2f0e, type: 3}
+  PetID: 160
+  PetName: Rock golem
+  ProbFacil: 0
+  ProbNormal: 0
+  ProbDificil: 0
+  ProbExtremo: 0
+  ProbPurgatorio: 0
+  ProbAgonia: 0
+  ProbTormento: 0
+  ProbPetHunter: 0
+  Pt: 0
+  Level: 1
+  Strength: 3
+  Speed: 1
+  Agility: 1
+  Armor: 5
+  critic_prob: 0
+  PetItem: {fileID: 0}
