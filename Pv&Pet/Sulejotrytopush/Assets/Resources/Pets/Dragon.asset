@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Dragon
+  m_EditorClassIdentifier: Assembly-CSharp::Pet
+  Name: Drake
+  icon: {fileID: 21300000, guid: c691ec8e0d663ed41a031beba5c6da13, type: 3}
+  PvP_Price: 2000
+  Pet_Price: 1000
+  Prem_Price: 500
+  Description: A slimy companion to take on adventure. Warning, dont take it close
+    to water!
+  damage: 10
+  bonus: 4
+  Set: Scale
+  Bt: 1
+  Level: 1
+  Health: 400
+  Hunger: 0
+  Mood: Neutral
+  Energy: 2
+  Speed: 2
+  Intelligence: 2
+  Timer: 6000
+  Hatch: 1
