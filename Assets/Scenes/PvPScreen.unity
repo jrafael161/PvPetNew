@@ -4855,6 +4855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac37defdc740534a857e5bb9a48e533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataBaseManager: {fileID: 0}
   ActiveScene:
     m_Handle: 0
   hp: 0
@@ -7045,7 +7046,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0845170ab3baa9c49a9195a43ab5fd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gc: {fileID: 0}
 --- !u!114 &1251814175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9595,7 +9595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0845170ab3baa9c49a9195a43ab5fd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gc: {fileID: 0}
 --- !u!114 &1543887361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10392,7 +10391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0845170ab3baa9c49a9195a43ab5fd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gc: {fileID: 0}
 --- !u!114 &1732981709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11293,6 +11291,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 747469790}
+        m_MethodName: GetOponentBattleTag
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 909167411}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1861004552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11667,7 +11676,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0845170ab3baa9c49a9195a43ab5fd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gc: {fileID: 0}
 --- !u!114 &1933010319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11848,7 +11856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0845170ab3baa9c49a9195a43ab5fd00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gc: {fileID: 0}
 --- !u!114 &1956488514
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,6 +10,18 @@ using UnityEngine.SceneManagement;
 
 public class DataBaseManager : MonoBehaviour
 {
+    private static DataBaseManager _instance;
+
+    public static DataBaseManager Instance
+    {
+        get { return _instance; }
+    }
+
+    void Awake()
+    {
+        _instance = this;
+    }
+
     public static Firebase.Auth.FirebaseAuth auth;
     public static Firebase.Auth.FirebaseUser user;
     private string displayName;
@@ -59,6 +71,7 @@ public class DataBaseManager : MonoBehaviour
     {
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pvpet-f0b05.firebaseio.com/Players/Pa5UU16uCzt6X1E1DJ6a");
         reference = FirebaseDatabase.DefaultInstance.RootReference;
+        _instance = this;
     }
     void InitializeFirebase()
     {
@@ -243,6 +256,12 @@ public class DataBaseManager : MonoBehaviour
                         {
                             GlobalControl.Instance.playeProfile.EquipedGear.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(Equipedgear["Item" + i.ToString()].ToString())));
                         }
+
+                        Dictionary<string, System.Object> EquipedItems = (Dictionary<string, System.Object>)dictUser["EquipedItems"];
+                        for (int i = 0; i < EquipedItems.Count; i++)
+                        {
+                            GlobalControl.Instance.playeProfile.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedItems["Item" + i.ToString()].ToString())));
+                        }
                     }
                 }
                 if (!registered)
@@ -254,6 +273,113 @@ public class DataBaseManager : MonoBehaviour
             }
         });
     }
+
+    public void GetOponentList(string Nivel)
+    {
+        List<PlayerData> OponentList = new List<PlayerData>();
+        PlayerData PlayerAux = new PlayerData();
+        PlayerAux.Inventory = new List<Item>();
+        PlayerAux.EquipedGear = new List<Item>();
+        PlayerAux.EquipedItems = new List<Item>();
+        PlayerAux.OwnedPets = new List<Pet>();
+        Pet AuxPet = new Pet();
+        PlayerData Opo = new PlayerData();
+        GameObject OponentProfile, OponentProfileAux;
+        Text[] Texto;
+        Sprite profile;
+
+        FirebaseDatabase.DefaultInstance.GetReference("Nivel").Child("1").GetValueAsync().ContinueWith(task =>
+        {
+            DataSnapshot snapshot = task.Result;
+            Dictionary<string, System.Object> userids = (Dictionary<string, System.Object>)snapshot.Value;
+            if (snapshot.Exists)
+            {
+                foreach (KeyValuePair<string, System.Object> users in userids)
+                {
+                    string Enemyid = users.Key;
+                    Debug.Log("Enemyid:" + Enemyid);
+
+
+                    FirebaseDatabase.DefaultInstance.GetReference("users").Child(Enemyid).GetValueAsync().ContinueWith(task2 =>
+                    {
+                        DataSnapshot snapshot2 = task2.Result;
+                        Dictionary<string, System.Object> enemstats = (Dictionary<string, System.Object>)snapshot2.Value;
+                        if (snapshot2.Exists)
+                        {
+                            Dictionary<string, System.Object> EquipedGear = (Dictionary<string, System.Object>)enemstats["Equipedgear"];
+                            Dictionary<string, System.Object> EquipedItems = (Dictionary<string, System.Object>)enemstats["EquipedItems"];
+                            Dictionary<string, System.Object> Ownedpets = (Dictionary<string, System.Object>)enemstats["Pets"];
+                            foreach (KeyValuePair<string, System.Object> Ownedpetsaux in Ownedpets)
+                            {
+                                Dictionary<string, System.Object> Ownedpets_lv2 = (Dictionary<string, System.Object>)Ownedpets[Ownedpetsaux.Key];
+                                Debug.Log(Ownedpets_lv2["Name"]);
+                                Debug.Log(Ownedpets_lv2["HP"]);
+                                Debug.Log(Ownedpets_lv2["STR"]);
+                            }
+
+                            PlayerAux.BattleTag = enemstats["username"].ToString();
+                            PlayerAux.PlayerID = Enemyid;
+                            switch (enemstats["profilepic"].ToString())
+                            {
+                                case "Profile_1":
+                                    PlayerAux.PlayerSprite = sprite1;
+                                    break;
+                                case "Profile_2":
+                                    PlayerAux.PlayerSprite = sprite2;
+                                    break;
+                                case "Profile_3":
+                                    PlayerAux.PlayerSprite = sprite3;
+                                    break;
+                                case "Profile_4":
+                                    PlayerAux.PlayerSprite = sprite4;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            PlayerAux.Level = int.Parse(enemstats["Level"].ToString());
+                            PlayerAux.HP = int.Parse(enemstats["HP"].ToString());
+                            PlayerAux.Strength = int.Parse(enemstats["Strength"].ToString());
+                            PlayerAux.Speed = int.Parse(enemstats["Speed"].ToString());
+                            PlayerAux.Agility = int.Parse(enemstats["Agility"].ToString());
+                            PlayerAux.Armor = int.Parse(enemstats["Armorv"].ToString());
+                            PlayerAux.critic_prob = 0.1f;
+                            //AuxPet. OwnedPets.ContainsKey(enemstats["CompanionPet"].ToString());
+                            PlayerAux.CompanionPet = AuxPet;
+                            for (int i = 0; i < EquipedGear.Count; i++)
+                            {
+                                PlayerAux.EquipedGear.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedGear["Item" + i.ToString()].ToString())));
+                            }
+                            for (int i = 0; i < EquipedItems.Count; i++)
+                            {
+                                PlayerAux.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedItems["Item" + i.ToString()].ToString())));
+                            }
+                            Debug.Log("----------------------------------------------------------------");
+                            OponentList.Add(PlayerAux);
+                        }
+                    });
+                }
+                OponentProfile = GameObject.Find("OponentProfile");
+                foreach (PlayerData Oponent in OponentList)
+                {
+                    OponentProfileAux = Instantiate(OponentProfile) as GameObject;
+                    OponentProfileAux.SetActive(true);
+                    OponentProfileAux.transform.SetParent(OponentProfile.transform.parent, false);
+                    profile = OponentProfileAux.GetComponentInChildren<Sprite>();
+                    profile = Opo.PlayerSprite;
+                    Texto = OponentProfileAux.GetComponentsInChildren<Text>();
+                    Texto[0].text = Opo.BattleTag.ToString();
+                    Texto[1].text = Opo.Level.ToString();
+                    Texto[2].text = Opo.HP.ToString();
+                    Texto[3].text = Opo.Strength.ToString();
+                    Texto[4].text = Opo.Speed.ToString();
+                    Texto[5].text = Opo.Agility.ToString();
+                }
+                Destroy(OponentProfile);
+                PvPControl.Instance.Oponents = OponentList;
+            }
+        });
+    }
+
     public void Btn_go()
     {
         string Userid;

@@ -235,7 +235,8 @@ public class BattleController : MonoBehaviour
         int hit_chance = Mathf.FloorToInt(hit_prob);
         if ( hit_chance >= Random.Range(0, 100))
         {
-            Debug.Log(Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + "con su ataque");
+            Debug.Log(Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + " con su ataque");
+            Debug.Log("Le quedan " + Attacked.HP + " puntos de vida");
             Attacked.HP -= hit;
         }
         else

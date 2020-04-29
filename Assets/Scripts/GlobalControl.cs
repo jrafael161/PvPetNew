@@ -12,6 +12,7 @@ public class GlobalControl : MonoBehaviour
     public PlayerData playeProfile = new PlayerData();
     public PlayerData oponentProfile = new PlayerData();
     public ItemsDBmanager itemDataBase = new ItemsDBmanager();
+    public DataBaseManager dataBaseManager = new DataBaseManager();
     public AbilitiesDBmanager abilitiesDataBase = new AbilitiesDBmanager();
     public PetDBManager petDBManager = new PetDBManager();
     AbilitiesHandler abilitiesHandler = new AbilitiesHandler();
@@ -30,6 +31,7 @@ public class GlobalControl : MonoBehaviour
     {
         NumberOfStats = 2;//3 por que se cuenta el 0
         NumberOfCoins = 2;
+        //dataBaseManager.Initialize();
         itemDataBase.Set_ItemDatabase();
         itemDataBase.Initialize();
         abilitiesDataBase.Set_AbilitiesDatabase();
