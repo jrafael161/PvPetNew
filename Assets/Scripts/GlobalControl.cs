@@ -171,7 +171,6 @@ public class GlobalControl : MonoBehaviour
     {
         playeProfile.EquipedGear = new List<Item>(4);
         playeProfile.EquipedItems = new List<Item>();
-        /*
         playeProfile.Inventory = new List<Item>();//Checar el inventario
         playeProfile.EquipedGear[(int)BodyZone.Head] = itemDataBase.ItemDB.Find(x => x.ItemID == 0);//Reemplazar por las ids de lo que se obtenga de la query del player
         playeProfile.EquipedGear[(int)BodyZone.Chest] = itemDataBase.ItemDB.Find(x => x.ItemID == 1);
@@ -182,7 +181,6 @@ public class GlobalControl : MonoBehaviour
         {
             playeProfile.EquipedGear[i] = itemDataBase.ItemDB.Find(x => x.ItemID == i);
         }
-        */
     }
 
     public void GetPlayerData()

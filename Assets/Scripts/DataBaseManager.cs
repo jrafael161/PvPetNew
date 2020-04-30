@@ -66,7 +66,15 @@ public class DataBaseManager : MonoBehaviour
         DB();
         Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
-        Checkforbattletag(textuserid.text.ToString());
+        if (GlobalControl.Instance.playeProfile.BattleTag==null)
+        {
+            Checkforbattletag(textuserid.text.ToString());
+        }
+        else
+        {
+            InitializeFirebase();
+        }
+        
     }
     void DB()
     {
@@ -291,15 +299,14 @@ public class DataBaseManager : MonoBehaviour
                                 AuxPet.Armor = int.Parse(Ownedpets_lv2["ARM"].ToString());
                                 GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
                             }
-
                         }
+                        GlobalControl.Instance.SavePlayerData();
                     }
                 }
                 if (!registered)
                 {
                     Debug.Log("sin battlet tag");
                     OpenPanel();
-
                 }
             }
         });

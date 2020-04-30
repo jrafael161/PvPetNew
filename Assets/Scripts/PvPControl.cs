@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
-
 public class PvPControl : MonoBehaviour
 {
     private bool active;
