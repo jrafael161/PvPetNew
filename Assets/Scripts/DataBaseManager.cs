@@ -263,6 +263,36 @@ public class DataBaseManager : MonoBehaviour
                         {
                             GlobalControl.Instance.playeProfile.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedItems["Item" + i.ToString()].ToString())));
                         }
+
+                        Dictionary<string, System.Object> Ownedpets = (Dictionary<string, System.Object>)dictUser["Pets"];                        
+                        foreach (KeyValuePair<string, System.Object> Ownedpetsaux in Ownedpets)
+                        {
+                            Pet AuxPet = new Pet();
+                            Dictionary<string, System.Object> Ownedpets_lv2 = (Dictionary<string, System.Object>)Ownedpets[Ownedpetsaux.Key];
+                            if (Ownedpetsaux.Key == dictUser["CompanionPet"].ToString())
+                            {
+                                GlobalControl.Instance.playeProfile.CompanionPet.PetName = Ownedpets_lv2["Name"].ToString();
+                                GlobalControl.Instance.playeProfile.CompanionPet.Level = int.Parse(Ownedpets_lv2["LVL"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.HP = float.Parse(Ownedpets_lv2["HP"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.Strength = int.Parse(Ownedpets_lv2["STR"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.Speed = int.Parse(Ownedpets_lv2["SPE"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.Agility = int.Parse(Ownedpets_lv2["AGY"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.Armor = int.Parse(Ownedpets_lv2["ARM"].ToString());
+                                GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
+                            }
+                            else
+                            {
+                                AuxPet.PetName = Ownedpets_lv2["Name"].ToString();
+                                AuxPet.Level = int.Parse(Ownedpets_lv2["LVL"].ToString());
+                                AuxPet.HP = float.Parse(Ownedpets_lv2["HP"].ToString());
+                                AuxPet.Strength = int.Parse(Ownedpets_lv2["STR"].ToString());
+                                AuxPet.Speed = int.Parse(Ownedpets_lv2["SPE"].ToString());
+                                AuxPet.Agility = int.Parse(Ownedpets_lv2["AGY"].ToString());
+                                AuxPet.Armor = int.Parse(Ownedpets_lv2["ARM"].ToString());
+                                GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
+                            }
+
+                        }
                     }
                 }
                 if (!registered)
