@@ -129,14 +129,21 @@ public class AbilitiesHandler
         return itemsWActive;
     }
 
-    public List<Item> CheckTriggerCondition(List<Item> availableActives, PlayerData player)
+    public List<Item> CheckTriggerCondition(List<Item> availableActives, PlayerData player, bool WhoIS)
     {
         List<Item> readyActives = new List<Item>();
         for (int i = 0; i < availableActives.Count; i++)
         {
             if (availableActives[i].Abilitys.Tt == ThresholdType.Turns)
             {
-                if (BattleController.Instance.passedTurns >= availableActives[i].Abilitys.minThreshold)
+                if (WhoIS)//Si es jugador
+                {
+                    if (BattleController.Instance.PlayerpassedTurns >= availableActives[i].Abilitys.minThreshold && BattleController.Instance.PlayerpassedTurns <= availableActives[i].Abilitys.maxThreshold)
+                    {
+                        readyActives.Add(availableActives[i]);
+                    }
+                }                
+                else if (BattleController.Instance.OponentpassedTurns >= availableActives[i].Abilitys.minThreshold && BattleController.Instance.OponentpassedTurns <= availableActives[i].Abilitys.maxThreshold)
                 {
                     readyActives.Add(availableActives[i]);
                 }
@@ -184,13 +191,13 @@ public class AbilitiesHandler
     public void Damage(PlayerData player, Ability ability)
     {
         player.HP -= ability.Bonus;
-        Debug.Log("Daño hecho a " + player.BattleTag + " de " + ability.Bonus + "por" + ability.Name);
+        Debug.Log("Daño hecho a " + player.BattleTag + " de " + ability.Bonus + " por " + ability.Name);
     }
 
     public void Heal(PlayerData player, Ability ability)
     {
         player.HP += ability.Bonus;
-        Debug.Log("Curacion hecha a " + player.BattleTag + " de " + ability.Bonus + "por" + ability.Name);
+        Debug.Log("Curacion hecha a " + player.BattleTag + " de " + ability.Bonus + " por " + ability.Name);
     }
 
     public void Buff(PlayerData player, Ability ability)

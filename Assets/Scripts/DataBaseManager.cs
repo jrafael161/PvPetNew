@@ -27,7 +27,8 @@ public class DataBaseManager : MonoBehaviour
     private string displayName;
     private bool signedIn;
     private bool registered;
-    
+    List<PlayerData> OponentList = new List<PlayerData>();
+
     public GameObject Panel;
     public GameObject Panel_character;
     public GameObject Panel_pet;
@@ -275,19 +276,7 @@ public class DataBaseManager : MonoBehaviour
     }
 
     public void GetOponentList(string Nivel)
-    {
-        List<PlayerData> OponentList = new List<PlayerData>();
-        PlayerData PlayerAux = new PlayerData();
-        PlayerAux.Inventory = new List<Item>();
-        PlayerAux.EquipedGear = new List<Item>();
-        PlayerAux.EquipedItems = new List<Item>();
-        PlayerAux.OwnedPets = new List<Pet>();
-        Pet AuxPet = new Pet();
-        PlayerData Opo = new PlayerData();
-        GameObject OponentProfile, OponentProfileAux;
-        Text[] Texto;
-        Sprite profile;
-
+    {        
         FirebaseDatabase.DefaultInstance.GetReference("Nivel").Child("1").GetValueAsync().ContinueWith(task =>
         {
             DataSnapshot snapshot = task.Result;
@@ -296,9 +285,18 @@ public class DataBaseManager : MonoBehaviour
             {
                 foreach (KeyValuePair<string, System.Object> users in userids)
                 {
+                    PlayerData PlayerAux = new PlayerData();
+                    PlayerAux.Inventory = new List<Item>();
+                    PlayerAux.EquipedGear = new List<Item>();
+                    PlayerAux.EquipedItems = new List<Item>();
+                    PlayerAux.OwnedPets = new List<Pet>();
+                    Pet AuxPet = new Pet();
                     string Enemyid = users.Key;
                     Debug.Log("Enemyid:" + Enemyid);
-
+                    if (Enemyid == GlobalControl.Instance.playeProfile.PlayerID)
+                    {
+                        continue;
+                    }
 
                     FirebaseDatabase.DefaultInstance.GetReference("users").Child(Enemyid).GetValueAsync().ContinueWith(task2 =>
                     {
@@ -309,13 +307,6 @@ public class DataBaseManager : MonoBehaviour
                             Dictionary<string, System.Object> EquipedGear = (Dictionary<string, System.Object>)enemstats["Equipedgear"];
                             Dictionary<string, System.Object> EquipedItems = (Dictionary<string, System.Object>)enemstats["EquipedItems"];
                             Dictionary<string, System.Object> Ownedpets = (Dictionary<string, System.Object>)enemstats["Pets"];
-                            foreach (KeyValuePair<string, System.Object> Ownedpetsaux in Ownedpets)
-                            {
-                                Dictionary<string, System.Object> Ownedpets_lv2 = (Dictionary<string, System.Object>)Ownedpets[Ownedpetsaux.Key];
-                                Debug.Log(Ownedpets_lv2["Name"]);
-                                Debug.Log(Ownedpets_lv2["HP"]);
-                                Debug.Log(Ownedpets_lv2["STR"]);
-                            }
 
                             PlayerAux.BattleTag = enemstats["username"].ToString();
                             PlayerAux.PlayerID = Enemyid;
@@ -343,7 +334,20 @@ public class DataBaseManager : MonoBehaviour
                             PlayerAux.Agility = int.Parse(enemstats["Agility"].ToString());
                             PlayerAux.Armor = int.Parse(enemstats["Armorv"].ToString());
                             PlayerAux.critic_prob = 0.1f;
-                            //AuxPet. OwnedPets.ContainsKey(enemstats["CompanionPet"].ToString());
+                            foreach (KeyValuePair<string, System.Object> Ownedpetsaux in Ownedpets)
+                            {
+                                Dictionary<string, System.Object> Ownedpets_lv2 = (Dictionary<string, System.Object>)Ownedpets[Ownedpetsaux.Key];                                
+                                if (Ownedpetsaux.Key == enemstats["CompanionPet"].ToString())
+                                {
+                                    AuxPet.PetName = Ownedpets_lv2["Name"].ToString();
+                                    AuxPet.Level = int.Parse(Ownedpets_lv2["LVL"].ToString());
+                                    AuxPet.HP = float.Parse(Ownedpets_lv2["HP"].ToString());
+                                    AuxPet.Strength = int.Parse(Ownedpets_lv2["STR"].ToString());
+                                    AuxPet.Speed = int.Parse(Ownedpets_lv2["SPE"].ToString());
+                                    AuxPet.Agility = int.Parse(Ownedpets_lv2["AGY"].ToString());
+                                    AuxPet.Armor = int.Parse(Ownedpets_lv2["ARM"].ToString());
+                                }
+                            }
                             PlayerAux.CompanionPet = AuxPet;
                             for (int i = 0; i < EquipedGear.Count; i++)
                             {
@@ -355,29 +359,16 @@ public class DataBaseManager : MonoBehaviour
                             }
                             Debug.Log("----------------------------------------------------------------");
                             OponentList.Add(PlayerAux);
-                        }
-                    });
+                        }                        
+                    });                    
                 }
-                OponentProfile = GameObject.Find("OponentProfile");
-                foreach (PlayerData Oponent in OponentList)
-                {
-                    OponentProfileAux = Instantiate(OponentProfile) as GameObject;
-                    OponentProfileAux.SetActive(true);
-                    OponentProfileAux.transform.SetParent(OponentProfile.transform.parent, false);
-                    profile = OponentProfileAux.GetComponentInChildren<Sprite>();
-                    profile = Opo.PlayerSprite;
-                    Texto = OponentProfileAux.GetComponentsInChildren<Text>();
-                    Texto[0].text = Opo.BattleTag.ToString();
-                    Texto[1].text = Opo.Level.ToString();
-                    Texto[2].text = Opo.HP.ToString();
-                    Texto[3].text = Opo.Strength.ToString();
-                    Texto[4].text = Opo.Speed.ToString();
-                    Texto[5].text = Opo.Agility.ToString();
-                }
-                Destroy(OponentProfile);
-                PvPControl.Instance.Oponents = OponentList;
             }
         });
+    }
+
+    public void AssignOponents()
+    {
+        PvPControl.Oponents = OponentList;
     }
 
     public void Btn_go()

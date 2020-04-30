@@ -22,6 +22,7 @@ public class Pet : ScriptableObject
     public float ProbTormento;
     public float ProbPetHunter;
     public PetTier Pt;
+    public float HP;
     public int Level;
     public int Strength;
     public int Speed;

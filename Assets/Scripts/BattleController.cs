@@ -22,6 +22,8 @@ public class BattleController : MonoBehaviour
     static bool both_alive;
     List<bool> turns;
     public int passedTurns;
+    public int PlayerpassedTurns;
+    public int OponentpassedTurns;
     float G_priority;
 
     List<Item> PlayerActives;
@@ -60,12 +62,14 @@ public class BattleController : MonoBehaviour
                         action_done = false;
                         yield return StartCoroutine(action(Player));
                         passedTurns++;
+                        PlayerpassedTurns++;
                     }
                     else if(both_alive)
                     {
                         action_done = false;
                         yield return StartCoroutine(action(Oponent));
                         passedTurns++;
+                        OponentpassedTurns++;
                     }
                 }                
             }
@@ -165,13 +169,13 @@ public class BattleController : MonoBehaviour
         if (player_onturn.PlayerID == Player.PlayerID)
         {
 
-            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(PlayerActives,Player);
+            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(PlayerActives,Player, true);
             for (int i = 0; i < UsableActives.Count; i++)
             {
                 AbilitiesHandler.Instance.UseActive(Player,UsableActives[i].Abilitys);
             }            
             Attack(Player,Oponent);
-            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(OponentActives, Oponent);//Se le da oportunidad al oponente de responder
+            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(OponentActives, Oponent, false);//Se le da oportunidad al oponente de responder
             for (int i = 0; i < UsableActives.Count; i++)
             {
                 if (UsableActives[i].Abilitys.Et == EffectType.Healing)
@@ -189,13 +193,13 @@ public class BattleController : MonoBehaviour
         }
         else
         {
-            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(OponentActives,Oponent);
+            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(OponentActives,Oponent, false);
             for (int i = 0; i < UsableActives.Count; i++)
             {
                 AbilitiesHandler.Instance.UseActive(Oponent, UsableActives[i].Abilitys);
             }
             Attack(Oponent, Player);
-            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(PlayerActives, Player);
+            UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(PlayerActives, Player, true);
             for (int i = 0; i < UsableActives.Count; i++)
             {
                 if (UsableActives[i].Abilitys.Et == EffectType.Healing)

@@ -8,7 +8,7 @@ using UnityEngine;
 public class PvPControl : MonoBehaviour
 {
     private bool active;
-    public List<PlayerData> Oponents;
+    public static List<PlayerData> Oponents;
     private string SelectedOponentBt;
 
     private static PvPControl _instance;
@@ -40,6 +40,32 @@ public class PvPControl : MonoBehaviour
     public void GetOponentBattleTag(Text bt)
     {
         SelectedOponentBt = bt.text;
+    }
+
+    public void ShowOponents()
+    {
+        Oponents.Clear();
+        DataBaseManager.Instance.AssignOponents();
+        GameObject OponentProfile, OponentProfileAux;
+        Text[] Texto;
+        Image profileSprite;
+        OponentProfile = GameObject.Find("OponentProfile");
+        foreach (PlayerData Oponent in Oponents)
+        {
+            OponentProfileAux = Instantiate(OponentProfile) as GameObject;
+            OponentProfileAux.SetActive(true);
+            OponentProfileAux.transform.SetParent(OponentProfile.transform.parent, false);
+            profileSprite = OponentProfileAux.GetComponentInChildren<Image>();
+            profileSprite.sprite = Oponent.PlayerSprite;
+            Texto = OponentProfileAux.GetComponentsInChildren<Text>();
+            Texto[0].text = Oponent.BattleTag.ToString();
+            Texto[1].text = Oponent.Level.ToString();
+            Texto[2].text = Oponent.HP.ToString();
+            Texto[3].text = Oponent.Strength.ToString();
+            Texto[4].text = Oponent.Speed.ToString();
+            Texto[5].text = Oponent.Agility.ToString();
+        }
+        Destroy(OponentProfile);
     }
 
     public void TransitionToBattle()
