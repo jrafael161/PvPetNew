@@ -167,19 +167,6 @@ public class GlobalControl : MonoBehaviour
     public void SetPlayerData()//Se tendran que obtener estos datos de preferencia del save en la nube de lo contrario del save local del dispositivo del jugador
     {
         /*
-        playeProfile.HP = hp;
-        playeProfile.XP = xp;
-        playeProfile.Level = Lv;
-        playeProfile.Strength = Str;
-        playeProfile.Speed = Spd;
-        playeProfile.Agility = Agl;
-        playeProfile.Armor = Arm;
-        playeProfile.PvPCoin = PvpC;
-        playeProfile.PetCoin = PetC;
-        PrepareItems();
-        playeProfile.PremiumCoin = PremC;
-        Debug.Log("fuerza: " + playeProfile.Strength);
-        
         playeProfile.BattleTag = "Raizen8";
         playeProfile.Level = 1;
         playeProfile.HP = 100;
@@ -249,6 +236,23 @@ public class GlobalControl : MonoBehaviour
             Debug.Log("Cual jugador?");
             return playeProfile;
         }
+    }
+
+    public void CopyPlayer(PlayerData player)
+    {
+        player.PlayerID = playeProfile.PlayerID;
+        player.BattleTag = playeProfile.BattleTag;
+        player.Level = playeProfile.Level;
+        player.HP = playeProfile.HP;
+        player.XP = playeProfile.XP;
+        player.Strength = playeProfile.Strength;
+        player.Speed = playeProfile.Speed;
+        player.Agility = playeProfile.Agility;
+        player.Armor = playeProfile.Armor;
+        player.critic_prob = playeProfile.critic_prob;
+        player.EquipedGear = playeProfile.EquipedGear;
+        player.EquipedItems = playeProfile.EquipedItems;
+        player.CompanionPet = playeProfile.CompanionPet;
     }
 
     public void CheckIfLevelUP()
