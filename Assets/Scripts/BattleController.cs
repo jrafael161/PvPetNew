@@ -17,7 +17,7 @@ public class BattleController : MonoBehaviour
         _instance = this;
     }
 
-    public static bool Winner { get { return Winner; } set { Winner = value; } }
+    public bool Winner;
 
     public void Initialize()
     {
@@ -60,7 +60,6 @@ public class BattleController : MonoBehaviour
 
     IEnumerator Battle()
     {
-        SetPlayersData();
         CalculateArmor(Player);
         CalculateArmor(Oponent);
         AbilitiesHandler.Instance.SetPasives(Player, Oponent);
@@ -78,14 +77,14 @@ public class BattleController : MonoBehaviour
                     if (turns[i] == true && both_alive)
                     {
                         action_done = false;
-                        yield return StartCoroutine(action(Player));
+                        yield return StartCoroutine("action",Player);
                         passedTurns++;
                         PlayerpassedTurns++;
                     }
                     else if(both_alive)
                     {
                         action_done = false;
-                        yield return StartCoroutine(action(Oponent));
+                        yield return StartCoroutine("action",Oponent);
                         passedTurns++;
                         OponentpassedTurns++;
                     }
@@ -94,7 +93,7 @@ public class BattleController : MonoBehaviour
         }
         if (Player.HP > Oponent.HP)
         {
-            Debug.Log(Player.BattleTag + " ha ganado");        
+            Debug.Log(Player.BattleTag + " ha ganado");
             Winner = true;
             GiveXP();
         }

@@ -40,12 +40,11 @@ public class GlobalControl : MonoBehaviour
         abilitiesHandler.Initialize();
         petDBManager.Set_PetDatabase();
         petDBManager.Initialize();
-        //Si el dispositivo tiene conexion a internet, jala datos de firebase de lo contrario del save local.
-        SetPlayerData();
-        LoadPlayerData();                
-        ActiveScene = SceneManager.GetActiveScene();
         battleController.Initialize();
-
+        //Si el dispositivo tiene conexion a internet, jala datos de firebase de lo contrario del save local.
+        //SetPlayerData();
+        LoadPlayerData();                
+        ActiveScene = SceneManager.GetActiveScene();        
     }
 
     private void Update()
@@ -208,6 +207,9 @@ public class GlobalControl : MonoBehaviour
         playeProfile.EquipedGear = new List<Item>(4);
         playeProfile.EquipedItems = new List<Item>();
         playeProfile.Inventory = new List<Item>();//Checar el inventario
+        playeProfile.CompanionPet = new Pet();
+        playeProfile.OwnedPets = new List<Pet>();
+        /*
         playeProfile.EquipedGear[(int)BodyZone.Head] = itemDataBase.ItemDB.Find(x => x.ItemID == 0);//Reemplazar por las ids de lo que se obtenga de la query del player
         playeProfile.EquipedGear[(int)BodyZone.Chest] = itemDataBase.ItemDB.Find(x => x.ItemID == 1);
         playeProfile.EquipedGear[(int)BodyZone.Arms] = itemDataBase.ItemDB.Find(x => x.ItemID == 2);
@@ -217,6 +219,7 @@ public class GlobalControl : MonoBehaviour
         {
             playeProfile.EquipedGear[i] = itemDataBase.ItemDB.Find(x => x.ItemID == i);
         }
+        */
     }
 
     public void GetPlayerData()
