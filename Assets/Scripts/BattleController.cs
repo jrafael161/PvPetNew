@@ -254,7 +254,6 @@ public class BattleController : MonoBehaviour
         if ( hit_chance >= Random.Range(0, 100))
         {
             battlelog.text = battlelog.text + Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + "con su ataque\n";
-            battlelog.text = battlelog.text + "Le quedan " + Attacked.HP + " puntos de vida\n";
             Attacked.HP -= hit;
         }
         else
