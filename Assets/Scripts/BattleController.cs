@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class BattleController : MonoBehaviour
 {
 
@@ -16,7 +16,10 @@ public class BattleController : MonoBehaviour
     {
         _instance = this;
     }
-
+    public void Initialize()
+    {
+        _instance = this;
+    }
     public PlayerData Player, Oponent;    
     static bool action_done;
     static bool both_alive;
@@ -26,17 +29,28 @@ public class BattleController : MonoBehaviour
 
     List<Item> PlayerActives;
     List<Item> OponentActives;
-    public GameObject back_button; 
+    public GameObject back_button;
+    public GameObject buttoncapture;
+    public Text battlelog;
+
+
 
     private void Start()
+    {
+        Debug.Log("Instancia creada"+_instance);   
+    }
+
+    public void StartBattle(bool gametype)
     {
         action_done = true;
         both_alive = true;
         SetPlayersData();
         PlayerActives = new List<Item>();
         OponentActives = new List<Item>();
-        StartCoroutine(Battle());
+        battlelog.text = "Inicia batalla\n";
+        StartCoroutine("Battle");
     }
+
 
     IEnumerator Battle()
     {
@@ -71,12 +85,12 @@ public class BattleController : MonoBehaviour
             }
         }
         if (Player.HP > Oponent.HP)
-            Debug.Log(Player.BattleTag + " ha ganado");
+            battlelog.text = battlelog.text + Player.BattleTag + " ha ganado\n";
         else
-            Debug.Log(Oponent.BattleTag + " ha ganado");
+            battlelog.text = battlelog.text + Oponent.BattleTag + " ha ganado\n";
 
         back_button.SetActive(true);
-        Debug.Log("Termino el combate");
+        battlelog.text = battlelog.text + "Termino el combate\n";
         yield return true;
     }
 
@@ -185,7 +199,7 @@ public class BattleController : MonoBehaviour
                 action_done = true;
                 yield return null;
             }
-            Debug.Log(Player.BattleTag + " realizo su turno");
+            battlelog.text = battlelog.text + Player.BattleTag + " realizo su turno\n";
         }
         else
         {
@@ -208,8 +222,8 @@ public class BattleController : MonoBehaviour
                 both_alive = false;
                 action_done = true;
                 yield return null;
-            }            
-            Debug.Log(Oponent.BattleTag + " realizo su turno");
+            }
+            battlelog.text = battlelog.text + Oponent.BattleTag + " realizo su turno\n";
         }
         yield return new WaitForSeconds(2f);//Reemplazar con el tiempo que tome la accion que realizara el jugador
         action_done = true;
@@ -235,12 +249,12 @@ public class BattleController : MonoBehaviour
         int hit_chance = Mathf.FloorToInt(hit_prob);
         if ( hit_chance >= Random.Range(0, 100))
         {
-            Debug.Log(Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + "con su ataque");
+            battlelog.text = battlelog.text + Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + "con su ataque\n";
             Attacked.HP -= hit;
         }
         else
         {
-            Debug.Log( Attacker.BattleTag + " fallo su ataque");
+            battlelog.text = battlelog.text+Attacker.BattleTag + " fallo su ataque\n";
         }        
     }
 

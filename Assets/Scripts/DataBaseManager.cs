@@ -12,6 +12,7 @@ public class DataBaseManager : MonoBehaviour
 {
     public static Firebase.Auth.FirebaseAuth auth;
     public static Firebase.Auth.FirebaseUser user;
+
     private string displayName;
     private bool signedIn;
     private bool registered;
@@ -68,9 +69,7 @@ public class DataBaseManager : MonoBehaviour
     }
     void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
-        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-        textuserid.text = GameController.userid;
-        Checkforbattletag(textuserid.text.ToString());
+        Checkforbattletag(GameController.userid);
     }
     
     public void Opencharacter()
@@ -184,7 +183,7 @@ public class DataBaseManager : MonoBehaviour
 
     public void Checkforbattletag(string Userid)
     {
-        Debug.Log("Checando bt");
+
         Firebase.Database.FirebaseDatabase dbInstance = Firebase.Database.FirebaseDatabase.DefaultInstance;
         dbInstance.GetReference("users").GetValueAsync().ContinueWith(task =>
         {
@@ -253,6 +252,8 @@ public class DataBaseManager : MonoBehaviour
                 }
             }
         });
+
+        
     }
     public void Btn_go()
     {

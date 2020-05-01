@@ -15,6 +15,8 @@ public class GlobalControl : MonoBehaviour
     public AbilitiesDBmanager abilitiesDataBase = new AbilitiesDBmanager();
     public PetDBManager petDBManager = new PetDBManager();
     AbilitiesHandler abilitiesHandler = new AbilitiesHandler();
+    BattleController battleController = new BattleController();
+
     public Scene ActiveScene;
     int NumberOfStats;
     int NumberOfCoins;
@@ -40,6 +42,8 @@ public class GlobalControl : MonoBehaviour
         SetPlayerData();
         LoadPlayerData();                
         ActiveScene = SceneManager.GetActiveScene();
+        battleController.Initialize();
+
     }
 
     private void Update()
