@@ -29,21 +29,21 @@ public class PVE : MonoBehaviour
     public int Capitulo;
     public string titulo;
 
-    private int hpuser;
-    private int struser;
-    private int aguser;
-    private int speuser;
-    private int armuser;
-    private int expuser;
-    private int available;
+    //private int hpuser;
+    //private int struser;
+    //private int aguser;
+    //private int speuser;
+    //private int armuser;
+    //private int expuser;
+    //private int available;
 
     public GameObject petimg;
 
 
     void Start()
     {
-        DB();
-        GetUserStats();
+        //DB();
+        //GetUserStats();
         //GlobalControl gcReal = GameObject.FindObjectOfType<GlobalControl>();
         //gc = gcReal.get_Instance();
     }
@@ -90,68 +90,68 @@ public class PVE : MonoBehaviour
         Panelact4.SetActive(false);
         Panelact5.SetActive(true);
     }
-    void DB()
-    {
-        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pvpet-f0b05.firebaseio.com/Players/Pa5UU16uCzt6X1E1DJ6a");
-        reference = FirebaseDatabase.DefaultInstance.RootReference;
-    }
-    void GetUserStats()
-    {
-        string uid;
-        //OBTIENE ID DE USUARIO
-        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-        textuserid.text = GameController.userid;
-        uid = textuserid.text.ToString();
-        //uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
-        //OBTIENE LABES PARA PANTALLA
-        Text textUsername = GameObject.Find("Canvas/lbl_username").GetComponent<Text>();
-        Text textHP = GameObject.Find("Canvas/lbl_pv").GetComponent<Text>();
-        Text textAgility = GameObject.Find("Canvas/lbl_ag").GetComponent<Text>();
-        Text textSpeed = GameObject.Find("Canvas/lbl_sp").GetComponent<Text>();
-        Text textStrength = GameObject.Find("Canvas/lbl_str").GetComponent<Text>();
-        Text textArmorv = GameObject.Find("Canvas/lbl_arm").GetComponent<Text>();
+    //void DB()
+    //{
+    //    FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pvpet-f0b05.firebaseio.com/Players/Pa5UU16uCzt6X1E1DJ6a");
+    //    reference = FirebaseDatabase.DefaultInstance.RootReference;
+    //}
+    //void GetUserStats()
+    //{
+    //    string uid;
+    //    //OBTIENE ID DE USUARIO
+    //    Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
+    //    textuserid.text = GameController.userid;
+    //    uid = textuserid.text.ToString();
+    //    //uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
+    //    //OBTIENE LABES PARA PANTALLA
+    //    Text textUsername = GameObject.Find("Canvas/lbl_username").GetComponent<Text>();
+    //    Text textHP = GameObject.Find("Canvas/lbl_pv").GetComponent<Text>();
+    //    Text textAgility = GameObject.Find("Canvas/lbl_ag").GetComponent<Text>();
+    //    Text textSpeed = GameObject.Find("Canvas/lbl_sp").GetComponent<Text>();
+    //    Text textStrength = GameObject.Find("Canvas/lbl_str").GetComponent<Text>();
+    //    Text textArmorv = GameObject.Find("Canvas/lbl_arm").GetComponent<Text>();
 
-        //reference.Child("users").Child(uid).Child("PVE").Child("available").SetValueAsync("1000");
-        //CONECTA CON BASE
-        FirebaseDatabase.DefaultInstance.GetReference("users").Child(uid).GetValueAsync().ContinueWith(task =>
-        {
-            if (task.IsFaulted)
-            {
-                Debug.LogError("DataManager: read database is faulted with error: " + task.Exception.ToString());
-                return;
-            }
-            if (task.IsCompleted)
-            {
-                DataSnapshot snapshot = task.Result;
-                Dictionary<string, System.Object> attributes = (Dictionary<string, System.Object>)snapshot.Value;
-                if (snapshot.Exists)
-                {
-                    //GUARDA TODOS LOS DATOS DE USUARIO, LLENA LAS VARIABLES DE USUARIO Y CAMBIA LOS LABELS PARA LA PANTALLA
-                    Dictionary<string, System.Object> PVE = (Dictionary<string, System.Object>)attributes["PVE"];
+    //    //reference.Child("users").Child(uid).Child("PVE").Child("available").SetValueAsync("1000");
+    //    //CONECTA CON BASE
+    //    FirebaseDatabase.DefaultInstance.GetReference("users").Child(uid).GetValueAsync().ContinueWith(task =>
+    //    {
+    //        if (task.IsFaulted)
+    //        {
+    //            Debug.LogError("DataManager: read database is faulted with error: " + task.Exception.ToString());
+    //            return;
+    //        }
+    //        if (task.IsCompleted)
+    //        {
+    //            DataSnapshot snapshot = task.Result;
+    //            Dictionary<string, System.Object> attributes = (Dictionary<string, System.Object>)snapshot.Value;
+    //            if (snapshot.Exists)
+    //            {
+    //                //GUARDA TODOS LOS DATOS DE USUARIO, LLENA LAS VARIABLES DE USUARIO Y CAMBIA LOS LABELS PARA LA PANTALLA
+    //                Dictionary<string, System.Object> PVE = (Dictionary<string, System.Object>)attributes["PVE"];
 
-                    hpuser = int.Parse(attributes["HP"].ToString());
-                    struser = int.Parse(attributes["Strength"].ToString());
-                    aguser = int.Parse(attributes["Agility"].ToString());
-                    speuser = int.Parse(attributes["Speed"].ToString());
-                    armuser = int.Parse(attributes["Armorv"].ToString());
-                    expuser = int.Parse(attributes["Armorv"].ToString());
+    //                hpuser = int.Parse(attributes["HP"].ToString());
+    //                struser = int.Parse(attributes["Strength"].ToString());
+    //                aguser = int.Parse(attributes["Agility"].ToString());
+    //                speuser = int.Parse(attributes["Speed"].ToString());
+    //                armuser = int.Parse(attributes["Armorv"].ToString());
+    //                expuser = int.Parse(attributes["Armorv"].ToString());
 
-                    available = int.Parse(PVE["available"].ToString());
+    //                available = int.Parse(PVE["available"].ToString());
                     
-                    textUsername.text = attributes["username"].ToString();
-                    textHP.text = "HP:" + attributes["HP"].ToString();
-                    textAgility.text = "AGY:" + attributes["Agility"].ToString();
-                    textSpeed.text = "SPE:" + attributes["Speed"].ToString();
-                    textStrength.text = "STR:" + attributes["Strength"].ToString();
-                    textArmorv.text = "ARM:" + attributes["Armorv"].ToString();
-                }
-                else
-                {
-                    Debug.LogError("DataManager: Database for the user not available.");
-                }
-            }
-        });
-    }
+    //                textUsername.text = attributes["username"].ToString();
+    //                textHP.text = "HP:" + attributes["HP"].ToString();
+    //                textAgility.text = "AGY:" + attributes["Agility"].ToString();
+    //                textSpeed.text = "SPE:" + attributes["Speed"].ToString();
+    //                textStrength.text = "STR:" + attributes["Strength"].ToString();
+    //                textArmorv.text = "ARM:" + attributes["Armorv"].ToString();
+    //            }
+    //            else
+    //            {
+    //                Debug.LogError("DataManager: Database for the user not available.");
+    //            }
+    //        }
+    //    });
+    //}
     public void preparativosmision()
     {
         Panelpreparativos.SetActive(true);
@@ -165,10 +165,10 @@ public class PVE : MonoBehaviour
     }
     public void gomision()
     {
-
         Text Act = GameObject.Find("Canvas/pnl_preparativos/lbl_act_v").GetComponent<Text>();
         Text Cap = GameObject.Find("Canvas/pnl_preparativos/lbl_cap_v").GetComponent<Text>();
         Text Tit = GameObject.Find("Canvas/pnl_preparativos/lbl_tit_v").GetComponent<Text>();
+
         int Mcla = int.Parse(Act.text);
         int Mcap = int.Parse(Cap.text);
         int VO = 0;
@@ -177,18 +177,7 @@ public class PVE : MonoBehaviour
         int ddDificultad = dropdownMenu.GetComponent<Dropdown>().value;
         List<Dropdown.OptionData> menuDificultad = dropdownMenu.GetComponent<Dropdown>().options;
         string Diff = menuDificultad[ddDificultad].text;
-        DB();
-        GetUserStats();
-        available = available - 1;
-        string uid;
-        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-        textuserid.text = GameController.userid;
-        uid = textuserid.text.ToString();
-        //uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
-
-        reference.Child("users").Child(uid).Child("PVE").Child("available").SetValueAsync(available);
-
-
+        
         Debug.Log(Diff);
         switch (Diff)
         {
@@ -204,13 +193,13 @@ public class PVE : MonoBehaviour
             case "Extremo":
                 LE = 30; VO = 40; MUL = 4;
                 break;
-            case "Tormento1":
+            case "Purgatorio":
                 LE = 40; VO = 60; MUL = 5;
                 break;
-            case "Tormento2":
+            case "Agonia":
                 LE = 60; VO = 90; MUL = 6;
                 break;
-            case "Tormento3":
+            case "Tormento":
                 LE = 90; VO = 150; MUL = 7;
                 break;
             case "PetHunter":
@@ -227,32 +216,32 @@ public class PVE : MonoBehaviour
         {
             string Petnombre = MissionPets[i].name;
             string Pettipo = MissionPets[i].Pt.ToString();
-            int Petchance = 0;
+            float Petchance = 0;
             switch (Diff)
             {
                 case "Facil":
-                    Petchance = int.Parse(MissionPets[i].ProbFacil.ToString());
+                    Petchance = float.Parse(MissionPets[i].ProbFacil.ToString());
                     break;
                 case "Normal":
-                    Petchance = int.Parse(MissionPets[i].ProbNormal.ToString());
+                    Petchance = float.Parse(MissionPets[i].ProbNormal.ToString());
                     break;
                 case "Dificil":
-                    Petchance = int.Parse(MissionPets[i].ProbDificil.ToString());
+                    Petchance = float.Parse(MissionPets[i].ProbDificil.ToString());
                     break;
                 case "Extremo":
-                    Petchance = int.Parse(MissionPets[i].ProbExtremo.ToString());
+                    Petchance = float.Parse(MissionPets[i].ProbExtremo.ToString());
                     break;
                 case "Purgatorio":
-                    Petchance = int.Parse(MissionPets[i].ProbPurgatorio.ToString());
+                    Petchance = float.Parse(MissionPets[i].ProbPurgatorio.ToString());
                     break;
                 case "Agonia":
-                    Petchance = int.Parse(MissionPets[i].ProbAgonia.ToString());
+                    Petchance = float.Parse(MissionPets[i].ProbAgonia.ToString());
                     break;
                 case "Tormento":
-                    Petchance = int.Parse(MissionPets[i].ProbTormento.ToString());
+                    Petchance = float.Parse(MissionPets[i].ProbTormento.ToString());
                     break;
                 case "PetHunter":
-                    Petchance = int.Parse(MissionPets[i].ProbPetHunter.ToString());
+                    Petchance = float.Parse(MissionPets[i].ProbPetHunter.ToString());
                     break;
             };
             items.Add(
@@ -273,7 +262,6 @@ public class PVE : MonoBehaviour
         int petarm = UnityEngine.Random.Range(LE, VO);
 
         petimg.GetComponent<Image>().sprite = Petichooseyou.PetSprite;
-        Panelpreparativos.SetActive(false);
         Panelmision.SetActive(true);
         Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
         Text petpvtxt = GameObject.Find("Canvas/pnl_mision/txt_pv_v").GetComponent<Text>();
@@ -319,27 +307,13 @@ public class PVE : MonoBehaviour
         }
         GlobalControl.Instance.oponentProfile.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 50);
 
-        //SceneManager.LoadScene("CombatScreen");
-
-        bool estatus = true;
-
-
-        if (estatus)
-            btncaptura.SetActive(true);
-        else
-            btncaptura.SetActive(false);
-
-
+        BattleController.Instance.StartBattle(false);
+        Panelpreparativos.SetActive(false);
     }
 
     public void capurarpet()
     {
-        string uid = "";
-        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-        textuserid.text = GameController.userid;
-        uid = textuserid.text.ToString();
-        //uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
-
+        string uid = GameController.userid;
         Debug.Log(uid);
         Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
         Text petpvtxt = GameObject.Find("Canvas/pnl_mision/txt_pv_v").GetComponent<Text>();
@@ -353,8 +327,6 @@ public class PVE : MonoBehaviour
         string petagy = petagytxt.text.ToString();
         string petspe = petspetxt.text.ToString();
         string petarm = petarmtxt.text.ToString();
-
-
         Capturapet Capturapet = new Capturapet( pethp, petstr, petspe, petagy, petarm);
         string json = JsonUtility.ToJson(Capturapet);
         reference.Child("users/" + uid).Child("PETS").Child(petname).SetRawJsonValueAsync(json);
@@ -366,22 +338,22 @@ public class PVE : MonoBehaviour
     }
 
 
-    void Getdata()
-    {
-        Firebase.Database.FirebaseDatabase dbInstance = Firebase.Database.FirebaseDatabase.DefaultInstance;
-        dbInstance.GetReference("users").GetValueAsync().ContinueWith(task =>
-        {
-            if (task.IsCompleted)
-            {
-                DataSnapshot snapshot = task.Result;
-                foreach (DataSnapshot user in snapshot.Children)
-                {
-                    IDictionary dictUser = (IDictionary)user.Value;
-                    Debug.Log(dictUser["username"].ToString());
-                }
-            }
-        });
-    }
+    //void Getdata()
+    //{
+    //    Firebase.Database.FirebaseDatabase dbInstance = Firebase.Database.FirebaseDatabase.DefaultInstance;
+    //    dbInstance.GetReference("users").GetValueAsync().ContinueWith(task =>
+    //    {
+    //        if (task.IsCompleted)
+    //        {
+    //            DataSnapshot snapshot = task.Result;
+    //            foreach (DataSnapshot user in snapshot.Children)
+    //            {
+    //                IDictionary dictUser = (IDictionary)user.Value;
+    //                Debug.Log(dictUser["username"].ToString());
+    //            }
+    //        }
+    //    });
+    //}
 
     public void Cancelmision()
     {
@@ -393,7 +365,7 @@ public class PVE : MonoBehaviour
 public class Itemc
 {
     public string name; // not only string, any type of data
-    public int chance;  // chance of getting this Item
+    public float chance;  // chance of getting this Item
     public string type;
     public Sprite PetSprite;
 }
@@ -405,17 +377,17 @@ public class ProportionalWheelSelection
     public static Itemc SelectItem(List<Itemc> items)
     {
         // Calculate the summa of all portions.
-        int poolSize = 0;
+        float poolSize = 0;
         for (int i = 0; i < items.Count; i++)
         {
             poolSize += items[i].chance;
         }
 
         // Get a random integer from 0 to PoolSize.
-        int randomNumber = rnd.Next(0, poolSize) + 1;
+        int randomNumber = rnd.Next(0, (int)poolSize) + 1;
 
         // Detect the item, which corresponds to current random number.
-        int accumulatedProbability = 0;
+        float accumulatedProbability = 0;
         for (int i = 0; i < items.Count; i++)
         {
             accumulatedProbability += items[i].chance;
