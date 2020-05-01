@@ -15,7 +15,7 @@ public class GlobalControl : MonoBehaviour
     public DataBaseManager dataBaseManager = new DataBaseManager();
     public AbilitiesDBmanager abilitiesDataBase = new AbilitiesDBmanager();
     public PetDBManager petDBManager = new PetDBManager();
-    AbilitiesHandler abilitiesHandler = new AbilitiesHandler();
+    public AbilitiesHandler abilitiesHandler = new AbilitiesHandler();
     public Scene ActiveScene;
     int NumberOfStats;
     int NumberOfCoins;
@@ -77,12 +77,17 @@ public class GlobalControl : MonoBehaviour
             
     }
 
-    public void InitializePlayerData()//Se muestra la informacion del jugador segun lo requerido
+    public void InitializePlayerData(PlayerData player = null)//Se muestra la informacion del jugador segun lo requerido
     {
+        if (player == null)
+        {
+            player = playeProfile;
+        }
+        bool leveled=false;
         Slider sli;       
         Text hp_Text;
         GameObject hpStat,currency;
-        GameObject [] stats = new GameObject[3];
+        GameObject [] stats = new GameObject[3];        
         Text[] PlayerCoins = new Text[3];
         stats[0] = GameObject.Find("StrengthStat");
         stats[1] = GameObject.Find("AgilityStat");
@@ -91,20 +96,20 @@ public class GlobalControl : MonoBehaviour
         currency = GameObject.Find("Currency");
         PlayerCoins = currency.GetComponentsInChildren<Text>();
         hp_Text = hpStat.GetComponentInChildren<Text>();
-        hp_Text.text = "HP:" + playeProfile.HP.ToString();
+        hp_Text.text = "HP:" + player.HP.ToString();
         for (int i = 0; i <= NumberOfStats; i++)
         {
             sli = stats[i].GetComponentInChildren<Slider>();            
             switch (i)
             {
                 case 0:
-                    sli.value = playeProfile.Strength;
+                    sli.value = player.Strength;
                 break;
                 case 1:
-                    sli.value = playeProfile.Agility;                    
+                    sli.value = player.Agility;                    
                     break;
                 case 2:
-                    sli.value = playeProfile.Speed;                    
+                    sli.value = player.Speed;                    
                     break;
                 default:
                     break;
@@ -115,17 +120,44 @@ public class GlobalControl : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    PlayerCoins[i].text = playeProfile.PetCoin.ToString();
+                    PlayerCoins[i].text = player.PetCoin.ToString();
                     break;
                 case 1:
-                    PlayerCoins[i].text = playeProfile.PvPCoin.ToString();
+                    PlayerCoins[i].text = player.PvPCoin.ToString();
                     break;
                 case 2:
-                    PlayerCoins[i].text = playeProfile.PremiumCoin.ToString();
+                    PlayerCoins[i].text = player.PremiumCoin.ToString();
                     break;
                 default:
                     break;
             }
+        }
+        if (player.LevelUpPoints >= 1)
+        {
+            foreach (GameObject stat in stats)
+            {
+                Button[] levelControlers = stat.GetComponentsInChildren<Button>(true);
+                foreach (Button but in levelControlers)
+                {
+                    but.gameObject.SetActive(true);
+                }
+            }
+            leveled = true;
+        }
+        else
+        {
+            if (leveled)
+            {
+                foreach (GameObject stat in stats)
+                {
+                    Button[] levelControlers = stat.GetComponentsInChildren<Button>(true);
+                    foreach (Button but in levelControlers)
+                    {
+                        but.gameObject.SetActive(false);
+                    }
+                }
+                leveled = false;
+            }                
         }
     }
 
@@ -210,5 +242,15 @@ public class GlobalControl : MonoBehaviour
             Debug.Log("Cual jugador?");
             return playeProfile;
         }
+    }
+
+    public void CheckIfLevelUP()
+    {
+        while (playeProfile.XP >= 100)
+        {
+            playeProfile.LevelUpPoints += 1;
+            playeProfile.XP = playeProfile.XP - 100;
+        }
+        SavePlayerData();
     }
 }
