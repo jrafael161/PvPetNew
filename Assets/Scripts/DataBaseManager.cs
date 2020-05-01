@@ -205,7 +205,7 @@ public class DataBaseManager : MonoBehaviour
 
     public void Checkforbattletag(string Userid)
     {
-
+        //if (CheckInternetConnection.Instance.Check())
         Firebase.Database.FirebaseDatabase dbInstance = Firebase.Database.FirebaseDatabase.DefaultInstance;
         dbInstance.GetReference("users").GetValueAsync().ContinueWith(task =>
         {
