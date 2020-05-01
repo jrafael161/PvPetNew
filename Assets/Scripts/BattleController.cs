@@ -16,10 +16,14 @@ public class BattleController : MonoBehaviour
     {
         _instance = this;
     }
+
+    public bool Winner;
+
     public void Initialize()
     {
         _instance = this;
     }
+    
     public PlayerData Player, Oponent;    
     static bool action_done;
     static bool both_alive;
@@ -56,7 +60,6 @@ public class BattleController : MonoBehaviour
 
     IEnumerator Battle()
     {
-        SetPlayersData();
         CalculateArmor(Player);
         CalculateArmor(Oponent);
         AbilitiesHandler.Instance.SetPasives(Player, Oponent);
@@ -66,7 +69,7 @@ public class BattleController : MonoBehaviour
 
         while (Player.HP > 0 && Oponent.HP > 0)
         {            
-            set_turns((float)Player.Speed/ (float)Oponent.Speed);
+            set_turns(Player.Speed/ Oponent.Speed);
             for (int i = 0; i < turns.Count; i++)
             {
                 if (action_done)
@@ -74,14 +77,14 @@ public class BattleController : MonoBehaviour
                     if (turns[i] == true && both_alive)
                     {
                         action_done = false;
-                        yield return StartCoroutine(action(Player));
+                        yield return StartCoroutine("action",Player);
                         passedTurns++;
                         PlayerpassedTurns++;
                     }
                     else if(both_alive)
                     {
                         action_done = false;
-                        yield return StartCoroutine(action(Oponent));
+                        yield return StartCoroutine("action",Oponent);
                         passedTurns++;
                         OponentpassedTurns++;
                     }
@@ -89,13 +92,39 @@ public class BattleController : MonoBehaviour
             }
         }
         if (Player.HP > Oponent.HP)
-            battlelog.text = battlelog.text + Player.BattleTag + " ha ganado\n";
+        {
+            Debug.Log(Player.BattleTag + " ha ganado");
+            Winner = true;
+            GiveXP();
+        }
         else
-            battlelog.text = battlelog.text + Oponent.BattleTag + " ha ganado\n";
-
+        {
+            Debug.Log(Oponent.BattleTag + " ha ganado");
+            Winner = false;
+            GiveXP();
+        }            
         back_button.SetActive(true);
         battlelog.text = battlelog.text + "Termino el combate\n";
         yield return true;
+    }
+
+    void GiveXP()
+    {
+        float XP = 0;
+        if (Winner)
+        {
+            XP = (((Player.HP * 100) / GlobalControl.Instance.playeProfile.HP) / passedTurns) / Player.Level;
+            XP = Mathf.Floor(XP);
+            GlobalControl.Instance.playeProfile.XP += XP;
+            Debug.Log("El jugador gano "+ XP + " puntos de Xp" );
+        }
+        else
+        {
+            XP = (passedTurns + Player.Level)/Player.Level;
+            XP = Mathf.Floor(XP);
+            GlobalControl.Instance.playeProfile.XP += XP;
+            Debug.Log("El jugador gano " + XP + " puntos de Xp");
+        }
     }
 
     void set_turns(float priority)
@@ -140,11 +169,11 @@ public class BattleController : MonoBehaviour
         if (priority<1)
         {
             float aux = Mathf.Pow(priority, -1);
-            turn_ratio = Mathf.FloorToInt(aux);// + 1;
+            turn_ratio = Mathf.CeilToInt(aux);// + 1;
         }
         else
         {
-            turn_ratio = Mathf.FloorToInt(priority);// + 1;
+            turn_ratio = Mathf.CeilToInt(priority);// + 1;
         }            
         turns = new List<bool>(turn_ratio);
         for (int i = 0, t = turn_ratio; i < t+1; i++)
@@ -236,21 +265,25 @@ public class BattleController : MonoBehaviour
     public void Attack(PlayerData Attacker, PlayerData Attacked)
     {
         float crit_prob = Attacker.critic_prob * 100;
-        int crit_chance = Mathf.FloorToInt(crit_prob);
-        int  hit = 0;
+        float crit_chance = Mathf.Ceil(crit_prob);
+        float  hit = 0;
+        float trueDamage = 0;
         if (crit_chance >= Random.Range(0, 100))
         {
-            hit = ((Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Value) * 2) / Attacked.Armor;
+            trueDamage = ((Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Value) * 2);
+            hit = trueDamage - (trueDamage * (Attacked.Armor / 100));
+            Debug.Log(Attacker.BattleTag + "realizo un critico");
         }
         else
         {
-            hit = (Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Value) / Attacked.Armor;
+            trueDamage = ((Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Value));
+            hit = trueDamage - (trueDamage * (Attacked.Armor / 100));
         }
-        hit = Mathf.FloorToInt(hit);
+        hit = Mathf.Ceil(hit);
 
-        float hit_prob = (float)Attacker.Speed / (float)Attacked.Agility;
+        float hit_prob = Attacker.Speed / Attacked.Agility;
         hit_prob = hit_prob * 100;
-        int hit_chance = Mathf.FloorToInt(hit_prob);
+        float hit_chance = Mathf.Ceil(hit_prob);
         if ( hit_chance >= Random.Range(0, 100))
         {
             battlelog.text = battlelog.text + Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + "con su ataque\n";
