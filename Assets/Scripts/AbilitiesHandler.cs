@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AbilitiesHandler
 {
@@ -20,6 +21,8 @@ public class AbilitiesHandler
     {
         _instance = this;
     }
+
+    public Text BattleLog;
 
     public void SetPasives(PlayerData player,PlayerData oponent)
     {
@@ -191,13 +194,13 @@ public class AbilitiesHandler
     public void Damage(PlayerData player, Ability ability)
     {
         player.HP -= ability.Bonus;
-        Debug.Log("Daño hecho a " + player.BattleTag + " de " + ability.Bonus + " por " + ability.Name);
+        BattleLog.text = BattleLog.text + "Daño hecho a " + player.BattleTag + " de " + ability.Bonus + " por " + ability.Name + "\n";
     }
 
     public void Heal(PlayerData player, Ability ability)
     {
         player.HP += ability.Bonus;
-        Debug.Log("Curacion hecha a " + player.BattleTag + " de " + ability.Bonus + " por " + ability.Name);
+        BattleLog.text = BattleLog.text + "Curacion hecha a " + player.BattleTag + " de " + ability.Bonus + " por " + ability.Name + "\n";
     }
 
     public void Buff(PlayerData player, Ability ability)
@@ -206,30 +209,30 @@ public class AbilitiesHandler
         {
             case BuffType.Health:
                 player.HP += ability.Bonus;
-                Debug.Log(ability.Bonus + "en vida " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en vida " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Strength:
                 player.Strength += ability.Bonus;
-                Debug.Log(ability.Bonus + "en fuerza " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en fuerza " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Speed:
                 player.Speed += ability.Bonus;
-                Debug.Log(ability.Bonus + "en velicidad " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en velicidad " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Agility:
                 player.Agility += ability.Bonus;
-                Debug.Log(ability.Bonus + "en agilidad " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en agilidad " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Critic:
                 player.critic_prob += ability.Bonus;
-                Debug.Log(ability.Bonus + "en critico " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en critico " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Armor:
                 player.Armor += ability.Bonus;
-                Debug.Log(ability.Bonus + "en armadura " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en armadura " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             default:
-                Debug.Log("No se supo que hacer con la habilidad " + ability.name);
+                BattleLog.text = BattleLog.text + "No se supo que hacer con la habilidad " + ability.name + "\n";
                 break;
         }
     }
@@ -240,30 +243,30 @@ public class AbilitiesHandler
         {
             case BuffType.Health:
                 player.HP -= ability.Bonus;
-                Debug.Log(ability.Bonus + "en vida " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en vida " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Strength:
                 player.Strength -= ability.Bonus;
-                Debug.Log(ability.Bonus + "en fuerza " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en fuerza " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Speed:
                 player.Speed -= ability.Bonus;
-                Debug.Log(ability.Bonus + "en velicidad " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en velicidad " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Agility:
                 player.Agility -= ability.Bonus;
-                Debug.Log(ability.Bonus + "en agilidad " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en agilidad " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Critic:
                 player.critic_prob -= ability.Bonus;
-                Debug.Log(ability.Bonus + "en critico " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en critico " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Armor:
                 player.Armor -= ability.Bonus;
-                Debug.Log(ability.Bonus + "en armadura " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en armadura " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             default:
-                Debug.Log("No se supo que hacer con la habilidad " + ability.name);
+                BattleLog.text = BattleLog.text + "No se supo que hacer con la habilidad " + ability.name + "\n";
                 break;
         }
     }
@@ -274,30 +277,30 @@ public class AbilitiesHandler
         {
             case BuffType.Health:
                 player.HP += ability.Bonus;
-                Debug.Log(ability.Bonus  + "en vida " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus  + "en vida " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Strength:
                 player.Strength += ability.Bonus;
-                Debug.Log(ability.Bonus + "en fuerza " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en fuerza " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Speed:
                 player.Speed += ability.Bonus;
-                Debug.Log(ability.Bonus + "en velicidad " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en velicidad " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Agility:
                 player.Agility += ability.Bonus;
-                Debug.Log(ability.Bonus + "en agilidad " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en agilidad " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Critic:
                 player.critic_prob += ability.Bonus;
-                Debug.Log(ability.Bonus + "en critico " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en critico " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             case BuffType.Armor:
                 player.Armor += ability.Bonus;
-                Debug.Log(ability.Bonus + "en armadura " + " a " + player.BattleTag + " por " + ability.name);
+                BattleLog.text = BattleLog.text + ability.Bonus + "en armadura " + " a " + player.BattleTag + " por " + ability.name + "\n";
                 break;
             default:
-                Debug.Log("No se supo que hacer con la habilidad " + ability.name);
+                BattleLog.text = BattleLog.text + "No se supo que hacer con la habilidad " + ability.name + "\n";
                 break;
         }    
     }

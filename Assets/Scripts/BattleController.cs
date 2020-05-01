@@ -17,8 +17,6 @@ public class BattleController : MonoBehaviour
         _instance = this;
     }
 
-    public bool Winner;
-
     public void Initialize()
     {
         _instance = this;
@@ -32,7 +30,8 @@ public class BattleController : MonoBehaviour
     public int PlayerpassedTurns;
     public int OponentpassedTurns;
     float G_priority;
-
+    public bool Winner;
+    public bool GameType;//true->PvP,false->PvE
     List<Item> PlayerActives;
     List<Item> OponentActives;
     public GameObject back_button;
@@ -48,12 +47,17 @@ public class BattleController : MonoBehaviour
 
     public void StartBattle(bool gametype)
     {
+        GameType = gametype;        
         action_done = true;
         both_alive = true;
+        passedTurns = 0;
+        PlayerpassedTurns = 0;
+        OponentpassedTurns = 0;
         SetPlayersData();
         PlayerActives = new List<Item>();
         OponentActives = new List<Item>();
         battlelog.text = "Inicia batalla\n";
+        AbilitiesHandler.Instance.BattleLog = battlelog;
         StartCoroutine("Battle");
     }
 
@@ -93,17 +97,20 @@ public class BattleController : MonoBehaviour
         }
         if (Player.HP > Oponent.HP)
         {
-            Debug.Log(Player.BattleTag + " ha ganado");
+            battlelog.text = battlelog.text + Player.BattleTag + " ha ganado\n";
             Winner = true;
             GiveXP();
         }
         else
         {
-            Debug.Log(Oponent.BattleTag + " ha ganado");
+            battlelog.text = battlelog.text + Oponent.BattleTag + " ha ganado\n";
             Winner = false;
             GiveXP();
-        }            
-        back_button.SetActive(true);
+        }
+        if (GameType)
+        {
+            back_button.SetActive(true);
+        }        
         battlelog.text = battlelog.text + "Termino el combate\n";
         yield return true;
     }
@@ -116,14 +123,14 @@ public class BattleController : MonoBehaviour
             XP = (((Player.HP * 100) / GlobalControl.Instance.playeProfile.HP) / passedTurns) / Player.Level;
             XP = Mathf.Floor(XP);
             GlobalControl.Instance.playeProfile.XP += XP;
-            Debug.Log("El jugador gano "+ XP + " puntos de Xp" );
+            battlelog.text = battlelog.text + " " + "El jugador gano " + XP + " puntos de Xp\n";
         }
         else
         {
             XP = (passedTurns + Player.Level)/Player.Level;
             XP = Mathf.Floor(XP);
             GlobalControl.Instance.playeProfile.XP += XP;
-            Debug.Log("El jugador gano " + XP + " puntos de Xp");
+            battlelog.text = battlelog.text + " " + "El jugador gano " + XP + " puntos de Xp\n";
         }
     }
 
@@ -169,11 +176,11 @@ public class BattleController : MonoBehaviour
         if (priority<1)
         {
             float aux = Mathf.Pow(priority, -1);
-            turn_ratio = Mathf.CeilToInt(aux);// + 1;
+            turn_ratio = Mathf.RoundToInt(aux);// + 1;
         }
         else
         {
-            turn_ratio = Mathf.CeilToInt(priority);// + 1;
+            turn_ratio = Mathf.RoundToInt(priority);// + 1;
         }            
         turns = new List<bool>(turn_ratio);
         for (int i = 0, t = turn_ratio; i < t+1; i++)
@@ -265,30 +272,35 @@ public class BattleController : MonoBehaviour
     public void Attack(PlayerData Attacker, PlayerData Attacked)
     {
         float crit_prob = Attacker.critic_prob * 100;
-        float crit_chance = Mathf.Ceil(crit_prob);
+        float crit_chance = Mathf.Round(crit_prob);
         float  hit = 0;
         float trueDamage = 0;
         if (crit_chance >= Random.Range(0, 100))
         {
             trueDamage = ((Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Value) * 2);
             hit = trueDamage - (trueDamage * (Attacked.Armor / 100));
-            Debug.Log(Attacker.BattleTag + "realizo un critico");
+            battlelog.text = battlelog.text + " " + Attacker.BattleTag + " hizo un golpe critico\n";
         }
         else
         {
             trueDamage = ((Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Value));
             hit = trueDamage - (trueDamage * (Attacked.Armor / 100));
         }
-        hit = Mathf.Ceil(hit);
-
+        hit = Mathf.Round(hit);
         float hit_prob = Attacker.Speed / Attacked.Agility;
         hit_prob = hit_prob * 100;
-        float hit_chance = Mathf.Ceil(hit_prob);
+        float hit_chance = Mathf.Round(hit_prob);
         if ( hit_chance >= Random.Range(0, 100))
         {
-            battlelog.text = battlelog.text + Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + "con su ataque\n";
-            battlelog.text = battlelog.text + "Le quedan " + Attacked.HP + " puntos de vida\n";
-            Attacked.HP -= hit;
+            battlelog.text = battlelog.text + Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + " con su ataque\n";
+            if (hit > Attacked.HP)
+            {
+                Attacked.HP = 0;
+            }
+            else
+                Attacked.HP -= hit;
+
+            battlelog.text = battlelog.text + "Le quedan " + Attacked.HP + " puntos de vida\n";            
         }
         else
         {
@@ -298,7 +310,11 @@ public class BattleController : MonoBehaviour
 
     public void SetPlayersData()
     {
-        Player = GlobalControl.Instance.playeProfile;
+        Player = new PlayerData();
+        Player.EquipedGear = new List<Item>();
+        Player.EquipedItems = new List<Item>();
+        Player.CompanionPet = new Pet();
+        GlobalControl.Instance.CopyPlayer(Player);
         Oponent = GlobalControl.Instance.oponentProfile;       
     }
 
