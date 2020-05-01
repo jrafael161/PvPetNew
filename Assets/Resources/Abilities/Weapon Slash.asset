@@ -13,18 +13,10 @@ MonoBehaviour:
   m_Name: Weapon Slash
   m_EditorClassIdentifier: 
   Name: Weapon Slash
-  AbilityID: 3
-  icon: {fileID: 0}
-  PvP_Price: 9999
-  Pet_Price: 9999
-  Prem_Price: 9999
-  Description: Slash the oponent with mighty force, once per battle.
-  LevelRequirement: 1
-  cuantity: 0
+  AbilityID: 2
+  Bonus: 5
   minThreshold: 1
-  maxThreshold: 0
-  Bz: 5
-  It: 3
+  maxThreshold: 1
   Tt: 0
   Et: 0
   Bt: 1

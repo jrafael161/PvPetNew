@@ -12,6 +12,7 @@ public class GlobalControl : MonoBehaviour
     public PlayerData playeProfile = new PlayerData();
     public PlayerData oponentProfile = new PlayerData();
     public ItemsDBmanager itemDataBase = new ItemsDBmanager();
+    public DataBaseManager dataBaseManager = new DataBaseManager();
     public AbilitiesDBmanager abilitiesDataBase = new AbilitiesDBmanager();
     public PetDBManager petDBManager = new PetDBManager();
     AbilitiesHandler abilitiesHandler = new AbilitiesHandler();
@@ -32,6 +33,7 @@ public class GlobalControl : MonoBehaviour
     {
         NumberOfStats = 2;//3 por que se cuenta el 0
         NumberOfCoins = 2;
+        //dataBaseManager.Initialize();
         itemDataBase.Set_ItemDatabase();
         itemDataBase.Initialize();
         abilitiesDataBase.Set_AbilitiesDatabase();
@@ -173,7 +175,6 @@ public class GlobalControl : MonoBehaviour
     {
         playeProfile.EquipedGear = new List<Item>(4);
         playeProfile.EquipedItems = new List<Item>();
-        /*
         playeProfile.Inventory = new List<Item>();//Checar el inventario
         playeProfile.EquipedGear[(int)BodyZone.Head] = itemDataBase.ItemDB.Find(x => x.ItemID == 0);//Reemplazar por las ids de lo que se obtenga de la query del player
         playeProfile.EquipedGear[(int)BodyZone.Chest] = itemDataBase.ItemDB.Find(x => x.ItemID == 1);
@@ -184,7 +185,6 @@ public class GlobalControl : MonoBehaviour
         {
             playeProfile.EquipedGear[i] = itemDataBase.ItemDB.Find(x => x.ItemID == i);
         }
-        */
     }
 
     public void GetPlayerData()

@@ -19,6 +19,7 @@ public class PlayerData
     public int PvPCoin;
     public int PetCoin;
     public int PremiumCoin;
+    public Pet CompanionPet;
     public List<Item> EquipedGear;
     public List<Item> EquipedItems;
     public List<Pet> OwnedPets;

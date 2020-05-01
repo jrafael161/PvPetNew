@@ -4,72 +4,72 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
-
 public class PvPControl : MonoBehaviour
 {
     private bool active;
-    PlayerData Opo;
-    private List<PlayerData> Oponents;
-    
+    public static List<PlayerData> Oponents;
+    private string SelectedOponentBt;
+
+    private static PvPControl _instance;
+
+    public static PvPControl Instance
+    {
+        get { return _instance; }
+    }
+
+    void Awake()
+    {
+        _instance = this;
+    }
+
 
     void Start()
     {       
         Oponents = new List<PlayerData>();
-        Opo = new PlayerData();        
+                
         GetOponents();
-        SetOponents();
+        //SetOponents();
     }
 
-    public void SetOponents()//Pobla el contenedor de los oponentes con sus perfiles
+    public void GetOponents()
     {
+        DataBaseManager.Instance.GetOponentList(GlobalControl.Instance.playeProfile.Level.ToString());
+    }
+
+    public void GetOponentBattleTag(Text bt)
+    {
+        SelectedOponentBt = bt.text;
+    }
+
+    public void ShowOponents()
+    {
+        Oponents.Clear();
+        DataBaseManager.Instance.AssignOponents();
         GameObject OponentProfile, OponentProfileAux;
         Text[] Texto;
-        Sprite profile;
-
+        Image profileSprite;
         OponentProfile = GameObject.Find("OponentProfile");
         foreach (PlayerData Oponent in Oponents)
         {
             OponentProfileAux = Instantiate(OponentProfile) as GameObject;
             OponentProfileAux.SetActive(true);
             OponentProfileAux.transform.SetParent(OponentProfile.transform.parent, false);
-            profile = OponentProfileAux.GetComponentInChildren<Sprite>();
-            profile = Opo.PlayerSprite;
-            Texto = OponentProfileAux.GetComponentsInChildren<Text>();            
-            Texto[0].text = Opo.BattleTag.ToString();
-            Texto[1].text = Opo.Level.ToString();
-            Texto[2].text = Opo.HP.ToString();
-            Texto[3].text = Opo.Strength.ToString();
-            Texto[4].text = Opo.Speed.ToString();
-            Texto[5].text = Opo.Agility.ToString();
+            profileSprite = OponentProfileAux.GetComponentInChildren<Image>();
+            profileSprite.sprite = Oponent.PlayerSprite;
+            Texto = OponentProfileAux.GetComponentsInChildren<Text>();
+            Texto[0].text = Oponent.BattleTag.ToString();
+            Texto[1].text = Oponent.Level.ToString();
+            Texto[2].text = Oponent.HP.ToString();
+            Texto[3].text = Oponent.Strength.ToString();
+            Texto[4].text = Oponent.Speed.ToString();
+            Texto[5].text = Oponent.Agility.ToString();
         }
         Destroy(OponentProfile);
     }
 
-    public void GetOponents()
-    {
-        //Obtener oponentes con la query de firebase
-        for (int i = 0; i < 10; i++)
-        {
-            Random.InitState(i);
-            Opo.BattleTag = "Pepe";
-            Opo.HP = 100;//Random.Range(0,100);
-            Opo.XP = 1;
-            Opo.Level = 1;
-            Opo.Strength = Random.Range(0, 30);
-            Opo.Speed = Random.Range(0, 30);
-            Opo.Agility = Random.Range(0, 30);
-            Opo.Armor = 0;
-            Opo.PvPCoin = 50;
-            Opo.PetCoin = 25;
-            Opo.PremiumCoin = 1;
-            Oponents.Add(Opo);
-        }        
-
-    }
-
     public void TransitionToBattle()
     {
-        GlobalControl.Instance.oponentProfile = Oponents.Find(x => x.BattleTag==Opo.BattleTag);
+        GlobalControl.Instance.oponentProfile = Oponents.Find(x => x.BattleTag==SelectedOponentBt);
         SceneManager.LoadScene("CombatScreen");
     }
 

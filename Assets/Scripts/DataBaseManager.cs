@@ -10,13 +10,26 @@ using UnityEngine.SceneManagement;
 
 public class DataBaseManager : MonoBehaviour
 {
+    private static DataBaseManager _instance;
+
+    public static DataBaseManager Instance
+    {
+        get { return _instance; }
+    }
+
+    void Awake()
+    {
+        _instance = this;
+    }
+
     public static Firebase.Auth.FirebaseAuth auth;
     public static Firebase.Auth.FirebaseUser user;
 
     private string displayName;
     private bool signedIn;
     private bool registered;
-    
+    List<PlayerData> OponentList = new List<PlayerData>();
+
     public GameObject Panel;
     public GameObject Panel_character;
     public GameObject Panel_pet;
@@ -54,12 +67,21 @@ public class DataBaseManager : MonoBehaviour
         DB();
         Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
-        Checkforbattletag(textuserid.text.ToString());
+        if (GlobalControl.Instance.playeProfile.BattleTag==null)
+        {
+            Checkforbattletag(textuserid.text.ToString());
+        }
+        else
+        {
+            InitializeFirebase();
+        }
+        
     }
     void DB()
     {
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pvpet-f0b05.firebaseio.com/Players/Pa5UU16uCzt6X1E1DJ6a");
         reference = FirebaseDatabase.DefaultInstance.RootReference;
+        _instance = this;
     }
     void InitializeFirebase()
     {
@@ -242,19 +264,151 @@ public class DataBaseManager : MonoBehaviour
                         {
                             GlobalControl.Instance.playeProfile.EquipedGear.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(Equipedgear["Item" + i.ToString()].ToString())));
                         }
+
+                        Dictionary<string, System.Object> EquipedItems = (Dictionary<string, System.Object>)dictUser["EquipedItems"];
+                        for (int i = 0; i < EquipedItems.Count; i++)
+                        {
+                            GlobalControl.Instance.playeProfile.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedItems["Item" + i.ToString()].ToString())));
+                        }
+
+                        Dictionary<string, System.Object> Ownedpets = (Dictionary<string, System.Object>)dictUser["Pets"];                        
+                        foreach (KeyValuePair<string, System.Object> Ownedpetsaux in Ownedpets)
+                        {
+                            Pet AuxPet = new Pet();
+                            Dictionary<string, System.Object> Ownedpets_lv2 = (Dictionary<string, System.Object>)Ownedpets[Ownedpetsaux.Key];
+                            if (Ownedpetsaux.Key == dictUser["CompanionPet"].ToString())
+                            {
+                                GlobalControl.Instance.playeProfile.CompanionPet.PetName = Ownedpets_lv2["Name"].ToString();
+                                GlobalControl.Instance.playeProfile.CompanionPet.Level = int.Parse(Ownedpets_lv2["LVL"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.HP = float.Parse(Ownedpets_lv2["HP"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.Strength = int.Parse(Ownedpets_lv2["STR"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.Speed = int.Parse(Ownedpets_lv2["SPE"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.Agility = int.Parse(Ownedpets_lv2["AGY"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.Armor = int.Parse(Ownedpets_lv2["ARM"].ToString());
+                                GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
+                            }
+                            else
+                            {
+                                AuxPet.PetName = Ownedpets_lv2["Name"].ToString();
+                                AuxPet.Level = int.Parse(Ownedpets_lv2["LVL"].ToString());
+                                AuxPet.HP = float.Parse(Ownedpets_lv2["HP"].ToString());
+                                AuxPet.Strength = int.Parse(Ownedpets_lv2["STR"].ToString());
+                                AuxPet.Speed = int.Parse(Ownedpets_lv2["SPE"].ToString());
+                                AuxPet.Agility = int.Parse(Ownedpets_lv2["AGY"].ToString());
+                                AuxPet.Armor = int.Parse(Ownedpets_lv2["ARM"].ToString());
+                                GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
+                            }
+                        }
+                        GlobalControl.Instance.SavePlayerData();
                     }
                 }
                 if (!registered)
                 {
                     Debug.Log("sin battlet tag");
                     OpenPanel();
+                }
+            }
+        });
+    }
 
+    public void GetOponentList(string Nivel)
+    {        
+        FirebaseDatabase.DefaultInstance.GetReference("Nivel").Child("1").GetValueAsync().ContinueWith(task =>
+        {
+            DataSnapshot snapshot = task.Result;
+            Dictionary<string, System.Object> userids = (Dictionary<string, System.Object>)snapshot.Value;
+            if (snapshot.Exists)
+            {
+                foreach (KeyValuePair<string, System.Object> users in userids)
+                {
+                    PlayerData PlayerAux = new PlayerData();
+                    PlayerAux.Inventory = new List<Item>();
+                    PlayerAux.EquipedGear = new List<Item>();
+                    PlayerAux.EquipedItems = new List<Item>();
+                    PlayerAux.OwnedPets = new List<Pet>();
+                    Pet AuxPet = new Pet();
+                    string Enemyid = users.Key;
+                    Debug.Log("Enemyid:" + Enemyid);
+                    if (Enemyid == GlobalControl.Instance.playeProfile.PlayerID)
+                    {
+                        continue;
+                    }
+
+                    FirebaseDatabase.DefaultInstance.GetReference("users").Child(Enemyid).GetValueAsync().ContinueWith(task2 =>
+                    {
+                        DataSnapshot snapshot2 = task2.Result;
+                        Dictionary<string, System.Object> enemstats = (Dictionary<string, System.Object>)snapshot2.Value;
+                        if (snapshot2.Exists)
+                        {
+                            Dictionary<string, System.Object> EquipedGear = (Dictionary<string, System.Object>)enemstats["Equipedgear"];
+                            Dictionary<string, System.Object> EquipedItems = (Dictionary<string, System.Object>)enemstats["EquipedItems"];
+                            Dictionary<string, System.Object> Ownedpets = (Dictionary<string, System.Object>)enemstats["Pets"];
+
+                            PlayerAux.BattleTag = enemstats["username"].ToString();
+                            PlayerAux.PlayerID = Enemyid;
+                            switch (enemstats["profilepic"].ToString())
+                            {
+                                case "Profile_1":
+                                    PlayerAux.PlayerSprite = sprite1;
+                                    break;
+                                case "Profile_2":
+                                    PlayerAux.PlayerSprite = sprite2;
+                                    break;
+                                case "Profile_3":
+                                    PlayerAux.PlayerSprite = sprite3;
+                                    break;
+                                case "Profile_4":
+                                    PlayerAux.PlayerSprite = sprite4;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            PlayerAux.Level = int.Parse(enemstats["Level"].ToString());
+                            PlayerAux.HP = int.Parse(enemstats["HP"].ToString());
+                            PlayerAux.Strength = int.Parse(enemstats["Strength"].ToString());
+                            PlayerAux.Speed = int.Parse(enemstats["Speed"].ToString());
+                            PlayerAux.Agility = int.Parse(enemstats["Agility"].ToString());
+                            PlayerAux.Armor = int.Parse(enemstats["Armorv"].ToString());
+                            PlayerAux.critic_prob = 0.1f;
+                            foreach (KeyValuePair<string, System.Object> Ownedpetsaux in Ownedpets)
+                            {
+                                Dictionary<string, System.Object> Ownedpets_lv2 = (Dictionary<string, System.Object>)Ownedpets[Ownedpetsaux.Key];                                
+                                if (Ownedpetsaux.Key == enemstats["CompanionPet"].ToString())
+                                {
+                                    AuxPet.PetName = Ownedpets_lv2["Name"].ToString();
+                                    AuxPet.Level = int.Parse(Ownedpets_lv2["LVL"].ToString());
+                                    AuxPet.HP = float.Parse(Ownedpets_lv2["HP"].ToString());
+                                    AuxPet.Strength = int.Parse(Ownedpets_lv2["STR"].ToString());
+                                    AuxPet.Speed = int.Parse(Ownedpets_lv2["SPE"].ToString());
+                                    AuxPet.Agility = int.Parse(Ownedpets_lv2["AGY"].ToString());
+                                    AuxPet.Armor = int.Parse(Ownedpets_lv2["ARM"].ToString());
+                                }
+                            }
+                            PlayerAux.CompanionPet = AuxPet;
+                            for (int i = 0; i < EquipedGear.Count; i++)
+                            {
+                                PlayerAux.EquipedGear.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedGear["Item" + i.ToString()].ToString())));
+                            }
+                            for (int i = 0; i < EquipedItems.Count; i++)
+                            {
+                                PlayerAux.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedItems["Item" + i.ToString()].ToString())));
+                            }
+                            Debug.Log("----------------------------------------------------------------");
+                            OponentList.Add(PlayerAux);
+                        }                        
+                    });                    
                 }
             }
         });
 
         
     }
+
+    public void AssignOponents()
+    {
+        PvPControl.Oponents = OponentList;
+    }
+
     public void Btn_go()
     {
         string Userid;
