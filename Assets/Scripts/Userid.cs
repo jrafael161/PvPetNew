@@ -15,6 +15,6 @@ public class Userid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        userid.text = GameController.userid;
+        //userid.text = GameController.userid;
     }
 }

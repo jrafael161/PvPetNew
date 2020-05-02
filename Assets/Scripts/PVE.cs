@@ -22,6 +22,8 @@ public class PVE : MonoBehaviour
     public GameObject Panelact5;
     public GameObject Panelpreparativos;
     public GameObject Panelmision;
+    public GameObject Panelerror;
+
     public Transform dropdownMenu;
     public GameObject btncaptura;
 
@@ -154,17 +156,39 @@ public class PVE : MonoBehaviour
     //}
     public void preparativosmision()
     {
-        Panelpreparativos.SetActive(true);
-        Text Act = GameObject.Find("Canvas/pnl_preparativos/lbl_act_v").GetComponent<Text>();
-        Text Cap = GameObject.Find("Canvas/pnl_preparativos/lbl_cap_v").GetComponent<Text>();
-        Text Tit = GameObject.Find("Canvas/pnl_preparativos/lbl_tit_v").GetComponent<Text>();
-        Act.text = Acto.ToString();
-        Cap.text = Capitulo.ToString();
-        Tit.text = titulo;
-       
+        int misionesdisponibles = GlobalControl.Instance.playeProfile.AvailableMissions;
+        if(misionesdisponibles == 0)
+        {
+            if (GlobalControl.Instance.playeProfile.timeUntilMissionCooldown != System.DateTime.Now.ToString("yyyy/MM/dd"))
+            {
+                GlobalControl.Instance.playeProfile.AvailableMissions = 10;
+            }
+        }
+        if (misionesdisponibles > 0)
+        {
+            Panelpreparativos.SetActive(true);
+            Text Act = GameObject.Find("Canvas/pnl_preparativos/lbl_act_v").GetComponent<Text>();
+            Text Cap = GameObject.Find("Canvas/pnl_preparativos/lbl_cap_v").GetComponent<Text>();
+            Text Tit = GameObject.Find("Canvas/pnl_preparativos/lbl_tit_v").GetComponent<Text>();
+            Act.text = Acto.ToString();
+            Cap.text = Capitulo.ToString();
+            Tit.text = titulo;
+        }
+        else
+        {
+            Panelerror.SetActive(true);
+
+        }
     }
     public void gomision()
     {
+        int AvailableMissions = GlobalControl.Instance.playeProfile.AvailableMissions;
+        GlobalControl.Instance.playeProfile.AvailableMissions = AvailableMissions - 1;
+        if(AvailableMissions-1 == 0)
+        {
+            GlobalControl.Instance.playeProfile.timeUntilMissionCooldown = System.DateTime.Now.ToString("yyyy/MM/dd");
+        }
+        btncaptura.SetActive(false);
         Text Act = GameObject.Find("Canvas/pnl_preparativos/lbl_act_v").GetComponent<Text>();
         Text Cap = GameObject.Find("Canvas/pnl_preparativos/lbl_cap_v").GetComponent<Text>();
         Text Tit = GameObject.Find("Canvas/pnl_preparativos/lbl_tit_v").GetComponent<Text>();
@@ -313,6 +337,7 @@ public class PVE : MonoBehaviour
 
     public void capurarpet()
     {
+        Panelmision.SetActive(false);
         string uid = GameController.userid;
         Debug.Log(uid);
         Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
@@ -322,14 +347,33 @@ public class PVE : MonoBehaviour
         Text petagytxt = GameObject.Find("Canvas/pnl_mision/txt_agy_v").GetComponent<Text>();
         Text petarmtxt = GameObject.Find("Canvas/pnl_mision/txt_arm_v").GetComponent<Text>();
         string petname = petnametxt.text.ToString();
-        string pethp = petpvtxt.text.ToString();
-        string petstr = petstrtxt.text.ToString();
-        string petagy = petagytxt.text.ToString();
-        string petspe = petspetxt.text.ToString();
-        string petarm = petarmtxt.text.ToString();
-        Capturapet Capturapet = new Capturapet( pethp, petstr, petspe, petagy, petarm);
-        string json = JsonUtility.ToJson(Capturapet);
-        reference.Child("users/" + uid).Child("PETS").Child(petname).SetRawJsonValueAsync(json);
+        int pethp = int.Parse(petpvtxt.text.ToString());
+        int petstr = int.Parse(petstrtxt.text.ToString());
+        int petagy = int.Parse(petagytxt.text.ToString());
+        int petspe = int.Parse(petspetxt.text.ToString());
+        int petarm = int.Parse(petarmtxt.text.ToString());
+
+
+        
+        Pet AuxPet = new Pet();
+        AuxPet.PetName = petname;
+        AuxPet.Level = 1;
+        AuxPet.HP = pethp;
+        AuxPet.Strength = petstr;
+        AuxPet.Speed = petspe;
+        AuxPet.Agility = petagy;
+        AuxPet.Armor = petarm;
+
+
+
+        GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
+
+
+        //Capturapet Capturapet = new Capturapet( pethp, petstr, petspe, petagy, petarm);
+        //string json = JsonUtility.ToJson(Capturapet);
+        //reference.Child("users/" + uid).Child("PETS").Child(petname).SetRawJsonValueAsync(json);
+
+
     }
 
     public void exitmision()

@@ -247,6 +247,7 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.playeProfile.PvPCoin = int.Parse(dictUser["PvPCoin"].ToString());
                         GlobalControl.Instance.playeProfile.PetCoin = int.Parse(dictUser["PetCoin"].ToString());
                         GlobalControl.Instance.playeProfile.PremiumCoin = int.Parse(dictUser["PremiumCoin"].ToString());
+                        GlobalControl.Instance.playeProfile.AvailableMissions = int.Parse(dictUser["AvailableMissions"].ToString());
 
                         Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];
                         GlobalControl.Instance.playeProfile.Inventory = new List<Item>();//Checar el inventario
@@ -481,7 +482,7 @@ public class DataBaseManager : MonoBehaviour
         string userspe_pet = textSpeed_pet.text.ToString();
         string userarm_pet = textArmorv_pet.text.ToString();
 
-        User user = new User(name, profileimg, userhp, "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_1");
+        User user = new User(name, profileimg, userhp, "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_1","10","1990/01/01");
         string json = JsonUtility.ToJson(user);
         reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
         
@@ -493,9 +494,9 @@ public class DataBaseManager : MonoBehaviour
         json = JsonUtility.ToJson(inventory);
         reference.Child("users/" + userId).Child("Inventory").SetRawJsonValueAsync(json);
 
-        PveU PveU = new PveU("10");
-        json = JsonUtility.ToJson(PveU);
-        reference.Child("users/" + userId).Child("PVE").SetRawJsonValueAsync(json);
+        //PveU PveU = new PveU("10");
+        //json = JsonUtility.ToJson(PveU);
+        //reference.Child("users/" + userId).Child("PVE").SetRawJsonValueAsync(json);
 
         Equipedgear Equipedgear = new Equipedgear("0","1","2","3","4");
         json = JsonUtility.ToJson(Equipedgear);
@@ -737,18 +738,7 @@ public class Inventory
         this.item_4 = item4;
     }
 }
-public class PveU
-{
-    public string available;
 
-    public PveU()
-    {
-    }
-    public PveU(string available)
-    {
-        this.available = available;
-    }
-}
 public class Equipedgear
 {
     public string Item0;
@@ -785,11 +775,12 @@ public class User
     public string PetCoin;
     public string PremiumCoin;
     public string CompanionPet;
-
+    public string AvailableMissions;
+    public string TimeUntilMissionCooldown;
     public User()
     {
     }
-    public User(string username,string profilepic, string HP, string Level, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin,string CompanionPet)
+    public User(string username,string profilepic, string HP, string Level, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin,string CompanionPet, string AvailableMissions, string TimeUntilMissionCooldown)
     {
         this.username = username;
         this.profilepic = profilepic;
@@ -804,6 +795,8 @@ public class User
         this.PetCoin = PetCoin;
         this.PremiumCoin = PremiumCoin;
         this.CompanionPet = CompanionPet;
+        this.AvailableMissions = AvailableMissions;
+        this.TimeUntilMissionCooldown = TimeUntilMissionCooldown;
     }
 }
 

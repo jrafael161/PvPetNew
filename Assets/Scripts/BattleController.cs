@@ -34,8 +34,7 @@ public class BattleController : MonoBehaviour
     public bool GameType;//true->PvP,false->PvE
     List<Item> PlayerActives;
     List<Item> OponentActives;
-    public GameObject back_button;
-    public GameObject buttoncapture;
+    public GameObject back_or_capture_button;//back -> PvP, capture->
     public Text battlelog;
 
 
@@ -109,8 +108,15 @@ public class BattleController : MonoBehaviour
         }
         if (GameType)
         {
-            back_button.SetActive(true);
-        }        
+            back_or_capture_button.SetActive(true);
+        }
+        else
+        {
+            if (Winner)
+            {
+                back_or_capture_button.SetActive(true);
+            }
+        }       
         battlelog.text = battlelog.text + "Termino el combate\n";
         yield return true;
     }
