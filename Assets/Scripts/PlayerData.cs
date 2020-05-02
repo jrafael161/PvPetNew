@@ -21,7 +21,7 @@ public class PlayerData
     public float PetCoin;
     public float PremiumCoin;
     public int AvailableMissions;
-    public Time timeUntilMissionCooldown;
+    public string timeUntilMissionCooldown;
     public int CompaninoPetSlot;
     public Pet CompanionPet;
     public List<int> EquipedGearIDs;
