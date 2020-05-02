@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Net;
 using System.IO;
 
-public class CheckInternetConnection
+public class CheckInternetConnection: MonoBehaviour
 {
     private static CheckInternetConnection _instance;
 

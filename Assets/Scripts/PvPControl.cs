@@ -26,7 +26,6 @@ public class PvPControl : MonoBehaviour
     void Start()
     {       
         Oponents = new List<PlayerData>();
-                
         GetOponents();
         //SetOponents();
     }

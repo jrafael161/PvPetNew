@@ -74,7 +74,6 @@ public class ItemsDBmanager
             ItemDB.Add(Resources.Load("Items/Adamantite Sword") as Item);
             ItemDB.Add(Resources.Load("Items/Pet Sword") as Item);
             ItemDB.Add(Resources.Load("Items/Weapon Slash") as Item);
-           
         }
     }
 }

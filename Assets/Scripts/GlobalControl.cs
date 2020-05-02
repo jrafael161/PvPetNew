@@ -196,23 +196,67 @@ public class GlobalControl : MonoBehaviour
         playeProfile.Inventory = new List<Item>();//Checar el inventario
         playeProfile.CompanionPet = new Pet();
         playeProfile.OwnedPets = new List<Pet>();
-        /*
-        playeProfile.EquipedGear[(int)BodyZone.Head] = itemDataBase.ItemDB.Find(x => x.ItemID == 0);//Reemplazar por las ids de lo que se obtenga de la query del player
-        playeProfile.EquipedGear[(int)BodyZone.Chest] = itemDataBase.ItemDB.Find(x => x.ItemID == 1);
-        playeProfile.EquipedGear[(int)BodyZone.Arms] = itemDataBase.ItemDB.Find(x => x.ItemID == 2);
-        playeProfile.EquipedGear[(int)BodyZone.Foots] = itemDataBase.ItemDB.Find(x => x.ItemID == 3);
-        playeProfile.EquipedGear[(int)BodyZone.Weapon] = itemDataBase.ItemDB.Find(x => x.ItemID == 4);
-        for (int i = 0; i < playeProfile.EquipedGear.Count; i++)
-        {
-            playeProfile.EquipedGear[i] = itemDataBase.ItemDB.Find(x => x.ItemID == i);
-        }
-        */
     }
 
-    public void GetPlayerData()
-    {             
-        string json = File.ReadAllText(Application.dataPath + "/playerProfile.json");//Obtiene los datos del jugador desde un JASON
-        playeProfile = JsonUtility.FromJson<PlayerData>(json);//Setea los dato obtenidos
+    public bool GetPlayerData()
+    {
+        string json = null;
+        try
+        {
+            json = File.ReadAllText(Application.dataPath + "/playerProfile.json");
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        if (json == null)
+        {
+            return false;
+        }
+        else
+        {
+            playeProfile = JsonUtility.FromJson<PlayerData>(json);//Setea los dato obtenidos
+            if (playeProfile.EquipedGear == null)
+            {
+                playeProfile.EquipedGear = new List<Item>();
+                foreach (int itemID in playeProfile.EquipedGearIDs)
+                {
+                    playeProfile.EquipedGear.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
+                }
+            }
+            if (playeProfile.EquipedItems == null)
+            {
+                playeProfile.EquipedItems = new List<Item>();
+                foreach (int itemID in playeProfile.EquipedItemsIDs)
+                {
+                    playeProfile.EquipedItems.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
+                }
+            }
+            if (playeProfile.Inventory == null)
+            {
+                playeProfile.Inventory = new List<Item>();
+                foreach (int itemID in playeProfile.InventoryItemsIDs)
+                {                    
+                    playeProfile.Inventory.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
+                }
+            }
+            if (playeProfile.OwnedPets == null)
+            {
+                playeProfile.OwnedPets = new List<Pet>();
+                for (int i = 0; i < playeProfile.OwnedPetsIDs.Count; i++)
+                {
+                    Pet auxPet;
+                    string jsonPet = File.ReadAllText(Application.dataPath + "/pet_" + i + ".json");
+                    auxPet = JsonUtility.FromJson<Pet>(jsonPet);
+                    if (i == playeProfile.CompaninoPetSlot)
+                    {
+                        playeProfile.CompanionPet = auxPet;
+                    }
+                    playeProfile.OwnedPets.Add(auxPet);
+                }
+            }
+            return true;
+        }
     }
 
     public void SavePlayerData()
@@ -220,6 +264,15 @@ public class GlobalControl : MonoBehaviour
         string jsonstr = JsonUtility.ToJson(playeProfile);//Convierte los datos del jugador en un JASON
         File.WriteAllText(Application.dataPath + "/playerProfile.json", jsonstr);//Guarda los datos del jugador en un archivo JASON
     }   
+
+    public void SavePetsData()
+    {
+        for (int i = 0; i < playeProfile.OwnedPets.Count; i++)
+        {
+            string jsonstr = JsonUtility.ToJson(playeProfile.OwnedPets[i]);
+            File.WriteAllText(Application.dataPath + "/pet_" + i + ".json", jsonstr);
+        }        
+    }
 
     public PlayerData GetPlayer(bool whichPlayer)//1 -> Player, 0 -> Oponent
     {
