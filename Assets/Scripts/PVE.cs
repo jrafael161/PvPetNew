@@ -233,9 +233,11 @@ public class PVE : MonoBehaviour
 
         VO = (VO + Mcap) * MUL;
         LE = (LE + Mcap) * MUL;
+
         List<Itemc> items = new List<Itemc>();
         List<Pet> MissionPets = new List<Pet>();
         MissionPets = PetDBManager.Instance.PetDB.FindAll(x => x.Mision == Mcap);
+
         for (int i = 0; i < MissionPets.Count; i++)
         {
             string Petnombre = MissionPets[i].name;
@@ -336,8 +338,7 @@ public class PVE : MonoBehaviour
     }
 
     public void capurarpet()
-    {
-        Panelmision.SetActive(false);
+    {        
         string uid = GameController.userid;
         Debug.Log(uid);
         Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
@@ -346,15 +347,14 @@ public class PVE : MonoBehaviour
         Text petspetxt = GameObject.Find("Canvas/pnl_mision/txt_spe_v").GetComponent<Text>();
         Text petagytxt = GameObject.Find("Canvas/pnl_mision/txt_agy_v").GetComponent<Text>();
         Text petarmtxt = GameObject.Find("Canvas/pnl_mision/txt_arm_v").GetComponent<Text>();
+        
         string petname = petnametxt.text.ToString();
         int pethp = int.Parse(petpvtxt.text.ToString());
         int petstr = int.Parse(petstrtxt.text.ToString());
         int petagy = int.Parse(petagytxt.text.ToString());
         int petspe = int.Parse(petspetxt.text.ToString());
         int petarm = int.Parse(petarmtxt.text.ToString());
-
-
-        
+   
         Pet AuxPet = new Pet();
         AuxPet.PetName = petname;
         AuxPet.Level = 1;
@@ -364,16 +364,14 @@ public class PVE : MonoBehaviour
         AuxPet.Agility = petagy;
         AuxPet.Armor = petarm;
 
-
-
         GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
-
+        GlobalControl.Instance.SavePetsData();
 
         //Capturapet Capturapet = new Capturapet( pethp, petstr, petspe, petagy, petarm);
         //string json = JsonUtility.ToJson(Capturapet);
         //reference.Child("users/" + uid).Child("PETS").Child(petname).SetRawJsonValueAsync(json);
 
-
+        Panelmision.SetActive(false);
     }
 
     public void exitmision()

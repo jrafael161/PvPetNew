@@ -147,7 +147,7 @@ public class GlobalControl : MonoBehaviour
             }
             leveled = true;
         }
-        else
+        else if(player == null && player.LevelUpPoints == 0)
         {
             if (leveled)
             {
@@ -296,6 +296,7 @@ public class GlobalControl : MonoBehaviour
         player.PlayerID = playeProfile.PlayerID;
         player.BattleTag = playeProfile.BattleTag;
         player.Level = playeProfile.Level;
+        player.LevelUpPoints = playeProfile.LevelUpPoints;
         player.HP = playeProfile.HP;
         player.XP = playeProfile.XP;
         player.Strength = playeProfile.Strength;

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 497c1732bba94ed42ac5802339a3aeeb, type: 3}
-  m_Name: New Pet
+  m_Name: Rock golem
   m_EditorClassIdentifier: 
   Clase: 0
   Mision: 0
@@ -26,6 +26,7 @@ MonoBehaviour:
   ProbTormento: 0
   ProbPetHunter: 0
   Pt: 0
+  HP: 0
   Level: 1
   Strength: 3
   Speed: 1

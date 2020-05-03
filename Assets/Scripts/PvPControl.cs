@@ -69,7 +69,7 @@ public class PvPControl : MonoBehaviour
     public void TransitionToBattle()
     {
         GlobalControl.Instance.oponentProfile = Oponents.Find(x => x.BattleTag==SelectedOponentBt);
-        SceneManager.LoadScene("CombatScreen");
+        BattleController.Instance.StartBattle(true);
     }
 
     public void ActivatePreview()

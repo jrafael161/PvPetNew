@@ -260,6 +260,7 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.playeProfile.PetCoin = int.Parse(dictUser["PetCoin"].ToString());
                         GlobalControl.Instance.playeProfile.PremiumCoin = int.Parse(dictUser["PremiumCoin"].ToString());
                         GlobalControl.Instance.playeProfile.AvailableMissions = int.Parse(dictUser["AvailableMissions"].ToString());
+                        GlobalControl.Instance.playeProfile.timeUntilMissionCooldown = dictUser["TimeUntilMissionCooldown"].ToString();
 
                         GlobalControl.Instance.PrepareItems();//Crea las listas para poder hacer los add
                         Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];                        
@@ -308,6 +309,7 @@ public class DataBaseManager : MonoBehaviour
                         }
                         GlobalControl.Instance.SavePlayerData();
                         GlobalControl.Instance.SavePetsData();
+                        break;
                     }
                 }
                 if (!registered)
@@ -321,7 +323,7 @@ public class DataBaseManager : MonoBehaviour
 
     public void GetOponentList(string Nivel)
     {        
-        FirebaseDatabase.DefaultInstance.GetReference("Nivel").Child("1").GetValueAsync().ContinueWith(task =>
+        FirebaseDatabase.DefaultInstance.GetReference("Nivel").Child(Nivel).GetValueAsync().ContinueWith(task =>
         {
             DataSnapshot snapshot = task.Result;
             Dictionary<string, System.Object> userids = (Dictionary<string, System.Object>)snapshot.Value;

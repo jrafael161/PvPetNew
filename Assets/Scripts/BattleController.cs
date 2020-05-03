@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class BattleController : MonoBehaviour
 {
 
@@ -31,7 +32,7 @@ public class BattleController : MonoBehaviour
     public int OponentpassedTurns;
     float G_priority;
     public bool Winner;
-    public bool GameType;//true->PvP,false->PvE
+    public static bool GameType=false;//true->PvP,false->PvE
     List<Item> PlayerActives;
     List<Item> OponentActives;
     public GameObject back_or_capture_button;//back -> PvP, capture->
@@ -41,11 +42,18 @@ public class BattleController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Instancia creada"+_instance);   
+        Debug.Log("Instancia creada"+_instance);
+        if (GameType)
+        {
+            battlelog = GameObject.Find("BattleLog").GetComponentInChildren<Text>();
+        }        
     }
 
     public void StartBattle(bool gametype)
     {
+        if (gametype)
+            SceneManager.LoadScene("CombatScreen");
+                   
         GameType = gametype;        
         action_done = true;
         both_alive = true;
@@ -138,6 +146,7 @@ public class BattleController : MonoBehaviour
             GlobalControl.Instance.playeProfile.XP += XP;
             battlelog.text = battlelog.text + " " + "El jugador gano " + XP + " puntos de Xp\n";
         }
+        GlobalControl.Instance.CheckIfLevelUP();
     }
 
     void set_turns(float priority)

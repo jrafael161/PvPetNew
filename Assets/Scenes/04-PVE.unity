@@ -4248,7 +4248,6 @@ MonoBehaviour:
   PlayerpassedTurns: 0
   OponentpassedTurns: 0
   Winner: 0
-  GameType: 0
   back_or_capture_button: {fileID: 2062976562}
   battlelog: {fileID: 787656590}
 --- !u!4 &627283420
