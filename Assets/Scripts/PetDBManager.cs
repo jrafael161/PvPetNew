@@ -19,7 +19,7 @@ public class PetDBManager
     
     public void Set_PetDatabase()
     {
-        for (int i = 0; PetDB.Count < 155; i++)
+        for (int i = 0; PetDB.Count < 160; i++)
         {
             PetDB.Add(Resources.Load("Pets/Bull") as Pet);
             PetDB.Add(Resources.Load("Pets/Lunar Butterfly") as Pet);
@@ -177,6 +177,22 @@ public class PetDBManager
             PetDB.Add(Resources.Load("Pets/King Yoggoth") as Pet);
             PetDB.Add(Resources.Load("Pets/Queen Yoggoth") as Pet);
             PetDB.Add(Resources.Load("Pets/Abomination Gazer") as Pet);
+            PetDB.Add(Resources.Load("Pets/Rock golem") as Pet);
+            PetDB.Add(Resources.Load("Pets/Toucan Panther") as Pet);
+            PetDB.Add(Resources.Load("Pets/Gunblin") as Pet);
+            PetDB.Add(Resources.Load("Pets/Mimic Sword") as Pet);
         }
+    }
+
+    public Pet InitializePet(string PetName,int hp ,int str, int agy, int spe, int arm)
+    {
+        Pet auxPet;
+        auxPet = PetDB.Find(x => x.PetName == PetName);
+        auxPet.HP = hp;
+        auxPet.Strength = str;
+        auxPet.Agility = agy;
+        auxPet.Speed = spe;
+        auxPet.Armor = arm;
+        return auxPet;
     }
 }

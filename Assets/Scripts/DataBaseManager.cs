@@ -56,7 +56,6 @@ public class DataBaseManager : MonoBehaviour
 
 
     public GameObject profilepic;
-    public GlobalControl gc;
 
     [SerializeField]
     private InputField Battletag = null;
@@ -64,18 +63,31 @@ public class DataBaseManager : MonoBehaviour
 
     void Start()
     {
-        DB();
-        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-        textuserid.text = GameController.userid;
-        if (GlobalControl.Instance.playeProfile.BattleTag==null)
+        if (CheckInternetConnection.Instance.Check())
         {
-            Checkforbattletag(textuserid.text.ToString());
+            DB();
+            Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
+            textuserid.text = GameController.userid;
+            if (GlobalControl.Instance.playeProfile.BattleTag == null)
+            {
+                Checkforbattletag(textuserid.text.ToString());
+            }
+            else
+            {
+                MainScene.Instance.InitializeScene();
+            }
         }
         else
         {
-            InitializeFirebase();
+            if (GlobalControl.Instance.GetPlayerData())
+            {
+                MainScene.Instance.InitializeScene();
+            }
+            else
+            {
+                writeNewUserOffline();
+            }
         }
-        
     }
     void DB()
     {
@@ -248,10 +260,10 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.playeProfile.PetCoin = int.Parse(dictUser["PetCoin"].ToString());
                         GlobalControl.Instance.playeProfile.PremiumCoin = int.Parse(dictUser["PremiumCoin"].ToString());
                         GlobalControl.Instance.playeProfile.AvailableMissions = int.Parse(dictUser["AvailableMissions"].ToString());
+                        GlobalControl.Instance.playeProfile.timeUntilMissionCooldown = dictUser["TimeUntilMissionCooldown"].ToString();
 
-                        Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];
-                        GlobalControl.Instance.playeProfile.Inventory = new List<Item>();//Checar el inventario
-
+                        GlobalControl.Instance.PrepareItems();//Crea las listas para poder hacer los add
+                        Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];                        
 
                         foreach (KeyValuePair<string, System.Object> InventoryItems in Inventory)
                         {
@@ -260,7 +272,6 @@ public class DataBaseManager : MonoBehaviour
                         }
 
                         Dictionary<string, System.Object> Equipedgear = (Dictionary<string, System.Object>)dictUser["Equipedgear"];
-                        GlobalControl.Instance.PrepareItems();
                         for (int i = 0; i < 5; i++)
                         {
                             GlobalControl.Instance.playeProfile.EquipedGear.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(Equipedgear["Item" + i.ToString()].ToString())));
@@ -286,10 +297,7 @@ public class DataBaseManager : MonoBehaviour
                                 GlobalControl.Instance.playeProfile.CompanionPet.Speed = int.Parse(Ownedpets_lv2["SPE"].ToString());
                                 GlobalControl.Instance.playeProfile.CompanionPet.Agility = int.Parse(Ownedpets_lv2["AGY"].ToString());
                                 GlobalControl.Instance.playeProfile.CompanionPet.Armor = int.Parse(Ownedpets_lv2["ARM"].ToString());
-                                GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
                             }
-                            else
-                            {
                                 AuxPet.PetName = Ownedpets_lv2["Name"].ToString();
                                 AuxPet.Level = int.Parse(Ownedpets_lv2["LVL"].ToString());
                                 AuxPet.HP = float.Parse(Ownedpets_lv2["HP"].ToString());
@@ -298,9 +306,10 @@ public class DataBaseManager : MonoBehaviour
                                 AuxPet.Agility = int.Parse(Ownedpets_lv2["AGY"].ToString());
                                 AuxPet.Armor = int.Parse(Ownedpets_lv2["ARM"].ToString());
                                 GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
-                            }
                         }
                         GlobalControl.Instance.SavePlayerData();
+                        GlobalControl.Instance.SavePetsData();
+                        break;
                     }
                 }
                 if (!registered)
@@ -314,7 +323,7 @@ public class DataBaseManager : MonoBehaviour
 
     public void GetOponentList(string Nivel)
     {        
-        FirebaseDatabase.DefaultInstance.GetReference("Nivel").Child("1").GetValueAsync().ContinueWith(task =>
+        FirebaseDatabase.DefaultInstance.GetReference("Nivel").Child(Nivel).GetValueAsync().ContinueWith(task =>
         {
             DataSnapshot snapshot = task.Result;
             Dictionary<string, System.Object> userids = (Dictionary<string, System.Object>)snapshot.Value;
@@ -424,11 +433,13 @@ public class DataBaseManager : MonoBehaviour
 
 
     }
+
     public void OpenPanel()
     {
         bool isActive = Panel.activeSelf;
         Panel.SetActive(true);
     }
+
     private void writeNewUser(string userId, string name)
     {
         bool profile1 = img1.activeSelf;
@@ -511,6 +522,122 @@ public class DataBaseManager : MonoBehaviour
         reference.Child("Nivel").Child("1").Child(userId).SetRawJsonValueAsync(json);
 
     }
+
+    private void writeNewUserOffline()
+    {
+        bool profile1 = img1.activeSelf;
+        bool profile2 = img2.activeSelf;
+        bool profile3 = img3.activeSelf;
+        bool profile4 = img4.activeSelf;
+        bool pet1 = imgpet1.activeSelf;
+        bool pet2 = imgpet2.activeSelf;
+        bool pet3 = imgpet3.activeSelf;
+        bool pet4 = imgpet4.activeSelf;
+        string profileimg = "Profile_1";
+        string initialpet = "Mimic Sword";
+        Text textHP = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_pv_v").GetComponent<Text>();
+        Text textStrength = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_str_v").GetComponent<Text>();
+        Text textAgility = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_agy_v").GetComponent<Text>();
+        Text textSpeed = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_spe_v").GetComponent<Text>();
+        Text textArmorv = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_arm_v").GetComponent<Text>();
+        Text textHP_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_pv_v_pet").GetComponent<Text>();
+        Text textStrength_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_str_v_pet").GetComponent<Text>();
+        Text textAgility_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_agy_v_pet").GetComponent<Text>();
+        Text textSpeed_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_spe_v_pet").GetComponent<Text>();
+        Text textArmorv_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_arm_v_pet").GetComponent<Text>();
+
+        if (profile1)
+            profileimg = "Profile_1";
+        if (profile2)
+            profileimg = "Profile_2";
+        if (profile3)
+            profileimg = "Profile_3";
+        if (profile4)
+            profileimg = "Profile_4";
+
+        if (pet1)
+            initialpet = "Mimic Sword";
+        if (pet2)
+            initialpet = "Toucan Panther";
+        if (pet3)
+            initialpet = "Gunblin";
+        if (pet4)
+            initialpet = "Rock golem";
+
+        string userhp = textHP.text.ToString();
+        string userstr = textStrength.text.ToString();
+        string useragy = textAgility.text.ToString();
+        string userspe = textSpeed.text.ToString();
+        string userarm = textArmorv.text.ToString();
+
+        string userhp_pet = textHP_pet.text.ToString();
+        string userstr_pet = textStrength_pet.text.ToString();
+        string useragy_pet = textAgility_pet.text.ToString();
+        string userspe_pet = textSpeed_pet.text.ToString();
+        string userarm_pet = textArmorv_pet.text.ToString();
+
+        GlobalControl.Instance.playeProfile.PlayerID = "0";
+        GlobalControl.Instance.playeProfile.BattleTag = name;
+        switch (profileimg)
+        {
+            case "Profile_1":
+                GlobalControl.Instance.playeProfile.PlayerSprite = img1.GetComponentInChildren<Image>().sprite;
+                break;
+            case "Profile_2":
+                GlobalControl.Instance.playeProfile.PlayerSprite = img2.GetComponentInChildren<Image>().sprite;
+                break;
+            case "Profile_3":
+                GlobalControl.Instance.playeProfile.PlayerSprite = img3.GetComponentInChildren<Image>().sprite;
+                break;
+            case "Profile_4":
+                GlobalControl.Instance.playeProfile.PlayerSprite = img4.GetComponentInChildren<Image>().sprite;
+                break;
+            default:
+                break;
+        }
+
+        GlobalControl.Instance.playeProfile.Level = 5;
+        GlobalControl.Instance.playeProfile.AvailableMissions = 10;
+        GlobalControl.Instance.playeProfile.HP = int.Parse(userhp);
+        GlobalControl.Instance.playeProfile.XP = 0;
+        GlobalControl.Instance.playeProfile.LevelUpPoints = 5;//agregar al write new user
+        GlobalControl.Instance.playeProfile.Strength = int.Parse(userstr);
+        GlobalControl.Instance.playeProfile.Speed = int.Parse(userspe);
+        GlobalControl.Instance.playeProfile.Agility = int.Parse(useragy);
+        GlobalControl.Instance.playeProfile.Armor = int.Parse(userarm);
+        GlobalControl.Instance.playeProfile.critic_prob = 0.1f;
+        GlobalControl.Instance.playeProfile.PvPCoin = 0;
+        GlobalControl.Instance.playeProfile.PetCoin = 0;
+        GlobalControl.Instance.playeProfile.PremiumCoin = 0;
+        GlobalControl.Instance.PrepareItems();                
+
+        for (int i = 0; i < 5; i++)//Se seteal el inventario
+        {
+            GlobalControl.Instance.playeProfile.Inventory.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == i));
+        }
+
+        //Se equipa la armadura
+        GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Head] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 0);
+        GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Chest] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 1);
+        GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Arms] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 2);
+        GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Foots] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 3);
+        GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Weapon] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 4);
+
+        //Se equipan los items
+        GlobalControl.Instance.playeProfile.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 52));
+
+        //Se asigna la mascota
+        Pet auxPet = PetDBManager.Instance.PetDB.Find(x => x.PetName == initialpet);
+        auxPet.HP = int.Parse(userhp_pet);
+        auxPet.Strength = int.Parse(userstr_pet);
+        auxPet.Agility = int.Parse(useragy_pet);
+        auxPet.Speed = int.Parse(userspe_pet);
+        auxPet.Armor = int.Parse(userarm_pet);
+        GlobalControl.Instance.playeProfile.CompanionPet = auxPet;
+
+        GlobalControl.Instance.SavePlayerData();
+    }
+
     public void SignOut()
     {
         SceneManager.LoadScene("00-Login");

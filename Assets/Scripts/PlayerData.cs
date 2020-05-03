@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerData
 {    
-    public Sprite PlayerSprite;
+    public Sprite PlayerSprite;//
     public string PlayerID;
     public string BattleTag;
     public float Level;
@@ -22,9 +22,15 @@ public class PlayerData
     public float PremiumCoin;
     public int AvailableMissions;
     public string timeUntilMissionCooldown;
+    public int CompaninoPetSlot;
     public Pet CompanionPet;
+    public List<int> EquipedGearIDs;
     public List<Item> EquipedGear;
+    public List<int> EquipedItemsIDs;
     public List<Item> EquipedItems;
+    public List<int> OwnedPetsIDs;
+    public Dictionary<string, int> PetStats;
     public List<Pet> OwnedPets;
-    public List<Item> Inventory;
+    public List<int> InventoryItemsIDs;
+    public List<Item> Inventory;   
 }
