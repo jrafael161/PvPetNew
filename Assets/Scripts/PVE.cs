@@ -49,9 +49,6 @@ public class PVE : MonoBehaviour
         //GlobalControl gcReal = GameObject.FindObjectOfType<GlobalControl>();
         //gc = gcReal.get_Instance();
     }
-
-  
-   
     public void showact1()
     {
         Panelact1.SetActive(true);
@@ -157,7 +154,7 @@ public class PVE : MonoBehaviour
     public void preparativosmision()
     {
         int misionesdisponibles = GlobalControl.Instance.playeProfile.AvailableMissions;
-        if(misionesdisponibles == 0)
+        if (misionesdisponibles == 0)
         {
             if (GlobalControl.Instance.playeProfile.timeUntilMissionCooldown != System.DateTime.Now.ToString("yyyy/MM/dd"))
             {
@@ -167,9 +164,15 @@ public class PVE : MonoBehaviour
         if (misionesdisponibles > 0)
         {
             Panelpreparativos.SetActive(true);
-            Text Act = GameObject.Find("Canvas/pnl_preparativos/lbl_act_v").GetComponent<Text>();
-            Text Cap = GameObject.Find("Canvas/pnl_preparativos/lbl_cap_v").GetComponent<Text>();
-            Text Tit = GameObject.Find("Canvas/pnl_preparativos/lbl_tit_v").GetComponent<Text>();
+            if (Panelpreparativos != null)
+            {
+                Animator animator = Panelpreparativos.GetComponent<Animator>();
+                if(animator != null)
+                    animator.SetBool("state_preparacion", true);
+            }
+            Text Act = GameObject.Find("Canvas/pnl_preparativos/bg_preparativos/lbl_act_v").GetComponent<Text>();
+            Text Cap = GameObject.Find("Canvas/pnl_preparativos/bg_preparativos/lbl_cap_v").GetComponent<Text>();
+            Text Tit = GameObject.Find("Canvas/pnl_preparativos/bg_preparativos/lbl_tit_v").GetComponent<Text>();
             Act.text = Acto.ToString();
             Cap.text = Capitulo.ToString();
             Tit.text = titulo;
@@ -177,21 +180,28 @@ public class PVE : MonoBehaviour
         else
         {
             Panelerror.SetActive(true);
-
         }
     }
     public void gomision()
     {
+        //Panelpreparativos.SetActive(false);
+        //animacion de entrada de la mision
+        Panelmision.SetActive(true);
+        if (Panelmision != null)
+        {
+            Animator animator = Panelmision.GetComponent<Animator>();
+            if (animator != null)
+                animator.SetBool("state_gomision", true);
+        }
         int AvailableMissions = GlobalControl.Instance.playeProfile.AvailableMissions;
         GlobalControl.Instance.playeProfile.AvailableMissions = AvailableMissions - 1;
-        if(AvailableMissions-1 == 0)
+        if (AvailableMissions - 1 == 0)
         {
             GlobalControl.Instance.playeProfile.timeUntilMissionCooldown = System.DateTime.Now.ToString("yyyy/MM/dd");
         }
-        btncaptura.SetActive(false);
-        Text Act = GameObject.Find("Canvas/pnl_preparativos/lbl_act_v").GetComponent<Text>();
-        Text Cap = GameObject.Find("Canvas/pnl_preparativos/lbl_cap_v").GetComponent<Text>();
-        Text Tit = GameObject.Find("Canvas/pnl_preparativos/lbl_tit_v").GetComponent<Text>();
+        Text Act = GameObject.Find("Canvas/pnl_preparativos/bg_preparativos/lbl_act_v").GetComponent<Text>();
+        Text Cap = GameObject.Find("Canvas/pnl_preparativos/bg_preparativos/lbl_cap_v").GetComponent<Text>();
+        Text Tit = GameObject.Find("Canvas/pnl_preparativos/bg_preparativos/lbl_tit_v").GetComponent<Text>();
 
         int Mcla = int.Parse(Act.text);
         int Mcap = int.Parse(Cap.text);
@@ -199,14 +209,15 @@ public class PVE : MonoBehaviour
         int LE = 0;
         int MUL = 0;
         int ddDificultad = dropdownMenu.GetComponent<Dropdown>().value;
+
         List<Dropdown.OptionData> menuDificultad = dropdownMenu.GetComponent<Dropdown>().options;
         string Diff = menuDificultad[ddDificultad].text;
-        
+
         Debug.Log(Diff);
         switch (Diff)
         {
             case "Facil":
-                LE = 1;VO = 10; MUL = 1;
+                LE = 1; VO = 10; MUL = 1;
                 break;
             case "Normal":
                 LE = 10; VO = 20; MUL = 2;
@@ -289,12 +300,12 @@ public class PVE : MonoBehaviour
 
         petimg.GetComponent<Image>().sprite = Petichooseyou.PetSprite;
         Panelmision.SetActive(true);
-        Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
-        Text petpvtxt = GameObject.Find("Canvas/pnl_mision/txt_pv_v").GetComponent<Text>();
-        Text petstrtxt = GameObject.Find("Canvas/pnl_mision/txt_str_v").GetComponent<Text>();
-        Text petspetxt = GameObject.Find("Canvas/pnl_mision/txt_spe_v").GetComponent<Text>();
-        Text petagytxt = GameObject.Find("Canvas/pnl_mision/txt_agy_v").GetComponent<Text>();
-        Text petarmtxt = GameObject.Find("Canvas/pnl_mision/txt_arm_v").GetComponent<Text>();
+        Text petnametxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_name").GetComponent<Text>();
+        Text petpvtxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_pv_v").GetComponent<Text>();
+        Text petstrtxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_str_v").GetComponent<Text>();
+        Text petspetxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_spe_v").GetComponent<Text>();
+        Text petagytxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_agy_v").GetComponent<Text>();
+        Text petarmtxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_arm_v").GetComponent<Text>();
         petnametxt.text = Petichooseyou.name;
         Debug.Log(Petichooseyou.type);
         if (Petichooseyou.type == "Normal")
@@ -332,21 +343,19 @@ public class PVE : MonoBehaviour
             GlobalControl.Instance.oponentProfile.EquipedGear.Add(null);
         }
         GlobalControl.Instance.oponentProfile.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 50);
-
         BattleController.Instance.StartBattle(false);
-        Panelpreparativos.SetActive(false);
     }
 
     public void capurarpet()
     {        
         string uid = GameController.userid;
         Debug.Log(uid);
-        Text petnametxt = GameObject.Find("Canvas/pnl_mision/txt_name").GetComponent<Text>();
-        Text petpvtxt = GameObject.Find("Canvas/pnl_mision/txt_pv_v").GetComponent<Text>();
-        Text petstrtxt = GameObject.Find("Canvas/pnl_mision/txt_str_v").GetComponent<Text>();
-        Text petspetxt = GameObject.Find("Canvas/pnl_mision/txt_spe_v").GetComponent<Text>();
-        Text petagytxt = GameObject.Find("Canvas/pnl_mision/txt_agy_v").GetComponent<Text>();
-        Text petarmtxt = GameObject.Find("Canvas/pnl_mision/txt_arm_v").GetComponent<Text>();
+        Text petnametxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_name").GetComponent<Text>();
+        Text petpvtxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_pv_v").GetComponent<Text>();
+        Text petstrtxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_str_v").GetComponent<Text>();
+        Text petspetxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_spe_v").GetComponent<Text>();
+        Text petagytxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_agy_v").GetComponent<Text>();
+        Text petarmtxt = GameObject.Find("Canvas/pnl_mision/bg_mision/txt_arm_v").GetComponent<Text>();
         
         string petname = petnametxt.text.ToString();
         int pethp = int.Parse(petpvtxt.text.ToString());
@@ -366,17 +375,17 @@ public class PVE : MonoBehaviour
 
         GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
         GlobalControl.Instance.SavePetsData();
-
         //Capturapet Capturapet = new Capturapet( pethp, petstr, petspe, petagy, petarm);
         //string json = JsonUtility.ToJson(Capturapet);
         //reference.Child("users/" + uid).Child("PETS").Child(petname).SetRawJsonValueAsync(json);
-
         Panelmision.SetActive(false);
+        Panelpreparativos.SetActive(false);
     }
 
     public void exitmision()
     {
         Panelmision.SetActive(false);
+        Panelpreparativos.SetActive(false);
     }
 
 

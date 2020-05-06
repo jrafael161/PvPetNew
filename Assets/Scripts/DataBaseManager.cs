@@ -34,6 +34,10 @@ public class DataBaseManager : MonoBehaviour
     public GameObject Panel_character;
     public GameObject Panel_pet;
 
+    public GameObject Animation_battletag;
+    public GameObject Animation_character;
+    public GameObject Animation_pet;
+
     public GameObject img1;
     public GameObject img2;
     public GameObject img3;
@@ -95,12 +99,12 @@ public class DataBaseManager : MonoBehaviour
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         _instance = this;
     }
-    void InitializeFirebase()
+    /*void InitializeFirebase()
     {
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         auth.StateChanged += AuthStateChanged;
         AuthStateChanged(this, null);
-    }
+    }*/
     void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
         Checkforbattletag(GameController.userid);
@@ -108,7 +112,13 @@ public class DataBaseManager : MonoBehaviour
     
     public void Opencharacter()
     {
-        Panel_character.SetActive(true);
+        Panel_character.SetActive(true); 
+        if (Animation_character != null)
+        {
+            Animator animator = Animation_character.GetComponent<Animator>();
+            if (animator != null)
+                animator.SetInteger("state_character", 1);
+        }
     }
     public void Openpet()
     {
@@ -116,7 +126,12 @@ public class DataBaseManager : MonoBehaviour
     }
     public void Closecharacter()
     {
-        Panel_character.SetActive(false);
+        if (Animation_character != null)
+        {
+            Animator animator = Animation_character.GetComponent<Animator>();
+            if (animator != null)
+                animator.SetInteger("state_character", 2);
+        }
     }
     public void Closepet()
     {

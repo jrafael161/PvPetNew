@@ -85,7 +85,6 @@ public class AuthManager : MonoBehaviour
     {
         string email = inputFieldEmail.text;
         string password = inputFieldPassword.text;
-
         auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             Firebase.Auth.FirebaseUser newUser = task.Result;
@@ -93,7 +92,6 @@ public class AuthManager : MonoBehaviour
             saveuserid(newUser.UserId);
             SceneManager.LoadScene("01-Main");
         });
-        
     }   
 
     void saveuserid(string userid)
