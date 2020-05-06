@@ -241,9 +241,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 731859235}
   Panel_character: {fileID: 82352043}
-  Panel_pet: {fileID: 0}
+  Panel_pet: {fileID: 2136034344}
+  Animation_battletag: {fileID: 330266175}
+  Animation_character: {fileID: 2027783113}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 0}
   img2: {fileID: 0}
   img3: {fileID: 0}
@@ -513,6 +516,7 @@ GameObject:
   - component: {fileID: 82352044}
   - component: {fileID: 82352046}
   - component: {fileID: 82352045}
+  - component: {fileID: 82352047}
   m_Layer: 0
   m_Name: Pn_Character
   m_TagString: Untagged
@@ -532,15 +536,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2027783114}
-  - {fileID: 1837448843}
-  - {fileID: 870414396}
   - {fileID: 1979528022}
+  - {fileID: 1837448843}
   m_Father: {fileID: 1635956135}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.07501221, y: 1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &82352045
@@ -556,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -578,6 +581,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82352043}
   m_CullTransparentMesh: 0
+--- !u!95 &82352047
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82352043}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 32b8a3e54c45ca14fa32bbf90909894b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &110462177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,9 +1091,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 731859235}
   Panel_character: {fileID: 0}
   Panel_pet: {fileID: 0}
+  Animation_battletag: {fileID: 0}
+  Animation_character: {fileID: 0}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 816463199}
   img2: {fileID: 799676762}
   img3: {fileID: 767620218}
@@ -1297,8 +1322,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Panel: {fileID: 731859235}
-  Panel_character: {fileID: 0}
-  Panel_pet: {fileID: 0}
+  Panel_character: {fileID: 82352043}
+  Panel_pet: {fileID: 2136034344}
+  Animation_battletag: {fileID: 330266175}
+  Animation_character: {fileID: 2027783113}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 0}
   img2: {fileID: 0}
   img3: {fileID: 0}
@@ -1458,6 +1486,9 @@ MonoBehaviour:
   Panel: {fileID: 731859235}
   Panel_character: {fileID: 82352043}
   Panel_pet: {fileID: 2136034344}
+  Animation_battletag: {fileID: 0}
+  Animation_character: {fileID: 0}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 932808383}
   img2: {fileID: 652069830}
   img3: {fileID: 301589629}
@@ -1528,9 +1559,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 731859235}
   Panel_character: {fileID: 0}
   Panel_pet: {fileID: 0}
+  Animation_battletag: {fileID: 0}
+  Animation_character: {fileID: 0}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 932808383}
   img2: {fileID: 652069830}
   img3: {fileID: 301589629}
@@ -2119,6 +2153,7 @@ GameObject:
   - component: {fileID: 330266176}
   - component: {fileID: 330266178}
   - component: {fileID: 330266177}
+  - component: {fileID: 330266179}
   m_Layer: 0
   m_Name: bg_1
   m_TagString: Untagged
@@ -2180,6 +2215,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330266175}
   m_CullTransparentMesh: 0
+--- !u!95 &330266179
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330266175}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 297fc435877d1e24ba1d0a745190a638, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &342415343
 GameObject:
   m_ObjectHideFlags: 0
@@ -3694,7 +3748,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870414395}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3708,12 +3762,12 @@ RectTransform:
   - {fileID: 1720980644}
   - {fileID: 2139092073}
   - {fileID: 1977654039}
-  m_Father: {fileID: 82352044}
-  m_RootOrder: 2
+  m_Father: {fileID: 2027783114}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000024828, y: 508.1}
+  m_AnchoredPosition: {x: -0.00003620716, y: 460.75003}
   m_SizeDelta: {x: 780, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &870414397
@@ -4220,9 +4274,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 731859235}
   Panel_character: {fileID: 0}
   Panel_pet: {fileID: 0}
+  Animation_battletag: {fileID: 0}
+  Animation_character: {fileID: 0}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 816463199}
   img2: {fileID: 799676762}
   img3: {fileID: 767620218}
@@ -4853,6 +4910,9 @@ MonoBehaviour:
   Panel: {fileID: 0}
   Panel_character: {fileID: 0}
   Panel_pet: {fileID: 0}
+  Animation_battletag: {fileID: 0}
+  Animation_character: {fileID: 0}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 0}
   img2: {fileID: 0}
   img3: {fileID: 0}
@@ -5238,9 +5298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 731859235}
   Panel_character: {fileID: 0}
   Panel_pet: {fileID: 0}
+  Animation_battletag: {fileID: 0}
+  Animation_character: {fileID: 0}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 932808383}
   img2: {fileID: 652069830}
   img3: {fileID: 301589629}
@@ -6073,9 +6136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 731859235}
   Panel_character: {fileID: 0}
   Panel_pet: {fileID: 0}
+  Animation_battletag: {fileID: 0}
+  Animation_character: {fileID: 0}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 932808383}
   img2: {fileID: 652069830}
   img3: {fileID: 301589629}
@@ -6232,9 +6298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 731859235}
   Panel_character: {fileID: 0}
   Panel_pet: {fileID: 0}
+  Animation_battletag: {fileID: 0}
+  Animation_character: {fileID: 0}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 932808383}
   img2: {fileID: 652069830}
   img3: {fileID: 301589629}
@@ -6683,9 +6752,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 731859235}
   Panel_character: {fileID: 0}
   Panel_pet: {fileID: 0}
+  Animation_battletag: {fileID: 0}
+  Animation_character: {fileID: 0}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 816463199}
   img2: {fileID: 799676762}
   img3: {fileID: 767620218}
@@ -7424,8 +7496,9 @@ GameObject:
   - component: {fileID: 1800390175}
   - component: {fileID: 1800390177}
   - component: {fileID: 1800390176}
+  - component: {fileID: 1800390178}
   m_Layer: 0
-  m_Name: bg_character
+  m_Name: bg_pet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7450,12 +7523,13 @@ RectTransform:
   - {fileID: 767620219}
   - {fileID: 1301159144}
   - {fileID: 816463200}
+  - {fileID: 2116107510}
   m_Father: {fileID: 2136034345}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035, y: 47.349976}
+  m_AnchoredPosition: {x: 1062, y: 0}
   m_SizeDelta: {x: 1080.1, y: 1525.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1800390176
@@ -7491,6 +7565,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800390174}
   m_CullTransparentMesh: 0
+--- !u!95 &1800390178
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800390174}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7acaeb2f0eecfbf4f8744a223f56f8c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1804511231
 GameObject:
   m_ObjectHideFlags: 0
@@ -7872,13 +7965,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837448842}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 841976402}
   m_Father: {fileID: 82352044}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7983,9 +8076,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
-  Panel_character: {fileID: 0}
+  Panel: {fileID: 731859235}
+  Panel_character: {fileID: 82352043}
   Panel_pet: {fileID: 2136034344}
+  Animation_battletag: {fileID: 330266175}
+  Animation_character: {fileID: 2027783113}
+  Animation_pet: {fileID: 1800390174}
   img1: {fileID: 0}
   img2: {fileID: 0}
   img3: {fileID: 0}
@@ -8133,9 +8229,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 731859235}
   Panel_character: {fileID: 0}
   Panel_pet: {fileID: 0}
+  Animation_battletag: {fileID: 0}
+  Animation_character: {fileID: 0}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 816463199}
   img2: {fileID: 799676762}
   img3: {fileID: 767620218}
@@ -8350,7 +8449,7 @@ RectTransform:
   m_Children:
   - {fileID: 1237089305}
   m_Father: {fileID: 82352044}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8369,9 +8468,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 731859235}
   Panel_character: {fileID: 82352043}
   Panel_pet: {fileID: 2136034344}
+  Animation_battletag: {fileID: 330266175}
+  Animation_character: {fileID: 2027783113}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 0}
   img2: {fileID: 0}
   img3: {fileID: 0}
@@ -8487,6 +8589,7 @@ GameObject:
   - component: {fileID: 2027783114}
   - component: {fileID: 2027783116}
   - component: {fileID: 2027783115}
+  - component: {fileID: 2027783117}
   m_Layer: 0
   m_Name: bg_character
   m_TagString: Untagged
@@ -8513,12 +8616,13 @@ RectTransform:
   - {fileID: 301589632}
   - {fileID: 116574817}
   - {fileID: 932808386}
+  - {fileID: 870414396}
   m_Father: {fileID: 82352044}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035, y: 47.349976}
+  m_AnchoredPosition: {x: 1058, y: 7.35}
   m_SizeDelta: {x: 1080.1, y: 1525.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2027783115
@@ -8554,6 +8658,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027783113}
   m_CullTransparentMesh: 0
+--- !u!95 &2027783117
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027783113}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b65471f744231d943b3e34e7676518b5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2076414666
 GameObject:
   m_ObjectHideFlags: 0
@@ -8741,7 +8864,7 @@ RectTransform:
   m_Children:
   - {fileID: 55870568}
   m_Father: {fileID: 2136034345}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8760,9 +8883,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441623882d0d2ce43b8d305105ddee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 731859235}
   Panel_character: {fileID: 82352043}
   Panel_pet: {fileID: 2136034344}
+  Animation_battletag: {fileID: 0}
+  Animation_character: {fileID: 0}
+  Animation_pet: {fileID: 0}
   img1: {fileID: 0}
   img2: {fileID: 0}
   img3: {fileID: 0}
@@ -8892,7 +9018,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116107509}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8906,12 +9032,12 @@ RectTransform:
   - {fileID: 1164779555}
   - {fileID: 111205557}
   - {fileID: 23488644}
-  m_Father: {fileID: 2136034345}
-  m_RootOrder: 2
+  m_Father: {fileID: 1800390175}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000024828, y: 508.1}
+  m_AnchoredPosition: {x: -0.00003620716, y: 460.75003}
   m_SizeDelta: {x: 780, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2116107511
@@ -8978,7 +9104,6 @@ RectTransform:
   m_Children:
   - {fileID: 1800390175}
   - {fileID: 202075352}
-  - {fileID: 2116107510}
   - {fileID: 2103941492}
   m_Father: {fileID: 1635956135}
   m_RootOrder: 13
@@ -9001,7 +9126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
