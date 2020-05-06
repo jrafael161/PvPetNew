@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +20,7 @@ public class DataBaseManager : MonoBehaviour
     private bool signedIn;
     private bool registered;
     public List<PlayerData> OponentList;
+    static bool alredyFetchedFromDB = false;
 
     public GameObject Panel;
     public GameObject Panel_character;
@@ -73,9 +75,9 @@ public class DataBaseManager : MonoBehaviour
             DB();
             //Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
             //textuserid.text = GameController.userid;
-            if (GlobalControl.Instance.playeProfile.BattleTag == null)
+            if (!alredyFetchedFromDB)
             {
-                Checkforbattletag(GameController.userid);
+                Checkforbattletag(GameController.userid);//Sacar del start para que no se haga cada vez que se ingresa al main
             }
             else
             {
@@ -246,6 +248,52 @@ public class DataBaseManager : MonoBehaviour
                     if (user.Key == Userid)
                     {
                         IDictionary dictUser = (IDictionary)user.Value;
+                        if (DateTime.Parse(dictUser["DatabaseSaveTimeStamp"].ToString()) < DateTime.Parse(GlobalControl.Instance.playeProfile.LocalSaveTimeStamp))
+                        {
+                            string usernameAux = GlobalControl.Instance.playeProfile.BattleTag;
+                            string profilepicAux = GlobalControl.Instance.playeProfile.PlayerSprite.name;
+                            string HPAux = GlobalControl.Instance.playeProfile.HP.ToString();
+                            string LevelAux = GlobalControl.Instance.playeProfile.Level.ToString();
+                            string LevelUpPointsAux = GlobalControl.Instance.playeProfile.Level.ToString();
+                            string XPAux = GlobalControl.Instance.playeProfile.XP.ToString();
+                            string StrengthAux = GlobalControl.Instance.playeProfile.Strength.ToString();
+                            string SpeedAux = GlobalControl.Instance.playeProfile.Speed.ToString();
+                            string AgilityAux = GlobalControl.Instance.playeProfile.Agility.ToString();
+                            string ArmorvAux = GlobalControl.Instance.playeProfile.Armor.ToString();
+                            string PvPCoinAux = GlobalControl.Instance.playeProfile.PvPCoin.ToString();
+                            string PetCoinAux = GlobalControl.Instance.playeProfile.PetCoin.ToString();
+                            string PremiumCoinAux = GlobalControl.Instance.playeProfile.PremiumCoin.ToString();
+                            string CompanionPetAux = "Pet_" + GlobalControl.Instance.playeProfile.CompaninoPetSlot.ToString();
+                            string AvailableMissionsAux = GlobalControl.Instance.playeProfile.AvailableMissions.ToString();
+                            string TimeUntilMissionCooldownAux = GlobalControl.Instance.playeProfile.timeUntilMissionCooldown;
+
+                            User userUpdate = new User(usernameAux, profilepicAux, HPAux, LevelUpPointsAux, XPAux, StrengthAux, SpeedAux, AgilityAux, ArmorvAux, PvPCoinAux, PetCoinAux, PremiumCoinAux, CompanionPetAux, AvailableMissionsAux, TimeUntilMissionCooldownAux);
+                            string json = JsonUtility.ToJson(userUpdate);
+                            reference.Child("users").Child(Userid).SetRawJsonValueAsync(json);
+                            string PetName;
+                            string PetHP;
+                            string PetSTR;
+                            string PetAGY;
+                            string PetSPE;
+                            string PetARM;
+                            string PetLV;
+
+                            for (int i = 1; i < GlobalControl.Instance.playeProfile.OwnedPets.Count; i++)
+                            {
+                                PetName = GlobalControl.Instance.playeProfile.OwnedPets[i].PetName;
+                                PetHP = GlobalControl.Instance.playeProfile.OwnedPets[i].HP.ToString();
+                                PetSTR = GlobalControl.Instance.playeProfile.OwnedPets[i].Strength.ToString();
+                                PetAGY = GlobalControl.Instance.playeProfile.OwnedPets[i].Agility.ToString();
+                                PetSPE = GlobalControl.Instance.playeProfile.OwnedPets[i].Speed.ToString();
+                                PetARM = GlobalControl.Instance.playeProfile.OwnedPets[i].Armor.ToString();
+                                PetLV = GlobalControl.Instance.playeProfile.OwnedPets[i].Level.ToString();
+
+                                Initialpet iniatialpet = new Initialpet(PetName, PetHP, PetSTR, PetAGY, PetSPE, PetARM, PetLV);
+                                json = JsonUtility.ToJson(iniatialpet);
+                                reference.Child("users/" + Userid).Child("Pets").Child("Pet_" + i.ToString()).SetRawJsonValueAsync(json);
+                            }                            
+                            break;
+                        }
                         Text textusername = GameObject.Find("Canvas/bg_main/Lbl_Username").GetComponent<Text>();
                         textusername.text = dictUser["username"].ToString();
 
@@ -327,6 +375,7 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.SavePlayerData();
                         GlobalControl.Instance.SavePetsData();
                         Debug.Log("Termino de traer la info del usuario");
+                        alredyFetchedFromDB = true;
                         break;
                     }
                 }
@@ -361,7 +410,6 @@ public class DataBaseManager : MonoBehaviour
                     {
                         continue;
                     }
-
                     FirebaseDatabase.DefaultInstance.GetReference("users").Child(Enemyid).GetValueAsync().ContinueWith(task2 =>
                     {
                         DataSnapshot snapshot2 = task2.Result;
@@ -990,7 +1038,6 @@ public class Pets
         this.Tormento2 = Tormento2;
         this.Tormento3 = Tormento3;
         this.PetHunter = PetHunter;
-
     }
 }
 

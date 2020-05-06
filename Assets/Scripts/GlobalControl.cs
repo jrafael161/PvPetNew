@@ -34,10 +34,9 @@ public class GlobalControl : MonoBehaviour
     {
         NumberOfStats = 2;//3 por que se cuenta el 0
         NumberOfCoins = 2;
-
 #if UNITY_ANDROID && !UNITY_EDITOR
         Debug.Log("Si, estamos en android");
-        Debug.Log(Application.dataPath);
+        Debug.Log(Application.persistentDataPath);
         //if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
         //Permission.RequestUserPermission(Permission.ExternalStorageWrite);
 #endif
@@ -46,23 +45,24 @@ public class GlobalControl : MonoBehaviour
         Debug.Log("Paso de setear la bd de items");
         itemDataBase.Initialize();
         abilitiesDataBase.Set_AbilitiesDatabase();
-        Debug.Log("Paso de setear la bd de items");
+        Debug.Log("Paso de setear la bd de habilidades");
         abilitiesHandler.Initialize();
         petDBManager.Set_PetDatabase();
-        Debug.Log("Paso de setear la bd de items");
+        Debug.Log("Paso de setear la bd de mascotas");
         petDBManager.Initialize();
         //battleController = gameObject.AddComponent(typeof(BattleController)) as BattleController;
         //battleController.Initialize();
         mainScene.Initialize();
         //Si el dispositivo tiene conexion a internet, jala datos de firebase de lo contrario del save local.
         //SetPlayerData();
-        LoadPlayerData();                
-        ActiveScene = SceneManager.GetActiveScene();        
+        //LoadPlayerData();                
+        //ActiveScene = SceneManager.GetActiveScene();        
+        GetPlayerData();
     }
 
     private void Update()
     {
-        if (ActiveScene != SceneManager.GetActiveScene())//Si la escena cambio
+        if (ActiveScene != SceneManager.GetActiveScene())//Si la escena cambio, sacar esto del update y refactorizar el codigo para que el PlayerResume sea un objeto que tenga atacheado un script que manda a llamar el loadplayerdata
             LoadPlayerData();
     }
 
@@ -90,7 +90,6 @@ public class GlobalControl : MonoBehaviour
         {
             InitializePlayerData();
         }
-            
     }
 
     public void InitializePlayerData(PlayerData player = null)//Se muestra la informacion del jugador segun lo requerido
@@ -297,14 +296,14 @@ public class GlobalControl : MonoBehaviour
 
     public void SavePlayerData()
     {
-        string jsonstr = JsonUtility.ToJson(playeProfile);//Convierte los datos del jugador en un JASON        
-        
+        playeProfile.LocalSaveTimeStamp = DateTime.Now.ToString();
+        Debug.Log(playeProfile.LocalSaveTimeStamp);
+        string jsonstr = JsonUtility.ToJson(playeProfile);//Convierte los datos del jugador en un JASON                       
 #if UNITY_ANDROID && !UNITY_EDITOR
         if (!File.Exists(Application.persistentDataPath + "/playerProfile.json"))
         {
-            File.Create(Application.persistentDataPath + "/playerProfile.json");
-        }        
-        File.WriteAllText(Application.persistentDataPath + "/playerProfile.json", jsonstr);
+            File.WriteAllText(Application.persistentDataPath + "/playerProfile.json", jsonstr);
+        }                
 #endif
 #if UNITY_EDITOR
         Debug.Log("Esta en el editor");
@@ -320,9 +319,9 @@ public class GlobalControl : MonoBehaviour
 #if UNITY_ANDROID && !UNITY_EDITOR
         if (!File.Exists(Application.persistentDataPath + "/pet_" + i.ToString() + ".json"))
         {
-            File.Create(Application.persistentDataPath + "/pet_" + i.ToString() + ".json");            
+            File.WriteAllText(Application.persistentDataPath + "/pet_" + i.ToString() + ".json", jsonstr);
         }
-        File.WriteAllText(Application.persistentDataPath + "/pet_" + i.ToString() + ".json", jsonstr);
+        
 #endif
 #if UNITY_EDITOR
             Debug.Log("Esta en el editor");
