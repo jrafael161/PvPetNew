@@ -188,7 +188,7 @@ public class PVE : MonoBehaviour
         {
             GlobalControl.Instance.playeProfile.timeUntilMissionCooldown = System.DateTime.Now.ToString("yyyy/MM/dd");
         }
-        btncaptura.SetActive(false);
+        //btncaptura.SetActive(false);
         Text Act = GameObject.Find("Canvas/pnl_preparativos/lbl_act_v").GetComponent<Text>();
         Text Cap = GameObject.Find("Canvas/pnl_preparativos/lbl_cap_v").GetComponent<Text>();
         Text Tit = GameObject.Find("Canvas/pnl_preparativos/lbl_tit_v").GetComponent<Text>();
@@ -236,7 +236,7 @@ public class PVE : MonoBehaviour
 
         List<Itemc> items = new List<Itemc>();
         List<Pet> MissionPets = new List<Pet>();
-        MissionPets = PetDBManager.Instance.PetDB.FindAll(x => x.Mision == Mcap);
+        MissionPets = GlobalControl.Instance.petDBManager.PetDB.FindAll(x => x.Mision == Mcap);
 
         for (int i = 0; i < MissionPets.Count; i++)
         {
@@ -331,8 +331,8 @@ public class PVE : MonoBehaviour
         {
             GlobalControl.Instance.oponentProfile.EquipedGear.Add(null);
         }
-        GlobalControl.Instance.oponentProfile.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 50);
-
+        GlobalControl.Instance.oponentProfile.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 50);        
+        
         BattleController.Instance.StartBattle(false);
         Panelpreparativos.SetActive(false);
     }

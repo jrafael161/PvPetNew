@@ -45,6 +45,7 @@ public class AuthManager : MonoBehaviour
 
     void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
+        Debug.Log("intento autenticar");
         if (auth.CurrentUser != user)
         {
             if (signedIn)
@@ -52,7 +53,8 @@ public class AuthManager : MonoBehaviour
                 displayName = user.DisplayName ?? "";
                 Debug.Log("Signed in " + user.UserId);
                 saveuserid(user.UserId);
-                SceneManager.LoadScene("01-Main");
+                Debug.Log("paso de autenticar");
+                SceneManager.LoadScene("01-Main");                
             }
             else
             {
@@ -91,6 +93,7 @@ public class AuthManager : MonoBehaviour
             Firebase.Auth.FirebaseUser newUser = task.Result;
             Debug.Log("Userid:" + newUser.UserId);
             saveuserid(newUser.UserId);
+            Debug.Log("paso de autenticar");
             SceneManager.LoadScene("01-Main");
         });
         

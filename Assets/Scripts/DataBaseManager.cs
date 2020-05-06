@@ -12,23 +12,13 @@ public class DataBaseManager : MonoBehaviour
 {
     private static DataBaseManager _instance;
 
-    public static DataBaseManager Instance
-    {
-        get { return _instance; }
-    }
-
-    void Awake()
-    {
-        _instance = this;
-    }
-
     public static Firebase.Auth.FirebaseAuth auth;
     public static Firebase.Auth.FirebaseUser user;
 
     private string displayName;
     private bool signedIn;
     private bool registered;
-    List<PlayerData> OponentList = new List<PlayerData>();
+    public List<PlayerData> OponentList;
 
     public GameObject Panel;
     public GameObject Panel_character;
@@ -58,23 +48,34 @@ public class DataBaseManager : MonoBehaviour
     public GameObject profilepic;
 
     [SerializeField]
-    private InputField Battletag = null;
+    private InputField Battletag;
     DatabaseReference reference;
+    static bool internetConnection;
+    CheckInternetConnection chkInt = new CheckInternetConnection();
+
+    public static DataBaseManager Instance
+    {
+        get { return _instance; }
+    }
 
     void Start()
     {
-        if (CheckInternetConnection.Instance.Check())
+        _instance = this;
+        OponentList = new List<PlayerData>();
+        internetConnection = chkInt.Check();
+
+        if (internetConnection)
         {
             DB();
-            Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-            textuserid.text = GameController.userid;
+            //Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
+            //textuserid.text = GameController.userid;
             if (GlobalControl.Instance.playeProfile.BattleTag == null)
             {
-                Checkforbattletag(textuserid.text.ToString());
+                Checkforbattletag(GameController.userid);
             }
             else
             {
-                MainScene.Instance.InitializeScene();
+                GlobalControl.Instance.mainScene.InitializeScene();
             }
         }
         else
@@ -85,10 +86,11 @@ public class DataBaseManager : MonoBehaviour
             }
             else
             {
-                writeNewUserOffline();
+                OpenPanel();
             }
         }
     }
+
     void DB()
     {
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pvpet-f0b05.firebaseio.com/Players/Pa5UU16uCzt6X1E1DJ6a");
@@ -286,7 +288,7 @@ public class DataBaseManager : MonoBehaviour
                         Dictionary<string, System.Object> Ownedpets = (Dictionary<string, System.Object>)dictUser["Pets"];                        
                         foreach (KeyValuePair<string, System.Object> Ownedpetsaux in Ownedpets)
                         {
-                            Pet AuxPet = new Pet();
+                            Pet AuxPet = ScriptableObject.CreateInstance("Pet") as Pet;
                             Dictionary<string, System.Object> Ownedpets_lv2 = (Dictionary<string, System.Object>)Ownedpets[Ownedpetsaux.Key];
                             if (Ownedpetsaux.Key == dictUser["CompanionPet"].ToString())
                             {
@@ -309,6 +311,7 @@ public class DataBaseManager : MonoBehaviour
                         }
                         GlobalControl.Instance.SavePlayerData();
                         GlobalControl.Instance.SavePetsData();
+                        Debug.Log("Termino de traer la info del usuario");
                         break;
                     }
                 }
@@ -336,7 +339,7 @@ public class DataBaseManager : MonoBehaviour
                     PlayerAux.EquipedGear = new List<Item>();
                     PlayerAux.EquipedItems = new List<Item>();
                     PlayerAux.OwnedPets = new List<Pet>();
-                    Pet AuxPet = new Pet();
+                    Pet AuxPet = ScriptableObject.CreateInstance("Pet") as Pet;
                     string Enemyid = users.Key;
                     Debug.Log("Enemyid:" + Enemyid);
                     if (Enemyid == GlobalControl.Instance.playeProfile.PlayerID)
@@ -404,7 +407,8 @@ public class DataBaseManager : MonoBehaviour
                                 PlayerAux.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedItems["Item" + i.ToString()].ToString())));
                             }
                             Debug.Log("----------------------------------------------------------------");
-                            OponentList.Add(PlayerAux);
+                            if(!OponentList.Exists(x=>x.PlayerID == Enemyid))
+                                OponentList.Add(PlayerAux);
                         }                        
                     });                    
                 }
@@ -422,16 +426,21 @@ public class DataBaseManager : MonoBehaviour
     public void Btn_go()
     {
         string Userid;
-        string Battletaguser = Battletag.text;
-        Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-        Userid = textuserid.text;
-        writeNewUser(Userid, Battletaguser);
-        Checkforbattletag(Userid);
+        string Battletaguser = Battletag.text;        
+        if (internetConnection)
+        {
+            Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
+            Userid = textuserid.text;
+            writeNewUser(Userid, Battletaguser);
+            Checkforbattletag(Userid);
+        }
+        else
+        {            
+            writeNewUserOffline();
+        }
         Panel.SetActive(false);
         Panel_character.SetActive(false);
         Panel_pet.SetActive(false);
-
-
     }
 
     public void OpenPanel()
@@ -524,7 +533,7 @@ public class DataBaseManager : MonoBehaviour
     }
 
     private void writeNewUserOffline()
-    {
+    {        
         bool profile1 = img1.activeSelf;
         bool profile2 = img2.activeSelf;
         bool profile3 = img3.activeSelf;
@@ -577,7 +586,7 @@ public class DataBaseManager : MonoBehaviour
         string userarm_pet = textArmorv_pet.text.ToString();
 
         GlobalControl.Instance.playeProfile.PlayerID = "0";
-        GlobalControl.Instance.playeProfile.BattleTag = name;
+        GlobalControl.Instance.playeProfile.BattleTag = Battletag.text;
         switch (profileimg)
         {
             case "Profile_1":
@@ -614,17 +623,24 @@ public class DataBaseManager : MonoBehaviour
         for (int i = 0; i < 5; i++)//Se seteal el inventario
         {
             GlobalControl.Instance.playeProfile.Inventory.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == i));
+            GlobalControl.Instance.playeProfile.InventoryItemsIDs.Add(i);
         }
 
         //Se equipa la armadura
-        GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Head] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 0);
-        GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Chest] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 1);
-        GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Arms] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 2);
-        GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Foots] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 3);
-        GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Weapon] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 4);
+        for (int i = 0; i < 5; i++)
+        {
+            GlobalControl.Instance.playeProfile.EquipedGear.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == i));
+            GlobalControl.Instance.playeProfile.EquipedGearIDs.Add(i);
+        }
+        //GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Head] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 0);
+        //GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Chest] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 1);
+        //GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Arms] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 2);
+        //GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Foots] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 3);
+        //GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Weapon] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 4);
 
         //Se equipan los items
         GlobalControl.Instance.playeProfile.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 52));
+        GlobalControl.Instance.playeProfile.EquipedItemsIDs.Add(52);
 
         //Se asigna la mascota
         Pet auxPet = PetDBManager.Instance.PetDB.Find(x => x.PetName == initialpet);
@@ -634,8 +650,11 @@ public class DataBaseManager : MonoBehaviour
         auxPet.Speed = int.Parse(userspe_pet);
         auxPet.Armor = int.Parse(userarm_pet);
         GlobalControl.Instance.playeProfile.CompanionPet = auxPet;
+        GlobalControl.Instance.playeProfile.OwnedPets.Add(auxPet);
+        GlobalControl.Instance.playeProfile.OwnedPetsIDs.Add(auxPet.PetID);
 
         GlobalControl.Instance.SavePlayerData();
+        GlobalControl.Instance.SavePetsData();
     }
 
     public void SignOut()

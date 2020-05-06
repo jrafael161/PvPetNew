@@ -32,29 +32,37 @@ public class BattleController : MonoBehaviour
     public int OponentpassedTurns;
     float G_priority;
     public bool Winner;
-    public static bool GameType=false;//true->PvP,false->PvE
+    public static bool GameType;//true->PvP,false->PvE
     List<Item> PlayerActives;
     List<Item> OponentActives;
-    public GameObject back_or_capture_button;//back -> PvP, capture->
+    public Button back_or_capture_button;//back -> PvP, capture->
     public Text battlelog;
 
 
 
     private void Start()
     {
-        Debug.Log("Instancia creada"+_instance);
-        if (GameType)
-        {
-            battlelog = GameObject.Find("BattleLog").GetComponentInChildren<Text>();
-        }        
+        Debug.Log("Instancia creada" + _instance);
+        if (SceneManager.GetActiveScene().name == "CombatScreen")
+            StartBattle(true);
     }
 
     public void StartBattle(bool gametype)
     {
         if (gametype)
-            SceneManager.LoadScene("CombatScreen");
-                   
-        GameType = gametype;        
+        {            
+            if (SceneManager.GetActiveScene().name == "CombatScreen")
+            {
+                back_or_capture_button = FindObjectOfType<Button>();
+                back_or_capture_button.gameObject.SetActive(false);
+            }            
+        }
+        else
+        {
+            GameObject panel = GameObject.Find("pnl_mision");
+            back_or_capture_button = panel.GetComponentInChildren<Button>();
+            back_or_capture_button.gameObject.SetActive(false);
+        }        
         action_done = true;
         both_alive = true;
         passedTurns = 0;
@@ -116,13 +124,13 @@ public class BattleController : MonoBehaviour
         }
         if (GameType)
         {
-            back_or_capture_button.SetActive(true);
+            back_or_capture_button.gameObject.SetActive(true);
         }
         else
         {
             if (Winner)
             {
-                back_or_capture_button.SetActive(true);
+                back_or_capture_button.gameObject.SetActive(true);
             }
         }       
         battlelog.text = battlelog.text + "Termino el combate\n";
@@ -329,7 +337,7 @@ public class BattleController : MonoBehaviour
         Player = new PlayerData();
         Player.EquipedGear = new List<Item>();
         Player.EquipedItems = new List<Item>();
-        Player.CompanionPet = new Pet();
+        Player.CompanionPet = ScriptableObject.CreateInstance("Pet") as Pet;
         GlobalControl.Instance.CopyPlayer(Player);
         Oponent = GlobalControl.Instance.oponentProfile;       
     }

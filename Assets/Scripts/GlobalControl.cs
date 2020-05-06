@@ -12,11 +12,12 @@ public class GlobalControl : MonoBehaviour
     public PlayerData playeProfile = new PlayerData();
     public PlayerData oponentProfile = new PlayerData();
     public ItemsDBmanager itemDataBase = new ItemsDBmanager();
-    public DataBaseManager dataBaseManager = new DataBaseManager();
+    public DataBaseManager dataBaseManager;
     public AbilitiesDBmanager abilitiesDataBase = new AbilitiesDBmanager();
     public PetDBManager petDBManager = new PetDBManager();
-    AbilitiesHandler abilitiesHandler = new AbilitiesHandler();
-    BattleController battleController = new BattleController();
+    public AbilitiesHandler abilitiesHandler = new AbilitiesHandler();
+    public MainScene mainScene = new MainScene();
+    //public BattleController battleController;    
 
     public Scene ActiveScene;
     int NumberOfStats;
@@ -33,14 +34,26 @@ public class GlobalControl : MonoBehaviour
     {
         NumberOfStats = 2;//3 por que se cuenta el 0
         NumberOfCoins = 2;
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        Debug.Log("Si, estamos en android");
+        Debug.Log(Application.dataPath);
+        //if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
+        //Permission.RequestUserPermission(Permission.ExternalStorageWrite);
+#endif
         //dataBaseManager.Initialize();
         itemDataBase.Set_ItemDatabase();
+        Debug.Log("Paso de setear la bd de items");
         itemDataBase.Initialize();
         abilitiesDataBase.Set_AbilitiesDatabase();
+        Debug.Log("Paso de setear la bd de items");
         abilitiesHandler.Initialize();
         petDBManager.Set_PetDatabase();
+        Debug.Log("Paso de setear la bd de items");
         petDBManager.Initialize();
-        battleController.Initialize();
+        //battleController = gameObject.AddComponent(typeof(BattleController)) as BattleController;
+        //battleController.Initialize();
+        mainScene.Initialize();
         //Si el dispositivo tiene conexion a internet, jala datos de firebase de lo contrario del save local.
         //SetPlayerData();
         LoadPlayerData();                
@@ -192,10 +205,14 @@ public class GlobalControl : MonoBehaviour
     public void PrepareItems()//Inicializar los items que el jugador tiene equipados
     {
         playeProfile.EquipedGear = new List<Item>(4);
+        playeProfile.EquipedGearIDs = new List<int>();
         playeProfile.EquipedItems = new List<Item>();
+        playeProfile.EquipedItemsIDs = new List<int>();
         playeProfile.Inventory = new List<Item>();//Checar el inventario
-        playeProfile.CompanionPet = new Pet();
+        playeProfile.InventoryItemsIDs = new List<int>();
+        playeProfile.CompanionPet = ScriptableObject.CreateInstance("Pet") as Pet;
         playeProfile.OwnedPets = new List<Pet>();
+        playeProfile.OwnedPetsIDs = new List<int>();
     }
 
     public bool GetPlayerData()
@@ -203,12 +220,22 @@ public class GlobalControl : MonoBehaviour
         string json = null;
         try
         {
-            json = File.ReadAllText(Application.dataPath + "/playerProfile.json");
-        }
-        catch (Exception)
+#if UNITY_ANDROID && !UNITY_EDITOR
+        if (File.Exists(Application.persistentDataPath + "/playerProfile.json"))
         {
-            throw;
+            json = File.ReadAllText(Application.dataPath + "/playerProfile.json");
+        }        
+#endif
+#if UNITY_EDITOR           
+            json = File.ReadAllText(Application.dataPath + "/playerProfile.json");
+#endif
+
         }
+        catch (Exception e)
+        {
+            print(e);
+        }
+
         if (json == null)
         {
             return false;
@@ -246,7 +273,16 @@ public class GlobalControl : MonoBehaviour
                 for (int i = 0; i < playeProfile.OwnedPetsIDs.Count; i++)
                 {
                     Pet auxPet;
-                    string jsonPet = File.ReadAllText(Application.dataPath + "/pet_" + i + ".json");
+                    string jsonPet=null;
+#if UNITY_ANDROID && !UNITY_EDITOR
+        if (File.Exists(Application.persistentDataPath + "/pet_" + i.ToString() + ".json"))
+        {
+            jsonPet = File.ReadAllText(Application.dataPath + "/pet_" + i.ToString() + ".json");
+        }        
+#endif
+#if UNITY_EDITOR
+                    jsonPet = File.ReadAllText(Application.dataPath + "/pet_" + i.ToString() + ".json");
+#endif
                     auxPet = JsonUtility.FromJson<Pet>(jsonPet);
                     if (i == playeProfile.CompaninoPetSlot)
                     {
@@ -261,17 +297,38 @@ public class GlobalControl : MonoBehaviour
 
     public void SavePlayerData()
     {
-        string jsonstr = JsonUtility.ToJson(playeProfile);//Convierte los datos del jugador en un JASON
+        string jsonstr = JsonUtility.ToJson(playeProfile);//Convierte los datos del jugador en un JASON        
+        
+#if UNITY_ANDROID && !UNITY_EDITOR
+        if (!File.Exists(Application.persistentDataPath + "/playerProfile.json"))
+        {
+            File.Create(Application.persistentDataPath + "/playerProfile.json");
+        }        
+        File.WriteAllText(Application.persistentDataPath + "/playerProfile.json", jsonstr);
+#endif
+#if UNITY_EDITOR
+        Debug.Log("Esta en el editor");
         File.WriteAllText(Application.dataPath + "/playerProfile.json", jsonstr);//Guarda los datos del jugador en un archivo JASON
-    }   
+#endif
+    }
 
     public void SavePetsData()
     {
         for (int i = 0; i < playeProfile.OwnedPets.Count; i++)
         {
             string jsonstr = JsonUtility.ToJson(playeProfile.OwnedPets[i]);
-            File.WriteAllText(Application.dataPath + "/pet_" + i + ".json", jsonstr);
-        }        
+#if UNITY_ANDROID && !UNITY_EDITOR
+        if (!File.Exists(Application.persistentDataPath + "/pet_" + i.ToString() + ".json"))
+        {
+            File.Create(Application.persistentDataPath + "/pet_" + i.ToString() + ".json");            
+        }
+        File.WriteAllText(Application.persistentDataPath + "/pet_" + i.ToString() + ".json", jsonstr);
+#endif
+#if UNITY_EDITOR
+            Debug.Log("Esta en el editor");
+            File.WriteAllText(Application.dataPath + "/pet_" + i.ToString() + ".json", jsonstr);
+#endif
+        }
     }
 
     public PlayerData GetPlayer(bool whichPlayer)//1 -> Player, 0 -> Oponent

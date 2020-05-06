@@ -5,6 +5,8 @@ using UnityEngine;
 public class AbilitiesDBmanager
 {
     private static AbilitiesDBmanager _instance;
+    string resourcesPath;
+
     public static AbilitiesDBmanager Instance
     {
         get { return _instance; }
@@ -15,19 +17,20 @@ public class AbilitiesDBmanager
     public void Initialize()
     {
         _instance = this;
+#if UNITY_ANDROID
+        resourcesPath = Application.dataPath + "Resources/";
+#endif
+        resourcesPath = "";
     }
 
     public void Set_AbilitiesDatabase()
     {
-        for (int i = 0; AbilitiesDB.Count < 5; i++)
-        {
-            AbilitiesDB.Add(Resources.Load("Abilities/Life Restoration") as Ability);
-            AbilitiesDB.Add(Resources.Load("Abilities/Phoenix Rise") as Ability);
-            AbilitiesDB.Add(Resources.Load("Abilities/Weapon Slash") as Ability);
-            AbilitiesDB.Add(Resources.Load("Abilities/Life Orb") as Ability);
-            AbilitiesDB.Add(Resources.Load("Abilities/Strength Orb") as Ability);
-            AbilitiesDB.Add(Resources.Load("Abilities/Speed Orb") as Ability);
-            AbilitiesDB.Add(Resources.Load("Abilities/Agility Orb") as Ability);
-        }
+            AbilitiesDB.Add(Resources.Load(resourcesPath + "Abilities/Life Restoration") as Ability);
+            AbilitiesDB.Add(Resources.Load(resourcesPath + "Abilities/Phoenix Rise") as Ability);
+            AbilitiesDB.Add(Resources.Load(resourcesPath + "Abilities/Weapon Slash") as Ability);
+            AbilitiesDB.Add(Resources.Load(resourcesPath + "Abilities/Life Orb") as Ability);
+            AbilitiesDB.Add(Resources.Load(resourcesPath + "Abilities/Strength Orb") as Ability);
+            AbilitiesDB.Add(Resources.Load(resourcesPath + "Abilities/Speed Orb") as Ability);
+            AbilitiesDB.Add(Resources.Load(resourcesPath + "Abilities/Agility Orb") as Ability);
     }
 }

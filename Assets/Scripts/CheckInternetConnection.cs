@@ -4,23 +4,10 @@ using UnityEngine;
 using System.Net;
 using System.IO;
 
-public class CheckInternetConnection: MonoBehaviour
+public class CheckInternetConnection
 {
-    private static CheckInternetConnection _instance;
-
-    public static CheckInternetConnection Instance
-    {
-        get { return _instance; }
-    }
-
-    void Awake()
-    {
-        _instance = this;
-    }
-
     public bool Check()
     {
-        _instance = this;
         string HtmlText = GetHtmlFromUri("http://google.com");
         if (HtmlText == "")
         {

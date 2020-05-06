@@ -26,12 +26,11 @@ public class INVENTARIO : MonoBehaviour
     }
     void GetUserStats()
     {
-        string uid; 
+        string uid = GlobalControl.Instance.playeProfile.PlayerID;
         //OBTIENE ID DE USUARIO
         Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
         textuserid.text = GameController.userid;
         uid = textuserid.text.ToString();
-        uid = "8xLUp3Df6tW4wOOQOICsmmUswiq1";
         
         //stats
         Text textHP = GameObject.Find("Canvas/lbl_ph_v").GetComponent<Text>();
@@ -47,10 +46,6 @@ public class INVENTARIO : MonoBehaviour
         Text arm = GameObject.Find("Canvas/lbl_item4").GetComponent<Text>();
         Text weapon = GameObject.Find("Canvas/lbl_item5").GetComponent<Text>();
         Text shield = GameObject.Find("Canvas/lbl_item6").GetComponent<Text>();
-
-
-
-
 
         //reference.Child("users").Child(uid).Child("PVE").Child("available").SetValueAsync("1000");
         //CONECTA CON BASE

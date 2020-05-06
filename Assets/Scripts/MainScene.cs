@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainScene : MonoBehaviour
+public class MainScene
 {    
     private static MainScene _instance;
 
@@ -12,13 +12,13 @@ public class MainScene : MonoBehaviour
         get { return _instance; }
     }
 
-    void Start()
+    public void Initialize()
     {
         _instance = this;
     }
 
     public void InitializeScene()
-    {
+    {        
         Text textusername = GameObject.Find("Canvas/bg_main/Lbl_Username").GetComponent<Text>();
         GlobalControl.Instance.GetPlayerData();
         Image profilepic = GameObject.Find("ProfileSprite").GetComponent<Image>();

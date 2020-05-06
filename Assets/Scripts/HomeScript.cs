@@ -8,7 +8,7 @@ public class HomeScript : MonoBehaviour
 {
     private void Start()
     {
-        if (GameObject.Find("Canvas/Txt_userid").GetComponent<Text>())
+        if (GameObject.Find("Canvas/Txt_userid"))
         {
             Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
             textuserid.text = GameController.userid;

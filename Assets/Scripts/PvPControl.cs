@@ -22,7 +22,6 @@ public class PvPControl : MonoBehaviour
         _instance = this;
     }
 
-
     void Start()
     {       
         Oponents = new List<PlayerData>();
@@ -67,9 +66,9 @@ public class PvPControl : MonoBehaviour
     }
 
     public void TransitionToBattle()
-    {
+    {        
         GlobalControl.Instance.oponentProfile = Oponents.Find(x => x.BattleTag==SelectedOponentBt);
-        BattleController.Instance.StartBattle(true);
+        SceneManager.LoadScene("CombatScreen");
     }
 
     public void ActivatePreview()
