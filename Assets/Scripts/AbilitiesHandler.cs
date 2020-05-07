@@ -94,7 +94,7 @@ public class AbilitiesHandler
 
     public List<Item> SetActives(PlayerData player)
     {
-        List<Item> itemsWActive = new List<Item>();
+        List<Item> itemsActive = new List<Item>();
         if (player.EquipedGear != null)
         {
             for (int i = 0; i < player.EquipedGear.Count; i++)//Checa habilidades de armadura y arma
@@ -107,14 +107,14 @@ public class AbilitiesHandler
                 {
                     if (player.EquipedGear[i].At == AbiltyType.Active)
                     {
-                        itemsWActive.Add(player.EquipedGear[i]);
+                        itemsActive.Add(player.EquipedGear[i]);
                     }
                 }
             }
         }
         if (player.EquipedItems != null)
         {
-            for (int i = 0; i < player.EquipedItems.Count; i++)//Checa habilidades de armadura y arma
+            for (int i = 0; i < player.EquipedItems.Count; i++)//Checa items equipados
             {
                 if (player.EquipedItems[i] == null)
                 {
@@ -124,12 +124,12 @@ public class AbilitiesHandler
                 {
                     if (player.EquipedItems[i].At == AbiltyType.Active)
                     {
-                        itemsWActive.Add(player.EquipedItems[i]);
+                        itemsActive.Add(player.EquipedItems[i]);
                     }
                 }
             }
         }
-        return itemsWActive;
+        return itemsActive;
     }
 
     public List<Item> CheckTriggerCondition(List<Item> availableActives, PlayerData player, bool WhoIS)
@@ -189,6 +189,7 @@ public class AbilitiesHandler
             default:
                 break;
         }
+        BattleController.Instance.ArePlayersAlive();
     }
 
     public void Damage(PlayerData player, Ability ability)

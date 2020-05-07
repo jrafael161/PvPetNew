@@ -69,7 +69,6 @@ public class DataBaseManager : MonoBehaviour
         _instance = this;
         OponentList = new List<PlayerData>();
         internetConnection = chkInt.Check();
-
         if (internetConnection)
         {
             DB();
@@ -248,7 +247,7 @@ public class DataBaseManager : MonoBehaviour
                     if (user.Key == Userid)
                     {
                         IDictionary dictUser = (IDictionary)user.Value;
-                        if (DateTime.Parse(dictUser["DatabaseSaveTimeStamp"].ToString()) < DateTime.Parse(GlobalControl.Instance.playeProfile.LocalSaveTimeStamp))
+                        if (false)//DateTime.Parse(dictUser["DatabaseSaveTimeStamp"].ToString()) < DateTime.Parse(GlobalControl.Instance.playeProfile.LocalSaveTimeStamp)
                         {
                             string usernameAux = GlobalControl.Instance.playeProfile.BattleTag;
                             string profilepicAux = GlobalControl.Instance.playeProfile.PlayerSprite.name;

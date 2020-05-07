@@ -24,6 +24,7 @@ public class Pet : ScriptableObject
     public PetTier Pt;
     public float HP;
     public int Level;
+    public int XP;
     public int Strength;
     public int Speed;
     public int Agility;

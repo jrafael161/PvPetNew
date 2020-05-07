@@ -34,5 +34,8 @@ public class PlayerData
     public Dictionary<string, int> PetStats;
     public List<Pet> OwnedPets;
     public List<int> InventoryItemsIDs;
-    public List<Item> Inventory;   
+    public List<Item> Inventory;
+
+    public List<Item> PlayerActiveAbilities;//Para el battle controlle, no se necesita almacenar
+    public PlayerData playerPetasPlayer;//Para el battle controlle, no se necesita almacenar
 }

@@ -336,6 +336,7 @@ public class PVE : MonoBehaviour
 
         GlobalControl.Instance.oponentProfile.Inventory = null;
         GlobalControl.Instance.oponentProfile.EquipedItems = null;
+        GlobalControl.Instance.oponentProfile.CompanionPet = null;
 
         GlobalControl.Instance.oponentProfile.EquipedGear = new List<Item>(4);
         for (int i = 0; i < 5; i++)
@@ -365,7 +366,7 @@ public class PVE : MonoBehaviour
         int petspe = int.Parse(petspetxt.text.ToString());
         int petarm = int.Parse(petarmtxt.text.ToString());
    
-        Pet AuxPet = new Pet();
+        Pet AuxPet = ScriptableObject.CreateInstance("Pet") as Pet;
         AuxPet.PetName = petname;
         AuxPet.Level = 1;
         AuxPet.HP = pethp;
