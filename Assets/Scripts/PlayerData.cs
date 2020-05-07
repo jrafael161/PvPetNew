@@ -17,11 +17,13 @@ public class PlayerData
     public float Agility;
     public float Armor;
     public float critic_prob;
-    public float PvPCoin;
-    public float PetCoin;
-    public float PremiumCoin;
+    public int PvPCoin;
+    public int PetCoin;
+    public int PremiumCoin;
     public int AvailableMissions;
     public string timeUntilMissionCooldown;
+    public string LocalSaveTimeStamp;
+    public string DateOfUserRegistration;
     public int CompaninoPetSlot;
     public Pet CompanionPet;
     public List<int> EquipedGearIDs;
