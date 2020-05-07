@@ -325,6 +325,8 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.playeProfile.PremiumCoin = int.Parse(dictUser["PremiumCoin"].ToString());
                         GlobalControl.Instance.playeProfile.AvailableMissions = int.Parse(dictUser["AvailableMissions"].ToString());
                         GlobalControl.Instance.playeProfile.timeUntilMissionCooldown = dictUser["TimeUntilMissionCooldown"].ToString();
+                        GlobalControl.Instance.playeProfile.Wins = int.Parse(dictUser["Wins"].ToString());
+                        GlobalControl.Instance.playeProfile.Loss = int.Parse(dictUser["Loss"].ToString());
 
                         GlobalControl.Instance.PrepareItems();//Crea las listas para poder hacer los add
                         Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];                        
@@ -564,10 +566,14 @@ public class DataBaseManager : MonoBehaviour
         string userspe_pet = textSpeed_pet.text.ToString();
         string userarm_pet = textArmorv_pet.text.ToString();
 
-        User user = new User(name, profileimg, userhp, "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_1","10","1990/01/01");
+        
+        User user = new User(name, profileimg, userhp, "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_1","10","1990/01/01","0","0");
         string json = JsonUtility.ToJson(user);
         reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
         
+
+
+
         EquipedItems equipedItems = new EquipedItems("1");
         json = JsonUtility.ToJson(equipedItems);
         reference.Child("users/" + userId).Child("EquipedItems").SetRawJsonValueAsync(json);
@@ -985,10 +991,12 @@ public class User
     public string CompanionPet;
     public string AvailableMissions;
     public string TimeUntilMissionCooldown;
+    public string Wins;
+    public string Loss;
     public User()
     {
     }
-    public User(string username,string profilepic, string HP, string Level, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin,string CompanionPet, string AvailableMissions, string TimeUntilMissionCooldown)
+    public User(string username,string profilepic, string HP, string Level, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin,string CompanionPet, string AvailableMissions, string TimeUntilMissionCooldown , string Wins, string Loss)
     {
         this.username = username;
         this.profilepic = profilepic;
@@ -1005,6 +1013,8 @@ public class User
         this.CompanionPet = CompanionPet;
         this.AvailableMissions = AvailableMissions;
         this.TimeUntilMissionCooldown = TimeUntilMissionCooldown;
+        this.Wins = Wins;
+        this.Loss = Loss;
     }
 }
 

@@ -38,4 +38,7 @@ public class PlayerData
 
     public List<Item> PlayerActiveAbilities;//Para el battle controlle, no se necesita almacenar
     public PlayerData playerPetasPlayer;//Para el battle controlle, no se necesita almacenar
+    public int Wins;
+    public int Loss;
+
 }

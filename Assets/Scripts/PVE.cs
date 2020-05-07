@@ -195,10 +195,7 @@ public class PVE : MonoBehaviour
         }
         int AvailableMissions = GlobalControl.Instance.playeProfile.AvailableMissions;
         GlobalControl.Instance.playeProfile.AvailableMissions = AvailableMissions - 1;
-        if (AvailableMissions - 1 == 0)
-        {
-            GlobalControl.Instance.playeProfile.timeUntilMissionCooldown = System.DateTime.Now.ToString("yyyy/MM/dd");
-        }
+        GlobalControl.Instance.playeProfile.timeUntilMissionCooldown = System.DateTime.Now.ToString("yyyy/MM/dd");
         Text Act = GameObject.Find("Canvas/pnl_preparativos/bg_preparativos/lbl_act_v").GetComponent<Text>();
         Text Cap = GameObject.Find("Canvas/pnl_preparativos/bg_preparativos/lbl_cap_v").GetComponent<Text>();
         Text Tit = GameObject.Find("Canvas/pnl_preparativos/bg_preparativos/lbl_tit_v").GetComponent<Text>();

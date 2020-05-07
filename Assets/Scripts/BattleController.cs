@@ -120,17 +120,30 @@ public class BattleController : MonoBehaviour
             Winner = false;
             GiveXP();
         }
-        if (GameType)
+        if (GameType)//pvp
         {
             back_or_capture_button.gameObject.SetActive(true);
+            if (Winner)
+            {
+                GlobalControl.Instance.playeProfile.Wins += 1;
+                GlobalControl.Instance.playeProfile.PvPCoin += passedTurns * 10;
+            }
+            else
+            {
+                GlobalControl.Instance.playeProfile.Wins += 1;
+                GlobalControl.Instance.playeProfile.PvPCoin += passedTurns * 2;
+            }
         }
-        else
+        else//pve
         {
             if (Winner)
             {
                 back_or_capture_button.gameObject.SetActive(true);
+                GlobalControl.Instance.playeProfile.PetCoin += passedTurns * 10;
             }
-        }       
+            else
+                GlobalControl.Instance.playeProfile.PetCoin += passedTurns * 2;
+        }
         battlelog.text = battlelog.text + "Termino el combate\n";
         yield return true;
     }
