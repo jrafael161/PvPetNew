@@ -32,5 +32,8 @@ public class PlayerData
     public Dictionary<string, int> PetStats;
     public List<Pet> OwnedPets;
     public List<int> InventoryItemsIDs;
-    public List<Item> Inventory;   
+    public List<Item> Inventory;
+    public int Wins;
+    public int Loss;
+
 }
