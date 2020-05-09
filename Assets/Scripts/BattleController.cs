@@ -126,12 +126,12 @@ public class BattleController : MonoBehaviour
             if (Winner)
             {
                 GlobalControl.Instance.playeProfile.Wins += 1;
-                GlobalControl.Instance.playeProfile.PvPCoin += passedTurns * 10;
+                //GlobalControl.Instance.playeProfile.PvPCoin += passedTurns * 10;
             }
             else
             {
                 GlobalControl.Instance.playeProfile.Wins += 1;
-                GlobalControl.Instance.playeProfile.PvPCoin += passedTurns * 2;
+                //GlobalControl.Instance.playeProfile.PvPCoin += passedTurns * 2;
             }
         }
         else//pve
@@ -139,10 +139,10 @@ public class BattleController : MonoBehaviour
             if (Winner)
             {
                 back_or_capture_button.gameObject.SetActive(true);
-                GlobalControl.Instance.playeProfile.PetCoin += passedTurns * 10;
+                //GlobalControl.Instance.playeProfile.PetCoin += passedTurns * 10;
             }
-            else
-                GlobalControl.Instance.playeProfile.PetCoin += passedTurns * 2;
+            //else
+            //    GlobalControl.Instance.playeProfile.PetCoin += passedTurns * 2;
         }
         battlelog.text = battlelog.text + "Termino el combate\n";
         yield return true;

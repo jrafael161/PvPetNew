@@ -38,6 +38,13 @@ public class HomeScript : MonoBehaviour
     public void GOPETS()
     {
         SceneManager.LoadScene("PetSantuary");
+    public void GORANKING()
+    {
+        SceneManager.LoadScene("06-Ranking");
+    }
+    public void GOBESTIARY()
+    {
+        SceneManager.LoadScene("05-Bestiario");
     }
 
     public void GOPETSMINIGAMES()
