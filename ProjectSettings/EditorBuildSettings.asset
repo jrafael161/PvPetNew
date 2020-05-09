@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShopScreen.unity
     guid: 9ad023639b759f5499434a228a0cc1e7
+  - enabled: 1
+    path: Assets/Scenes/05-Bestiario.unity
+    guid: 17ce517e6b99fdb43a3c4eeaabb2e953
+  - enabled: 1
+    path: Assets/Scenes/06-Ranking.unity
+    guid: 303c486a55c45a742b3cf98f1448f771
   m_configObjects: {}

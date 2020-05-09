@@ -34,7 +34,14 @@ public class HomeScript : MonoBehaviour
     {
         SceneManager.LoadScene("06-SHOP");
     }
-
+    public void GORANKING()
+    {
+        SceneManager.LoadScene("06-Ranking");
+    }
+    public void GOBESTIARY()
+    {
+        SceneManager.LoadScene("05-Bestiario");
+    }
 
 
 

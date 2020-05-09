@@ -265,8 +265,10 @@ public class DataBaseManager : MonoBehaviour
                             string CompanionPetAux = "Pet_" + GlobalControl.Instance.playeProfile.CompaninoPetSlot.ToString();
                             string AvailableMissionsAux = GlobalControl.Instance.playeProfile.AvailableMissions.ToString();
                             string TimeUntilMissionCooldownAux = GlobalControl.Instance.playeProfile.timeUntilMissionCooldown;
+                            string Wins = GlobalControl.Instance.playeProfile.Wins.ToString();
+                            string Loss = GlobalControl.Instance.playeProfile.Loss.ToString();
 
-                            User userUpdate = new User(usernameAux, profilepicAux, HPAux, LevelUpPointsAux, XPAux, StrengthAux, SpeedAux, AgilityAux, ArmorvAux, PvPCoinAux, PetCoinAux, PremiumCoinAux, CompanionPetAux, AvailableMissionsAux, TimeUntilMissionCooldownAux);
+                            User userUpdate = new User(usernameAux, profilepicAux, HPAux, LevelUpPointsAux, XPAux, StrengthAux, SpeedAux, AgilityAux, ArmorvAux, PvPCoinAux, PetCoinAux, PremiumCoinAux, CompanionPetAux, AvailableMissionsAux, TimeUntilMissionCooldownAux, Wins,Loss) ;
                             string json = JsonUtility.ToJson(userUpdate);
                             reference.Child("users").Child(Userid).SetRawJsonValueAsync(json);
                             string PetName;
