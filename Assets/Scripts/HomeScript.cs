@@ -35,7 +35,13 @@ public class HomeScript : MonoBehaviour
         SceneManager.LoadScene("06-SHOP");
     }
 
+    public void GOPETS()
+    {
+        SceneManager.LoadScene("PetSantuary");
+    }
 
-
-
+    public void GOPETSMINIGAMES()
+    {
+        SceneManager.LoadScene("PetMinigames");
+    }
 }
