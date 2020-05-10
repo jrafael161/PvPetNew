@@ -34,6 +34,10 @@ public class HomeScript : MonoBehaviour
     {
         SceneManager.LoadScene("06-SHOP");
     }
+
+    public void GOPETS()
+    {
+        SceneManager.LoadScene("PetSantuary");
     public void GORANKING()
     {
         SceneManager.LoadScene("06-Ranking");
@@ -43,6 +47,8 @@ public class HomeScript : MonoBehaviour
         SceneManager.LoadScene("05-Bestiario");
     }
 
-
-
+    public void GOPETSMINIGAMES()
+    {
+        SceneManager.LoadScene("PetMinigames");
+    }
 }

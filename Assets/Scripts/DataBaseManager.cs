@@ -265,10 +265,10 @@ public class DataBaseManager : MonoBehaviour
                             string CompanionPetAux = "Pet_" + GlobalControl.Instance.playeProfile.CompaninoPetSlot.ToString();
                             string AvailableMissionsAux = GlobalControl.Instance.playeProfile.AvailableMissions.ToString();
                             string TimeUntilMissionCooldownAux = GlobalControl.Instance.playeProfile.timeUntilMissionCooldown;
-                            string Wins = GlobalControl.Instance.playeProfile.Wins.ToString();
-                            string Loss = GlobalControl.Instance.playeProfile.Loss.ToString();
+                            string WinsAux = GlobalControl.Instance.playeProfile.Wins.ToString();
+                            string LosesAux = GlobalControl.Instance.playeProfile.Loss.ToString();
 
-                            User userUpdate = new User(usernameAux, profilepicAux, HPAux, LevelUpPointsAux, XPAux, StrengthAux, SpeedAux, AgilityAux, ArmorvAux, PvPCoinAux, PetCoinAux, PremiumCoinAux, CompanionPetAux, AvailableMissionsAux, TimeUntilMissionCooldownAux, Wins,Loss) ;
+                            User userUpdate = new User(usernameAux, profilepicAux, HPAux, LevelUpPointsAux, XPAux, StrengthAux, SpeedAux, AgilityAux, ArmorvAux, PvPCoinAux, PetCoinAux, PremiumCoinAux, CompanionPetAux, AvailableMissionsAux, TimeUntilMissionCooldownAux, DateTime.Now.ToString(), WinsAux, LosesAux);
                             string json = JsonUtility.ToJson(userUpdate);
                             reference.Child("users").Child(Userid).SetRawJsonValueAsync(json);
                             string PetName;
@@ -569,7 +569,7 @@ public class DataBaseManager : MonoBehaviour
         string userarm_pet = textArmorv_pet.text.ToString();
 
         
-        User user = new User(name, profileimg, userhp, "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_1","10","1990/01/01","0","0");
+        User user = new User(name, profileimg, userhp, "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_1","10","1990/01/01","0",DateTime.Now.ToString(),"0");
         string json = JsonUtility.ToJson(user);
         reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
         
@@ -993,12 +993,13 @@ public class User
     public string CompanionPet;
     public string AvailableMissions;
     public string TimeUntilMissionCooldown;
+    public string CloudSaveTimeStamp;
     public string Wins;
     public string Loss;
     public User()
     {
     }
-    public User(string username,string profilepic, string HP, string Level, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin,string CompanionPet, string AvailableMissions, string TimeUntilMissionCooldown , string Wins, string Loss)
+    public User(string username,string profilepic, string HP, string Level, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin,string CompanionPet, string AvailableMissions, string TimeUntilMissionCooldown, string cloudSaveTimeStamp, string Wins, string Loss)//string creationDate = null
     {
         this.username = username;
         this.profilepic = profilepic;
@@ -1015,6 +1016,7 @@ public class User
         this.CompanionPet = CompanionPet;
         this.AvailableMissions = AvailableMissions;
         this.TimeUntilMissionCooldown = TimeUntilMissionCooldown;
+        this.CloudSaveTimeStamp = cloudSaveTimeStamp;
         this.Wins = Wins;
         this.Loss = Loss;
     }
