@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Projectile
+  - ExplosiveProjectiles
   - Enemy
   layers:
   - Default
