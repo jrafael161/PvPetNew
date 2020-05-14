@@ -7,6 +7,7 @@ public class LevelUpManager : MonoBehaviour
 {
     static PlayerData player;
     public Button SaveChangesBtn;
+    PlayerResume playerResume;
     private void Start()
     {
         player = new PlayerData();
@@ -15,6 +16,7 @@ public class LevelUpManager : MonoBehaviour
 
     public void StatUp(int stat)
     {
+        SaveChangesBtn.gameObject.SetActive(true);
         switch (stat)
         {
             case 1:
@@ -23,7 +25,7 @@ public class LevelUpManager : MonoBehaviour
                     player.HP += 10;
                     player.Strength += 1;
                     player.LevelUpPoints -= 1;
-                }                    
+                }
                 break;
             case 2:
                 if (player.LevelUpPoints > 0)
@@ -31,7 +33,7 @@ public class LevelUpManager : MonoBehaviour
                     player.HP += 10;
                     player.Agility += 1;
                     player.LevelUpPoints -= 1;
-                }                    
+                }
                 break;
             case 3:
                 if (player.LevelUpPoints > 0)
@@ -39,16 +41,17 @@ public class LevelUpManager : MonoBehaviour
                     player.HP += 10;
                     player.Speed += 1;
                     player.LevelUpPoints -= 1;
-                }                    
+                }
                 break;
             default:
                 break;
-        }        
-        GlobalControl.Instance.InitializePlayerData(player);
+        }
+        playerResume.InitializePlayerData(player);
     }
 
     public void StatDown(int stat)
     {
+        SaveChangesBtn.gameObject.SetActive(true);
         switch (stat)
         {
             case 1:
@@ -79,8 +82,8 @@ public class LevelUpManager : MonoBehaviour
 
             default:
                 break;
-        }        
-        GlobalControl.Instance.InitializePlayerData(player);
+        }
+        playerResume.InitializePlayerData(player);
     }
 
     public void SaveChanges()
@@ -91,6 +94,7 @@ public class LevelUpManager : MonoBehaviour
         GlobalControl.Instance.playeProfile.Agility = player.Agility;
         GlobalControl.Instance.playeProfile.LevelUpPoints = player.LevelUpPoints;
         GlobalControl.Instance.SavePlayerData();
-        GlobalControl.Instance.InitializePlayerData();
+        playerResume.InitializePlayerData();
+        SaveChangesBtn.gameObject.SetActive(false);
     }
 }

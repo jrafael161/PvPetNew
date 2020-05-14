@@ -16,6 +16,7 @@ public class GearManager : MonoBehaviour
     public void SetSelectedInventory(GameObject dp)//Hace falta programar la funcion para esconder el dropdown cuando se deseleccione y que aparezca de nuevo la lista
     {
         int counter = 0;
+        int slot=0;
         dp.SetActive(true);
         List<string> m_DropOptions = new List<string>();
         Dropdown drp;
@@ -27,11 +28,15 @@ public class GearManager : MonoBehaviour
             {                
                 m_DropOptions.Add(item.name);
                 if (GlobalControl.Instance.playeProfile.EquipedGear[(int)GearSelect].name == item.name)
-                    drp.value = counter;
-            }
-            counter++;
+                {
+                    slot = counter;
+                }                                                        
+                counter++;
+            }            
         }
-        drp.AddOptions(m_DropOptions);    
+        drp.AddOptions(m_DropOptions);
+        drp.value = slot;//Setear el valua hasta que ya se crearon las opciones del dropdown
+        GlobalControl.Instance.SavePlayerData();
     }
 
     public void changeUserEquipedGear(string GearName)

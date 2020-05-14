@@ -10,6 +10,7 @@ public class Purchase : MonoBehaviour
     int ItemID;
     string Description;
     int UsingCoin;
+    PlayerResume playerResume;
 
     private void Start()
     {
@@ -61,7 +62,9 @@ public class Purchase : MonoBehaviour
             default:
                 break;
         }
-        GlobalControl.Instance.InitializePlayerData();
+        GlobalControl.Instance.SavePlayerData();
+        GlobalControl.Instance.SavePetsData();
+        playerResume.InitializePlayerData();
     }
 
     public void GetCurrentCurrency(GameObject CoinType)
