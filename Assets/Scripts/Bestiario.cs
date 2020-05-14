@@ -16,18 +16,20 @@ public class Bestiario : MonoBehaviour
     {
         GameObject OponentProfile, OponentProfileAux;
         Text[] Texto;
-        Image profileSprite;
+        Image[] profileSprite;
         OponentProfile = GameObject.Find("OponentProfile");
         for (int i = 0; i < GlobalControl.Instance.petDBManager.PetDB.Count; i++)
         {
             OponentProfileAux = Instantiate(OponentProfile) as GameObject;
             OponentProfileAux.SetActive(true);
             OponentProfileAux.transform.SetParent(OponentProfile.transform.parent, false);
-            profileSprite = OponentProfileAux.GetComponentInChildren<Image>();
-            profileSprite.sprite = GlobalControl.Instance.petDBManager.PetDB[i].PetSprite;
+
+
+            profileSprite = OponentProfileAux.GetComponentsInChildren<Image>();
+            profileSprite[1].sprite = GlobalControl.Instance.petDBManager.PetDB[i].PetSprite;
+            
             Texto = OponentProfileAux.GetComponentsInChildren<Text>();
             Texto[0].text = GlobalControl.Instance.petDBManager.PetDB[i].name;
-            Texto[1].text = GlobalControl.Instance.petDBManager.PetDB[i].Pt.ToString();
         }
         Destroy(OponentProfile);
     }
