@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class AgilityGame : MonoBehaviour
 {
@@ -14,9 +15,8 @@ public class AgilityGame : MonoBehaviour
     public GameObject explosiveProjectile;
     public GameObject miniProjectile;
     public Vector2 MousePos;
-    static float TimeBetweenPSpawn = 1;
-    static float TimeBetweenOSpawn = 1;
-    static int frames=0;
+    static float TimeBetweenPSpawn = 10;
+    static float TimeBetweenOSpawn = 10;
     private List<GameObject> Projectiles;
     private List<GameObject> TrackProjectiles;
     private List<Vector3> TrackingPos;
@@ -24,10 +24,19 @@ public class AgilityGame : MonoBehaviour
     private List<GameObject> ExplosiveProjectiles;
     private List<GameObject> MiniProjectiles;
     private List<Vector3> TrackingMiniPos;
-    //float ProjectileVelocity = 0.01f;
+    public float timeAtStart;
+    public float timePassed;
+
+    private Image playerSprite;
+    public TMP_Text Level;
+    public static int level = 0;
+    private static int lives=3;
+
+    bool m_Fading;
 
     void Start()
     {
+        playerSprite = player.GetComponent<Image>();
         Projectiles = new List<GameObject>();
         TrackProjectiles = new List<GameObject>();
         TrackingPos = new List<Vector3>();
@@ -46,22 +55,76 @@ public class AgilityGame : MonoBehaviour
         StartCoroutine("SpawnExplosiveProjectiles");
         StartCoroutine("MoveExplosiveProjectiles");        
         StartCoroutine("MoveMiniProjectile");
+        timeAtStart = Time.timeSinceLevelLoad;
+        timePassed = timeAtStart * 2;
     }
 
     // Update is called once per frame
     void Update()
-    {        
+    {
+        if (lives >= 0 && !player.activeInHierarchy)
+        {
+            lives--;
+            SpawnPlayer(SpawnPoint);
+        }
+        if(Time.timeSinceLevelLoad - timeAtStart > timePassed)
+        {
+            level++;
+            Level.text = "Level:" + level.ToString();
+            timePassed = timePassed * 2;
+        }
+            
     }
 
     public void SpawnPlayer(Transform spawnpoint)
     {
+        Debug.Log("Te quedan:" + lives + " vidas");
+        player.SetActive(true);
         player.transform.position = spawnpoint.transform.position;
+        Destroy(player.GetComponent<Rigidbody2D>());
         Eframes();
     }
 
     public void Eframes()
     {
-        //Darle Invulnerabilidad al jugador durante 3 o 5 seg cuando hace spawn
+        //player.GetComponent<Rigidbody2D>().gameObject.SetActive(false);
+        StartCoroutine("PlayerTwinkle");
+    }
+
+    IEnumerator PlayerTwinkle()
+    {
+        int twinkles = 0;
+        bool twinkled = false;
+        while (twinkles <5)
+        {
+            if (!twinkled)
+            {
+                var tempColor = playerSprite.color;
+                tempColor.a = 0;
+                playerSprite.color = tempColor;
+                twinkled = true;                
+                yield return new WaitForSeconds(0.1f);                
+            }
+            else
+            {
+                var tempColor = playerSprite.color;
+                tempColor.a = 255;
+                playerSprite.color = tempColor;
+                twinkled = false;
+                twinkles++;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        if (!player.GetComponent<Rigidbody2D>())
+        {
+            Rigidbody2D aux = player.AddComponent<Rigidbody2D>();
+            aux.bodyType = RigidbodyType2D.Kinematic;
+            aux.simulated = true;
+            aux.useFullKinematicContacts = true;
+            aux.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+            aux.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }        
+        yield return null;
     }
 
     void MovePlayer()
@@ -97,14 +160,13 @@ public class AgilityGame : MonoBehaviour
         while (true)
         {
 
-            if (Projectiles.Count < 5 && frames!=Time.frameCount)
+            if (Projectiles.Count < 5)
             {
                 Random.InitState((int)Time.time);
                 GameObject p = Instantiate(projectile, this.transform);
                 int pos_y = Random.Range(0, Screen.height);
                 p.transform.position = new Vector3(Screen.width + 100, pos_y, 0);
                 Projectiles.Add(p);
-                frames = Time.frameCount;
             }            
             yield return new WaitForSecondsRealtime(TimeBetweenPSpawn);
         }        
@@ -211,7 +273,7 @@ public class AgilityGame : MonoBehaviour
                 o.transform.position = new Vector3(Screen.width + 100, pos_y, 0);
                 Obstacles.Add(o);
             }
-            yield return new WaitForSecondsRealtime(Random.Range(0,10));
+            yield return new WaitForSecondsRealtime(Random.Range(0,TimeBetweenOSpawn));
         }
     }
 
@@ -291,7 +353,7 @@ public class AgilityGame : MonoBehaviour
             yield return null;
         }
     }
-
+    
     IEnumerator MoveMiniProjectile()
     {
         while (true)

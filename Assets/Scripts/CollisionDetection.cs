@@ -15,7 +15,8 @@ public class CollisionDetection : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
-            Debug.Log("El jugador choco con algo");
+            Debug.Log("Perdiste una vida");
+            collision.collider.gameObject.SetActive(false);            
         }
         if (collision.collider.tag == "ExplosiveProjectiles")
         {

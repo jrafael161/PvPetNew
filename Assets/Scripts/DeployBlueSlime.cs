@@ -15,9 +15,6 @@ public class DeployBlueSlime : MonoBehaviour
     public float Purplerespawn = 30.0f;
     public bool startBool = true;
     private Vector2 screenBounds;
-    
-
-
 
     void Start()
     {
