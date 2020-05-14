@@ -35,7 +35,7 @@ public class RankingController : MonoBehaviour
     {
         GameObject OponentProfile, OponentProfileAux;
         Text[] Texto;
-        Image profileSprite;
+        Image[] profileSprite;
         OponentProfile = GameObject.Find("OponentProfile");
         FirebaseDatabase.DefaultInstance.GetReference("Ranking").Child("top100").GetValueAsync().ContinueWith(task =>
         {
@@ -56,34 +56,36 @@ public class RankingController : MonoBehaviour
                             OponentProfileAux = Instantiate(OponentProfile) as GameObject;
                             OponentProfileAux.SetActive(true);
                             OponentProfileAux.transform.SetParent(OponentProfile.transform.parent, false);
-                            profileSprite = OponentProfileAux.GetComponentInChildren<Image>();
+                            profileSprite = OponentProfileAux.GetComponentsInChildren<Image>();
+                            profileSprite[0].enabled = true;
                             switch (enemstats["profilepic"].ToString())
                             {
                                 case "Profile_1":
-                                    profileSprite.sprite = sprite1;
+                                    profileSprite[1].sprite = sprite1;
                                     break;
                                 case "Profile_2":
-                                    profileSprite.sprite = sprite2;
+                                    profileSprite[1].sprite = sprite2;
                                     break;
                                 case "Profile_3":
-                                    profileSprite.sprite = sprite3;
+                                    profileSprite[1].sprite = sprite3;
                                     break;
                                 case "Profile_4":
-                                    profileSprite.sprite = sprite4;
+                                    profileSprite[1].sprite = sprite4;
                                     break;
                                 default:
                                     break;
                             }
                             Texto = OponentProfileAux.GetComponentsInChildren<Text>();
                             Texto[0].text = enemstats["username"].ToString();
-                            Texto[1].text = enemstats["Level"].ToString();
-                            Texto[2].text = enemstats["HP"].ToString();
-                            Texto[3].text = enemstats["Strength"].ToString();
-                            Texto[4].text = enemstats["Speed"].ToString();
-                            Texto[5].text = enemstats["Agility"].ToString();
-                            Destroy(OponentProfile);
+                            Texto[1].text = "Nivel:" + enemstats["Level"].ToString();
+                            Texto[2].text = "HP:" + enemstats["HP"].ToString();
+                            Texto[3].text = "STR:" + enemstats["Strength"].ToString();
+                            Texto[4].text = "SPE:" + enemstats["Speed"].ToString();
+                            Texto[5].text = "AGY:" + enemstats["Agility"].ToString();
 
                         }
+                        Destroy(OponentProfile);
+
                     });
                 }
             }
