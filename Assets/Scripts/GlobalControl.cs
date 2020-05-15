@@ -60,11 +60,12 @@ public class GlobalControl : MonoBehaviour
         GetPlayerData();
     }
 
+    /*
     private void Update()
     {
         if (ActiveScene != SceneManager.GetActiveScene())//Si la escena cambio, sacar esto del update y refactorizar el codigo para que el PlayerResume sea un objeto que tenga atacheado un script que manda a llamar el loadplayerdata
             LoadPlayerData();
-    }
+    }*/
 
     private void Awake()//Funcion que mantiene el GlobalControl entre escenas
     {
@@ -79,6 +80,7 @@ public class GlobalControl : MonoBehaviour
         }
     }
 
+    /*
     public void LoadPlayerData()//Se asegura que nos econtremos en una escena valida en la que se pueda cargar la informacion del jugador
     {
         ActiveScene = SceneManager.GetActiveScene();
@@ -175,6 +177,7 @@ public class GlobalControl : MonoBehaviour
             }                
         }
     }
+    */
 
     public void SetPlayerData()//Se tendran que obtener estos datos de preferencia del save en la nube de lo contrario del save local del dispositivo del jugador
     {

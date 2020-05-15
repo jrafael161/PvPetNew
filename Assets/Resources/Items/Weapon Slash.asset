@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Weapon Slash
   ItemID: 51
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e34f49fd7f5ae5542a9cec58591e77e0, type: 3}
   PvP_Price: 9999
   Pet_Price: 9999
   Prem_Price: 9999
