@@ -26,11 +26,12 @@ public class ItemsDBmanager
 
     public void Set_ItemDatabase()
     {       
-
+            
             ItemDB.Add(Resources.Load(resourcesPath + "Items/LeatherHelmet") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/LeatherVest") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/LeatherGauntlets") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/LeatherBoots") as Item);
+            ItemDB.Add(Resources.Load(resourcesPath + "Items/Weapon Slash") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/ShortSword") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Copper Helmet") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Copper Vest") as Item);
@@ -78,6 +79,5 @@ public class ItemsDBmanager
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Adamantite Boots") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Adamantite Sword") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Pet Sword") as Item);
-            ItemDB.Add(Resources.Load(resourcesPath + "Items/Weapon Slash") as Item);
     }
 }

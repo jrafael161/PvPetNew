@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Life Potion
   m_EditorClassIdentifier: 
   Name: Life Potion
-  ItemID: 5
+  ItemID: 51
   icon: {fileID: 0}
   PvP_Price: 20
   Pet_Price: 5
   Prem_Price: 1
   Description: A minor curation in battle, consumable.
   LevelRequirement: 1
-  Damage: 0
+  Value: 0
   Bonus_amount: 0
   Set: NA
   Bz: 5

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Net;
@@ -51,9 +52,9 @@ public class CheckInternetConnection
                 }
             }
         }
-        catch
+        catch (Exception e)
         {
-            return "";
+            Debug.Log(e);
         }
         return html;
     }

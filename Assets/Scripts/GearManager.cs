@@ -36,7 +36,7 @@ public class GearManager : MonoBehaviour
         }
         drp.AddOptions(m_DropOptions);
         drp.value = slot;//Setear el valua hasta que ya se crearon las opciones del dropdown
-        GlobalControl.Instance.SavePlayerData();
+        //GlobalControl.Instance.SavePlayerData();
     }
 
     public void changeUserEquipedGear(string GearName)
