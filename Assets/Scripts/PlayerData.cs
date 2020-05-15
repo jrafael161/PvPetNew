@@ -24,6 +24,7 @@ public class PlayerData
     public string timeUntilMissionCooldown;
     public string LocalSaveTimeStamp;
     public string DateOfUserRegistration;
+    public string SpriteName;
     public int CompaninoPetSlot;
     public Pet CompanionPet;
     public List<int> EquipedGearIDs;
