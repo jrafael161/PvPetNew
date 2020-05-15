@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 public class DataBaseManager : MonoBehaviour
 {
     private static DataBaseManager _instance;
+    private InputField Battletag;
 
     public static Firebase.Auth.FirebaseAuth auth;
     public static Firebase.Auth.FirebaseUser user;
@@ -22,39 +23,26 @@ public class DataBaseManager : MonoBehaviour
     public List<PlayerData> OponentList;
     static bool alredyFetchedFromDB = false;
 
-    public GameObject Panel;
-    public GameObject Panel_character;
-    public GameObject Panel_pet;
+    public GameObject Panel;// panel para battletag
 
-    public GameObject Animation_battletag;
-    public GameObject Animation_character;
-    public GameObject Animation_pet;
-
-    public GameObject img1;
+    public GameObject img1; //para crear user
     public GameObject img2;
     public GameObject img3;
     public GameObject img4;
 
-    public GameObject imgpet1;
+    public GameObject imgpet1;//para crear pet de user
     public GameObject imgpet2;
     public GameObject imgpet3;
     public GameObject imgpet4;
 
-    public Sprite sprite1;
+    public Sprite sprite1;//para cargar imagen de personaje
     public Sprite sprite2;
     public Sprite sprite3;
     public Sprite sprite4;
 
-    public Sprite spritepet1;
-    public Sprite spritepet2;
-    public Sprite spritepet3;
-    public Sprite spritepet4;
-
-
     public GameObject profilepic;
 
     [SerializeField]
-    private InputField Battletag;
     DatabaseReference reference;
     static bool internetConnection;
     CheckInternetConnection chkInt = new CheckInternetConnection();
@@ -95,147 +83,18 @@ public class DataBaseManager : MonoBehaviour
             }
         }
     }
-
     void DB()
     {
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pvpet-f0b05.firebaseio.com/Players/Pa5UU16uCzt6X1E1DJ6a");
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         _instance = this;
     }
-    /*void InitializeFirebase()
-    {
-        auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-        auth.StateChanged += AuthStateChanged;
-        AuthStateChanged(this, null);
-    }*/
     void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
         Checkforbattletag(GameController.userid);
     }
-    
-    public void Opencharacter()
-    {
-        Panel_character.SetActive(true); 
-        if (Animation_character != null)
-        {
-            Animator animator = Animation_character.GetComponent<Animator>();
-            if (animator != null)
-                animator.SetInteger("state_character", 1);
-        }
-    }
-    public void Openpet()
-    {
-        Panel_pet.SetActive(true);
-    }
-    public void Closecharacter()
-    {
-        if (Animation_character != null)
-        {
-            Animator animator = Animation_character.GetComponent<Animator>();
-            if (animator != null)
-                animator.SetInteger("state_character", 2);
-        }
-    }
-    public void Closepet()
-    {
-        Panel_pet.SetActive(false);
-    }
-
-    public void Cargadatos_user(string hp, string str, string agy, string spe, string arm)
-    {
-        Text textHP = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_pv_v").GetComponent<Text>();
-        Text textStrength = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_str_v").GetComponent<Text>();
-        Text textAgility = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_agy_v").GetComponent<Text>();
-        Text textSpeed = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_spe_v").GetComponent<Text>();
-        Text textArmorv = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_arm_v").GetComponent<Text>();
-        textHP.text = hp;
-        textStrength.text = str;
-        textAgility.text = agy;
-        textSpeed.text = spe;
-        textArmorv.text = arm;
-    }
-    public void Cargadatos_pet(string hp, string str, string agy, string spe, string arm)
-    {
-        Text textHP = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_pv_v_pet").GetComponent<Text>();
-        Text textStrength = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_str_v_pet").GetComponent<Text>();
-        Text textAgility = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_agy_v_pet").GetComponent<Text>();
-        Text textSpeed = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_spe_v_pet").GetComponent<Text>();
-        Text textArmorv = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_arm_v_pet").GetComponent<Text>();
-        textHP.text = hp;
-        textStrength.text = str;
-        textAgility.text = agy;
-        textSpeed.text = spe;
-        textArmorv.text = arm;
-    }
-
-    public void chechprofileimg1()
-    {
-        Cargadatos_user("10","5","1","1","0");
-        img1.SetActive(true);
-        img2.SetActive(false);
-        img3.SetActive(false);
-        img4.SetActive(false);
-    }
-    public void chechprofileimg2()
-    {
-        Cargadatos_user("7","4","2","2","0");
-        img1.SetActive(false);
-        img2.SetActive(true);
-        img3.SetActive(false);
-        img4.SetActive(false);
-    }
-    public void chechprofileimg3()
-    {
-        Cargadatos_user("15","3","1","1","0");
-        img1.SetActive(false);
-        img2.SetActive(false);
-        img3.SetActive(true);
-        img4.SetActive(false);
-    }
-    public void chechprofileimg4()
-    {
-        Cargadatos_user("10","3","1","4","0");
-        img1.SetActive(false);
-        img2.SetActive(false);
-        img3.SetActive(false);
-        img4.SetActive(true);
-    }
-    public void chechprofileimg1_pet()
-    {
-        Cargadatos_pet("5","7","2","2","1");
-        img1.SetActive(true);
-        img2.SetActive(false);
-        img3.SetActive(false);
-        img4.SetActive(false);
-    }
-    public void chechprofileimg2_pet()
-    {
-        Cargadatos_pet("10","3","4","3","1");
-        img1.SetActive(false);
-        img2.SetActive(true);
-        img3.SetActive(false);
-        img4.SetActive(false);
-    }
-    public void chechprofileimg3_pet()
-    {
-        Cargadatos_pet("10","4","3","3","1");
-        img1.SetActive(false);
-        img2.SetActive(false);
-        img3.SetActive(true);
-        img4.SetActive(false);
-    }
-    public void chechprofileimg4_pet()
-    {
-        Cargadatos_pet("15","5","1","1","1");
-        img1.SetActive(false);
-        img2.SetActive(false);
-        img3.SetActive(false);
-        img4.SetActive(true);
-    }
-
     public void Checkforbattletag(string Userid)
     {
-        //if (CheckInternetConnection.Instance.Check())
         Firebase.Database.FirebaseDatabase dbInstance = Firebase.Database.FirebaseDatabase.DefaultInstance;
         dbInstance.GetReference("users").GetValueAsync().ContinueWith(task =>
         {
@@ -295,7 +154,7 @@ public class DataBaseManager : MonoBehaviour
                             }                            
                             break;
                         }
-                        Text textusername = GameObject.Find("Canvas/bg_main/Lbl_Username").GetComponent<Text>();
+                        Text textusername = GameObject.Find("Canvas/Lbl_Username").GetComponent<Text>();
                         textusername.text = dictUser["username"].ToString();
 
                         Debug.Log(dictUser["profilepic"].ToString());
@@ -390,7 +249,11 @@ public class DataBaseManager : MonoBehaviour
             }
         });
     }
-
+    public void OpenPanel()
+    {
+        bool isActive = Panel.activeSelf;
+        Panel.SetActive(true);
+    }
     public void GetOponentList(string Nivel)
     {        
         FirebaseDatabase.DefaultInstance.GetReference("Nivel").Child(Nivel).GetValueAsync().ContinueWith(task =>
@@ -483,39 +346,11 @@ public class DataBaseManager : MonoBehaviour
 
         
     }
-
     public void AssignOponents()
     {
         PvPControl.Oponents = OponentList;
     }
-
-    public void Btn_go()
-    {
-        string Userid;
-        string Battletaguser = Battletag.text;        
-        if (internetConnection)
-        {
-            Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-            Userid = textuserid.text;
-            writeNewUser(Userid, Battletaguser);
-            Checkforbattletag(Userid);
-        }
-        else
-        {            
-            writeNewUserOffline();
-        }
-        Panel.SetActive(false);
-        Panel_character.SetActive(false);
-        Panel_pet.SetActive(false);
-    }
-
-    public void OpenPanel()
-    {
-        bool isActive = Panel.activeSelf;
-        Panel.SetActive(true);
-    }
-
-    private void updateUser(string userId, string name)
+    public void writeNewUser(string userId, string name)
     {
         bool profile1 = img1.activeSelf;
         bool profile2 = img2.activeSelf;
@@ -527,99 +362,18 @@ public class DataBaseManager : MonoBehaviour
         bool pet4 = imgpet4.activeSelf;
         string profileimg = "Profile_1";
         string initialpet = "Mimic Sword";
-        Text textHP = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_pv_v").GetComponent<Text>();
-        Text textStrength = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_str_v").GetComponent<Text>();
-        Text textAgility = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_agy_v").GetComponent<Text>();
-        Text textSpeed = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_spe_v").GetComponent<Text>();
-        Text textArmorv = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_arm_v").GetComponent<Text>();
-        Text textHP_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_pv_v_pet").GetComponent<Text>();
-        Text textStrength_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_str_v_pet").GetComponent<Text>();
-        Text textAgility_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_agy_v_pet").GetComponent<Text>();
-        Text textSpeed_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_spe_v_pet").GetComponent<Text>();
-        Text textArmorv_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_arm_v_pet").GetComponent<Text>();
+        
+        Text textHP = GameObject.Find("Canvas/Pn_Character/bg_character/bg_character_2/txt_pv_v").GetComponent<Text>();
+        Text textStrength = GameObject.Find("Canvas/Pn_Character/bg_character/bg_character_2/txt_str_v").GetComponent<Text>();
+        Text textAgility = GameObject.Find("Canvas/Pn_Character/bg_character/bg_character_2/txt_agy_v").GetComponent<Text>();
+        Text textSpeed = GameObject.Find("Canvas/Pn_Character/bg_character/bg_character_2/txt_spe_v").GetComponent<Text>();
+        Text textArmorv = GameObject.Find("Canvas/Pn_Character/bg_character/bg_character_2/txt_arm_v").GetComponent<Text>();
 
-        if (profile1)
-            profileimg = "Profile_1";
-        if (profile2)
-            profileimg = "Profile_2";
-        if (profile3)
-            profileimg = "Profile_3";
-        if (profile4)
-            profileimg = "Profile_4";
-
-        if (pet1)
-            initialpet = "Mimic Sword";
-        if (pet2)
-            initialpet = "Toucan Panther";
-        if (pet3)
-            initialpet = "Gunblin";
-        if (pet4)
-            initialpet = "Rock golem";
-
-        string userhp = textHP.text.ToString();
-        string userstr = textStrength.text.ToString();
-        string useragy = textAgility.text.ToString();
-        string userspe = textSpeed.text.ToString();
-        string userarm = textArmorv.text.ToString();
-
-        string userhp_pet = textHP_pet.text.ToString();
-        string userstr_pet = textStrength_pet.text.ToString();
-        string useragy_pet = textAgility_pet.text.ToString();
-        string userspe_pet = textSpeed_pet.text.ToString();
-        string userarm_pet = textArmorv_pet.text.ToString();
-
-
-        User user = new User(name, profileimg, userhp, "5", "1", userstr, userspe, useragy, userarm, "0", "0", "0", "Pet_1", "10", "1990/01/01", "0", DateTime.Now.ToString(), "0");
-        string json = JsonUtility.ToJson(user);
-        reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
-
-        EquipedItems equipedItems = new EquipedItems("1");
-        json = JsonUtility.ToJson(equipedItems);
-        reference.Child("users/" + userId).Child("EquipedItems").SetRawJsonValueAsync(json);
-
-        Inventory inventory = new Inventory("0", "1", "2", "3", "4");
-        json = JsonUtility.ToJson(inventory);
-        reference.Child("users/" + userId).Child("Inventory").SetRawJsonValueAsync(json);
-
-        //PveU PveU = new PveU("10");
-        //json = JsonUtility.ToJson(PveU);
-        //reference.Child("users/" + userId).Child("PVE").SetRawJsonValueAsync(json);
-
-        Equipedgear Equipedgear = new Equipedgear("0", "1", "2", "3", "4");
-        json = JsonUtility.ToJson(Equipedgear);
-        reference.Child("users/" + userId).Child("Equipedgear").SetRawJsonValueAsync(json);
-
-        Initialpet iniatialpet = new Initialpet(initialpet, userhp_pet, userstr_pet, useragy_pet, userspe_pet, userarm_pet, "1");
-        json = JsonUtility.ToJson(iniatialpet);
-        reference.Child("users/" + userId).Child("Pets").Child("Pet_1").SetRawJsonValueAsync(json);
-
-        Nivel nivel = new Nivel("1");
-        json = JsonUtility.ToJson(nivel);
-        reference.Child("Nivel").Child("1").Child(userId).SetRawJsonValueAsync(json);
-    }
-
-    private void writeNewUser(string userId, string name)
-    {
-        bool profile1 = img1.activeSelf;
-        bool profile2 = img2.activeSelf;
-        bool profile3 = img3.activeSelf;
-        bool profile4 = img4.activeSelf;
-        bool pet1 = imgpet1.activeSelf;
-        bool pet2 = imgpet2.activeSelf;
-        bool pet3 = imgpet3.activeSelf;
-        bool pet4 = imgpet4.activeSelf;
-        string profileimg = "Profile_1";
-        string initialpet = "Mimic Sword";
-        Text textHP = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_pv_v").GetComponent<Text>();
-        Text textStrength = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_str_v").GetComponent<Text>();
-        Text textAgility = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_agy_v").GetComponent<Text>();
-        Text textSpeed = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_spe_v").GetComponent<Text>();
-        Text textArmorv = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_arm_v").GetComponent<Text>();
-        Text textHP_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_pv_v_pet").GetComponent<Text>();
-        Text textStrength_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_str_v_pet").GetComponent<Text>();
-        Text textAgility_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_agy_v_pet").GetComponent<Text>();
-        Text textSpeed_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_spe_v_pet").GetComponent<Text>();
-        Text textArmorv_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_arm_v_pet").GetComponent<Text>();
+        Text textHP_pet = GameObject.Find("Canvas/Pn_pet/bg_pet/bg_pet_2/txt_pv_v_pet").GetComponent<Text>();
+        Text textStrength_pet = GameObject.Find("Canvas/Pn_pet/bg_pet/bg_pet_2/txt_str_v_pet").GetComponent<Text>();
+        Text textAgility_pet = GameObject.Find("Canvas/Pn_pet/bg_pet/bg_pet_2/txt_agy_v_pet").GetComponent<Text>();
+        Text textSpeed_pet = GameObject.Find("Canvas/Pn_pet/bg_pet/bg_pet_2/txt_spe_v_pet").GetComponent<Text>();
+        Text textArmorv_pet = GameObject.Find("Canvas/Pn_pet/bg_pet/bg_pet_2/txt_arm_v_pet").GetComponent<Text>();
 
         if (profile1)
             profileimg = "Profile_1";
@@ -680,8 +434,7 @@ public class DataBaseManager : MonoBehaviour
         json = JsonUtility.ToJson(nivel);
         reference.Child("Nivel").Child("1").Child(userId).SetRawJsonValueAsync(json);
     }
-
-    private void writeNewUserOffline()
+    public void writeNewUserOffline()
     {        
         bool profile1 = img1.activeSelf;
         bool profile2 = img2.activeSelf;
@@ -693,16 +446,16 @@ public class DataBaseManager : MonoBehaviour
         bool pet4 = imgpet4.activeSelf;
         string profileimg = "Profile_1";
         string initialpet = "Mimic Sword";
-        Text textHP = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_pv_v").GetComponent<Text>();
-        Text textStrength = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_str_v").GetComponent<Text>();
-        Text textAgility = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_agy_v").GetComponent<Text>();
-        Text textSpeed = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_spe_v").GetComponent<Text>();
-        Text textArmorv = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_arm_v").GetComponent<Text>();
-        Text textHP_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_pv_v_pet").GetComponent<Text>();
-        Text textStrength_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_str_v_pet").GetComponent<Text>();
-        Text textAgility_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_agy_v_pet").GetComponent<Text>();
-        Text textSpeed_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_spe_v_pet").GetComponent<Text>();
-        Text textArmorv_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_arm_v_pet").GetComponent<Text>();
+        Text textHP = GameObject.Find("Canvas/Pn_Character/bg_character/bg_character_2/txt_pv_v").GetComponent<Text>();
+        Text textStrength = GameObject.Find("Canvas/Pn_Character/bg_character/bg_character_2/txt_str_v").GetComponent<Text>();
+        Text textAgility = GameObject.Find("Canvas/Pn_Character/bg_character/bg_character_2/txt_agy_v").GetComponent<Text>();
+        Text textSpeed = GameObject.Find("Canvas/Pn_Character/bg_character/bg_character_2/txt_spe_v").GetComponent<Text>();
+        Text textArmorv = GameObject.Find("Canvas/Pn_Character/bg_character/bg_character_2/txt_arm_v").GetComponent<Text>();
+        Text textHP_pet = GameObject.Find("Canvas/Pn_pet/bg_pet/bg_pet_2/txt_pv_v_pet").GetComponent<Text>();
+        Text textStrength_pet = GameObject.Find("Canvas/bg_pet/bg_pet_2/txt_str_v_pet").GetComponent<Text>();
+        Text textAgility_pet = GameObject.Find("Canvas/bg_pet/bg_pet_2/txt_agy_v_pet").GetComponent<Text>();
+        Text textSpeed_pet = GameObject.Find("Canvas/bg_pet/bg_pet_2/txt_spe_v_pet").GetComponent<Text>();
+        Text textArmorv_pet = GameObject.Find("Canvas/bg_pet/bg_pet_2/txt_arm_v_pet").GetComponent<Text>();
 
         if (profile1)
             profileimg = "Profile_1";
@@ -805,13 +558,6 @@ public class DataBaseManager : MonoBehaviour
         GlobalControl.Instance.SavePlayerData();
         GlobalControl.Instance.SavePetsData();
     }
-
-    public void SignOut()
-    {
-        SceneManager.LoadScene("00-Login");
-
-    }
-
     /*public void createpets()
     {
         string json;
