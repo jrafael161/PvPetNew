@@ -26,7 +26,9 @@ MonoBehaviour:
   ProbTormento: 0
   ProbPetHunter: 0
   Pt: 0
+  HP: 5
   Level: 1
+  XP: 0
   Strength: 5
   Speed: 2
   Agility: 2

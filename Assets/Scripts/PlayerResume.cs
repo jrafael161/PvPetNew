@@ -89,7 +89,6 @@ public class PlayerResume : MonoBehaviour
         Text[] Texto;
         foreach (Pet pet in player.OwnedPets)
         {
-            Pet aux;
             OwnedPetAux = Instantiate(OwnedPet) as GameObject;
             //OwnedPetAux.SetActive(true);
             OwnedPetAux.transform.SetParent(OwnedPet.transform.parent, false);

@@ -406,7 +406,7 @@ public class BattleController : MonoBehaviour
         petAsPlayer.Agility = player.CompanionPet.Agility;
         petAsPlayer.Armor = player.CompanionPet.Armor;
         petAsPlayer.critic_prob = player.CompanionPet.critic_prob;
-        petAsPlayer.EquipedItems.Add(player.CompanionPet.PetItem);
+        //petAsPlayer.EquipedItems.Add(player.CompanionPet.PetItem);
         petAsPlayer.Inventory = null;
 
         petAsPlayer.EquipedGear = new List<Item>(4);

@@ -12,16 +12,10 @@ public class GlobalControl : MonoBehaviour
     public PlayerData playeProfile = new PlayerData();
     public PlayerData oponentProfile = new PlayerData();
     public ItemsDBmanager itemDataBase = new ItemsDBmanager();
-    public DataBaseManager dataBaseManager;
     public AbilitiesDBmanager abilitiesDataBase = new AbilitiesDBmanager();
     public PetDBManager petDBManager = new PetDBManager();
     public AbilitiesHandler abilitiesHandler = new AbilitiesHandler();
-    public MainScene mainScene = new MainScene();
-    //public BattleController battleController;    
-
-    public Scene ActiveScene;
-    int NumberOfStats;
-    int NumberOfCoins;
+    //public BattleController battleController;
 
     public int hp=0,xp=0,Lv=0,Str=0,Spd=0,Agl=0,Arm=0,PvpC=0,PetC=0,PremC=0;
 
@@ -32,8 +26,6 @@ public class GlobalControl : MonoBehaviour
 
     private void Start()
     {
-        NumberOfStats = 2;//3 por que se cuenta el 0
-        NumberOfCoins = 2;
 #if UNITY_ANDROID && !UNITY_EDITOR
         Debug.Log("Si, estamos en android");
         Debug.Log(Application.persistentDataPath);
@@ -52,12 +44,11 @@ public class GlobalControl : MonoBehaviour
         petDBManager.Initialize();
         //battleController = gameObject.AddComponent(typeof(BattleController)) as BattleController;
         //battleController.Initialize();
-        mainScene.Initialize();
         //Si el dispositivo tiene conexion a internet, jala datos de firebase de lo contrario del save local.
         //SetPlayerData();
         //LoadPlayerData();                
         //ActiveScene = SceneManager.GetActiveScene();        
-        GetPlayerData();
+        //GetPlayerData();
     }
 
     /*
@@ -71,7 +62,7 @@ public class GlobalControl : MonoBehaviour
     {
         if (_instance == null)
         {
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this.gameObject);
             _instance = this;
         }
         else if (_instance != this)
@@ -79,105 +70,6 @@ public class GlobalControl : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    /*
-    public void LoadPlayerData()//Se asegura que nos econtremos en una escena valida en la que se pueda cargar la informacion del jugador
-    {
-        ActiveScene = SceneManager.GetActiveScene();
-        if (ActiveScene.name == "PvPScreen")
-        {
-            InitializePlayerData();
-        }            
-        else if (ActiveScene.name == "ShopScreen")
-        {
-            InitializePlayerData();
-        }
-    }
-
-    public void InitializePlayerData(PlayerData player = null)//Se muestra la informacion del jugador segun lo requerido
-    {
-        if (player == null)
-        {
-            player = playeProfile;
-        }
-        bool leveled=false;
-        Slider sli;       
-        Text hp_Text;
-        GameObject hpStat,currency;
-        GameObject [] stats = new GameObject[3];        
-        Text[] PlayerCoins = new Text[3];
-        stats[0] = GameObject.Find("StrengthStat");
-        stats[1] = GameObject.Find("AgilityStat");
-        stats[2] = GameObject.Find("SpeedStat");
-        hpStat = GameObject.Find("HPStat");
-        currency = GameObject.Find("Currency");
-        PlayerCoins = currency.GetComponentsInChildren<Text>();
-        hp_Text = hpStat.GetComponentInChildren<Text>();
-        hp_Text.text = "HP:" + player.HP.ToString();
-        for (int i = 0; i <= NumberOfStats; i++)
-        {
-            sli = stats[i].GetComponentInChildren<Slider>();            
-            switch (i)
-            {
-                case 0:
-                    sli.value = player.Strength;
-                break;
-                case 1:
-                    sli.value = player.Agility;                    
-                    break;
-                case 2:
-                    sli.value = player.Speed;                    
-                    break;
-                default:
-                    break;
-            }
-        }
-        for (int i = 0; i <= NumberOfCoins; i++)
-        {
-            switch (i)
-            {
-                case 0:
-                    PlayerCoins[i].text = player.PetCoin.ToString();
-                    break;
-                case 1:
-                    PlayerCoins[i].text = player.PvPCoin.ToString();
-                    break;
-                case 2:
-                    PlayerCoins[i].text = player.PremiumCoin.ToString();
-                    break;
-                default:
-                    break;
-            }
-        }
-        if (player.LevelUpPoints >= 1)
-        {
-            foreach (GameObject stat in stats)
-            {
-                Button[] levelControlers = stat.GetComponentsInChildren<Button>(true);
-                foreach (Button but in levelControlers)
-                {
-                    but.gameObject.SetActive(true);
-                }
-            }
-            leveled = true;
-        }
-        else if(player == null && player.LevelUpPoints == 0)
-        {
-            if (leveled)
-            {
-                foreach (GameObject stat in stats)
-                {
-                    Button[] levelControlers = stat.GetComponentsInChildren<Button>(true);
-                    foreach (Button but in levelControlers)
-                    {
-                        but.gameObject.SetActive(false);
-                    }
-                }
-                leveled = false;
-            }                
-        }
-    }
-    */
 
     public void SetPlayerData()//Se tendran que obtener estos datos de preferencia del save en la nube de lo contrario del save local del dispositivo del jugador
     {
@@ -245,37 +137,26 @@ public class GlobalControl : MonoBehaviour
         else
         {
             playeProfile = JsonUtility.FromJson<PlayerData>(json);//Setea los dato obtenidos
-            if (playeProfile.EquipedGear == null)
+            playeProfile.EquipedGear = new List<Item>();
+            foreach (int itemID in playeProfile.EquipedGearIDs)
             {
-                playeProfile.EquipedGear = new List<Item>();
-                foreach (int itemID in playeProfile.EquipedGearIDs)
-                {
-                    playeProfile.EquipedGear.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
-                }
+                playeProfile.EquipedGear.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
             }
-            if (playeProfile.EquipedItems == null)
-            {
                 playeProfile.EquipedItems = new List<Item>();
-                foreach (int itemID in playeProfile.EquipedItemsIDs)
-                {
-                    playeProfile.EquipedItems.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
-                }
-            }
-            if (playeProfile.Inventory == null)
+            foreach (int itemID in playeProfile.EquipedItemsIDs)
             {
+                playeProfile.EquipedItems.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
+            }
                 playeProfile.Inventory = new List<Item>();
-                foreach (int itemID in playeProfile.InventoryItemsIDs)
-                {                    
-                    playeProfile.Inventory.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
-                }
-            }
-            if (playeProfile.OwnedPets == null)
+            foreach (int itemID in playeProfile.InventoryItemsIDs)
             {
+                playeProfile.Inventory.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
+            }
                 playeProfile.OwnedPets = new List<Pet>();
-                for (int i = 0; i < playeProfile.OwnedPetsIDs.Count; i++)
-                {
-                    Pet auxPet;
-                    string jsonPet=null;
+            for (int i = 0; i < playeProfile.OwnedPetsIDs.Count; i++)
+            {
+                PetForJson auxPet;
+                string jsonPet = null;
 #if UNITY_ANDROID && !UNITY_EDITOR
         if (File.Exists(Application.persistentDataPath + "/pet_" + i.ToString() + ".json"))
         {
@@ -283,15 +164,30 @@ public class GlobalControl : MonoBehaviour
         }        
 #endif
 #if UNITY_EDITOR
-                    jsonPet = File.ReadAllText(Application.dataPath + "/pet_" + i.ToString() + ".json");
+                jsonPet = File.ReadAllText(Application.dataPath + "/pet_" + i.ToString() + ".json");
 #endif
-                    auxPet = JsonUtility.FromJson<Pet>(jsonPet);
-                    if (i == playeProfile.CompaninoPetSlot)
-                    {
-                        playeProfile.CompanionPet = auxPet;
-                    }
-                    playeProfile.OwnedPets.Add(auxPet);
+                auxPet = JsonUtility.FromJson<PetForJson>(jsonPet);
+                Pet pet = ScriptableObject.CreateInstance("Pet") as Pet;
+                pet = petDBManager.PetDB.Find(x => x.PetID == playeProfile.OwnedPetsIDs[i]);
+                pet.Clase = auxPet.Clase;
+                pet.Mision = auxPet.Mision;
+                pet.PetID = auxPet.PetID;
+                pet.PetName = auxPet.PetName;
+                pet.Pt = auxPet.Pt;
+                pet.HP = auxPet.HP;
+                pet.Level = auxPet.Level;
+                pet.XP = auxPet.XP;
+                pet.Strength = auxPet.Strength;
+                pet.Speed = auxPet.Speed;
+                pet.Agility = auxPet.Agility;
+                pet.Armor = auxPet.Armor;
+                pet.critic_prob = auxPet.critic_prob;
+                //falta el pet item
+                if (i == playeProfile.CompanionPetSlot)
+                {
+                    playeProfile.CompanionPet = pet;
                 }
+                playeProfile.OwnedPets.Add(pet);
             }
             return true;
         }
@@ -314,11 +210,31 @@ public class GlobalControl : MonoBehaviour
 #endif
     }
 
-    public void SavePetsData()
+    public void SavePetsData()//Se tuvo que crear una con los mismos datos de pet por que las clases que heredan de serialazable object no pueden serializarse con json
     {
         for (int i = 0; i < playeProfile.OwnedPets.Count; i++)
         {
-            string jsonstr = JsonUtility.ToJson(playeProfile.OwnedPets[i]);
+            PetForJson AuxPet = new PetForJson();
+            AuxPet.Clase = playeProfile.OwnedPets[i].Clase;
+            AuxPet.Mision = playeProfile.OwnedPets[i].Mision;
+            AuxPet.PetSprite = playeProfile.OwnedPets[i].PetSprite;
+            AuxPet.PetID = playeProfile.OwnedPets[i].PetID;
+            AuxPet.PetName = playeProfile.OwnedPets[i].PetName;
+            AuxPet.Pt = playeProfile.OwnedPets[i].Pt;
+            AuxPet.HP = playeProfile.OwnedPets[i].HP;
+            AuxPet.Level = playeProfile.OwnedPets[i].Level;
+            AuxPet.XP = playeProfile.OwnedPets[i].XP;
+            AuxPet.Strength = playeProfile.OwnedPets[i].Strength;
+            AuxPet.Speed = playeProfile.OwnedPets[i].Speed;
+            AuxPet.Agility = playeProfile.OwnedPets[i].Agility;
+            AuxPet.Armor = playeProfile.OwnedPets[i].Armor;
+            AuxPet.critic_prob = playeProfile.OwnedPets[i].critic_prob;
+            /*
+            if(playeProfile.OwnedPets[i].PetItem != null)
+            {
+                AuxPet.PetItemID = playeProfile.OwnedPets[i].PetItem.ItemID;
+            }*/           
+            string jsonstr = JsonUtility.ToJson(AuxPet);
 #if UNITY_ANDROID && !UNITY_EDITOR
         if (!File.Exists(Application.persistentDataPath + "/pet_" + i.ToString() + ".json"))
         {

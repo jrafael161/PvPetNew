@@ -1,12 +1,8 @@
 ﻿using System.Collections;
-using UnityEngine.UI;
+using System.Collections.Generic;
 using UnityEngine;
 
-public enum PetTier { Normal, PocoComun , Raro, Legendario, Epico };
-
-[CreateAssetMenu(fileName = "New Pet", menuName = "Inventory/Pet")]
-
-public class Pet : ScriptableObject//Wachar cual es el campo que no deja que se serialice el script
+public class PetForJson
 {
     public int Clase;
     public int Mision;
@@ -30,5 +26,6 @@ public class Pet : ScriptableObject//Wachar cual es el campo que no deja que se 
     public int Agility;
     public int Armor;
     public float critic_prob;
-    public Item PetItem;
+    //public Item PetItem;
+    public int PetItemID;
 }

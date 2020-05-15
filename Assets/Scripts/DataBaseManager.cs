@@ -12,6 +12,12 @@ using UnityEngine.SceneManagement;
 public class DataBaseManager : MonoBehaviour
 {
     private static DataBaseManager _instance;
+
+    public static DataBaseManager Instance
+    {
+        get { return _instance; }
+    }
+
     private InputField Battletag;
 
     public static Firebase.Auth.FirebaseAuth auth;
@@ -22,6 +28,8 @@ public class DataBaseManager : MonoBehaviour
     private bool registered;
     public List<PlayerData> OponentList;
     static bool alredyFetchedFromDB = false;
+
+    static bool firstTime = false;//Indica si se acaba de crear el usuario, por lo tanto no habia un json contra el que comparar datos
 
     public GameObject Panel;// panel para battletag
 
@@ -46,15 +54,13 @@ public class DataBaseManager : MonoBehaviour
     DatabaseReference reference;
     static bool internetConnection;
     CheckInternetConnection chkInt = new CheckInternetConnection();
-
-    public static DataBaseManager Instance
-    {
-        get { return _instance; }
-    }
+    MainScene mainScene;
 
     void Start()
     {
         _instance = this;
+        //this.gameObject.AddComponent<MainScene>();
+        //mainScene = GetComponent<MainScene>();
         OponentList = new List<PlayerData>();
         internetConnection = chkInt.Check();
         if (internetConnection)
@@ -68,14 +74,15 @@ public class DataBaseManager : MonoBehaviour
             }
             else
             {
-                GlobalControl.Instance.mainScene.InitializeScene();
+                //Cargar la main scene pero con datos del playerprofile
             }
         }
         else
         {
             if (GlobalControl.Instance.GetPlayerData())
             {
-                MainScene.Instance.InitializeScene();
+                //MainScene.Instance.InitializeScene();
+                //Cargar la main scene pero con datos del playerprofile
             }
             else
             {
@@ -83,16 +90,32 @@ public class DataBaseManager : MonoBehaviour
             }
         }
     }
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            _instance = this;
+        }
+        else if (_instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void DB()
     {
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pvpet-f0b05.firebaseio.com/Players/Pa5UU16uCzt6X1E1DJ6a");
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         _instance = this;
     }
+
     void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
         Checkforbattletag(GameController.userid);
     }
+
     public void Checkforbattletag(string Userid)
     {
         Firebase.Database.FirebaseDatabase dbInstance = Firebase.Database.FirebaseDatabase.DefaultInstance;
@@ -106,53 +129,59 @@ public class DataBaseManager : MonoBehaviour
                     if (user.Key == Userid)
                     {
                         IDictionary dictUser = (IDictionary)user.Value;
-                        if (false)//DateTime.Parse(dictUser["DatabaseSaveTimeStamp"].ToString()) < DateTime.Parse(GlobalControl.Instance.playeProfile.LocalSaveTimeStamp)
+                        if (!firstTime)
                         {
-                            string usernameAux = GlobalControl.Instance.playeProfile.BattleTag;
-                            string profilepicAux = GlobalControl.Instance.playeProfile.PlayerSprite.name;
-                            string HPAux = GlobalControl.Instance.playeProfile.HP.ToString();
-                            string LevelAux = GlobalControl.Instance.playeProfile.Level.ToString();
-                            string LevelUpPointsAux = GlobalControl.Instance.playeProfile.Level.ToString();
-                            string XPAux = GlobalControl.Instance.playeProfile.XP.ToString();
-                            string StrengthAux = GlobalControl.Instance.playeProfile.Strength.ToString();
-                            string SpeedAux = GlobalControl.Instance.playeProfile.Speed.ToString();
-                            string AgilityAux = GlobalControl.Instance.playeProfile.Agility.ToString();
-                            string ArmorvAux = GlobalControl.Instance.playeProfile.Armor.ToString();
-                            string PvPCoinAux = GlobalControl.Instance.playeProfile.PvPCoin.ToString();
-                            string PetCoinAux = GlobalControl.Instance.playeProfile.PetCoin.ToString();
-                            string PremiumCoinAux = GlobalControl.Instance.playeProfile.PremiumCoin.ToString();
-                            string CompanionPetAux = "Pet_" + GlobalControl.Instance.playeProfile.CompaninoPetSlot.ToString();
-                            string AvailableMissionsAux = GlobalControl.Instance.playeProfile.AvailableMissions.ToString();
-                            string TimeUntilMissionCooldownAux = GlobalControl.Instance.playeProfile.timeUntilMissionCooldown;
-                            string WinsAux = GlobalControl.Instance.playeProfile.Wins.ToString();
-                            string LosesAux = GlobalControl.Instance.playeProfile.Loss.ToString();
-
-                            User userUpdate = new User(usernameAux, profilepicAux, HPAux, LevelUpPointsAux, XPAux, StrengthAux, SpeedAux, AgilityAux, ArmorvAux, PvPCoinAux, PetCoinAux, PremiumCoinAux, CompanionPetAux, AvailableMissionsAux, TimeUntilMissionCooldownAux, DateTime.Now.ToString(), WinsAux, LosesAux);
-                            string json = JsonUtility.ToJson(userUpdate);
-                            reference.Child("users").Child(Userid).SetRawJsonValueAsync(json);
-                            string PetName;
-                            string PetHP;
-                            string PetSTR;
-                            string PetAGY;
-                            string PetSPE;
-                            string PetARM;
-                            string PetLV;
-
-                            for (int i = 1; i < GlobalControl.Instance.playeProfile.OwnedPets.Count; i++)
+                            if (false)//DateTime.Parse(dictUser["CloudSaveTimeStamp"].ToString()) < DateTime.Parse(GlobalControl.Instance.playeProfile.LocalSaveTimeStamp) no se esta guardando el time stamp en la nube
                             {
-                                PetName = GlobalControl.Instance.playeProfile.OwnedPets[i].PetName;
-                                PetHP = GlobalControl.Instance.playeProfile.OwnedPets[i].HP.ToString();
-                                PetSTR = GlobalControl.Instance.playeProfile.OwnedPets[i].Strength.ToString();
-                                PetAGY = GlobalControl.Instance.playeProfile.OwnedPets[i].Agility.ToString();
-                                PetSPE = GlobalControl.Instance.playeProfile.OwnedPets[i].Speed.ToString();
-                                PetARM = GlobalControl.Instance.playeProfile.OwnedPets[i].Armor.ToString();
-                                PetLV = GlobalControl.Instance.playeProfile.OwnedPets[i].Level.ToString();
+                                string usernameAux = GlobalControl.Instance.playeProfile.BattleTag;
+                                string profilepicAux = GlobalControl.Instance.playeProfile.PlayerSprite.name;
+                                string HPAux = GlobalControl.Instance.playeProfile.HP.ToString();
+                                string LevelAux = GlobalControl.Instance.playeProfile.Level.ToString();
+                                string LevelUpPointsAux = GlobalControl.Instance.playeProfile.Level.ToString();
+                                string XPAux = GlobalControl.Instance.playeProfile.XP.ToString();
+                                string StrengthAux = GlobalControl.Instance.playeProfile.Strength.ToString();
+                                string SpeedAux = GlobalControl.Instance.playeProfile.Speed.ToString();
+                                string AgilityAux = GlobalControl.Instance.playeProfile.Agility.ToString();
+                                string ArmorvAux = GlobalControl.Instance.playeProfile.Armor.ToString();
+                                string PvPCoinAux = GlobalControl.Instance.playeProfile.PvPCoin.ToString();
+                                string PetCoinAux = GlobalControl.Instance.playeProfile.PetCoin.ToString();
+                                string PremiumCoinAux = GlobalControl.Instance.playeProfile.PremiumCoin.ToString();
+                                string CompanionPetAux = "Pet_" + GlobalControl.Instance.playeProfile.CompanionPetSlot.ToString();
+                                string AvailableMissionsAux = GlobalControl.Instance.playeProfile.AvailableMissions.ToString();
+                                string TimeUntilMissionCooldownAux = GlobalControl.Instance.playeProfile.timeUntilMissionCooldown;
+                                string WinsAux = GlobalControl.Instance.playeProfile.Wins.ToString();
+                                string LosesAux = GlobalControl.Instance.playeProfile.Loss.ToString();
 
-                                Initialpet iniatialpet = new Initialpet(PetName, PetHP, PetSTR, PetAGY, PetSPE, PetARM, PetLV);
-                                json = JsonUtility.ToJson(iniatialpet);
-                                reference.Child("users/" + Userid).Child("Pets").Child("Pet_" + i.ToString()).SetRawJsonValueAsync(json);
-                            }                            
-                            break;
+                                User userUpdate = new User(usernameAux, profilepicAux, HPAux, LevelAux, LevelUpPointsAux, XPAux, StrengthAux, SpeedAux, AgilityAux, ArmorvAux, PvPCoinAux, PetCoinAux, PremiumCoinAux, CompanionPetAux, AvailableMissionsAux, TimeUntilMissionCooldownAux, DateTime.Now.ToString(), WinsAux, LosesAux);
+                                string json = JsonUtility.ToJson(userUpdate);
+                                reference.Child("users").Child(Userid).SetRawJsonValueAsync(json);
+                                string PetName;
+                                string PetID;
+                                string PetHP;
+                                string PetSTR;
+                                string PetAGY;
+                                string PetSPE;
+                                string PetARM;
+                                string PetLV;
+
+                                for (int i = 1; i < GlobalControl.Instance.playeProfile.OwnedPets.Count; i++)
+                                {
+                                    PetName = GlobalControl.Instance.playeProfile.OwnedPets[i].PetName;
+                                    PetID = GlobalControl.Instance.playeProfile.OwnedPets[i].PetID.ToString();
+                                    PetHP = GlobalControl.Instance.playeProfile.OwnedPets[i].HP.ToString();
+                                    PetSTR = GlobalControl.Instance.playeProfile.OwnedPets[i].Strength.ToString();
+                                    PetAGY = GlobalControl.Instance.playeProfile.OwnedPets[i].Agility.ToString();
+                                    PetSPE = GlobalControl.Instance.playeProfile.OwnedPets[i].Speed.ToString();
+                                    PetARM = GlobalControl.Instance.playeProfile.OwnedPets[i].Armor.ToString();
+                                    PetLV = GlobalControl.Instance.playeProfile.OwnedPets[i].Level.ToString();
+
+                                    Initialpet iniatialpet = new Initialpet(PetName, PetID, PetHP, PetSTR, PetAGY, PetSPE, PetARM, PetLV);
+                                    json = JsonUtility.ToJson(iniatialpet);
+                                    reference.Child("users/" + Userid).Child("Pets").Child("Pet_" + i.ToString()).SetRawJsonValueAsync(json);
+                                }
+                                firstTime = false;
+                                break;
+                            }
                         }
                         Text textusername = GameObject.Find("Canvas/Lbl_Username").GetComponent<Text>();
                         textusername.text = dictUser["username"].ToString();
@@ -190,30 +219,49 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.playeProfile.PremiumCoin = int.Parse(dictUser["PremiumCoin"].ToString());
                         GlobalControl.Instance.playeProfile.AvailableMissions = int.Parse(dictUser["AvailableMissions"].ToString());
                         GlobalControl.Instance.playeProfile.timeUntilMissionCooldown = dictUser["TimeUntilMissionCooldown"].ToString();
+                        GlobalControl.Instance.playeProfile.LocalSaveTimeStamp = DateTime.Now.ToString();
                         GlobalControl.Instance.playeProfile.Wins = int.Parse(dictUser["Wins"].ToString());
                         GlobalControl.Instance.playeProfile.Loss = int.Parse(dictUser["Loss"].ToString());
                         GlobalControl.Instance.PrepareItems();//Crea las listas para poder hacer los add
+<<<<<<< HEAD
 
 
 
 
                         Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];                        
                         foreach (KeyValuePair<string, System.Object> InventoryItems in Inventory)
+=======
+                        Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];
+                        int itemid = 0;
+                        foreach (KeyValuePair<string, System.Object> InventoryItemsaux in Inventory)
+>>>>>>> 2bfe2ce24da34f2999cc6ad0f13f8cf93ce345a7
                         {
-                            int itemid = int.Parse(InventoryItems.Value.ToString());
+                            //Dictionary<string, System.Object> Inventory_lv2 = (Dictionary<string, System.Object>)Inventory[InventoryItemsaux.Key];
+                            //GlobalControl.Instance.playeProfile.Inventory.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(Inventory_lv2["id"].ToString())));
+                            Dictionary<string, System.Object> Inventory_lv2 = (Dictionary<string, System.Object>)Inventory[InventoryItemsaux.Key];
+                            itemid = int.Parse((Inventory_lv2["id"].ToString()));
                             GlobalControl.Instance.playeProfile.Inventory.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == itemid));
+                            GlobalControl.Instance.playeProfile.InventoryItemsIDs.Add(itemid);
                         }
 
                         Dictionary<string, System.Object> Equipedgear = (Dictionary<string, System.Object>)dictUser["Equipedgear"];
                         for (int i = 0; i < 5; i++)
                         {
-                            GlobalControl.Instance.playeProfile.EquipedGear.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(Equipedgear["Item" + i.ToString()].ToString())));
+                            itemid = int.Parse(Equipedgear["Item" + i.ToString()].ToString());
+                            GlobalControl.Instance.playeProfile.EquipedGear.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == itemid));
+                            GlobalControl.Instance.playeProfile.EquipedGearIDs.Add(itemid);
                         }
 
+                        string id = "";
                         Dictionary<string, System.Object> EquipedItems = (Dictionary<string, System.Object>)dictUser["EquipedItems"];
                         for (int i = 0; i < EquipedItems.Count; i++)
-                        {
-                            GlobalControl.Instance.playeProfile.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedItems["Item" + i.ToString()].ToString())));
+                        {                            
+                            if (EquipedItems["Item" + i.ToString()].ToString() != "")
+                            {
+                                itemid = int.Parse(EquipedItems["Item" + i.ToString()].ToString());
+                                GlobalControl.Instance.playeProfile.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == itemid));
+                                GlobalControl.Instance.playeProfile.EquipedItemsIDs.Add(itemid);
+                            }                            
                         }
 
                         Dictionary<string, System.Object> Ownedpets = (Dictionary<string, System.Object>)dictUser["Pets"];                        
@@ -239,11 +287,13 @@ public class DataBaseManager : MonoBehaviour
                                 AuxPet.Agility = int.Parse(Ownedpets_lv2["AGY"].ToString());
                                 AuxPet.Armor = int.Parse(Ownedpets_lv2["ARM"].ToString());
                                 GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
+                                GlobalControl.Instance.playeProfile.OwnedPetsIDs.Add(int.Parse(Ownedpets_lv2["ID"].ToString()));//No tengo claro que guardar supongo que el slot?, pero si necesito el id para reconstruir la mascota apartir de eso
                         }
                         GlobalControl.Instance.SavePlayerData();
                         GlobalControl.Instance.SavePetsData();
                         Debug.Log("Termino de traer la info del usuario");
                         alredyFetchedFromDB = true;
+                        firstTime = false;
                         break;
                     }
                 }
@@ -341,7 +391,6 @@ public class DataBaseManager : MonoBehaviour
                             {
                                 PlayerAux.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedItems["Item" + i.ToString()].ToString())));
                             }
-                            Debug.Log("----------------------------------------------------------------");
                             if(!OponentList.Exists(x=>x.PlayerID == Enemyid))
                                 OponentList.Add(PlayerAux);
                         }                        
@@ -358,6 +407,7 @@ public class DataBaseManager : MonoBehaviour
     }
     public void writeNewUser(string userId, string name)
     {
+        firstTime = true;
         bool profile1 = img1.activeSelf;
         bool profile2 = img2.activeSelf;
         bool profile3 = img3.activeSelf;
@@ -406,44 +456,41 @@ public class DataBaseManager : MonoBehaviour
         string userarm = textArmorv.text.ToString();
 
         string userhp_pet = textHP_pet.text.ToString();
+        string userid_pet = PetDBManager.Instance.PetDB.Find(x => x.PetName == initialpet).PetID.ToString();
         string userstr_pet = textStrength_pet.text.ToString();
         string useragy_pet = textAgility_pet.text.ToString();
         string userspe_pet = textSpeed_pet.text.ToString();
         string userarm_pet = textArmorv_pet.text.ToString();
 
         
-        User user = new User(name, profileimg, userhp, "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_1","10","1990/01/01","0",DateTime.Now.ToString(),"0");
+        User user = new User(name, profileimg, userhp, "5", "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_1","10","1990/01/01", DateTime.Now.ToString(),"0","0", DateTime.Now.ToString());
         string json = JsonUtility.ToJson(user);
         reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
         
-
-
-
-        EquipedItems equipedItems = new EquipedItems("1");
+        EquipedItems equipedItems = new EquipedItems("5","","","","","");
         json = JsonUtility.ToJson(equipedItems);
         reference.Child("users/" + userId).Child("EquipedItems").SetRawJsonValueAsync(json);
 
-        Inventory inventory = new Inventory("0", "1", "2", "3", "4");
-        json = JsonUtility.ToJson(inventory);
-        reference.Child("users/" + userId).Child("Inventory").SetRawJsonValueAsync(json);
-
-        //PveU PveU = new PveU("10");
-        //json = JsonUtility.ToJson(PveU);
-        //reference.Child("users/" + userId).Child("PVE").SetRawJsonValueAsync(json);
-
+        for (int i = 0; i < 6; i++)
+        {
+            Inventory inventory = new Inventory(i.ToString());
+            json = JsonUtility.ToJson(inventory);
+            reference.Child("users/" + userId).Child("Inventory").Child("item_" + i.ToString()).SetRawJsonValueAsync(json);
+        }
+        
         Equipedgear Equipedgear = new Equipedgear("0","1","2","3","4");
         json = JsonUtility.ToJson(Equipedgear);
         reference.Child("users/" + userId).Child("Equipedgear").SetRawJsonValueAsync(json);
 
-        Initialpet iniatialpet = new Initialpet(initialpet, userhp_pet, userstr_pet, useragy_pet, userspe_pet, userarm_pet,"1");
+        Initialpet iniatialpet = new Initialpet(initialpet, userid_pet, userhp_pet, userstr_pet, useragy_pet, userspe_pet, userarm_pet,"1");
         json = JsonUtility.ToJson(iniatialpet);
         reference.Child("users/" + userId).Child("Pets").Child("Pet_1").SetRawJsonValueAsync(json);
 
-        Nivel nivel = new Nivel("1");
+        Nivel nivel = new Nivel("5");
         json = JsonUtility.ToJson(nivel);
-        reference.Child("Nivel").Child("1").Child(userId).SetRawJsonValueAsync(json);
-
+        reference.Child("Nivel").Child("5").Child(userId).SetRawJsonValueAsync(json);
     }
+
     public void writeNewUserOffline()
     {        
         bool profile1 = img1.activeSelf;
@@ -736,6 +783,7 @@ public class DataBaseManager : MonoBehaviour
 public class Initialpet
 {
     public string Name;
+    public string ID;
     public string HP;
     public string STR;
     public string AGY;
@@ -746,9 +794,10 @@ public class Initialpet
     public Initialpet()
     {
     }
-    public Initialpet(string Name, string HP, string STR, string AGY, string SPE, string ARM, string LVL)
+    public Initialpet(string Name, string ID,string HP, string STR, string AGY, string SPE, string ARM, string LVL)
     {
         this.Name = Name;
+        this.ID = ID;
         this.HP = HP;
         this.STR = STR;
         this.AGY = AGY;
@@ -760,33 +809,37 @@ public class Initialpet
 
 public class EquipedItems
 {
-    public string item;
+    public string Item0;
+    public string Item1;
+    public string Item2;
+    public string Item3;
+    public string Item4;
+    public string Item5;
+
+
     public EquipedItems()
     {
     }
-    public EquipedItems(string item)
+    public EquipedItems(string item0, string item1, string item2, string item3, string item4, string item5)
     {
-        this.item = item;
+        this.Item0 = item0;
+        this.Item1 = item1;
+        this.Item2 = item2;
+        this.Item3 = item3;
+        this.Item4 = item4;
+        this.Item5 = item5;
     }
 }
 public class Inventory
 {
-    public string item_0;
-    public string item_1;
-    public string item_2;
-    public string item_3;
-    public string item_4;
+    public string id;
 
     public Inventory()
     {
     }
-    public Inventory(string item0, string item1, string item2, string item3, string item4)
+    public Inventory(string id)
     {
-        this.item_0 = item0;
-        this.item_1 = item1;
-        this.item_2 = item2;
-        this.item_3 = item3;
-        this.item_4 = item4;
+        this.id= id;
     }
 }
 
@@ -817,6 +870,7 @@ public class User
     public string profilepic;
     public string HP;
     public string Level;
+    public string LevelUpPoints;
     public string XP;
     public string Strength;
     public string Speed;
@@ -831,15 +885,17 @@ public class User
     public string CloudSaveTimeStamp;
     public string Wins;
     public string Loss;
+    public string UserCreationTimeStamp;
     public User()
     {
     }
-    public User(string username,string profilepic, string HP, string Level, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin,string CompanionPet, string AvailableMissions, string TimeUntilMissionCooldown, string cloudSaveTimeStamp, string Wins, string Loss)//string creationDate = null
+    public User(string username,string profilepic, string HP, string Level, string LevelUpPoints, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin,string CompanionPet, string AvailableMissions, string TimeUntilMissionCooldown, string cloudSaveTimeStamp, string Wins, string Loss, string creationDate = null)
     {
         this.username = username;
         this.profilepic = profilepic;
         this.HP = HP;
         this.Level = Level;
+        this.LevelUpPoints = LevelUpPoints;
         this.XP = XP;
         this.Strength = Strength;
         this.Speed = Speed;
@@ -852,6 +908,10 @@ public class User
         this.AvailableMissions = AvailableMissions;
         this.TimeUntilMissionCooldown = TimeUntilMissionCooldown;
         this.CloudSaveTimeStamp = cloudSaveTimeStamp;
+        if (creationDate != null)
+        {
+            this.CloudSaveTimeStamp = UserCreationTimeStamp;
+        }
         this.Wins = Wins;
         this.Loss = Loss;
     }

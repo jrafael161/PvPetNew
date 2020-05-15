@@ -51,13 +51,13 @@ public class MainScene : MonoBehaviour
 
         profilepic.gameObject.SetActive(true);
 
-        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile1_L")
+        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile_1")
             profilepic.GetComponent<Image>().sprite = DataBaseManager.Instance.sprite1;
-        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile2_L")
+        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile_2")
             profilepic.GetComponent<Image>().sprite = DataBaseManager.Instance.sprite2;
-        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile3_L")
+        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile_3")
             profilepic.GetComponent<Image>().sprite = DataBaseManager.Instance.sprite3;
-        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile4_L")
+        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile_4")
             profilepic.GetComponent<Image>().sprite = DataBaseManager.Instance.sprite4;
     }
 
