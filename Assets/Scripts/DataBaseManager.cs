@@ -247,7 +247,7 @@ public class DataBaseManager : MonoBehaviour
                     if (user.Key == Userid)
                     {
                         IDictionary dictUser = (IDictionary)user.Value;
-                        if (false)//DateTime.Parse(dictUser["DatabaseSaveTimeStamp"].ToString()) < DateTime.Parse(GlobalControl.Instance.playeProfile.LocalSaveTimeStamp)
+                        if (DateTime.Parse(dictUser["DatabaseSaveTimeStamp"].ToString()) < DateTime.Parse(GlobalControl.Instance.playeProfile.LocalSaveTimeStamp))
                         {
                             string usernameAux = GlobalControl.Instance.playeProfile.BattleTag;
                             string profilepicAux = GlobalControl.Instance.playeProfile.PlayerSprite.name;
@@ -262,7 +262,7 @@ public class DataBaseManager : MonoBehaviour
                             string PvPCoinAux = GlobalControl.Instance.playeProfile.PvPCoin.ToString();
                             string PetCoinAux = GlobalControl.Instance.playeProfile.PetCoin.ToString();
                             string PremiumCoinAux = GlobalControl.Instance.playeProfile.PremiumCoin.ToString();
-                            string CompanionPetAux = "Pet_" + GlobalControl.Instance.playeProfile.CompaninoPetSlot.ToString();
+                            string CompanionPetAux = "Pet_" + GlobalControl.Instance.playeProfile.CompanionPetSlot.ToString();
                             string AvailableMissionsAux = GlobalControl.Instance.playeProfile.AvailableMissions.ToString();
                             string TimeUntilMissionCooldownAux = GlobalControl.Instance.playeProfile.timeUntilMissionCooldown;
                             string WinsAux = GlobalControl.Instance.playeProfile.Wins.ToString();
@@ -515,6 +515,89 @@ public class DataBaseManager : MonoBehaviour
         Panel.SetActive(true);
     }
 
+    private void updateUser(string userId, string name)
+    {
+        bool profile1 = img1.activeSelf;
+        bool profile2 = img2.activeSelf;
+        bool profile3 = img3.activeSelf;
+        bool profile4 = img4.activeSelf;
+        bool pet1 = imgpet1.activeSelf;
+        bool pet2 = imgpet2.activeSelf;
+        bool pet3 = imgpet3.activeSelf;
+        bool pet4 = imgpet4.activeSelf;
+        string profileimg = "Profile_1";
+        string initialpet = "Mimic Sword";
+        Text textHP = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_pv_v").GetComponent<Text>();
+        Text textStrength = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_str_v").GetComponent<Text>();
+        Text textAgility = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_agy_v").GetComponent<Text>();
+        Text textSpeed = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_spe_v").GetComponent<Text>();
+        Text textArmorv = GameObject.Find("Canvas/bg_main/Pn_Character/bg_character_2/txt_arm_v").GetComponent<Text>();
+        Text textHP_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_pv_v_pet").GetComponent<Text>();
+        Text textStrength_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_str_v_pet").GetComponent<Text>();
+        Text textAgility_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_agy_v_pet").GetComponent<Text>();
+        Text textSpeed_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_spe_v_pet").GetComponent<Text>();
+        Text textArmorv_pet = GameObject.Find("Canvas/bg_main/Pn_pet/bg_character_2/txt_arm_v_pet").GetComponent<Text>();
+
+        if (profile1)
+            profileimg = "Profile_1";
+        if (profile2)
+            profileimg = "Profile_2";
+        if (profile3)
+            profileimg = "Profile_3";
+        if (profile4)
+            profileimg = "Profile_4";
+
+        if (pet1)
+            initialpet = "Mimic Sword";
+        if (pet2)
+            initialpet = "Toucan Panther";
+        if (pet3)
+            initialpet = "Gunblin";
+        if (pet4)
+            initialpet = "Rock golem";
+
+        string userhp = textHP.text.ToString();
+        string userstr = textStrength.text.ToString();
+        string useragy = textAgility.text.ToString();
+        string userspe = textSpeed.text.ToString();
+        string userarm = textArmorv.text.ToString();
+
+        string userhp_pet = textHP_pet.text.ToString();
+        string userstr_pet = textStrength_pet.text.ToString();
+        string useragy_pet = textAgility_pet.text.ToString();
+        string userspe_pet = textSpeed_pet.text.ToString();
+        string userarm_pet = textArmorv_pet.text.ToString();
+
+
+        User user = new User(name, profileimg, userhp, "5", "1", userstr, userspe, useragy, userarm, "0", "0", "0", "Pet_1", "10", "1990/01/01", "0", DateTime.Now.ToString(), "0");
+        string json = JsonUtility.ToJson(user);
+        reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
+
+        EquipedItems equipedItems = new EquipedItems("1");
+        json = JsonUtility.ToJson(equipedItems);
+        reference.Child("users/" + userId).Child("EquipedItems").SetRawJsonValueAsync(json);
+
+        Inventory inventory = new Inventory("0", "1", "2", "3", "4");
+        json = JsonUtility.ToJson(inventory);
+        reference.Child("users/" + userId).Child("Inventory").SetRawJsonValueAsync(json);
+
+        //PveU PveU = new PveU("10");
+        //json = JsonUtility.ToJson(PveU);
+        //reference.Child("users/" + userId).Child("PVE").SetRawJsonValueAsync(json);
+
+        Equipedgear Equipedgear = new Equipedgear("0", "1", "2", "3", "4");
+        json = JsonUtility.ToJson(Equipedgear);
+        reference.Child("users/" + userId).Child("Equipedgear").SetRawJsonValueAsync(json);
+
+        Initialpet iniatialpet = new Initialpet(initialpet, userhp_pet, userstr_pet, useragy_pet, userspe_pet, userarm_pet, "1");
+        json = JsonUtility.ToJson(iniatialpet);
+        reference.Child("users/" + userId).Child("Pets").Child("Pet_1").SetRawJsonValueAsync(json);
+
+        Nivel nivel = new Nivel("1");
+        json = JsonUtility.ToJson(nivel);
+        reference.Child("Nivel").Child("1").Child(userId).SetRawJsonValueAsync(json);
+    }
+
     private void writeNewUser(string userId, string name)
     {
         bool profile1 = img1.activeSelf;
@@ -573,9 +656,6 @@ public class DataBaseManager : MonoBehaviour
         string json = JsonUtility.ToJson(user);
         reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
         
-
-
-
         EquipedItems equipedItems = new EquipedItems("1");
         json = JsonUtility.ToJson(equipedItems);
         reference.Child("users/" + userId).Child("EquipedItems").SetRawJsonValueAsync(json);
@@ -599,7 +679,6 @@ public class DataBaseManager : MonoBehaviour
         Nivel nivel = new Nivel("1");
         json = JsonUtility.ToJson(nivel);
         reference.Child("Nivel").Child("1").Child(userId).SetRawJsonValueAsync(json);
-
     }
 
     private void writeNewUserOffline()

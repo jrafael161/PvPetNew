@@ -17,11 +17,7 @@ public class GlobalControl : MonoBehaviour
     public PetDBManager petDBManager = new PetDBManager();
     public AbilitiesHandler abilitiesHandler = new AbilitiesHandler();
     public MainScene mainScene = new MainScene();
-    //public BattleController battleController;    
-
-    public Scene ActiveScene;
-    int NumberOfStats;
-    int NumberOfCoins;
+    //public BattleController battleController;
 
     public int hp=0,xp=0,Lv=0,Str=0,Spd=0,Agl=0,Arm=0,PvpC=0,PetC=0,PremC=0;
 
@@ -32,8 +28,6 @@ public class GlobalControl : MonoBehaviour
 
     private void Start()
     {
-        NumberOfStats = 2;//3 por que se cuenta el 0
-        NumberOfCoins = 2;
 #if UNITY_ANDROID && !UNITY_EDITOR
         Debug.Log("Si, estamos en android");
         Debug.Log(Application.persistentDataPath);
@@ -79,105 +73,6 @@ public class GlobalControl : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    /*
-    public void LoadPlayerData()//Se asegura que nos econtremos en una escena valida en la que se pueda cargar la informacion del jugador
-    {
-        ActiveScene = SceneManager.GetActiveScene();
-        if (ActiveScene.name == "PvPScreen")
-        {
-            InitializePlayerData();
-        }            
-        else if (ActiveScene.name == "ShopScreen")
-        {
-            InitializePlayerData();
-        }
-    }
-
-    public void InitializePlayerData(PlayerData player = null)//Se muestra la informacion del jugador segun lo requerido
-    {
-        if (player == null)
-        {
-            player = playeProfile;
-        }
-        bool leveled=false;
-        Slider sli;       
-        Text hp_Text;
-        GameObject hpStat,currency;
-        GameObject [] stats = new GameObject[3];        
-        Text[] PlayerCoins = new Text[3];
-        stats[0] = GameObject.Find("StrengthStat");
-        stats[1] = GameObject.Find("AgilityStat");
-        stats[2] = GameObject.Find("SpeedStat");
-        hpStat = GameObject.Find("HPStat");
-        currency = GameObject.Find("Currency");
-        PlayerCoins = currency.GetComponentsInChildren<Text>();
-        hp_Text = hpStat.GetComponentInChildren<Text>();
-        hp_Text.text = "HP:" + player.HP.ToString();
-        for (int i = 0; i <= NumberOfStats; i++)
-        {
-            sli = stats[i].GetComponentInChildren<Slider>();            
-            switch (i)
-            {
-                case 0:
-                    sli.value = player.Strength;
-                break;
-                case 1:
-                    sli.value = player.Agility;                    
-                    break;
-                case 2:
-                    sli.value = player.Speed;                    
-                    break;
-                default:
-                    break;
-            }
-        }
-        for (int i = 0; i <= NumberOfCoins; i++)
-        {
-            switch (i)
-            {
-                case 0:
-                    PlayerCoins[i].text = player.PetCoin.ToString();
-                    break;
-                case 1:
-                    PlayerCoins[i].text = player.PvPCoin.ToString();
-                    break;
-                case 2:
-                    PlayerCoins[i].text = player.PremiumCoin.ToString();
-                    break;
-                default:
-                    break;
-            }
-        }
-        if (player.LevelUpPoints >= 1)
-        {
-            foreach (GameObject stat in stats)
-            {
-                Button[] levelControlers = stat.GetComponentsInChildren<Button>(true);
-                foreach (Button but in levelControlers)
-                {
-                    but.gameObject.SetActive(true);
-                }
-            }
-            leveled = true;
-        }
-        else if(player == null && player.LevelUpPoints == 0)
-        {
-            if (leveled)
-            {
-                foreach (GameObject stat in stats)
-                {
-                    Button[] levelControlers = stat.GetComponentsInChildren<Button>(true);
-                    foreach (Button but in levelControlers)
-                    {
-                        but.gameObject.SetActive(false);
-                    }
-                }
-                leveled = false;
-            }                
-        }
-    }
-    */
 
     public void SetPlayerData()//Se tendran que obtener estos datos de preferencia del save en la nube de lo contrario del save local del dispositivo del jugador
     {
@@ -286,7 +181,7 @@ public class GlobalControl : MonoBehaviour
                     jsonPet = File.ReadAllText(Application.dataPath + "/pet_" + i.ToString() + ".json");
 #endif
                     auxPet = JsonUtility.FromJson<Pet>(jsonPet);
-                    if (i == playeProfile.CompaninoPetSlot)
+                    if (i == playeProfile.CompanionPetSlot)
                     {
                         playeProfile.CompanionPet = auxPet;
                     }
