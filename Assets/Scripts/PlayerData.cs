@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerData
 {    
     public Sprite PlayerSprite;
+    public string PlayerSpriteName;
     public string PlayerID;
     public string BattleTag;
     public float Level;

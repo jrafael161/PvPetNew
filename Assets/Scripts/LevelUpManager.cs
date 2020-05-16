@@ -6,17 +6,23 @@ using UnityEngine.UI;
 public class LevelUpManager : MonoBehaviour
 {
     static PlayerData player;
-    public Button SaveChangesBtn;
+    static GameObject SaveChangesBtn;
     PlayerResume playerResume;
     private void Start()
     {
         player = new PlayerData();
-        GlobalControl.Instance.CopyPlayer(player);
+        GlobalControl.Instance.CopyPlayer(player);        
+        playerResume = FindObjectOfType<PlayerResume>();
+        if (SaveChangesBtn == null)
+        {
+            SaveChangesBtn = GameObject.FindGameObjectWithTag("SaveBtn");
+            SaveChangesBtn.SetActive(false);
+        }        
     }
 
     public void StatUp(int stat)
     {
-        SaveChangesBtn.gameObject.SetActive(true);
+        SaveChangesBtn.SetActive(true);
         switch (stat)
         {
             case 1:
@@ -51,7 +57,7 @@ public class LevelUpManager : MonoBehaviour
 
     public void StatDown(int stat)
     {
-        SaveChangesBtn.gameObject.SetActive(true);
+        SaveChangesBtn.SetActive(true);
         switch (stat)
         {
             case 1:
@@ -95,6 +101,6 @@ public class LevelUpManager : MonoBehaviour
         GlobalControl.Instance.playeProfile.LevelUpPoints = player.LevelUpPoints;
         GlobalControl.Instance.SavePlayerData();
         playerResume.InitializePlayerData();
-        SaveChangesBtn.gameObject.SetActive(false);
+        SaveChangesBtn.SetActive(false);
     }
 }

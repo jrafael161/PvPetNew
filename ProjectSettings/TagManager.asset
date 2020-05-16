@@ -7,6 +7,9 @@ TagManager:
   - Projectile
   - ExplosiveProjectiles
   - Enemy
+  - ShopItem
+  - Chip
+  - SaveBtn
   layers:
   - Default
   - TransparentFX

@@ -1419,11 +1419,11 @@ GameObject:
   - component: {fileID: 671057228}
   m_Layer: 5
   m_Name: SaveChanges
-  m_TagString: Untagged
+  m_TagString: SaveBtn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &671057227
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1456,7 +1456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c9a48c8bea5e84a879db805b90e449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SaveChangesBtn: {fileID: 671057229}
 --- !u!114 &671057229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1973,7 +1972,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 191906946}
   m_HandleRect: {fileID: 191906945}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3456,7 +3455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1556619771
@@ -3848,8 +3847,8 @@ RectTransform:
   m_Children:
   - {fileID: 1778827819}
   - {fileID: 126598834}
-  - {fileID: 1873005194}
   - {fileID: 1936513298}
+  - {fileID: 1873005194}
   - {fileID: 1654450322}
   - {fileID: 1318877323}
   - {fileID: 1609209915}
@@ -5160,7 +5159,7 @@ PrefabInstance:
     - target: {fileID: 6255386555587950061, guid: 970dd5dbac4a37145ac5820e5d63db04,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6255386555587950061, guid: 970dd5dbac4a37145ac5820e5d63db04,
         type: 3}
@@ -5320,7 +5319,7 @@ PrefabInstance:
     - target: {fileID: 6255386557345019937, guid: 970dd5dbac4a37145ac5820e5d63db04,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2.4501
+      value: -2.4501038
       objectReference: {fileID: 0}
     - target: {fileID: 6255386557345019937, guid: 970dd5dbac4a37145ac5820e5d63db04,
         type: 3}
@@ -5430,7 +5429,7 @@ PrefabInstance:
     - target: {fileID: 6255386556192227097, guid: 970dd5dbac4a37145ac5820e5d63db04,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00003263865
+      value: -0.000021818816
       objectReference: {fileID: 0}
     - target: {fileID: 6255386556192227097, guid: 970dd5dbac4a37145ac5820e5d63db04,
         type: 3}
@@ -6658,6 +6657,36 @@ PrefabInstance:
       propertyPath: m_Value
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 6255386557100691953, guid: 970dd5dbac4a37145ac5820e5d63db04,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255386557100691953, guid: 970dd5dbac4a37145ac5820e5d63db04,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255386557100691953, guid: 970dd5dbac4a37145ac5820e5d63db04,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255386557259996094, guid: 970dd5dbac4a37145ac5820e5d63db04,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255386557259996094, guid: 970dd5dbac4a37145ac5820e5d63db04,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255386557259996094, guid: 970dd5dbac4a37145ac5820e5d63db04,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 970dd5dbac4a37145ac5820e5d63db04, type: 3}
 --- !u!224 &1873005194 stripped
@@ -6698,7 +6727,7 @@ RectTransform:
   - {fileID: 568895010}
   - {fileID: 1517365773}
   m_Father: {fileID: 1653628222}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.088437505}
   m_AnchorMax: {x: 0.28225005, y: 0.6048149}
