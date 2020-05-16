@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Titanium Gauntlets
   ItemID: 37
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 87da4c40b48edbb47860bb015825ebde, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

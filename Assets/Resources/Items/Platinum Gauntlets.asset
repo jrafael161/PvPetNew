@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Platinum Gauntlets
   ItemID: 32
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a307a8fa1f848194587a5c9ae049431d, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

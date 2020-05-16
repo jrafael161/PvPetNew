@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
   m_Name: Bronze Sword
   m_EditorClassIdentifier: 
-  Name: Bronze Helmet
+  Name: Bronze Sword
   ItemID: 14
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3beda36646c93a44b8c73a0a35dc1206, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

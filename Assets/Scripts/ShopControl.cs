@@ -23,13 +23,20 @@ public class ShopControl : MonoBehaviour
     {
         GameObject ShopItem, ShopItemAux;
         Text[] Texto;
+        Image[] img;
 
         ShopItem = GameObject.Find("ShopItem");
         foreach (Item item in ItemsDBmanager.Instance.ItemDB)
         {
+            if (item.Name == "Pet Sword")
+            {
+                continue;
+            }
             ShopItemAux = Instantiate(ShopItem) as GameObject;
             ShopItemAux.SetActive(true);
             ShopItemAux.transform.SetParent(ShopItem.transform.parent, false);
+            img = ShopItemAux.GetComponentsInChildren<Image>();
+            img[2].sprite = item.icon;
             Texto = ShopItemAux.GetComponentsInChildren<Text>();
             Texto[0].text = item.Description.ToString();
             Texto[1].text = item.PvP_Price.ToString();

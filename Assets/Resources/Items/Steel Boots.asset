@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Steel Boots
   ItemID: 23
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 5284711d856a34e408c2be48d89dc53c, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

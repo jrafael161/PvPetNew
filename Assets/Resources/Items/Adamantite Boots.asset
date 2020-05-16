@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Adamantite Boots
   ItemID: 48
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 5f8819ffaeb9ad949a40ab39076a95d1, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Mithril Gauntlets
   ItemID: 42
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ea90c3aed2cf5a04dba9183e4e49cc61, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

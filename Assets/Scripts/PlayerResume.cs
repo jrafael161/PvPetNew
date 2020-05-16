@@ -26,6 +26,13 @@ public class PlayerResume : MonoBehaviour
         }
         bool leveled = false;
         Slider sli;
+        Image[] imgs = GetComponentsInChildren<Image>();
+        imgs[0].sprite = player.PlayerSprite;
+        for (int i = 0; i < player.EquipedGear.Count; i++)
+        {
+            imgs[i+1].sprite = player.EquipedGear[i].icon;
+        }
+        
         Text hp_Text,level_Text,xp_Text;
         GameObject hpStat, level, xp, currency;
         GameObject[] stats = new GameObject[3];

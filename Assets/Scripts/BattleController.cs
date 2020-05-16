@@ -414,7 +414,7 @@ public class BattleController : MonoBehaviour
         {
             petAsPlayer.EquipedGear.Add(null);
         }
-        petAsPlayer.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 50);//Equipa la pet sword
+        petAsPlayer.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.Name == "Pet Sword");//Equipa la pet sword        
     }
 
     public bool ArePlayersAlive()

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Gold Sword
   ItemID: 29
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 542eeac8004f8f941983aeb9f1f2387e, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

@@ -340,7 +340,7 @@ public class PVE : MonoBehaviour
         {
             GlobalControl.Instance.oponentProfile.EquipedGear.Add(null);
         }
-        GlobalControl.Instance.oponentProfile.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 50);//Equipa la pet sword
+        GlobalControl.Instance.oponentProfile.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.Name == "Pet Sword");//Equipa la pet sword
         
         BattleController.Instance.StartBattle(false);
     }
@@ -365,6 +365,7 @@ public class PVE : MonoBehaviour
    
         Pet AuxPet = ScriptableObject.CreateInstance("Pet") as Pet;
         AuxPet.PetName = petname;
+        AuxPet.PetID = PetDBManager.Instance.PetDB.Find(x => x.PetName == petname).PetID;
         AuxPet.Level = 1;
         AuxPet.HP = pethp;
         AuxPet.Strength = petstr;
@@ -373,6 +374,8 @@ public class PVE : MonoBehaviour
         AuxPet.Armor = petarm;
 
         GlobalControl.Instance.playeProfile.OwnedPets.Add(AuxPet);
+        GlobalControl.Instance.playeProfile.OwnedPetsIDs.Add(AuxPet.PetID);
+        GlobalControl.Instance.SavePlayerData();
         GlobalControl.Instance.SavePetsData();
         //Capturapet Capturapet = new Capturapet( pethp, petstr, petspe, petagy, petarm);
         //string json = JsonUtility.ToJson(Capturapet);

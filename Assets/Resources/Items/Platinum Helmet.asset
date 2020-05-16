@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Platinum Helmet
   ItemID: 30
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c28bd28d1de4eb74c91c8ac9cc7248df, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

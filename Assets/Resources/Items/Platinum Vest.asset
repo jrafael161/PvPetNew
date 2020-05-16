@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Platinum Vest
   ItemID: 31
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a1b7b03f2bb73c34b887de9ec4150b59, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0
