@@ -180,15 +180,18 @@ public class Character_sheet : MonoBehaviour
         Text[] Texto;
         Image[] profileSprite;
         InventorytList = GameObject.Find("Iteminv");
-        for (int i = 0; i < GlobalControl.Instance.petDBManager.PetDB.Count; i++)
+        
+        foreach (Item item in GlobalControl.Instance.playeProfile.Inventory)
         {
+            
             InventorytListAux = Instantiate(InventorytList) as GameObject;
             InventorytListAux.SetActive(true);
             InventorytListAux.transform.SetParent(InventorytList.transform.parent, false);
             profileSprite = InventorytListAux.GetComponentsInChildren<Image>();
-            profileSprite[1].sprite = GlobalControl.Instance.petDBManager.PetDB[i].PetSprite;
+            profileSprite[1].sprite = item.icon;
             Texto = InventorytListAux.GetComponentsInChildren<Text>();
-            Texto[0].text = "lalaland";
+            Texto[0].text = item.ItemID.ToString(); ;
+
         }
         Destroy(InventorytList);
     }
@@ -198,15 +201,18 @@ public class Character_sheet : MonoBehaviour
         Text[] Texto;
         Image[] profileSprite;
         InventorytList = GameObject.Find("Iteminv");
-        for (int i = 0; i < GlobalControl.Instance.petDBManager.PetDB.Count; i++)
+        int counter = 0;
+        foreach (Pet pet in GlobalControl.Instance.playeProfile.OwnedPets)
         {
             InventorytListAux = Instantiate(InventorytList) as GameObject;
             InventorytListAux.SetActive(true);
             InventorytListAux.transform.SetParent(InventorytList.transform.parent, false);
             profileSprite = InventorytListAux.GetComponentsInChildren<Image>();
-            profileSprite[1].sprite = GlobalControl.Instance.petDBManager.PetDB[i].PetSprite;
+            profileSprite[1].sprite = pet.PetSprite;
+            //pet.PetID.ToString();
             Texto = InventorytListAux.GetComponentsInChildren<Text>();
-            Texto[0].text = "lalaland";
+            Texto[0].text = counter.ToString();
+            counter++;
         }
         Destroy(InventorytList);
     }
