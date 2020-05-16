@@ -168,11 +168,12 @@ public class GlobalControl : MonoBehaviour
 #endif
                 auxPet = JsonUtility.FromJson<PetForJson>(jsonPet);
                 Pet pet = ScriptableObject.CreateInstance("Pet") as Pet;
-                pet = petDBManager.PetDB.Find(x => x.PetID == playeProfile.OwnedPetsIDs[i]);
+                
                 pet.Clase = auxPet.Clase;
                 pet.Mision = auxPet.Mision;
                 pet.PetID = auxPet.PetID;
                 pet.PetName = auxPet.PetName;
+                pet.PetSprite = petDBManager.PetDB.Find(x => x.PetID == playeProfile.OwnedPetsIDs[i]).PetSprite;
                 pet.Pt = auxPet.Pt;
                 pet.HP = auxPet.HP;
                 pet.Level = auxPet.Level;
@@ -282,6 +283,9 @@ public class GlobalControl : MonoBehaviour
         player.EquipedGear = playeProfile.EquipedGear;
         player.EquipedItems = playeProfile.EquipedItems;
         player.CompanionPet = playeProfile.CompanionPet;
+        //Checar en PvP y PvE
+        player.OwnedPets = playeProfile.OwnedPets;
+        player.OwnedPetsIDs = playeProfile.OwnedPetsIDs;
     }
 
     public void CheckIfLevelUP()

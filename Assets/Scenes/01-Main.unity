@@ -1717,6 +1717,7 @@ GameObject:
   - component: {fileID: 237755143}
   - component: {fileID: 237755142}
   - component: {fileID: 237755144}
+  - component: {fileID: 237755145}
   m_Layer: 0
   m_Name: Img_profile
   m_TagString: Untagged
@@ -1824,6 +1825,34 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+--- !u!114 &237755145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237755140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff21eaacce8706d47944abc1f68ea385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Battletag: {fileID: 0}
+  Panel: {fileID: 0}
+  Panel_character: {fileID: 0}
+  Panel_pet: {fileID: 0}
+  spritepet1: {fileID: 0}
+  spritepet2: {fileID: 0}
+  spritepet3: {fileID: 0}
+  spritepet4: {fileID: 0}
+  img1: {fileID: 0}
+  img2: {fileID: 0}
+  img3: {fileID: 0}
+  img4: {fileID: 0}
+  imgpet1: {fileID: 0}
+  imgpet2: {fileID: 0}
+  imgpet3: {fileID: 0}
+  imgpet4: {fileID: 0}
 --- !u!1 &245050270
 GameObject:
   m_ObjectHideFlags: 0

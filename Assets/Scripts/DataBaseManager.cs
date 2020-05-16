@@ -62,6 +62,7 @@ public class DataBaseManager : MonoBehaviour
         //this.gameObject.AddComponent<MainScene>();
         //mainScene = GetComponent<MainScene>();
         OponentList = new List<PlayerData>();
+        GlobalControl.Instance.GetPlayerData();
         internetConnection = chkInt.Check();
         if (internetConnection)
         {
@@ -131,13 +132,16 @@ public class DataBaseManager : MonoBehaviour
                         IDictionary dictUser = (IDictionary)user.Value;
                         if (!firstTime)
                         {
-                            if (false)//DateTime.Parse(dictUser["CloudSaveTimeStamp"].ToString()) < DateTime.Parse(GlobalControl.Instance.playeProfile.LocalSaveTimeStamp) no se esta guardando el time stamp en la nube
+                            DateTime DBT = DateTime.Parse(dictUser["CloudSaveTimeStamp"].ToString());                            
+                            DateTime LT = DateTime.Parse(GlobalControl.Instance.playeProfile.LocalSaveTimeStamp);
+                            if (DBT < LT)
                             {
+                                registered = true;
                                 string usernameAux = GlobalControl.Instance.playeProfile.BattleTag;
-                                string profilepicAux = GlobalControl.Instance.playeProfile.PlayerSprite.name;
+                                string profilepicAux = GlobalControl.Instance.playeProfile.PlayerSpriteName;
                                 string HPAux = GlobalControl.Instance.playeProfile.HP.ToString();
                                 string LevelAux = GlobalControl.Instance.playeProfile.Level.ToString();
-                                string LevelUpPointsAux = GlobalControl.Instance.playeProfile.Level.ToString();
+                                string LevelUpPointsAux = GlobalControl.Instance.playeProfile.LevelUpPoints.ToString();
                                 string XPAux = GlobalControl.Instance.playeProfile.XP.ToString();
                                 string StrengthAux = GlobalControl.Instance.playeProfile.Strength.ToString();
                                 string SpeedAux = GlobalControl.Instance.playeProfile.Speed.ToString();
@@ -164,7 +168,7 @@ public class DataBaseManager : MonoBehaviour
                                 string PetARM;
                                 string PetLV;
 
-                                for (int i = 1; i < GlobalControl.Instance.playeProfile.OwnedPets.Count; i++)
+                                for (int i = 0; i < GlobalControl.Instance.playeProfile.OwnedPets.Count; i++)
                                 {
                                     PetName = GlobalControl.Instance.playeProfile.OwnedPets[i].PetName;
                                     PetID = GlobalControl.Instance.playeProfile.OwnedPets[i].PetID.ToString();
@@ -178,6 +182,51 @@ public class DataBaseManager : MonoBehaviour
                                     Initialpet iniatialpet = new Initialpet(PetName, PetID, PetHP, PetSTR, PetAGY, PetSPE, PetARM, PetLV);
                                     json = JsonUtility.ToJson(iniatialpet);
                                     reference.Child("users/" + Userid).Child("Pets").Child("Pet_" + i.ToString()).SetRawJsonValueAsync(json);
+                                }
+
+                                string[] items = new string[6];
+                                for (int i = 0; i < GlobalControl.Instance.playeProfile.EquipedItemsIDs.Count; i++)
+                                {
+                                    items[i] = GlobalControl.Instance.playeProfile.EquipedItemsIDs[i].ToString();
+                                }
+                                EquipedItems equipedItems = new EquipedItems(items[0], items[1], items[2], items[3], items[4], items[5]);
+                                json = JsonUtility.ToJson(equipedItems);
+                                reference.Child("users/" + Userid).Child("EquipedItems").SetRawJsonValueAsync(json);
+
+                                foreach (Item item in GlobalControl.Instance.playeProfile.Inventory)
+                                {
+                                    Inventory inventory = new Inventory(item.ItemID.ToString());
+                                    json = JsonUtility.ToJson(inventory);
+                                    reference.Child("users/" + Userid).Child("Inventory").Child("item_" + item.ItemID.ToString()).SetRawJsonValueAsync(json);
+                                }
+
+                                string[] items1 = new string[5];
+                                for (int i = 0; i < GlobalControl.Instance.playeProfile.EquipedGearIDs.Count; i++)
+                                {
+                                    items1[i] = GlobalControl.Instance.playeProfile.EquipedGearIDs[i].ToString();
+                                }
+                                Equipedgear Equipedgear1 = new Equipedgear(items1[0], items1[1], items1[2], items1[3], items1[4]);
+                                json = JsonUtility.ToJson(Equipedgear1);
+                                reference.Child("users/" + Userid).Child("Equipedgear").SetRawJsonValueAsync(json);
+
+                                int counter = 0;
+                                foreach (Pet pet in GlobalControl.Instance.playeProfile.OwnedPets)
+                                {                                    
+                                    Initialpet iniatialpet = new Initialpet(pet.PetName, pet.PetID.ToString(), pet.HP.ToString(), pet.Strength.ToString(), pet.Agility.ToString(), pet.Speed.ToString(), pet.Armor.ToString(), counter.ToString());
+                                    json = JsonUtility.ToJson(iniatialpet);
+                                    reference.Child("users/" + Userid).Child("Pets").Child("Pet_"+counter.ToString()).SetRawJsonValueAsync(json);
+                                    counter++;
+                                }
+
+                                Nivel nivel = new Nivel(GlobalControl.Instance.playeProfile.Level.ToString());
+                                if (reference.Child("Nivel").Child(GlobalControl.Instance.playeProfile.Level--.ToString()).Child(Userid).SetRawJsonValueAsync(json).IsCompleted)
+                                {
+                                    reference.Child("Nivel").Child(GlobalControl.Instance.playeProfile.Level--.ToString()).Child(Userid).RemoveValueAsync();
+                                }
+                                if (!reference.Child("Nivel").Child(GlobalControl.Instance.playeProfile.Level.ToString()).Child(Userid).SetRawJsonValueAsync(json).IsCompleted)
+                                {
+                                    json = JsonUtility.ToJson(nivel);
+                                    reference.Child("Nivel").Child(GlobalControl.Instance.playeProfile.Level.ToString()).Child(Userid).SetRawJsonValueAsync(json);
                                 }
                                 firstTime = false;
                                 break;
@@ -202,10 +251,9 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.playeProfile.PlayerID = Userid;
                         GlobalControl.Instance.playeProfile.BattleTag = dictUser["username"].ToString();
                         GlobalControl.Instance.playeProfile.PlayerSprite = profilepic.GetComponent<Image>().sprite;
+                        GlobalControl.Instance.playeProfile.PlayerSpriteName = dictUser["profilepic"].ToString();
                         GlobalControl.Instance.playeProfile.Level = int.Parse(dictUser["Level"].ToString());
                         GlobalControl.Instance.playeProfile.LevelUpPoints = int.Parse(dictUser["LevelUpPoints"].ToString());
-
-
                         GlobalControl.Instance.playeProfile.SpriteName = dictUser["profilepic"].ToString();
                         GlobalControl.Instance.playeProfile.HP = int.Parse(dictUser["HP"].ToString());
                         GlobalControl.Instance.playeProfile.XP = int.Parse(dictUser["XP"].ToString());
@@ -243,7 +291,6 @@ public class DataBaseManager : MonoBehaviour
                             GlobalControl.Instance.playeProfile.EquipedGearIDs.Add(itemid);
                         }
 
-                        string id = "";
                         Dictionary<string, System.Object> EquipedItems = (Dictionary<string, System.Object>)dictUser["EquipedItems"];
                         for (int i = 0; i < EquipedItems.Count; i++)
                         {                            
@@ -264,6 +311,7 @@ public class DataBaseManager : MonoBehaviour
                             {
                                 GlobalControl.Instance.playeProfile.CompanionPet.PetName = Ownedpets_lv2["Name"].ToString();
                                 GlobalControl.Instance.playeProfile.CompanionPet.Level = int.Parse(Ownedpets_lv2["LVL"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.PetID = int.Parse(Ownedpets_lv2["ID"].ToString());
                                 GlobalControl.Instance.playeProfile.CompanionPet.HP = float.Parse(Ownedpets_lv2["HP"].ToString());
                                 GlobalControl.Instance.playeProfile.CompanionPet.Strength = int.Parse(Ownedpets_lv2["STR"].ToString());
                                 GlobalControl.Instance.playeProfile.CompanionPet.Speed = int.Parse(Ownedpets_lv2["SPE"].ToString());
@@ -272,6 +320,7 @@ public class DataBaseManager : MonoBehaviour
                             }
                                 AuxPet.PetName = Ownedpets_lv2["Name"].ToString();
                                 AuxPet.Level = int.Parse(Ownedpets_lv2["LVL"].ToString());
+                                AuxPet.PetID = int.Parse(Ownedpets_lv2["ID"].ToString());
                                 AuxPet.HP = float.Parse(Ownedpets_lv2["HP"].ToString());
                                 AuxPet.Strength = int.Parse(Ownedpets_lv2["STR"].ToString());
                                 AuxPet.Speed = int.Parse(Ownedpets_lv2["SPE"].ToString());
@@ -380,7 +429,10 @@ public class DataBaseManager : MonoBehaviour
                             }
                             for (int i = 0; i < EquipedItems.Count; i++)
                             {
-                                PlayerAux.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedItems["Item" + i.ToString()].ToString())));
+                                if (EquipedItems["Item" + i.ToString()].ToString() != "")
+                                {
+                                    PlayerAux.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(EquipedItems["Item" + i.ToString()].ToString())));
+                                }                                 
                             }
                             if(!OponentList.Exists(x=>x.PlayerID == Enemyid))
                                 OponentList.Add(PlayerAux);
@@ -454,7 +506,7 @@ public class DataBaseManager : MonoBehaviour
         string userarm_pet = textArmorv_pet.text.ToString();
 
         
-        User user = new User(name, profileimg, userhp, "5", "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_1","10","1990/01/01", DateTime.Now.ToString(),"0","0", DateTime.Now.ToString());
+        User user = new User(name, profileimg, userhp, "5", "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_0","10","1990/01/01", DateTime.Now.ToString(),"0","0", DateTime.Now.ToString());
         string json = JsonUtility.ToJson(user);
         reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
         
@@ -475,7 +527,7 @@ public class DataBaseManager : MonoBehaviour
 
         Initialpet iniatialpet = new Initialpet(initialpet, userid_pet, userhp_pet, userstr_pet, useragy_pet, userspe_pet, userarm_pet,"1");
         json = JsonUtility.ToJson(iniatialpet);
-        reference.Child("users/" + userId).Child("Pets").Child("Pet_1").SetRawJsonValueAsync(json);
+        reference.Child("users/" + userId).Child("Pets").Child("Pet_0").SetRawJsonValueAsync(json);
 
         Nivel nivel = new Nivel("5");
         json = JsonUtility.ToJson(nivel);
@@ -554,8 +606,8 @@ public class DataBaseManager : MonoBehaviour
             default:
                 break;
         }
-
-        GlobalControl.Instance.playeProfile.Level = 5;
+        GlobalControl.Instance.playeProfile.PlayerSpriteName = profileimg;
+        GlobalControl.Instance.playeProfile.Level = 5;        
         GlobalControl.Instance.playeProfile.AvailableMissions = 10;
         GlobalControl.Instance.playeProfile.HP = int.Parse(userhp);
         GlobalControl.Instance.playeProfile.XP = 0;
@@ -901,7 +953,7 @@ public class User
         this.CloudSaveTimeStamp = cloudSaveTimeStamp;
         if (creationDate != null)
         {
-            this.CloudSaveTimeStamp = UserCreationTimeStamp;
+            this.UserCreationTimeStamp = creationDate;
         }
         this.Wins = Wins;
         this.Loss = Loss;

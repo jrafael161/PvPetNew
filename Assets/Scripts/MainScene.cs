@@ -42,8 +42,8 @@ public class MainScene : MonoBehaviour
         _instance = this;
     }
 
-    public void InitializeScene()
-    {        
+    private void Start()
+    {    
         Text textusername = GameObject.Find("Canvas/Lbl_Username").GetComponent<Text>();
         GlobalControl.Instance.GetPlayerData();
         Image profilepic = GameObject.Find("ProfileSprite").GetComponent<Image>();
@@ -51,13 +51,13 @@ public class MainScene : MonoBehaviour
 
         profilepic.gameObject.SetActive(true);
 
-        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile_1")
+        if (GlobalControl.Instance.playeProfile.PlayerSpriteName == "Profile_1")
             profilepic.GetComponent<Image>().sprite = DataBaseManager.Instance.sprite1;
-        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile_2")
+        if (GlobalControl.Instance.playeProfile.PlayerSpriteName  == "Profile_2")
             profilepic.GetComponent<Image>().sprite = DataBaseManager.Instance.sprite2;
-        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile_3")
+        if (GlobalControl.Instance.playeProfile.PlayerSpriteName == "Profile_3")
             profilepic.GetComponent<Image>().sprite = DataBaseManager.Instance.sprite3;
-        if (GlobalControl.Instance.playeProfile.PlayerSprite.name == "Profile_4")
+        if (GlobalControl.Instance.playeProfile.PlayerSpriteName == "Profile_4")
             profilepic.GetComponent<Image>().sprite = DataBaseManager.Instance.sprite4;
     }
 

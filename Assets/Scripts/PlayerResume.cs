@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerResume : MonoBehaviour
 {
     // Start is called before the first frame update
-    PlayerData player;
+    static PlayerData player;
     GameObject Stats;
     GameObject Currency;
     GameObject PlayerPortrait;
@@ -26,18 +26,26 @@ public class PlayerResume : MonoBehaviour
         }
         bool leveled = false;
         Slider sli;
-        Text hp_Text;
-        GameObject hpStat, currency;
+        Text hp_Text,level_Text,xp_Text;
+        GameObject hpStat, level, xp, currency;
         GameObject[] stats = new GameObject[3];
         Text[] PlayerCoins = new Text[3];
         stats[0] = GameObject.Find("StrengthStat");
         stats[1] = GameObject.Find("AgilityStat");
         stats[2] = GameObject.Find("SpeedStat");
         hpStat = GameObject.Find("HPStat");
+        level = GameObject.Find("Level");
+        xp = GameObject.Find("XP");
         currency = GameObject.Find("Currency");
         PlayerCoins = currency.GetComponentsInChildren<Text>();
         hp_Text = hpStat.GetComponentInChildren<Text>();
+        level_Text = level.GetComponentInChildren<Text>();
+        xp_Text = xp.GetComponentInChildren<Text>();
+
         hp_Text.text = "HP:" + player.HP.ToString();
+        level_Text.text = "Level:" + player.Level.ToString();
+        xp_Text.text = "XP:" + player.XP.ToString();
+
         for (int i = 0; i <= 2; i++)
         {
             sli = stats[i].GetComponentInChildren<Slider>();
