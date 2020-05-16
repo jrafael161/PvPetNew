@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Leather Vest
   ItemID: 1
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e66413780e6ad67468bbe41e089b2534, type: 3}
   PvP_Price: 10
   Pet_Price: 5
   Prem_Price: 1
