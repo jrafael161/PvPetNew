@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Short Sword
   ItemID: 4
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e91fc63fcd9bb1c4abf7ffdc0848a328, type: 3}
   PvP_Price: 15
   Pet_Price: 7
   Prem_Price: 1

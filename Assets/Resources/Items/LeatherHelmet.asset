@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Leather Helmet
   ItemID: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: dfdc592fb97a2594787ed0f037d8f17a, type: 3}
   PvP_Price: 10
   Pet_Price: 5
   Prem_Price: 1

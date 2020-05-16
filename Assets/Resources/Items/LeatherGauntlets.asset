@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Leather Gloves
   ItemID: 2
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 975668da200627749b4e03f57ba5045d, type: 3}
   PvP_Price: 10
   Pet_Price: 5
   Prem_Price: 1
