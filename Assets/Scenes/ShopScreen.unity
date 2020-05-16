@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1974,7 +1974,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 191906945}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3456,7 +3456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1556619771
@@ -5320,7 +5320,7 @@ PrefabInstance:
     - target: {fileID: 6255386557345019937, guid: 970dd5dbac4a37145ac5820e5d63db04,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2.4501
+      value: -2.4501038
       objectReference: {fileID: 0}
     - target: {fileID: 6255386557345019937, guid: 970dd5dbac4a37145ac5820e5d63db04,
         type: 3}
@@ -5430,7 +5430,7 @@ PrefabInstance:
     - target: {fileID: 6255386556192227097, guid: 970dd5dbac4a37145ac5820e5d63db04,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00003263865
+      value: 0.000027246644
       objectReference: {fileID: 0}
     - target: {fileID: 6255386556192227097, guid: 970dd5dbac4a37145ac5820e5d63db04,
         type: 3}
@@ -6440,6 +6440,11 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 513
       objectReference: {fileID: 0}
+    - target: {fileID: 6255386556375337262, guid: 970dd5dbac4a37145ac5820e5d63db04,
+        type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6255386556590302684, guid: 970dd5dbac4a37145ac5820e5d63db04,
         type: 3}
       propertyPath: m_Name
@@ -6652,11 +6657,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FontData.m_FontSize
       value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255386556375337262, guid: 970dd5dbac4a37145ac5820e5d63db04,
-        type: 3}
-      propertyPath: m_Value
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 970dd5dbac4a37145ac5820e5d63db04, type: 3}

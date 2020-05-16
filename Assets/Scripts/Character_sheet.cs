@@ -34,6 +34,8 @@ public class Character_sheet : MonoBehaviour
     public GameObject AGYinc;
     public GameObject AGYdec;
 
+    //inventario
+    public GameObject itemid;
 
 
     private void OpenSheet()
@@ -45,8 +47,9 @@ public class Character_sheet : MonoBehaviour
         if (true)
         {
             Loadexp();
-            Loadimg();
             Loadstats();
+            Loadimg();
+            LoadInventory();
         }
     }
     private void CloseSheet()
@@ -62,6 +65,7 @@ public class Character_sheet : MonoBehaviour
     }
     private void Loadimg()
     {
+        Debug.Log(GlobalControl.Instance.playeProfile.SpriteName.ToString());
         if (GlobalControl.Instance.playeProfile.SpriteName.ToString() == "Profile_1")
             imgprofile.GetComponent<Image>().sprite = sprite1;
         if (GlobalControl.Instance.playeProfile.SpriteName.ToString() == "Profile_2")
@@ -162,8 +166,56 @@ public class Character_sheet : MonoBehaviour
             AGY.GetComponent<TMPro.TextMeshProUGUI>().text = (puntosagy - 1).ToString();
         }
     }
-
-
+    public void Savestats()
+    {
+        GlobalControl.Instance.playeProfile.LevelUpPoints = int.Parse(puntoshabilidad.GetComponent<TMPro.TextMeshProUGUI>().text);
+        GlobalControl.Instance.playeProfile.HP = int.Parse(HP.GetComponent<TMPro.TextMeshProUGUI>().text);
+        GlobalControl.Instance.playeProfile.Strength = int.Parse(STR.GetComponent<TMPro.TextMeshProUGUI>().text);
+        GlobalControl.Instance.playeProfile.Speed = int.Parse(SPE.GetComponent<TMPro.TextMeshProUGUI>().text);
+        GlobalControl.Instance.playeProfile.Agility = int.Parse(AGY.GetComponent<TMPro.TextMeshProUGUI>().text);
+    }
+    public void LoadInventory()
+    {
+        GameObject InventorytList, InventorytListAux;
+        Text[] Texto;
+        Image[] profileSprite;
+        InventorytList = GameObject.Find("Iteminv");
+        for (int i = 0; i < GlobalControl.Instance.petDBManager.PetDB.Count; i++)
+        {
+            InventorytListAux = Instantiate(InventorytList) as GameObject;
+            InventorytListAux.SetActive(true);
+            InventorytListAux.transform.SetParent(InventorytList.transform.parent, false);
+            profileSprite = InventorytListAux.GetComponentsInChildren<Image>();
+            profileSprite[1].sprite = GlobalControl.Instance.petDBManager.PetDB[i].PetSprite;
+            Texto = InventorytListAux.GetComponentsInChildren<Text>();
+            Texto[0].text = "lalaland";
+        }
+        Destroy(InventorytList);
+    }
+    public void LoadPets()
+    {
+        GameObject InventorytList, InventorytListAux;
+        Text[] Texto;
+        Image[] profileSprite;
+        InventorytList = GameObject.Find("Iteminv");
+        for (int i = 0; i < GlobalControl.Instance.petDBManager.PetDB.Count; i++)
+        {
+            InventorytListAux = Instantiate(InventorytList) as GameObject;
+            InventorytListAux.SetActive(true);
+            InventorytListAux.transform.SetParent(InventorytList.transform.parent, false);
+            profileSprite = InventorytListAux.GetComponentsInChildren<Image>();
+            profileSprite[1].sprite = GlobalControl.Instance.petDBManager.PetDB[i].PetSprite;
+            Texto = InventorytListAux.GetComponentsInChildren<Text>();
+            Texto[0].text = "lalaland";
+        }
+        Destroy(InventorytList);
+    }
+    public void Showitem()
+    {
+        string id = itemid.GetComponent<Text>().text.ToString();
+        Debug.Log(id);
+        Debug.Log("asdadasd");
+    }
 
 
 }

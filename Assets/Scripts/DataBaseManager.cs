@@ -223,18 +223,9 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.playeProfile.Wins = int.Parse(dictUser["Wins"].ToString());
                         GlobalControl.Instance.playeProfile.Loss = int.Parse(dictUser["Loss"].ToString());
                         GlobalControl.Instance.PrepareItems();//Crea las listas para poder hacer los add
-<<<<<<< HEAD
-
-
-
-
-                        Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];                        
-                        foreach (KeyValuePair<string, System.Object> InventoryItems in Inventory)
-=======
                         Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];
                         int itemid = 0;
                         foreach (KeyValuePair<string, System.Object> InventoryItemsaux in Inventory)
->>>>>>> 2bfe2ce24da34f2999cc6ad0f13f8cf93ce345a7
                         {
                             //Dictionary<string, System.Object> Inventory_lv2 = (Dictionary<string, System.Object>)Inventory[InventoryItemsaux.Key];
                             //GlobalControl.Instance.playeProfile.Inventory.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == int.Parse(Inventory_lv2["id"].ToString())));
