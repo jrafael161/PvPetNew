@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &38962932566387891
+--- !u!1 &261880355464731018
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7116699000161397707}
-  - component: {fileID: 3909781074694984739}
-  - component: {fileID: 6071004738080408276}
+  - component: {fileID: 9066256042813313591}
+  - component: {fileID: 7639445901191658449}
+  - component: {fileID: 2777447503128340165}
   m_Layer: 5
   m_Name: equiped
   m_TagString: Untagged
@@ -18,13 +18,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &7116699000161397707
+--- !u!224 &9066256042813313591
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38962932566387891}
+  m_GameObject: {fileID: 261880355464731018}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,24 +34,24 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 35.9, y: -101.1}
+  m_AnchoredPosition: {x: 35.900024, y: -101.099976}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3909781074694984739
+--- !u!222 &7639445901191658449
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38962932566387891}
+  m_GameObject: {fileID: 261880355464731018}
   m_CullTransparentMesh: 0
---- !u!114 &6071004738080408276
+--- !u!114 &2777447503128340165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38962932566387891}
+  m_GameObject: {fileID: 261880355464731018}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 7944097435913333916}
   - component: {fileID: 7944097435913333919}
   m_Layer: 5
-  m_Name: Iteminv
+  m_Name: Petinv
   m_TagString: ShopItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -253,7 +253,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7116699000161397707}
+  - {fileID: 9066256042813313591}
   - {fileID: 5382581111440646704}
   m_Father: {fileID: 7944097436299329997}
   m_RootOrder: 0
@@ -339,7 +339,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5010845019869164471}
-        m_MethodName: Showitems
+        m_MethodName: Showpets
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -379,8 +379,8 @@ MonoBehaviour:
   SPEdec: {fileID: 0}
   AGYinc: {fileID: 0}
   AGYdec: {fileID: 0}
-  itemid: {fileID: 1980822326139989113}
-  petid: {fileID: 0}
+  itemid: {fileID: 0}
+  petid: {fileID: 1980822326139989113}
   inventory: {fileID: 0}
   ownpets: {fileID: 0}
   equiped: {fileID: 0}

@@ -546,65 +546,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332222627}
   m_CullTransparentMesh: 0
---- !u!1 &372586222
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 372586224}
-  - component: {fileID: 372586223}
-  m_Layer: 0
-  m_Name: MainObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &372586223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 372586222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff21eaacce8706d47944abc1f68ea385, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Battletag: {fileID: 0}
-  Panel: {fileID: 0}
-  Panel_character: {fileID: 0}
-  Panel_pet: {fileID: 0}
-  spritepet1: {fileID: 0}
-  spritepet2: {fileID: 0}
-  spritepet3: {fileID: 0}
-  spritepet4: {fileID: 0}
-  img1: {fileID: 0}
-  img2: {fileID: 0}
-  img3: {fileID: 0}
-  img4: {fileID: 0}
-  imgpet1: {fileID: 0}
-  imgpet2: {fileID: 0}
-  imgpet3: {fileID: 0}
-  imgpet4: {fileID: 0}
---- !u!4 &372586224
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 372586222}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 901.9545, y: 615.67554, z: -9.413336}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &397108875
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,7 +610,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &445395946
 GameObject:
@@ -985,7 +926,7 @@ Transform:
   - {fileID: 1592614801}
   - {fileID: 1931947399}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &498520881
 MonoBehaviour:
@@ -3814,10 +3755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac37defdc740534a857e5bb9a48e533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataBaseManager: {fileID: 0}
-  mainScene: {fileID: 372586223}
-  ActiveScene:
-    m_Handle: 0
   hp: 0
   xp: 0
   Lv: 0

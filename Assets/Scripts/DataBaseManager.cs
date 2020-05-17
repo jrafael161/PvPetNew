@@ -219,10 +219,10 @@ public class DataBaseManager : MonoBehaviour
                                 }
 
                                 Nivel nivel = new Nivel(GlobalControl.Instance.playeProfile.Level.ToString());
-                                if (reference.Child("Nivel").Child(GlobalControl.Instance.playeProfile.Level--.ToString()).Child(Userid).SetRawJsonValueAsync(json).IsCompleted)
+                                /*if (reference.Child("Nivel").Child(GlobalControl.Instance.playeProfile.Level--.ToString()).Child(Userid).SetRawJsonValueAsync(json).IsCompleted)
                                 {
                                     reference.Child("Nivel").Child(GlobalControl.Instance.playeProfile.Level--.ToString()).Child(Userid).RemoveValueAsync();
-                                }
+                                }*/
                                 if (!reference.Child("Nivel").Child(GlobalControl.Instance.playeProfile.Level.ToString()).Child(Userid).SetRawJsonValueAsync(json).IsCompleted)
                                 {
                                     json = JsonUtility.ToJson(nivel);
