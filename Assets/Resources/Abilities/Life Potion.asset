@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Life Potion
   m_EditorClassIdentifier: 
   Name: Life Potion
-  ItemID: 51
+  ItemID: 50
   icon: {fileID: 0}
   PvP_Price: 20
   Pet_Price: 5

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bronze Helmet
   ItemID: 10
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b8dc75e45d08eb746a5e0832da8b6c96, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

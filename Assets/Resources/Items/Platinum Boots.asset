@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Platinum Boots
   ItemID: 33
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 09c2c5f536747074f922dbe67a34ac6d, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

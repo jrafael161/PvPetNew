@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bronze Gauntlets
   ItemID: 12
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 49103d6cb3cdff542af2c9b3a1fb23e4, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

@@ -153,10 +153,11 @@ public class DataBaseManager : MonoBehaviour
                                 string CompanionPetAux = "Pet_" + GlobalControl.Instance.playeProfile.CompanionPetSlot.ToString();
                                 string AvailableMissionsAux = GlobalControl.Instance.playeProfile.AvailableMissions.ToString();
                                 string TimeUntilMissionCooldownAux = GlobalControl.Instance.playeProfile.timeUntilMissionCooldown;
+                                string UserCreationDate = GlobalControl.Instance.playeProfile.DateOfUserRegistration;
                                 string WinsAux = GlobalControl.Instance.playeProfile.Wins.ToString();
                                 string LosesAux = GlobalControl.Instance.playeProfile.Loss.ToString();
 
-                                User userUpdate = new User(usernameAux, profilepicAux, HPAux, LevelAux, LevelUpPointsAux, XPAux, StrengthAux, SpeedAux, AgilityAux, ArmorvAux, PvPCoinAux, PetCoinAux, PremiumCoinAux, CompanionPetAux, AvailableMissionsAux, TimeUntilMissionCooldownAux, DateTime.Now.ToString(), WinsAux, LosesAux);
+                                User userUpdate = new User(usernameAux, profilepicAux, HPAux, LevelAux, LevelUpPointsAux, XPAux, StrengthAux, SpeedAux, AgilityAux, ArmorvAux, PvPCoinAux, PetCoinAux, PremiumCoinAux, CompanionPetAux, AvailableMissionsAux, TimeUntilMissionCooldownAux, DateTime.Now.ToString(), WinsAux, LosesAux, UserCreationDate);
                                 string json = JsonUtility.ToJson(userUpdate);
                                 reference.Child("users").Child(Userid).SetRawJsonValueAsync(json);
                                 string PetName;
@@ -167,22 +168,6 @@ public class DataBaseManager : MonoBehaviour
                                 string PetSPE;
                                 string PetARM;
                                 string PetLV;
-
-                                for (int i = 0; i < GlobalControl.Instance.playeProfile.OwnedPets.Count; i++)
-                                {
-                                    PetName = GlobalControl.Instance.playeProfile.OwnedPets[i].PetName;
-                                    PetID = GlobalControl.Instance.playeProfile.OwnedPets[i].PetID.ToString();
-                                    PetHP = GlobalControl.Instance.playeProfile.OwnedPets[i].HP.ToString();
-                                    PetSTR = GlobalControl.Instance.playeProfile.OwnedPets[i].Strength.ToString();
-                                    PetAGY = GlobalControl.Instance.playeProfile.OwnedPets[i].Agility.ToString();
-                                    PetSPE = GlobalControl.Instance.playeProfile.OwnedPets[i].Speed.ToString();
-                                    PetARM = GlobalControl.Instance.playeProfile.OwnedPets[i].Armor.ToString();
-                                    PetLV = GlobalControl.Instance.playeProfile.OwnedPets[i].Level.ToString();
-
-                                    Initialpet iniatialpet = new Initialpet(PetName, PetID, PetHP, PetSTR, PetAGY, PetSPE, PetARM, PetLV);
-                                    json = JsonUtility.ToJson(iniatialpet);
-                                    reference.Child("users/" + Userid).Child("Pets").Child("Pet_" + i.ToString()).SetRawJsonValueAsync(json);
-                                }
 
                                 string[] items = new string[6];
                                 for (int i = 0; i < GlobalControl.Instance.playeProfile.EquipedItemsIDs.Count; i++)
@@ -209,6 +194,7 @@ public class DataBaseManager : MonoBehaviour
                                 json = JsonUtility.ToJson(Equipedgear1);
                                 reference.Child("users/" + Userid).Child("Equipedgear").SetRawJsonValueAsync(json);
 
+                                /*
                                 int counter = 0;
                                 foreach (Pet pet in GlobalControl.Instance.playeProfile.OwnedPets)
                                 {                                    
@@ -216,13 +202,25 @@ public class DataBaseManager : MonoBehaviour
                                     json = JsonUtility.ToJson(iniatialpet);
                                     reference.Child("users/" + Userid).Child("Pets").Child("Pet_"+counter.ToString()).SetRawJsonValueAsync(json);
                                     counter++;
+                                }*/
+
+                                for (int i = 0; i < GlobalControl.Instance.playeProfile.OwnedPets.Count; i++)
+                                {
+                                    PetName = GlobalControl.Instance.playeProfile.OwnedPets[i].PetName;
+                                    PetID = GlobalControl.Instance.playeProfile.OwnedPets[i].PetID.ToString();
+                                    PetHP = GlobalControl.Instance.playeProfile.OwnedPets[i].HP.ToString();
+                                    PetSTR = GlobalControl.Instance.playeProfile.OwnedPets[i].Strength.ToString();
+                                    PetAGY = GlobalControl.Instance.playeProfile.OwnedPets[i].Agility.ToString();
+                                    PetSPE = GlobalControl.Instance.playeProfile.OwnedPets[i].Speed.ToString();
+                                    PetARM = GlobalControl.Instance.playeProfile.OwnedPets[i].Armor.ToString();
+                                    PetLV = GlobalControl.Instance.playeProfile.OwnedPets[i].Level.ToString();
+
+                                    Initialpet iniatialpet = new Initialpet(PetName, PetID, PetHP, PetSTR, PetAGY, PetSPE, PetARM, PetLV);
+                                    json = JsonUtility.ToJson(iniatialpet);
+                                    reference.Child("users/" + Userid).Child("Pets").Child("Pet_" + i.ToString()).SetRawJsonValueAsync(json);
                                 }
 
                                 Nivel nivel = new Nivel(GlobalControl.Instance.playeProfile.Level.ToString());
-                                /*if (reference.Child("Nivel").Child(GlobalControl.Instance.playeProfile.Level--.ToString()).Child(Userid).SetRawJsonValueAsync(json).IsCompleted)
-                                {
-                                    reference.Child("Nivel").Child(GlobalControl.Instance.playeProfile.Level--.ToString()).Child(Userid).RemoveValueAsync();
-                                }*/
                                 if (!reference.Child("Nivel").Child(GlobalControl.Instance.playeProfile.Level.ToString()).Child(Userid).SetRawJsonValueAsync(json).IsCompleted)
                                 {
                                     json = JsonUtility.ToJson(nivel);
@@ -268,6 +266,7 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.playeProfile.AvailableMissions = int.Parse(dictUser["AvailableMissions"].ToString());
                         GlobalControl.Instance.playeProfile.timeUntilMissionCooldown = dictUser["TimeUntilMissionCooldown"].ToString();
                         GlobalControl.Instance.playeProfile.LocalSaveTimeStamp = DateTime.Now.ToString();
+                        GlobalControl.Instance.playeProfile.DateOfUserRegistration = dictUser["UserCreationTimeStamp"].ToString();
                         GlobalControl.Instance.playeProfile.Wins = int.Parse(dictUser["Wins"].ToString());
                         GlobalControl.Instance.playeProfile.Loss = int.Parse(dictUser["Loss"].ToString());
                         GlobalControl.Instance.PrepareItems();//Crea las listas para poder hacer los add
@@ -506,7 +505,7 @@ public class DataBaseManager : MonoBehaviour
         string userarm_pet = textArmorv_pet.text.ToString();
 
         
-        User user = new User(name, profileimg, userhp, "5", "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_0","10","1990/01/01", DateTime.Now.ToString(),"0","0", DateTime.Now.ToString());
+        User user = new User(name, profileimg, userhp, "5", "5", "1", userstr, userspe, useragy, userarm, "0", "0","0","Pet_0","10","1990/01/01", DateTime.Now.ToString(),"0","0", DateTime.Now.Date.ToString());
         string json = JsonUtility.ToJson(user);
         reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
         
@@ -609,9 +608,10 @@ public class DataBaseManager : MonoBehaviour
         GlobalControl.Instance.playeProfile.PlayerSpriteName = profileimg;
         GlobalControl.Instance.playeProfile.Level = 5;        
         GlobalControl.Instance.playeProfile.AvailableMissions = 10;
+        GlobalControl.Instance.playeProfile.DateOfUserRegistration = DateTime.Now.Date.ToString();
         GlobalControl.Instance.playeProfile.HP = int.Parse(userhp);
         GlobalControl.Instance.playeProfile.XP = 0;
-        GlobalControl.Instance.playeProfile.LevelUpPoints = 5;//agregar al write new user
+        GlobalControl.Instance.playeProfile.LevelUpPoints = 5;
         GlobalControl.Instance.playeProfile.Strength = int.Parse(userstr);
         GlobalControl.Instance.playeProfile.Speed = int.Parse(userspe);
         GlobalControl.Instance.playeProfile.Agility = int.Parse(useragy);
@@ -932,7 +932,7 @@ public class User
     public User()
     {
     }
-    public User(string username,string profilepic, string HP, string Level, string LevelUpPoints, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin,string CompanionPet, string AvailableMissions, string TimeUntilMissionCooldown, string cloudSaveTimeStamp, string Wins, string Loss, string creationDate = null)
+    public User(string username,string profilepic, string HP, string Level, string LevelUpPoints, string XP, string Strength, string Speed, string Agility, string Armorv, string PvPCoin, string PetCoin, string PremiumCoin,string CompanionPet, string AvailableMissions, string TimeUntilMissionCooldown, string cloudSaveTimeStamp, string Wins, string Loss, string creationDate)
     {
         this.username = username;
         this.profilepic = profilepic;
@@ -951,10 +951,7 @@ public class User
         this.AvailableMissions = AvailableMissions;
         this.TimeUntilMissionCooldown = TimeUntilMissionCooldown;
         this.CloudSaveTimeStamp = cloudSaveTimeStamp;
-        if (creationDate != null)
-        {
-            this.UserCreationTimeStamp = creationDate;
-        }
+        this.UserCreationTimeStamp = creationDate;
         this.Wins = Wins;
         this.Loss = Loss;
     }

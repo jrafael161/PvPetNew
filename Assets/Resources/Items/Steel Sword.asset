@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Steel Sword
   ItemID: 24
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ddce68a9ba96d554298d45a0f8f9b317, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

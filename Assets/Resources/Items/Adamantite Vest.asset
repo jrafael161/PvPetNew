@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Adamantite Vest
   ItemID: 46
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 5dfa0473c45d5844cad40399a61b8131, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

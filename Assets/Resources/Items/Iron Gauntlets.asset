@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Iron Gauntlets
   ItemID: 17
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b41de85c878dfda4e9bc484402e65ef2, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

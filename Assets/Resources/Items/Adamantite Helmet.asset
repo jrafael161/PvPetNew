@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Adamantite Helmet
   ItemID: 45
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: dfdc592fb97a2594787ed0f037d8f17a, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

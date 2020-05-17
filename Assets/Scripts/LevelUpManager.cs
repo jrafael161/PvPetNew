@@ -28,6 +28,7 @@ public class LevelUpManager : MonoBehaviour
             case 1:
                 if (player.LevelUpPoints > 0)
                 {
+                    player.Level += 1;
                     player.HP += 10;
                     player.Strength += 1;
                     player.LevelUpPoints -= 1;
@@ -36,6 +37,7 @@ public class LevelUpManager : MonoBehaviour
             case 2:
                 if (player.LevelUpPoints > 0)
                 {
+                    player.Level += 1;
                     player.HP += 10;
                     player.Agility += 1;
                     player.LevelUpPoints -= 1;
@@ -44,6 +46,7 @@ public class LevelUpManager : MonoBehaviour
             case 3:
                 if (player.LevelUpPoints > 0)
                 {
+                    player.Level += 1;
                     player.HP += 10;
                     player.Speed += 1;
                     player.LevelUpPoints -= 1;
@@ -63,6 +66,7 @@ public class LevelUpManager : MonoBehaviour
             case 1:
                 if (player.Strength > GlobalControl.Instance.playeProfile.Strength)
                 {
+                    player.Level -= 1;
                     player.HP -= 10;
                     player.Strength -= 1;
                     player.LevelUpPoints += 1;
@@ -72,6 +76,7 @@ public class LevelUpManager : MonoBehaviour
             case 2:
                 if (player.Agility > GlobalControl.Instance.playeProfile.Agility)
                 {
+                    player.Level -= 1;
                     player.HP -= 10;
                     player.Agility -= 1;
                     player.LevelUpPoints += 1;
@@ -80,6 +85,7 @@ public class LevelUpManager : MonoBehaviour
             case 3:
                 if (player.Speed > GlobalControl.Instance.playeProfile.Speed)
                 {
+                    player.Level -= 1;
                     player.HP -= 10;
                     player.Speed -= 1;
                     player.LevelUpPoints += 1;
@@ -94,6 +100,7 @@ public class LevelUpManager : MonoBehaviour
 
     public void SaveChanges()
     {
+        GlobalControl.Instance.playeProfile.Level = player.Level;
         GlobalControl.Instance.playeProfile.HP = player.HP;
         GlobalControl.Instance.playeProfile.Strength = player.Strength;
         GlobalControl.Instance.playeProfile.Speed = player.Speed;

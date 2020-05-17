@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pet Sword
   m_EditorClassIdentifier: 
   Name: Pet Sword
-  ItemID: 50
+  ItemID: 999
   icon: {fileID: 0}
   PvP_Price: 0
   Pet_Price: 0

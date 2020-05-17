@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Adamantite Sword
   ItemID: 49
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: de72c07fd522abb4382687152dd26500, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Steel Helmet
   ItemID: 20
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: dcd45a2b718dfc0469b21f4a78dfb9a6, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0

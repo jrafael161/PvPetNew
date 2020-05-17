@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bronze Boots
   ItemID: 13
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 8f9b6b4de68fe7744a524afc449207c0, type: 3}
   PvP_Price: 0
   Pet_Price: 0
   Prem_Price: 0
