@@ -10406,11 +10406,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pn_Character_sheet
       objectReference: {fileID: 0}
-    - target: {fileID: 2447168645961722353, guid: f5e615a4c18e4924abf08a149b759c95,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1420993199454110884, guid: f5e615a4c18e4924abf08a149b759c95,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10516,6 +10511,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2447168645961722353, guid: f5e615a4c18e4924abf08a149b759c95,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3545565727215724083, guid: f5e615a4c18e4924abf08a149b759c95,
         type: 3}
       propertyPath: m_IsActive
@@ -10584,7 +10584,7 @@ PrefabInstance:
     - target: {fileID: 3162354057771348463, guid: f5e615a4c18e4924abf08a149b759c95,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 3162354057771348463, guid: f5e615a4c18e4924abf08a149b759c95,
         type: 3}
