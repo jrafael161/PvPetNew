@@ -10,21 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
-  m_Name: LeatherGauntlets
+  m_Name: Leather Vest
   m_EditorClassIdentifier: 
-  Name: Leather Gloves
-  ItemID: 2
-  icon: {fileID: 21300000, guid: 975668da200627749b4e03f57ba5045d, type: 3}
+  Name: Leather Vest
+  ItemID: 1
+  icon: {fileID: 21300000, guid: e66413780e6ad67468bbe41e089b2534, type: 3}
   PvP_Price: 10
   Pet_Price: 5
   Prem_Price: 1
-  Description: A common pair of leather gloves, it won't help much but it's better
-    than nothing.
+  Description: A common leather Vest, it won't help much but it's better than nothing.
   LevelRequirement: 1
   Value: 1
   Bonus_amount: 0
   Set: Leather
-  Bz: 2
+  Bz: 1
   It: 0
   has_ability: 0
   At: 0

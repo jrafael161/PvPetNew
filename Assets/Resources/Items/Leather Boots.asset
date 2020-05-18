@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
-  m_Name: LeatherVest
+  m_Name: Leather Boots
   m_EditorClassIdentifier: 
-  Name: Leather Vest
-  ItemID: 1
-  icon: {fileID: 21300000, guid: e66413780e6ad67468bbe41e089b2534, type: 3}
+  Name: Leather boots
+  ItemID: 3
+  icon: {fileID: 21300000, guid: c5c40b2e98ae02b4aa1267a5be0d70fb, type: 3}
   PvP_Price: 10
   Pet_Price: 5
   Prem_Price: 1
-  Description: A common leather Vest, it won't help much but it's better than nothing.
+  Description: A common pair of leather boots, it won't help much but it's better
+    than nothing.
   LevelRequirement: 1
   Value: 1
   Bonus_amount: 0
   Set: Leather
-  Bz: 1
+  Bz: 3
   It: 0
   has_ability: 0
   At: 0

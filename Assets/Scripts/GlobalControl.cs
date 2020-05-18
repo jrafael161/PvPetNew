@@ -142,17 +142,20 @@ public class GlobalControl : MonoBehaviour
             {
                 playeProfile.EquipedGear.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
             }
-                playeProfile.EquipedItems = new List<Item>();
+
+            playeProfile.EquipedItems = new List<Item>();
             foreach (int itemID in playeProfile.EquipedItemsIDs)
             {
                 playeProfile.EquipedItems.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
             }
-                playeProfile.Inventory = new List<Item>();
+
+            playeProfile.Inventory = new List<Item>();
             foreach (int itemID in playeProfile.InventoryItemsIDs)
             {
                 playeProfile.Inventory.Add(itemDataBase.ItemDB.Find(x => x.ItemID == itemID));
             }
-                playeProfile.OwnedPets = new List<Pet>();
+
+            playeProfile.OwnedPets = new List<Pet>();
             for (int i = 0; i < playeProfile.OwnedPetsIDs.Count; i++)
             {
                 PetForJson auxPet;
