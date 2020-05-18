@@ -27,12 +27,12 @@ public class ItemsDBmanager
     public void Set_ItemDatabase()
     {       
             
-            ItemDB.Add(Resources.Load(resourcesPath + "Items/LeatherHelmet") as Item);
-            ItemDB.Add(Resources.Load(resourcesPath + "Items/LeatherVest") as Item);
-            ItemDB.Add(Resources.Load(resourcesPath + "Items/LeatherGauntlets") as Item);
-            ItemDB.Add(Resources.Load(resourcesPath + "Items/LeatherBoots") as Item);
+            ItemDB.Add(Resources.Load(resourcesPath + "Items/Leather Helmet") as Item);
+            ItemDB.Add(Resources.Load(resourcesPath + "Items/Leather Vest") as Item);
+            ItemDB.Add(Resources.Load(resourcesPath + "Items/Leather Gauntlets") as Item);
+            ItemDB.Add(Resources.Load(resourcesPath + "Items/Leather Boots") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Weapon Slash") as Item);
-            ItemDB.Add(Resources.Load(resourcesPath + "Items/ShortSword") as Item);
+            ItemDB.Add(Resources.Load(resourcesPath + "Items/Short Sword") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Copper Helmet") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Copper Vest") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Copper Gauntlets") as Item);

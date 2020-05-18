@@ -90,13 +90,16 @@ public class PlayerResume : MonoBehaviour
         }
         GameObject EquipedItemAux;
         Image img;
+        Text txt;
         foreach (Item item in player.EquipedItems)
         {
             EquipedItemAux = Instantiate(EquipedItem) as GameObject;
             //EquipedItemAux.SetActive(true);
             EquipedItemAux.transform.SetParent(EquipedItem.transform.parent, false);
             img = EquipedItemAux.GetComponentInChildren<Image>();
+            txt = EquipedItemAux.GetComponentInChildren<Text>();
             img.sprite = item.icon;
+            txt.text = item.name;
         }
         EquipedItem.SetActive(false);
 

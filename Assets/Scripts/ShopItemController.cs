@@ -12,14 +12,19 @@ public class ShopItemController : MonoBehaviour
     {
         Text[] TextoOriginal;
         Text[] TextoPreview;
+        Image[] SpriteOriginal;
+        Image[] SpritePreview;
 
         shopItem.SetActive(true);
         TextoOriginal = aux.GetComponentsInChildren<Text>();
         TextoPreview = shopItem.GetComponentsInChildren<Text>();
+        SpriteOriginal = aux.GetComponentsInChildren<Image>();
+        SpritePreview = shopItem.GetComponentsInChildren<Image>();
         for (int i = 0; i < TextoOriginal.Length; i++)
         {
             TextoPreview[i].text = TextoOriginal[i].text;
         }
+        SpritePreview[2].sprite = SpriteOriginal[2].sprite;
     }
 
     public void GetShopItem(GameObject shopItem)

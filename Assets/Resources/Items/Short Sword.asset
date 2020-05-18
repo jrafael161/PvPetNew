@@ -10,22 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
-  m_Name: LeatherBoots
+  m_Name: Short Sword
   m_EditorClassIdentifier: 
-  Name: Leather boots
-  ItemID: 3
-  icon: {fileID: 21300000, guid: c5c40b2e98ae02b4aa1267a5be0d70fb, type: 3}
-  PvP_Price: 10
-  Pet_Price: 5
+  Name: Short Sword
+  ItemID: 4
+  icon: {fileID: 21300000, guid: e91fc63fcd9bb1c4abf7ffdc0848a328, type: 3}
+  PvP_Price: 15
+  Pet_Price: 7
   Prem_Price: 1
-  Description: A common pair of leather boots, it won't help much but it's better
-    than nothing.
+  Description: A common sword, useful for opening letter and not much more.
   LevelRequirement: 1
-  Value: 1
+  Value: 2
   Bonus_amount: 0
-  Set: Leather
-  Bz: 3
-  It: 0
+  Set: NA
+  Bz: 4
+  It: 1
   has_ability: 0
   At: 0
   Abilitys: {fileID: 0}

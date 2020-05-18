@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d71bd459a2f4cd43925c01fa2e55683, type: 3}
-  m_Name: ShortSword
+  m_Name: Leather Gauntlets
   m_EditorClassIdentifier: 
-  Name: Short Sword
-  ItemID: 4
-  icon: {fileID: 21300000, guid: e91fc63fcd9bb1c4abf7ffdc0848a328, type: 3}
-  PvP_Price: 15
-  Pet_Price: 7
+  Name: Leather Gloves
+  ItemID: 2
+  icon: {fileID: 21300000, guid: 975668da200627749b4e03f57ba5045d, type: 3}
+  PvP_Price: 10
+  Pet_Price: 5
   Prem_Price: 1
-  Description: A common sword, useful for opening letter and not much more.
+  Description: A common pair of leather gloves, it won't help much but it's better
+    than nothing.
   LevelRequirement: 1
-  Value: 2
+  Value: 1
   Bonus_amount: 0
-  Set: NA
-  Bz: 4
-  It: 1
+  Set: Leather
+  Bz: 2
+  It: 0
   has_ability: 0
   At: 0
   Abilitys: {fileID: 0}

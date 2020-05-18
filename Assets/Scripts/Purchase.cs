@@ -14,7 +14,7 @@ public class Purchase : MonoBehaviour
 
     private void Start()
     {
-
+        playerResume = FindObjectOfType<PlayerResume>();
     }
 
     public void CheckCurrency()
@@ -22,7 +22,7 @@ public class Purchase : MonoBehaviour
         switch (UsingCoin)
         {
             case 1:
-                if (GlobalControl.Instance.playeProfile.PvPCoin >= Precio)//Checar con cual moneda se esta realizando la compra
+                if (GlobalControl.Instance.playeProfile.PvPCoin >= Precio)//Checa con cual moneda se esta realizando la compra
                     AddItemToInventory();
                 else
                     Debug.Log("Tas pobre shabo");                       
@@ -48,6 +48,7 @@ public class Purchase : MonoBehaviour
     public void AddItemToInventory()
     {
         GlobalControl.Instance.playeProfile.Inventory.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID==ItemID));
+        GlobalControl.Instance.playeProfile.InventoryItemsIDs.Add(ItemID);
         switch (UsingCoin)
         {
             case 1:
@@ -63,7 +64,7 @@ public class Purchase : MonoBehaviour
                 break;
         }
         GlobalControl.Instance.SavePlayerData();
-        GlobalControl.Instance.SavePetsData();
+        //GlobalControl.Instance.SavePetsData();
         playerResume.InitializePlayerData();
     }
 
