@@ -264,6 +264,7 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.playeProfile.PlayerSpriteName = dictUser["profilepic"].ToString();
                         GlobalControl.Instance.playeProfile.Level = int.Parse(dictUser["Level"].ToString());
                         GlobalControl.Instance.playeProfile.LevelUpPoints = int.Parse(dictUser["LevelUpPoints"].ToString());
+                        GlobalControl.Instance.playeProfile.SpriteName = dictUser["profilepic"].ToString();
                         GlobalControl.Instance.playeProfile.HP = int.Parse(dictUser["HP"].ToString());
                         GlobalControl.Instance.playeProfile.XP = int.Parse(dictUser["XP"].ToString());
                         GlobalControl.Instance.playeProfile.Strength = int.Parse(dictUser["Strength"].ToString());
@@ -280,7 +281,6 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.playeProfile.DateOfUserRegistration = dictUser["UserCreationTimeStamp"].ToString();
                         GlobalControl.Instance.playeProfile.Wins = int.Parse(dictUser["Wins"].ToString());
                         GlobalControl.Instance.playeProfile.Loss = int.Parse(dictUser["Loss"].ToString());
-
                         GlobalControl.Instance.PrepareItems();//Crea las listas para poder hacer los add
                         Dictionary<string, System.Object> Inventory = (Dictionary<string, System.Object>)dictUser["Inventory"];
                         int itemid = 0;

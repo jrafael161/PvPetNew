@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8217302375121097291}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -933, y: 382}
+  m_AnchoredPosition: {x: -855, y: 433}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8217302375121097280
@@ -138,3 +138,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pn_Character_sheet: {fileID: 0}
+  expbar: {fileID: 0}
+  sprite1: {fileID: 21300000, guid: 3e8f952bc74dd1d438cce44ac94d64cf, type: 3}
+  sprite2: {fileID: 21300000, guid: cb7d72fb9cfa971469fb0c236cb19009, type: 3}
+  sprite3: {fileID: 21300000, guid: 39f6f541b1d32a045a868189388bd2c8, type: 3}
+  sprite4: {fileID: 21300000, guid: d95f292feb90dee46af6487634d0b848, type: 3}
+  imgprofile: {fileID: 0}
+  puntoshabilidad: {fileID: 0}
+  HP: {fileID: 0}
+  STR: {fileID: 0}
+  SPE: {fileID: 0}
+  AGY: {fileID: 0}
+  STRinc: {fileID: 0}
+  STRdec: {fileID: 0}
+  SPEinc: {fileID: 0}
+  SPEdec: {fileID: 0}
+  AGYinc: {fileID: 0}
+  AGYdec: {fileID: 0}
+  itemid: {fileID: 0}

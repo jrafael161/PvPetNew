@@ -180,8 +180,8 @@ public class MainScene : MonoBehaviour
         internetConnection = chkInt.Check();
         if (internetConnection)
         {
-            Text textuserid = GameObject.Find("Canvas/Txt_userid").GetComponent<Text>();
-            Userid = textuserid.text;
+
+            Userid = GameController.userid;
             DataBaseManager.Instance.writeNewUser(Userid, Battletaguser);
             DataBaseManager.Instance.Checkforbattletag(Userid);
         }
