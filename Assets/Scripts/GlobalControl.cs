@@ -274,6 +274,7 @@ public class GlobalControl : MonoBehaviour
     {
         player.PlayerID = playeProfile.PlayerID;
         player.BattleTag = playeProfile.BattleTag;
+        player.PlayerSprite = playeProfile.PlayerSprite;
         player.Level = playeProfile.Level;
         player.LevelUpPoints = playeProfile.LevelUpPoints;
         player.HP = playeProfile.HP;
