@@ -37,7 +37,8 @@ public class BattleController : MonoBehaviour
     List<Item> PlayerActives;
     List<Item> OponentActives;
     Button back_or_capture_button;//back -> PvP, capture->
-    Text battlelog;
+    Text battlelog,PlayerHpText,OponentHpText;
+    public GameObject AbylityPrefab;
 
     private void Start()
     {
@@ -62,8 +63,8 @@ public class BattleController : MonoBehaviour
                 GameObject Aux = GameObject.Find("BattleLog");
                 battlelog = Aux.GetComponentInChildren<Text>();
             }
-            PlayerObject = GameObject.Find("Player");
-            OponentObject = GameObject.Find("Oponent");            
+            PlayerObject = GameObject.Find("Player");//Why?
+            OponentObject = GameObject.Find("Oponent");//Why?          
         }
         else
         {
@@ -83,6 +84,7 @@ public class BattleController : MonoBehaviour
         if (gametype)
         {
             InitializeHUD();
+            SetCombatients();
         }        
         battlelog.text = "Inicia batalla\n";
         GlobalControl.Instance.abilitiesHandler.BattleLog = battlelog;
@@ -91,7 +93,76 @@ public class BattleController : MonoBehaviour
 
     void InitializeHUD()
     {
+        GameObject playerHud, oponentHud;
+        playerHud = GameObject.Find("PlayerHud");
+        oponentHud = GameObject.Find("OponentHud");
+        setPlayerHud(playerHud,Player,true);
+        setPlayerHud(oponentHud,Oponent,false);
+    }
 
+    void setPlayerHud(GameObject pHud, PlayerData pData, bool whichPlayer)
+    {
+        Text[] txts = pHud.GetComponentsInChildren<Text>();
+        //se asigna el battletag
+        txts[0].text = pData.BattleTag;
+        //se asigna el HP
+        txts[1].text = pData.HP.ToString();
+        if (whichPlayer)
+        {
+            PlayerHpText = txts[1];
+        }
+        else
+        {
+            OponentHpText = txts[1];
+        }
+        Image[] imgs = pHud.GetComponentsInChildren<Image>();
+        //4 sprite del jugador en marco
+        imgs[3].sprite = pData.PlayerSprite;
+        //8 sprite de la mascota en marco
+        imgs[6].sprite = pData.OwnedPets[pData.CompanionPetSlot].PetSprite;//El oponente no trae sus mascotas
+        GameObject EquipedItem;
+        GameObject EquipedItemAux;
+        Image[] img;
+        if (whichPlayer)
+        {
+            EquipedItem = GameObject.Find("PlayerHud/PlayerEquipedItems/Item_Frame");
+        }
+        else
+        {
+            EquipedItem = GameObject.Find("OponentHud/OponentEquipedItems/Item_Frame");
+        }
+        foreach (Item item in pData.EquipedItems)
+        {
+            EquipedItemAux = Instantiate(EquipedItem) as GameObject;
+            EquipedItemAux.SetActive(true);
+            EquipedItemAux.transform.SetParent(EquipedItem.transform.parent, false);
+            img = EquipedItemAux.GetComponentsInChildren<Image>();
+            img[1].sprite = item.icon;
+        }        
+        EquipedItem.SetActive(false);
+    }
+
+    void SetCombatients()
+    {
+        GameObject playerChara, oponentChara;
+        playerChara = GameObject.Find("Player");
+        oponentChara = GameObject.Find("Oponent");
+        Image[] sprites = playerChara.GetComponentsInChildren<Image>();
+        foreach (Image img in sprites)
+        {
+            if (!Player.PlayerSpriteName.Contains(img.name))
+            {
+                img.gameObject.SetActive(false);
+            }
+        }
+        sprites = oponentChara.GetComponentsInChildren<Image>();
+        foreach (Image img in sprites)
+        {
+            if (!Oponent.PlayerSpriteName.Contains(img.name))
+            {
+                img.gameObject.SetActive(false);
+            }
+        }
     }
 
     IEnumerator Battle()
