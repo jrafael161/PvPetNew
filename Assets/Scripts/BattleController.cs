@@ -277,7 +277,8 @@ public class BattleController : MonoBehaviour
         {
             action_done = true;
             battlelog.text = battlelog.text + player_onturn.BattleTag + " realizo su turno\n";
-            yield break;
+            //yield break;
+            yield return new WaitForSeconds(2f);
         }
         UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(player_onturn.PlayerActiveAbilities, Player, true);
         for (int i = 0; i < UsableActives.Count; i++)
@@ -288,7 +289,8 @@ public class BattleController : MonoBehaviour
         {
             action_done = true;
             battlelog.text = battlelog.text + player_onturn.BattleTag + " realizo su turno\n";
-            yield break;
+            //yield break;
+            yield return new WaitForSeconds(2f);
         }
         UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(player_notonturn.PlayerActiveAbilities, player_notonturn, false);//Se le da oportunidad al oponente de responder con sus activas de curacion
         for (int i = 0; i < UsableActives.Count; i++)
@@ -302,7 +304,8 @@ public class BattleController : MonoBehaviour
         {
             action_done = true;
             battlelog.text = battlelog.text + player_onturn.BattleTag + " realizo su turno\n";
-            yield break;
+            //yield break;
+            yield return new WaitForSeconds(2f);
         }
         if (player_onturn.CompanionPet != null)//miniturno de la mascota
         {
@@ -315,7 +318,8 @@ public class BattleController : MonoBehaviour
                         Attack(player_onturn.playerPetasPlayer, player_notonturn.playerPetasPlayer);
                         action_done = true;
                         battlelog.text = battlelog.text + player_onturn.BattleTag + " realizo su turno\n";
-                        yield break;
+                        //yield break;
+                        yield return new WaitForSeconds(2f);
                     }
                     else//Si la mascota del oponente esta muerta
                     {
@@ -323,12 +327,13 @@ public class BattleController : MonoBehaviour
                         ArePlayersAlive();
                         action_done = true;
                         battlelog.text = battlelog.text + player_onturn.BattleTag + " realizo su turno\n";
-                        yield break;
+                        //yield break;
+                        yield return new WaitForSeconds(2f);
                     }
                 }
             }
         }
-        //yield return new WaitForSeconds(2f);Reemplazar con el tiempo que tome la accion que realizara el jugador
+        yield return new WaitForSeconds(2f);//Reemplazar con el tiempo que tome la accion que realizara el jugador
         action_done = true;
     }
 

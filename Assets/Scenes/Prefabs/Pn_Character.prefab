@@ -3833,7 +3833,7 @@ MonoBehaviour:
   sprite4: {fileID: 0}
   imgprofile: {fileID: 0}
   puntoshabilidad: {fileID: 1420993200456480343}
-  HP: {fileID: 0}
+  HP: {fileID: 1420993198591755253}
   STR: {fileID: 1420993199686965543}
   SPE: {fileID: 1420993198432170394}
   AGY: {fileID: 1420993199023471694}
@@ -5162,13 +5162,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 772650725572030722}
-    characterCount: 4
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -5305,7 +5305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 687.4, y: 114.9}
+  m_AnchoredPosition: {x: 687.4, y: 114.8999}
   m_SizeDelta: {x: -1376.8, y: -229.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &763483751887342318
@@ -5809,13 +5809,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 5258323240424790216}
-    characterCount: 3
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -5964,13 +5964,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 9031425713309071964}
-    characterCount: 3
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -6423,13 +6423,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1533190608146108023}
-    characterCount: 4
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -7562,13 +7562,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1327688433913143758}
-    characterCount: 4
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -7717,13 +7717,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 7948237577007949041}
-    characterCount: 3
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -8080,7 +8080,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6022164068236263463}
   m_HandleRect: {fileID: 4967269022071504547}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8198,7 +8198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 12.399994, y: 0}
+  m_AnchoredPosition: {x: 12.399994, y: -0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2419827507188460857
@@ -8371,13 +8371,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 6675094579719416034}
-    characterCount: 3
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -8600,13 +8600,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 7561989065990562120}
-    characterCount: 3
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -8874,13 +8874,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 5662279506948108247}
-    characterCount: 4
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -9288,13 +9288,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 4545015078420692281}
-    characterCount: 3
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -9841,13 +9841,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 4417076443777624371}
-    characterCount: 4
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -11086,22 +11086,22 @@ PrefabInstance:
       objectReference: {fileID: 2447168645961722353}
     - target: {fileID: 5010845019869164471, guid: 58b16718a30387a4fb6e326bbcf43f8f,
         type: 3}
-      propertyPath: detailsitemsstr
+      propertyPath: detailsitemsname
       value: 
       objectReference: {fileID: 5029640542987136}
     - target: {fileID: 5010845019869164471, guid: 58b16718a30387a4fb6e326bbcf43f8f,
         type: 3}
-      propertyPath: detailsitemsspe
+      propertyPath: detailsitemstipo
       value: 
       objectReference: {fileID: 5134163849472132864}
     - target: {fileID: 5010845019869164471, guid: 58b16718a30387a4fb6e326bbcf43f8f,
         type: 3}
-      propertyPath: detailsitemsagy
+      propertyPath: detailsitemsmod
       value: 
       objectReference: {fileID: 1750017593487072837}
     - target: {fileID: 5010845019869164471, guid: 58b16718a30387a4fb6e326bbcf43f8f,
         type: 3}
-      propertyPath: detailsitemsarm
+      propertyPath: detailsitemsdesc
       value: 
       objectReference: {fileID: 8671648501580117222}
     - target: {fileID: 5010845019869164471, guid: 58b16718a30387a4fb6e326bbcf43f8f,
@@ -11124,6 +11124,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3162354057771348463}
     m_Modifications:
+    - target: {fileID: 7944097435913333913, guid: 919239c00eb0ced4090df72068e4b8ed,
+        type: 3}
+      propertyPath: m_Name
+      value: Petinv
+      objectReference: {fileID: 0}
     - target: {fileID: 7944097436299329997, guid: 919239c00eb0ced4090df72068e4b8ed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11229,10 +11234,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7944097435913333913, guid: 919239c00eb0ced4090df72068e4b8ed,
+    - target: {fileID: 7944097436056137888, guid: 919239c00eb0ced4090df72068e4b8ed,
         type: 3}
-      propertyPath: m_Name
-      value: Petinv
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Showipets
       objectReference: {fileID: 0}
     - target: {fileID: 5010845019869164471, guid: 919239c00eb0ced4090df72068e4b8ed,
         type: 3}

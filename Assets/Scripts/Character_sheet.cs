@@ -157,7 +157,7 @@ public class Character_sheet : MonoBehaviour
     public void A_STRdec()
     {
         int puntos = int.Parse(puntoshabilidad.GetComponent<TMPro.TextMeshProUGUI>().text);
-        if(puntos + 1 <= 50)
+        if(puntos + 1 <= 0)
         {
             puntoshabilidad.GetComponent<TMPro.TextMeshProUGUI>().text = (puntos + 1).ToString();
             int puntosstr = int.Parse(STR.GetComponent<TMPro.TextMeshProUGUI>().text);
@@ -177,7 +177,7 @@ public class Character_sheet : MonoBehaviour
     public void A_SPEdec()
     {
         int puntos = int.Parse(puntoshabilidad.GetComponent<TMPro.TextMeshProUGUI>().text);
-        if (puntos + 1 <= 50)
+        if (puntos + 1 <= 0)
         {
             puntoshabilidad.GetComponent<TMPro.TextMeshProUGUI>().text = (puntos + 1).ToString();
             int puntosspe = int.Parse(SPE.GetComponent<TMPro.TextMeshProUGUI>().text);
@@ -197,7 +197,7 @@ public class Character_sheet : MonoBehaviour
     public void A_AGYdec()
     {
         int puntos = int.Parse(puntoshabilidad.GetComponent<TMPro.TextMeshProUGUI>().text);
-        if (puntos + 1 <= 50)
+        if (puntos + 1 <= 0)
         {
             puntoshabilidad.GetComponent<TMPro.TextMeshProUGUI>().text = (puntos + 1).ToString();
             int puntosagy = int.Parse(AGY.GetComponent<TMPro.TextMeshProUGUI>().text);
