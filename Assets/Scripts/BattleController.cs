@@ -23,40 +23,51 @@ public class BattleController : MonoBehaviour
         _instance = this;
     }
     
-    public PlayerData Player, Oponent;    
+    public PlayerData Player, Oponent;
+    GameObject PlayerObject, OponentObject;
     static bool action_done;
     static bool both_alive;
     List<bool> turns;
-    public int passedTurns;
+    int passedTurns;
     public int PlayerpassedTurns;
     public int OponentpassedTurns;
     float G_priority;
-    public bool Winner;
-    public static bool GameType;//true->PvP,false->PvE
+    bool Winner;
+    static bool GameType;//true->PvP,false->PvE
     List<Item> PlayerActives;
     List<Item> OponentActives;
-    public Button back_or_capture_button;//back -> PvP, capture->
-    public Text battlelog;
+    Button back_or_capture_button;//back -> PvP, capture->
+    Text battlelog;
 
     private void Start()
     {
         Debug.Log("Instancia creada" + _instance);
         if (SceneManager.GetActiveScene().name == "CombatScreen")
+        {
+            GameType = true;
             StartBattle(true);
+        }
+            
     }
 
     public void StartBattle(bool gametype)
     {
         if (gametype)
-        {            
+        {
+            GameType = true;
             if (SceneManager.GetActiveScene().name == "CombatScreen")
             {
                 back_or_capture_button = FindObjectOfType<Button>();
                 back_or_capture_button.gameObject.SetActive(false);
-            }            
+                GameObject Aux = GameObject.Find("BattleLog");
+                battlelog = Aux.GetComponentInChildren<Text>();
+            }
+            PlayerObject = GameObject.Find("Player");
+            OponentObject = GameObject.Find("Oponent");            
         }
         else
         {
+            GameType = false;
             GameObject panel = GameObject.Find("pnl_mision");
             back_or_capture_button = panel.GetComponentInChildren<Button>();
             back_or_capture_button.gameObject.SetActive(false);
@@ -69,11 +80,19 @@ public class BattleController : MonoBehaviour
         SetPlayersData();
         Player.PlayerActiveAbilities = new List<Item>();
         Oponent.PlayerActiveAbilities = new List<Item>();
+        if (gametype)
+        {
+            InitializeHUD();
+        }        
         battlelog.text = "Inicia batalla\n";
         GlobalControl.Instance.abilitiesHandler.BattleLog = battlelog;
         StartCoroutine("Battle");
     }
 
+    void InitializeHUD()
+    {
+
+    }
 
     IEnumerator Battle()
     {
@@ -360,12 +379,14 @@ public class BattleController : MonoBehaviour
         float hit_chance = Mathf.Round(hit_prob);
         if ( hit_chance >= Random.Range(0, 100))
         {                        
+
             if (hit > Attacked.HP)
             {
                 Attacked.HP = 0;
             }
             else
                 Attacked.HP -= hit;
+            Attacker.PlayerAnimation.Play(Attacker.PlayerSpriteName + "_Hit");
             battlelog.text = battlelog.text + Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + " con su ataque\n";
             battlelog.text = battlelog.text + "Le quedan " + Attacked.HP + " puntos de vida\n";            
         }
@@ -398,6 +419,14 @@ public class BattleController : MonoBehaviour
             Oponent.playerPetasPlayer.EquipedItems = new List<Item>();
             SetPet(Oponent.playerPetasPlayer, Oponent);
         }
+
+        if (GameType)
+        {
+            Player.PlayerAnimation = new Animator();
+            Oponent.PlayerAnimation = new Animator();
+            Player.PlayerAnimation = PlayerObject.GetComponentInChildren<Animator>();
+            Oponent.PlayerAnimation = OponentObject.GetComponentInChildren<Animator>();
+        }        
     }
 
     public void SetPet(PlayerData petAsPlayer,PlayerData player)
