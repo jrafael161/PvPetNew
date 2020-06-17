@@ -122,6 +122,9 @@ public class DataBaseManager : MonoBehaviour
 
     public void Checkforbattletag(string Userid)
     {
+        DateTime DBT;
+        DateTime LT;
+
         Firebase.Database.FirebaseDatabase dbInstance = Firebase.Database.FirebaseDatabase.DefaultInstance;
         dbInstance.GetReference("users").GetValueAsync().ContinueWith(task =>
         {
@@ -137,8 +140,8 @@ public class DataBaseManager : MonoBehaviour
                         {
                             if (GlobalControl.Instance.GetPlayerData())
                             {
-                                DateTime DBT = DateTime.Parse(dictUser["CloudSaveTimeStamp"].ToString());
-                                DateTime LT = DateTime.Parse(GlobalControl.Instance.playeProfile.LocalSaveTimeStamp);
+                                DBT = DateTime.Parse(dictUser["CloudSaveTimeStamp"].ToString());
+                                LT = DateTime.Parse(GlobalControl.Instance.playeProfile.LocalSaveTimeStamp);
                                 if (DBT < LT)
                                 {
                                     registered = true;
@@ -157,12 +160,13 @@ public class DataBaseManager : MonoBehaviour
                                     string PremiumCoinAux = GlobalControl.Instance.playeProfile.PremiumCoin.ToString();
                                     string CompanionPetAux = "Pet_" + GlobalControl.Instance.playeProfile.CompanionPetSlot.ToString();
                                     string AvailableMissionsAux = GlobalControl.Instance.playeProfile.AvailableMissions.ToString();
+                                    string LocalTimeStamp = GlobalControl.Instance.playeProfile.LocalSaveTimeStamp.ToString();
                                     string TimeUntilMissionCooldownAux = GlobalControl.Instance.playeProfile.timeUntilMissionCooldown;
                                     string UserCreationDate = GlobalControl.Instance.playeProfile.DateOfUserRegistration;
                                     string WinsAux = GlobalControl.Instance.playeProfile.Wins.ToString();
                                     string LosesAux = GlobalControl.Instance.playeProfile.Loss.ToString();
 
-                                    User userUpdate = new User(usernameAux, profilepicAux, HPAux, LevelAux, LevelUpPointsAux, XPAux, StrengthAux, SpeedAux, AgilityAux, ArmorvAux, PvPCoinAux, PetCoinAux, PremiumCoinAux, CompanionPetAux, AvailableMissionsAux, TimeUntilMissionCooldownAux, DateTime.Now.ToString(), WinsAux, LosesAux, UserCreationDate);
+                                    User userUpdate = new User(usernameAux, profilepicAux, HPAux, LevelAux, LevelUpPointsAux, XPAux, StrengthAux, SpeedAux, AgilityAux, ArmorvAux, PvPCoinAux, PetCoinAux, PremiumCoinAux, CompanionPetAux, AvailableMissionsAux, TimeUntilMissionCooldownAux, LocalTimeStamp, WinsAux, LosesAux, UserCreationDate);
                                     string json = JsonUtility.ToJson(userUpdate);
                                     reference.Child("users").Child(Userid).SetRawJsonValueAsync(json);
                                     string PetName;
@@ -239,6 +243,12 @@ public class DataBaseManager : MonoBehaviour
                                     firstTime = false;
                                     break;
                                 }
+                                if (DBT == LT)
+                                {
+                                    registered = true;
+                                    break;
+                                }
+                                    
                             }
                         }
 
@@ -277,7 +287,8 @@ public class DataBaseManager : MonoBehaviour
                         GlobalControl.Instance.playeProfile.PremiumCoin = int.Parse(dictUser["PremiumCoin"].ToString());
                         GlobalControl.Instance.playeProfile.AvailableMissions = int.Parse(dictUser["AvailableMissions"].ToString());
                         GlobalControl.Instance.playeProfile.timeUntilMissionCooldown = dictUser["TimeUntilMissionCooldown"].ToString();
-                        GlobalControl.Instance.playeProfile.LocalSaveTimeStamp = DateTime.Now.ToString();
+                        //GlobalControl.Instance.playeProfile.LocalSaveTimeStamp = DateTime.Now.ToString();
+                        GlobalControl.Instance.playeProfile.LocalSaveTimeStamp = dictUser["CloudSaveTimeStamp"].ToString();
                         GlobalControl.Instance.playeProfile.DateOfUserRegistration = dictUser["UserCreationTimeStamp"].ToString();
                         GlobalControl.Instance.playeProfile.Wins = int.Parse(dictUser["Wins"].ToString());
                         GlobalControl.Instance.playeProfile.Loss = int.Parse(dictUser["Loss"].ToString());
@@ -323,6 +334,7 @@ public class DataBaseManager : MonoBehaviour
                                 GlobalControl.Instance.playeProfile.CompanionPet.PetName = Ownedpets_lv2["Name"].ToString();
                                 GlobalControl.Instance.playeProfile.CompanionPet.Level = int.Parse(Ownedpets_lv2["LVL"].ToString());
                                 GlobalControl.Instance.playeProfile.CompanionPet.PetID = int.Parse(Ownedpets_lv2["ID"].ToString());
+                                GlobalControl.Instance.playeProfile.CompanionPet.PetSprite = PetDBManager.Instance.PetDB.Find(x => x.PetID == int.Parse(Ownedpets_lv2["ID"].ToString())).PetSprite;
                                 GlobalControl.Instance.playeProfile.CompanionPet.HP = float.Parse(Ownedpets_lv2["HP"].ToString());
                                 GlobalControl.Instance.playeProfile.CompanionPet.Strength = int.Parse(Ownedpets_lv2["STR"].ToString());
                                 GlobalControl.Instance.playeProfile.CompanionPet.Speed = int.Parse(Ownedpets_lv2["SPE"].ToString());
@@ -332,6 +344,7 @@ public class DataBaseManager : MonoBehaviour
                                 AuxPet.PetName = Ownedpets_lv2["Name"].ToString();
                                 AuxPet.Level = int.Parse(Ownedpets_lv2["LVL"].ToString());
                                 AuxPet.PetID = int.Parse(Ownedpets_lv2["ID"].ToString());
+                                AuxPet.PetSprite = PetDBManager.Instance.PetDB.Find(x => x.PetID == int.Parse(Ownedpets_lv2["ID"].ToString())).PetSprite;
                                 AuxPet.HP = float.Parse(Ownedpets_lv2["HP"].ToString());
                                 AuxPet.Strength = int.Parse(Ownedpets_lv2["STR"].ToString());
                                 AuxPet.Speed = int.Parse(Ownedpets_lv2["SPE"].ToString());
