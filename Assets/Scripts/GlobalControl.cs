@@ -287,6 +287,7 @@ public class GlobalControl : MonoBehaviour
         player.EquipedGear = playeProfile.EquipedGear;
         player.EquipedItems = playeProfile.EquipedItems;
         player.CompanionPet = playeProfile.CompanionPet;
+        player.CompanionPetSlot = playeProfile.CompanionPetSlot;
         //Checar en PvP y PvE
         player.OwnedPets = playeProfile.OwnedPets;
         player.OwnedPetsIDs = playeProfile.OwnedPetsIDs;
