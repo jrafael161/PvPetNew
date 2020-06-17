@@ -465,8 +465,6 @@ public class DataBaseManager : MonoBehaviour
                 }
             }
         });
-
-        
     }
     public void AssignOponents()
     {
