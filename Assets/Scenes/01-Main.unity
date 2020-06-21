@@ -5478,25 +5478,9 @@ PrefabInstance:
       objectReference: {fileID: 2118444612}
     - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
         type: 3}
-      propertyPath: equiped
+      propertyPath: equipedHelmet
       value: 
-      objectReference: {fileID: 21300000, guid: 31429c56a7c7e194d9c64364c31ce36c,
-        type: 3}
-    - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
-        type: 3}
-      propertyPath: equipedChest
-      value: 
-      objectReference: {fileID: 2118444614}
-    - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
-        type: 3}
-      propertyPath: equipedArm
-      value: 
-      objectReference: {fileID: 2118444615}
-    - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
-        type: 3}
-      propertyPath: equipedWeapon
-      value: 
-      objectReference: {fileID: 2118444616}
+      objectReference: {fileID: 2118444618}
     - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
         type: 3}
       propertyPath: equipedBoots
@@ -5504,29 +5488,24 @@ PrefabInstance:
       objectReference: {fileID: 2118444617}
     - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
         type: 3}
-      propertyPath: equipedHelmet
+      propertyPath: equipedWeapon
       value: 
-      objectReference: {fileID: 2118444618}
+      objectReference: {fileID: 2118444616}
     - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
         type: 3}
-      propertyPath: equipedItem6
+      propertyPath: equipedArm
       value: 
-      objectReference: {fileID: 2118444619}
+      objectReference: {fileID: 2118444615}
     - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
         type: 3}
-      propertyPath: equipedItem5
+      propertyPath: equipedChest
       value: 
-      objectReference: {fileID: 2118444620}
+      objectReference: {fileID: 2118444614}
     - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
         type: 3}
-      propertyPath: equipedItem4
+      propertyPath: equipedItem1
       value: 
-      objectReference: {fileID: 2118444621}
-    - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
-        type: 3}
-      propertyPath: equipedItem3
-      value: 
-      objectReference: {fileID: 2118444622}
+      objectReference: {fileID: 2118444624}
     - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
         type: 3}
       propertyPath: equipedItem2
@@ -5534,9 +5513,24 @@ PrefabInstance:
       objectReference: {fileID: 2118444623}
     - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
         type: 3}
-      propertyPath: equipedItem1
+      propertyPath: equipedItem3
       value: 
-      objectReference: {fileID: 2118444624}
+      objectReference: {fileID: 2118444622}
+    - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
+        type: 3}
+      propertyPath: equipedItem4
+      value: 
+      objectReference: {fileID: 2118444621}
+    - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
+        type: 3}
+      propertyPath: equipedItem5
+      value: 
+      objectReference: {fileID: 2118444620}
+    - target: {fileID: 8217302375121097285, guid: fbed92a098819e947a4698914ee036ab,
+        type: 3}
+      propertyPath: equipedItem6
+      value: 
+      objectReference: {fileID: 2118444619}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbed92a098819e947a4698914ee036ab, type: 3}
 --- !u!1 &1185422788
@@ -10657,7 +10651,7 @@ PrefabInstance:
     - target: {fileID: 3162354057771348463, guid: f5e615a4c18e4924abf08a149b759c95,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 3162354057771348463, guid: f5e615a4c18e4924abf08a149b759c95,
         type: 3}

@@ -1988,7 +1988,7 @@ PrefabInstance:
     - target: {fileID: 1420993199454110884, guid: f5e615a4c18e4924abf08a149b759c95,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.022404
+      value: 0.022399902
       objectReference: {fileID: 0}
     - target: {fileID: 1420993199454110884, guid: f5e615a4c18e4924abf08a149b759c95,
         type: 3}
@@ -2029,6 +2029,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5525871624725483316, guid: f5e615a4c18e4924abf08a149b759c95,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8518056360324221752, guid: f5e615a4c18e4924abf08a149b759c95,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5179124543693246810, guid: f5e615a4c18e4924abf08a149b759c95,
         type: 3}
@@ -2083,7 +2093,7 @@ PrefabInstance:
     - target: {fileID: 3162354057771348463, guid: f5e615a4c18e4924abf08a149b759c95,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3162354057771348463, guid: f5e615a4c18e4924abf08a149b759c95,
         type: 3}
@@ -2572,6 +2582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerpassedTurns: 0
   OponentpassedTurns: 0
+  AbylityPrefab: {fileID: 0}
 --- !u!4 &333417909
 Transform:
   m_ObjectHideFlags: 0

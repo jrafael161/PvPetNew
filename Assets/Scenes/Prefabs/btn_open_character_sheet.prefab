@@ -156,3 +156,32 @@ MonoBehaviour:
   AGYinc: {fileID: 0}
   AGYdec: {fileID: 0}
   itemid: {fileID: 0}
+  petid: {fileID: 0}
+  inventory: {fileID: 0}
+  ownpets: {fileID: 0}
+  equiped: {fileID: 21300000, guid: 31429c56a7c7e194d9c64364c31ce36c, type: 3}
+  equipedHelmet: {fileID: 0}
+  equipedBoots: {fileID: 0}
+  equipedWeapon: {fileID: 0}
+  equipedArm: {fileID: 0}
+  equipedChest: {fileID: 0}
+  equipedItem1: {fileID: 0}
+  equipedItem2: {fileID: 0}
+  equipedItem3: {fileID: 0}
+  equipedItem4: {fileID: 0}
+  equipedItem5: {fileID: 0}
+  equipedItem6: {fileID: 0}
+  detailsitems: {fileID: 0}
+  detailsipets: {fileID: 0}
+  detailsitemsname: {fileID: 0}
+  detailsitemstipo: {fileID: 0}
+  detailsitemsmod: {fileID: 0}
+  detailsitemsdesc: {fileID: 0}
+  detailsitemsimg: {fileID: 0}
+  detailsipetsname: {fileID: 0}
+  detailsipetsstr: {fileID: 0}
+  detailsipetsspe: {fileID: 0}
+  detailsipetsagy: {fileID: 0}
+  detailsipetsarm: {fileID: 0}
+  detailsipetshp: {fileID: 0}
+  detailsipetsimg: {fileID: 0}

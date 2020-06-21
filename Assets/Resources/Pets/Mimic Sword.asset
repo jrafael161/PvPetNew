@@ -32,6 +32,6 @@ MonoBehaviour:
   Strength: 5
   Speed: 2
   Agility: 2
-  Armor: 1
+  Armor: 0
   critic_prob: 0
   PetItem: {fileID: 0}

@@ -412,15 +412,19 @@ public class DataBaseManager : MonoBehaviour
                             {
                                 case "Profile_1":
                                     PlayerAux.PlayerSprite = sprite1;
+                                    PlayerAux.PlayerSpriteName = "Profile_1";
                                     break;
                                 case "Profile_2":
                                     PlayerAux.PlayerSprite = sprite2;
+                                    PlayerAux.PlayerSpriteName = "Profile_2";
                                     break;
                                 case "Profile_3":
                                     PlayerAux.PlayerSprite = sprite3;
+                                    PlayerAux.PlayerSpriteName = "Profile_3";
                                     break;
                                 case "Profile_4":
                                     PlayerAux.PlayerSprite = sprite4;
+                                    PlayerAux.PlayerSpriteName = "Profile_4";
                                     break;
                                 default:
                                     break;

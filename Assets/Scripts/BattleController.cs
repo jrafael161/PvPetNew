@@ -39,6 +39,10 @@ public class BattleController : MonoBehaviour
     Button back_or_capture_button;//back -> PvP, capture->
     Text battlelog,PlayerHpText,OponentHpText;
     public GameObject AbylityPrefab;
+    Animator PlayerAni, OponentAni;
+    Image PlayerHPBar, OponentHPBar;
+    float HPBarUnit;
+    float PlayerTotalHP, OponentTotalHP;
 
     private void Start()
     {
@@ -85,6 +89,7 @@ public class BattleController : MonoBehaviour
         {
             InitializeHUD();
             SetCombatients();
+            SetPets();
         }        
         battlelog.text = "Inicia batalla\n";
         GlobalControl.Instance.abilitiesHandler.BattleLog = battlelog;
@@ -110,26 +115,32 @@ public class BattleController : MonoBehaviour
         if (whichPlayer)
         {
             PlayerHpText = txts[1];
+            PlayerTotalHP = pData.HP;
         }
         else
         {
             OponentHpText = txts[1];
+            OponentTotalHP = pData.HP;
         }
-        Image[] imgs = pHud.GetComponentsInChildren<Image>();
+        Image[] imgs = pHud.GetComponentsInChildren<Image>();        
         //4 sprite del jugador en marco
         imgs[3].sprite = pData.PlayerSprite;
         //8 sprite de la mascota en marco
-        imgs[6].sprite = pData.OwnedPets[pData.CompanionPetSlot].PetSprite;//El oponente no trae sus mascotas
+        imgs[6].sprite = PetDBManager.Instance.PetDB.Find(x => x.PetName == pData.CompanionPet.PetName).PetSprite;
         GameObject EquipedItem;
         GameObject EquipedItemAux;
         Image[] img;
         if (whichPlayer)
         {
+            PlayerHPBar = imgs[2];
+            float PlayerHPLenght = PlayerHPBar.sprite.rect.width;
+            HPBarUnit = PlayerHPLenght / PlayerTotalHP;
             EquipedItem = GameObject.Find("PlayerHud/PlayerEquipedItems/Item_Frame");
         }
         else
         {
-            EquipedItem = GameObject.Find("OponentHud/OponentEquipedItems/Item_Frame");
+            OponentHPBar = imgs[2];
+            EquipedItem = GameObject.Find("OponentHud/PlayerEquipedItems/Item_Frame");
         }
         foreach (Item item in pData.EquipedItems)
         {
@@ -163,6 +174,22 @@ public class BattleController : MonoBehaviour
                 img.gameObject.SetActive(false);
             }
         }
+
+        Player.PlayerAnimation = playerChara.GetComponentInChildren<Animator>();
+        Oponent.PlayerAnimation = oponentChara.GetComponentInChildren<Animator>();
+    }
+
+    void SetPets()
+    {
+        GameObject playerPetSprite, oponentPetSprite;
+        playerPetSprite = GameObject.Find("PlayerPet");
+        oponentPetSprite = GameObject.Find("OponentPet");
+        Image sprite = playerPetSprite.GetComponentInChildren<Image>();
+        sprite.sprite = PetDBManager.Instance.PetDB.Find(x => x.PetName == Player.CompanionPet.PetName).PetSprite;
+        sprite.SetNativeSize();
+        sprite = oponentPetSprite.GetComponentInChildren<Image>();
+        sprite.sprite = PetDBManager.Instance.PetDB.Find(x => x.PetName == Oponent.CompanionPet.PetName).PetSprite;
+        sprite.SetNativeSize();
     }
 
     IEnumerator Battle()
@@ -367,8 +394,7 @@ public class BattleController : MonoBehaviour
         {
             action_done = true;
             battlelog.text = battlelog.text + player_onturn.BattleTag + " realizo su turno\n";
-            //yield break;
-            yield return new WaitForSeconds(2f);
+            yield break;
         }
         UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(player_onturn.PlayerActiveAbilities, Player, true);
         for (int i = 0; i < UsableActives.Count; i++)
@@ -379,8 +405,7 @@ public class BattleController : MonoBehaviour
         {
             action_done = true;
             battlelog.text = battlelog.text + player_onturn.BattleTag + " realizo su turno\n";
-            //yield break;
-            yield return new WaitForSeconds(2f);
+            yield break;            
         }
         UsableActives = AbilitiesHandler.Instance.CheckTriggerCondition(player_notonturn.PlayerActiveAbilities, player_notonturn, false);//Se le da oportunidad al oponente de responder con sus activas de curacion
         for (int i = 0; i < UsableActives.Count; i++)
@@ -394,8 +419,7 @@ public class BattleController : MonoBehaviour
         {
             action_done = true;
             battlelog.text = battlelog.text + player_onturn.BattleTag + " realizo su turno\n";
-            //yield break;
-            yield return new WaitForSeconds(2f);
+            yield break;            
         }
         if (player_onturn.CompanionPet != null)//miniturno de la mascota
         {
@@ -408,7 +432,6 @@ public class BattleController : MonoBehaviour
                         Attack(player_onturn.playerPetasPlayer, player_notonturn.playerPetasPlayer);
                         action_done = true;
                         battlelog.text = battlelog.text + player_onturn.BattleTag + " realizo su turno\n";
-                        //yield break;
                         yield return new WaitForSeconds(2f);
                     }
                     else//Si la mascota del oponente esta muerta
@@ -417,7 +440,6 @@ public class BattleController : MonoBehaviour
                         ArePlayersAlive();
                         action_done = true;
                         battlelog.text = battlelog.text + player_onturn.BattleTag + " realizo su turno\n";
-                        //yield break;
                         yield return new WaitForSeconds(2f);
                     }
                 }
@@ -429,6 +451,20 @@ public class BattleController : MonoBehaviour
 
     public void Attack(PlayerData Attacker, PlayerData Attacked)
     {
+        bool whichPlayer = false;
+        bool notPlayer = false;
+        if (Attacker.BattleTag == Player.BattleTag)
+        {
+            whichPlayer = true;
+        }
+        else if (Attacker.BattleTag == Oponent.BattleTag)
+        {
+            whichPlayer = false;
+        }
+        else
+        {
+            notPlayer = true;
+        }
         float crit_prob = Attacker.critic_prob * 100;
         float crit_chance = Mathf.Round(crit_prob);
         float  hit = 0;
@@ -436,28 +472,72 @@ public class BattleController : MonoBehaviour
         if (crit_chance >= Random.Range(0, 100))
         {
             trueDamage = ((Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Value) * 2);
-            hit = trueDamage - (trueDamage * (Attacked.Armor / 100));
+            if (Attacked.Armor > 0)
+            {
+                hit = trueDamage - (trueDamage * (Attacked.Armor / 100));
+            }
+            else
+            {
+                hit = trueDamage;
+            }
             battlelog.text = battlelog.text + " " + Attacker.BattleTag + " hizo un golpe critico\n";
         }
         else
         {
             trueDamage = ((Attacker.Strength * Attacker.EquipedGear[(int)BodyZone.Weapon].Value));
-            hit = trueDamage - (trueDamage * (Attacked.Armor / 100));
+            if (Attacked.Armor > 0)
+            {
+                hit = trueDamage - (trueDamage * (Attacked.Armor / 100));
+            }
+            else
+            {
+                hit = trueDamage;
+            }            
         }
         hit = Mathf.Round(hit);
         float hit_prob = Attacker.Speed / Attacked.Agility;
         hit_prob = hit_prob * 100;
         float hit_chance = Mathf.Round(hit_prob);
         if ( hit_chance >= Random.Range(0, 100))
-        {                        
+        {            
+            if (whichPlayer)
+            {
+                Attacker.PlayerAnimation.Play(Attacker.PlayerSpriteName + "_Left_" + "Hit");                
+            }
+            else
+            {
+                //Attacker.PlayerAnimation.Play(Attacker.PlayerSpriteName + "_Right_" + "Hit");
+            }
 
             if (hit > Attacked.HP)
             {
                 Attacked.HP = 0;
+                if (!whichPlayer && !notPlayer)
+                {
+                    PlayerHpText.text = "0";
+                    UpdateLifeBarLength(PlayerHPBar,whichPlayer);
+                }
+                else if(!notPlayer)
+                {
+                    OponentHpText.text = "0";
+                    UpdateLifeBarLength(OponentHPBar, whichPlayer);
+                }
             }
             else
+            {
                 Attacked.HP -= hit;
-            Attacker.PlayerAnimation.Play(Attacker.PlayerSpriteName + "_Hit");
+                if (!whichPlayer && !notPlayer)
+                {
+                    PlayerHpText.text = Attacked.HP.ToString();
+                    UpdateLifeBarLength(PlayerHPBar, whichPlayer);
+                }
+                else if(!notPlayer)
+                {
+                    OponentHpText.text = Attacked.HP.ToString();
+                    UpdateLifeBarLength(OponentHPBar, whichPlayer);
+                }
+            }            
+            //Attacker.PlayerAnimation.Play(Attacker.PlayerSpriteName + "_Hit");
             battlelog.text = battlelog.text + Attacker.BattleTag + " le hizo " + hit + " puntos de daño a " + Attacked.BattleTag + " con su ataque\n";
             battlelog.text = battlelog.text + "Le quedan " + Attacked.HP + " puntos de vida\n";            
         }
@@ -520,6 +600,19 @@ public class BattleController : MonoBehaviour
             petAsPlayer.EquipedGear.Add(null);
         }
         petAsPlayer.EquipedGear[4] = ItemsDBmanager.Instance.ItemDB.Find(x => x.Name == "Pet Sword");//Equipa la pet sword        
+    }
+
+    public void UpdateLifeBarLength(Image HPBar, bool whichP)
+    {
+        if (!whichP)
+        {
+
+            PlayerHPBar.fillAmount = Player.HP / PlayerTotalHP;
+        }
+        else
+        {
+            OponentHPBar.fillAmount = Oponent.HP / OponentTotalHP;
+        }
     }
 
     public bool ArePlayersAlive()
