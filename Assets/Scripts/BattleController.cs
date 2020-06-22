@@ -499,14 +499,14 @@ public class BattleController : MonoBehaviour
         hit_prob = hit_prob * 100;
         float hit_chance = Mathf.Round(hit_prob);
         if ( hit_chance >= Random.Range(0, 100))
-        {            
-            if (whichPlayer)
+        {
+            if (whichPlayer && !notPlayer)
             {
-                Attacker.PlayerAnimation.Play(Attacker.PlayerSpriteName + "_Left_" + "Hit");                
+                Attacker.PlayerAnimation.Play(Attacker.PlayerSpriteName + "_Left_" + "Hit");
             }
-            else
+            else if (!notPlayer)
             {
-                //Attacker.PlayerAnimation.Play(Attacker.PlayerSpriteName + "_Right_" + "Hit");
+                Attacker.PlayerAnimation.Play(Attacker.PlayerSpriteName + "_Right_" + "Hit");
             }
 
             if (hit > Attacked.HP)
