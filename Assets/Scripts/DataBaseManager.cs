@@ -536,7 +536,7 @@ public class DataBaseManager : MonoBehaviour
         string json = JsonUtility.ToJson(user);
         reference.Child("users").Child(userId).SetRawJsonValueAsync(json);
         
-        EquipedItems equipedItems = new EquipedItems("5","","","","","");
+        EquipedItems equipedItems = new EquipedItems("50","","","","","");
         json = JsonUtility.ToJson(equipedItems);
         reference.Child("users/" + userId).Child("EquipedItems").SetRawJsonValueAsync(json);
 
@@ -668,8 +668,8 @@ public class DataBaseManager : MonoBehaviour
         //GlobalControl.Instance.playeProfile.EquipedGear[(int)BodyZone.Weapon] = ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 4);
 
         //Se equipan los items
-        GlobalControl.Instance.playeProfile.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 52));
-        GlobalControl.Instance.playeProfile.EquipedItemsIDs.Add(52);
+        GlobalControl.Instance.playeProfile.EquipedItems.Add(ItemsDBmanager.Instance.ItemDB.Find(x => x.ItemID == 50));
+        GlobalControl.Instance.playeProfile.EquipedItemsIDs.Add(50);
 
         //Se asigna la mascota
         Pet auxPet = PetDBManager.Instance.PetDB.Find(x => x.PetName == initialpet);

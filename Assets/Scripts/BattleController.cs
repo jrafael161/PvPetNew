@@ -76,6 +76,8 @@ public class BattleController : MonoBehaviour
             GameObject panel = GameObject.Find("pnl_mision");
             back_or_capture_button = panel.GetComponentInChildren<Button>();
             back_or_capture_button.gameObject.SetActive(false);
+            GameObject Aux = GameObject.Find("Battlelogbg");
+            battlelog = Aux.GetComponentInChildren<Text>();
         }        
         action_done = true;
         both_alive = true;
@@ -247,7 +249,7 @@ public class BattleController : MonoBehaviour
             }
             else
             {
-                GlobalControl.Instance.playeProfile.Wins += 1;
+                GlobalControl.Instance.playeProfile.Loss += 1;
                 //GlobalControl.Instance.playeProfile.PvPCoin += passedTurns * 2;
             }
         }
@@ -262,6 +264,7 @@ public class BattleController : MonoBehaviour
             //    GlobalControl.Instance.playeProfile.PetCoin += passedTurns * 2;
         }
         battlelog.text = battlelog.text + "Termino el combate\n";
+        GlobalControl.Instance.SavePlayerData();
         yield return true;
     }
 
@@ -500,11 +503,11 @@ public class BattleController : MonoBehaviour
         float hit_chance = Mathf.Round(hit_prob);
         if ( hit_chance >= Random.Range(0, 100))
         {
-            if (whichPlayer && !notPlayer)
+            if (whichPlayer && !notPlayer && GameType)
             {
                 Attacker.PlayerAnimation.Play(Attacker.PlayerSpriteName + "_Left_" + "Hit");
             }
-            else if (!notPlayer)
+            else if (!notPlayer && GameType)
             {
                 Attacker.PlayerAnimation.Play(Attacker.PlayerSpriteName + "_Right_" + "Hit");
             }
@@ -512,12 +515,12 @@ public class BattleController : MonoBehaviour
             if (hit > Attacked.HP)
             {
                 Attacked.HP = 0;
-                if (!whichPlayer && !notPlayer)
+                if (!whichPlayer && !notPlayer && GameType)
                 {
                     PlayerHpText.text = "0";
                     UpdateLifeBarLength(PlayerHPBar,whichPlayer);
                 }
-                else if(!notPlayer)
+                else if(!notPlayer && GameType)
                 {
                     OponentHpText.text = "0";
                     UpdateLifeBarLength(OponentHPBar, whichPlayer);
@@ -526,12 +529,12 @@ public class BattleController : MonoBehaviour
             else
             {
                 Attacked.HP -= hit;
-                if (!whichPlayer && !notPlayer)
+                if (!whichPlayer && !notPlayer && GameType)
                 {
                     PlayerHpText.text = Attacked.HP.ToString();
                     UpdateLifeBarLength(PlayerHPBar, whichPlayer);
                 }
-                else if(!notPlayer)
+                else if(!notPlayer && GameType)
                 {
                     OponentHpText.text = Attacked.HP.ToString();
                     UpdateLifeBarLength(OponentHPBar, whichPlayer);

@@ -31,8 +31,7 @@ public class ItemsDBmanager
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Leather Vest") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Leather Gauntlets") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Leather Boots") as Item);
-            ItemDB.Add(Resources.Load(resourcesPath + "Items/Weapon Slash") as Item);
-            ItemDB.Add(Resources.Load(resourcesPath + "Items/Short Sword") as Item);
+            ItemDB.Add(Resources.Load(resourcesPath + "Items/Weapon Slash") as Item);            
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Copper Helmet") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Copper Vest") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Copper Gauntlets") as Item);
@@ -78,6 +77,7 @@ public class ItemsDBmanager
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Adamantite Gauntlets") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Adamantite Boots") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Adamantite Sword") as Item);
+            ItemDB.Add(Resources.Load(resourcesPath + "Items/Short Sword") as Item);
             ItemDB.Add(Resources.Load(resourcesPath + "Items/Pet Sword") as Item);
     }
 }
